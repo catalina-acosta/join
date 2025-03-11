@@ -6,7 +6,7 @@ import { ContactsComponent } from './main-content/contacts/contacts.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SharedComponent, ContactsComponen],
+  imports: [RouterOutlet, SharedComponent, ContactsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
