@@ -1,3 +1,5 @@
+@use './../../../styles.scss' as *;
+
 section {
     header {
         width: 100%;
@@ -30,7 +32,7 @@ section {
                 height: 56px;
                 border-radius: 100%;
                 border: 2.5px solid #000000;
-                color:#29abe2 ;
+                color: $light_blue;
                 font-size: 20px;
                 font-weight: 600;
 
