@@ -16,7 +16,7 @@ ngOnDestroy() {
 }
 
 constructor() {
-  this.unsubscribe = onSnapshot(collection(this.firebase, "join"), (joinObjects) => {
+  this.unsubscribe = onSnapshot(collection(this.firebase, "contacts"), (joinObjects) => {
     console.log(joinObjects);
 
   })
