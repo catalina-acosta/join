@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
+import { SharedComponent } from "./shared/shared.component";
 import { ContactsComponent } from './main-content/contacts/contacts.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ContactsComponent],
+  imports: [RouterOutlet, SharedComponent, ContactsComponen],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
