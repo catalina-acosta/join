@@ -19,7 +19,7 @@ export class FirebaseService {
       })
     })
   }
-
+  
   setContactObject(id: string, obj: ContactInterface): ContactInterface {
     return {
       id: id,
@@ -35,5 +35,4 @@ export class FirebaseService {
       this.unsubscribe();
     }
   }
-
 }
