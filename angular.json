@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Join": {
+    "join": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Join:build:production"
+              "buildTarget": "join:build:production"
             },
             "development": {
-              "buildTarget": "Join:build:development"
+              "buildTarget": "join:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -103,5 +103,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "1b58b254-9fcf-4ec7-a542-c9694b475c0f"
   }
 }
