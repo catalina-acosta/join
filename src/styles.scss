@@ -17,7 +17,7 @@ body {
   font-family: 'Inter';
   src: url('../public/assets/fonts/Inter-VariableFont_opsz\,wght.ttf');
 }
-
+$black: #000000;
 $lightblack: #2A3647;     //sidebar background, menu bg, edit bgr, btn bg
 $darkblack: #091931;      //btns after click
 $page_bg: #F0F0F0;          //page background
@@ -40,11 +40,11 @@ $low_green: #7be129;        //low btns
     gap: 16px;
     align-items: center;
     border-radius: 5px;
-    background-color:#2A3647;
+    background-color:$lightblack;
     font-weight: 700;
     font-size: 21px;
     &:hover {
-        background-color:#2aaae2;
+        background-color:$light_blue;
     }
 }
 
@@ -52,3 +52,28 @@ $low_green: #7be129;        //low btns
     display: none;
 }
 
+h1 {
+    font-size: 61px;
+    font-weight: 700;
+    color: $black;
+}
+
+h2 {
+    font-size: 47px;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 27px;
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+}
