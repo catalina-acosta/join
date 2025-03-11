@@ -1,8 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-add-contact-dialog',
-  imports: [],
+  standalone:true,
+  imports: [CommonModule],
   templateUrl: './add-contact-dialog.component.html',
   styleUrl: './add-contact-dialog.component.scss'
 })
