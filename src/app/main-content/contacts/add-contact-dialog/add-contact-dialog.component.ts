@@ -32,20 +32,25 @@ export class AddContactDialogComponent {
 
   addNewContact() {
     const nameParts = this.newContact.fullname.trim().split(' ');
-    this.newContact.firstname = nameParts[0];
-    this.newContact.lastname = nameParts.slice(1).join(' ') || '';
+    this.newContact.firstname = this.toUpperCaseName(nameParts[0]);
+    this.newContact.lastname = this.toUpperCaseName(nameParts.slice(1).join(' ') || '');
 
       this.firebase.addContactToData(this.newContact);
       this.clearInputFeld();
   }
 
+  toUpperCaseName(str: string): string {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+
   clearInputFeld(){
     this.newContact = {
-    fullname: '',
+    fullname: 'Name',
     firstname: '',
     lastname: '',
-    email: '',
-    phone: '',
+    email: 'Email',
+    phone: 'Phone',
     };
     this.closeDialog();
   }
@@ -53,5 +58,4 @@ export class AddContactDialogComponent {
   closeDialog() {
     this.closeDialogEvent.emit(); 
   }
-
 }
