@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
 import { SharedComponent } from "./shared/shared.component";
 import { ContactsComponent } from './main-content/contacts/contacts.component';
