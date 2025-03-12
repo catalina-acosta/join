@@ -1,10 +1,5 @@
 
 <section>
-    <h2>contacts list</h2>
-    @for (item of firebase.contactsList; track $index ) {
-        <p>{{item.firstname}} - {{item.lastname}}</p>
-    }
-
     <h2>ordered list</h2>
     @for (item of firebase.orderedContactsList; track $index) {
         <p>{{item.firstname}}</p>
