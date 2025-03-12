@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-contact-dialog',
@@ -14,7 +14,7 @@ export class AddContactDialogComponent {
   firebase =inject(FirebaseService);
 
   @Output() closeDialogEvent = new EventEmitter<void>();
-
+  formSubmitted = false;
   newContact = {
     fullname:'',
     firstname:'',
@@ -23,14 +23,20 @@ export class AddContactDialogComponent {
     phone:'',
   }
 
-  addNewContact(){
-   const nameParts = this.newContact.fullname.trim().split(' ');
+  onCreateContact(contactForm: NgForm) {
+    this.formSubmitted = true;
+    if (contactForm.valid) {
+      this.addNewContact();
+    }
+  }
 
-   this.newContact.firstname = nameParts[0];
-   this.newContact.lastname = nameParts.slice(1).join(' ')|| '';
+  addNewContact() {
+    const nameParts = this.newContact.fullname.trim().split(' ');
+    this.newContact.firstname = nameParts[0];
+    this.newContact.lastname = nameParts.slice(1).join(' ') || '';
 
-   this.firebase.addContactToData(this.newContact);
-   this.clearInputFeld();
+      this.firebase.addContactToData(this.newContact);
+      this.clearInputFeld();
   }
 
   clearInputFeld(){
@@ -40,8 +46,10 @@ export class AddContactDialogComponent {
     lastname: '',
     email: '',
     phone: '',
-    }
+    };
+    this.closeDialog();
   }
+  
   closeDialog() {
     this.closeDialogEvent.emit(); 
   }
