@@ -8,31 +8,31 @@
 
     <div class="add_contacts_content">
         <img class="contact_icon" src="./assets/contact/add-contact-overlay.svg" alt="contact_icon">
-        <form>
+        <form (ngSubmit)="addNewContact()">
            
 
             <label class="input_content">
-                <input type="text" name="name" placeholder="Name">
+                <input type="text"  [(ngModel)]="newContact.fullname" name="fullname" placeholder="Name">
                 <img src="./assets/contact/person.svg" alt="Person">
             </label>
 
             <label class="input_content">
-                <input type="text" name="email" placeholder="Email">
+                <input type="text" [(ngModel)]="newContact.email" name="email" placeholder="Email">
                 <img src="./assets/contact/mail.svg" alt="mail">
             </label>
 
             <label class="input_content">
-                <input type="text" name="phone" placeholder="Phone">
+                <input type="text" [(ngModel)]="newContact.phone" name="phone" placeholder="Phone">
                 <img src="./assets/contact/call.svg" alt="phone">
             </label>
 
             <div class="btn_container">
-                <button class="cancel_btn">
+                <button class="cancel_btn" (click)="cancel()">
                     Cancel
                     <img src="./assets/btns-icons/close_dark.svg" alt="cancel">
                 </button>
 
-                <button class="create_btn">
+                <button class="create_btn" type="submit">
                     Create contact
                     <img src="./assets/btns-icons/check.svg" alt="Create">
                 </button>
