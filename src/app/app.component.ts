@@ -8,6 +8,7 @@ import { AddContactDialogComponent } from "./main-content/contacts/add-contact-d
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, SharedComponent, AddContactDialogComponent],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
