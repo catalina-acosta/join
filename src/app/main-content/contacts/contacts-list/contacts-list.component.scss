@@ -1,0 +1,40 @@
+@use '../../../../styles.scss' as styles;
+
+.list_wrapper {
+    width: 40%;
+    padding: 20px 30px;
+    height: 100vh;
+    overflow-y: scroll;
+    height: calc(100vh - 96px);
+}
+
+.btn_wrapper {
+    width: 100%;
+
+    .btn_plain_color {
+        width: 100%;
+    }
+}
+
+.single_letter {
+    padding: 20px;
+    border-bottom: 1px solid rgb(185, 185, 185);
+}
+
+.contact_info_wrapper {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    padding: 20px 10px;
+    gap: 32px;
+}
+
+.avatar {
+    border-radius: 50%;
+    padding: 10px;
+    background-color: styles.$low_green;
+}
+
+.email {
+    color: styles.$light_blue;
+}
