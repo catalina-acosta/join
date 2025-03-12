@@ -41,7 +41,7 @@ section {
         padding: 50px;
         height: 100%;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.116);
+        background-color:#fff;
         border-radius: 0 25px 25px 0;
 
         .contact_icon{
@@ -150,3 +150,10 @@ section {
         }
     }
 }
+
+.custom-dialog-content {
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 100%; 
+  }
+  

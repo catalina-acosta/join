@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import {FormsModule} from '@angular/forms';
 
@@ -12,6 +12,8 @@ import {FormsModule} from '@angular/forms';
 })
 export class AddContactDialogComponent {
   firebase =inject(FirebaseService);
+
+  @Output() closeDialogEvent = new EventEmitter<void>();
 
   newContact = {
     fullname:'',
@@ -40,9 +42,8 @@ export class AddContactDialogComponent {
     phone: '',
     }
   }
-
-  cancel(){
-  
+  closeDialog() {
+    this.closeDialogEvent.emit(); 
   }
 
 }

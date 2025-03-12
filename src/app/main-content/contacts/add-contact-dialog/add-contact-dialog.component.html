@@ -1,4 +1,4 @@
-<section>
+<section class="custom-dialog-content">
     <div class="headline">
         <img src="./assets/contact/logo.svg" alt="logo">
         <h1> Add contact</h1>
@@ -27,7 +27,7 @@
             </label>
 
             <div class="btn_container">
-                <button class="cancel_btn" (click)="cancel()">
+                <button class="cancel_btn" (click)="closeDialog()">
                     Cancel
                     <img src="./assets/btns-icons/close_dark.svg" alt="cancel">
                 </button>
@@ -37,7 +37,7 @@
                     <img src="./assets/btns-icons/check.svg" alt="Create">
                 </button>
 
-                <div class="close_btn">
+                <div class="close_btn"  (click)="closeDialog()">
                     <img src="./assets/btns-icons/close_dark.svg" alt="close">
                 </div>
             </div>
