@@ -9,4 +9,8 @@ import { FirebaseService } from '../../../shared/service/firebase.service';
 })
 export class ContactsListComponent {
   firebase = inject(FirebaseService);
+
+  openDialogDetails() {
+    console.log("opening dialog details");
+  }
 }
