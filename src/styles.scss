@@ -1,3 +1,15 @@
+$black: #000000;
+$lightblack: #2A3647;     //sidebar background, menu bg, edit bgr, btn bg
+$darkblack: #091931;      //btns after click
+$page_bg: #F0F0F0;          //page background
+$black_hover: #091931;  //hover in sidebar
+$light_blue: #2aaae2;   //textcolor for username, hover btn
+$dark_blue: #293647;    //textcolor for greeting
+$btn_black: #2b3646;    //check buttons
+$urgent_red: #ff3d00;     //urge buttons and text form-validations
+$medium_orange: #fea800;       //medium btns
+$low_green: #7be129;        //low btns
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -11,45 +23,76 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter';
+    background-color: $page_bg;
 }
 
 @font-face {
   font-family: 'Inter';
   src: url('../public/assets/fonts/Inter-VariableFont_opsz\,wght.ttf');
 }
-$black: #000000;
-$lightblack: #2A3647;     //sidebar background, menu bg, edit bgr, btn bg
-$darkblack: #091931;      //btns after click
-$page_bg: #F0F0F0;          //page background
-$black_hover: #091931;  //hover in sidebar
-$light_blue: #2aaae2;   //textcolor for username, hover btn
-$dark_blue: #293647;    //textcolor for greeting
-$btn_black: #2b3646;    //check buttons
-$urgent_red: #ff3d00;     //urge buttons and text form-validations
-$medium_orange: #fea800;       //medium btns
-$low_green: #7be129;        //low btns
 
 //avatar_bg = [ #FF7A00, #FF5EB3, #6E52FF, #9327FF, #00BEE8, #1FD7C1, #FF745E, #FFA35E, #FC71FF, #FFC701, #0038FF, #C3FF2B, #FFE62B, #FF4646, #FFBB2B ];
 //später können wir durchitterieren, gehört eigentlich nicht in styles, aber wenn ich schon bei den Farben war, habe ich es mitgemacht
 
-.btn {
-    border: unset;
-    padding: 20px;
+.btn_plain {
+    cursor: pointer;
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 10px;
     align-items: center;
-    border-radius: 5px;
-    background-color:$lightblack;
-    font-weight: 700;
-    font-size: 21px;
-    &:hover {
-        background-color:$light_blue;
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 15px 24px;
+    font-size: 16px;
+    font-weight: 400;
+    &:hover{
+        border: 2px solid $light_blue;
+        color: $light_blue;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 }
 
-.d_none {
-    display: none;
+.btn_plain_color {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    border-radius: 8px;
+    border: unset;
+    padding: 15px 24px;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    background-color: $lightblack;
+    &:hover{
+        background-color: $light_blue;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}
+
+.btn_bold {
+    cursor: pointer;
+    border: unset;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    align-items: center;
+    border-radius: 10px;
+    background-color:$lightblack;
+    font-weight: 700;
+    font-size: 21px;
+    color: white;
+    &:hover {
+        background-color:$light_blue;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}
+
+a {
+    color: $light_blue;
+    cursor: pointer;
 }
 
 h1 {
@@ -76,4 +119,13 @@ h4 {
 p {
     font-size: 16px;
     font-weight: 400;
+}
+
+.section_wrapper {
+    padding-right: 100px;
+    padding-left: 100px;
+}
+
+.d_none {
+    display: none;
 }
