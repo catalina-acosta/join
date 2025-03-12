@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { collection, Firestore, onSnapshot, orderBy, query } from '@angular/fire/firestore';
 import { ContactInterface } from '../../main-content/contacts/contact-interface';
-import { log } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +17,18 @@ export class FirebaseService {
       joinObjects.forEach((element) => {
         this.contactsList.push(this.setContactObject(element.id, element.data() as ContactInterface))
       })
-    })
+    });
+    this.orderedListQuery();
   }
 
   orderedListQuery() {
     const contactsRef = collection(this.firebase, "contacts")
     const q = query(contactsRef, orderBy('firstname'));
     return onSnapshot(q, (list) => {
+      this.orderedContactsList = [];
       list.forEach(element => {
         this.orderedContactsList.push(this.setContactObject(element.id, element.data() as ContactInterface))
-      })
+      });
     })
   }
   
