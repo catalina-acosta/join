@@ -1,8 +1,9 @@
 @use './../../../../styles.scss' as *;
 
 section {
-    width: 1212px;
     height: 592px;
+    width: 100%;
+    max-width: 1212px;
     display: flex;
     align-items: center;
 
@@ -10,19 +11,21 @@ section {
         background-color: $lightblack;
         padding: 50px;
         height: 100%;
-        width: 60%;
+        width: 45%;
         border-radius: 25px 0 0 25px;
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: center;
         justify-content: center;
 
         h1 {
             color: #fff;
+            font-size: 2.9vw;
         }
 
         h3 {
             color: #fff;
+            font-size: 1.4vw;
         }
 
         .blueline {
@@ -40,12 +43,13 @@ section {
         align-items: center;
         padding: 50px;
         height: 100%;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.116);
+        width: 65%;
+        background-color:#fff;
         border-radius: 0 25px 25px 0;
 
         .contact_icon{
             padding-left: 20px;
+            padding-right: 40px;
         }
     }
 
@@ -72,9 +76,16 @@ section {
 
                 &:focus {
                     border: 1px solid $light_blue;
-                    box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151); /* Leichter Glow-Effekt */
+                    box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
                 }
-            }
+                
+                &.input-error{
+                    border: 1px solid $light_blue;
+    
+                &::placeholder{
+                    color: rgba(211, 0, 0, 0.534);
+                }
+            }}
 
             img {
                 position: absolute;
@@ -150,3 +161,10 @@ section {
         }
     }
 }
+
+.custom-dialog-content {
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 100%; 
+  }
+  
