@@ -1,1 +1,16 @@
-<p>header works!</p>
+<section>
+    <header>
+        <p>Kanban Project Management Tool</p>
+        <div class="header_profil_container">
+            <a class="profile_btn" href="#"><img src="./assets/header/help.svg" alt="Help"></a>
+            <button (click)="toggleMenu()">CS</button>
+
+            <div class="dropdown_menu" *ngIf="menuOpen">
+                <a [routerLink]="'/legal-notice'" (click)="openLegalNotice()">Legal Notice</a>
+                <a [routerLink]="'/privacy-policy'" (click)="openPrivacyPolicy()">Privacy Policy</a>
+                <a [routerLink]="'/logout'" (click)="logout()">Log out</a>
+              </div>
+        </div>
+    </header>
+
+</section>
