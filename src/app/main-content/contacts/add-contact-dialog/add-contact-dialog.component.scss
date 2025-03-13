@@ -15,17 +15,15 @@ section {
         border-radius: 25px 0 0 25px;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: start;
         justify-content: center;
 
         h1 {
             color: #fff;
-            font-size: 2.9vw;
         }
 
         h3 {
             color: #fff;
-            font-size: 1.4vw;
         }
 
         .blueline {
@@ -38,18 +36,22 @@ section {
 
     .add_contacts_content {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        gap: 90px;
         padding: 50px;
         height: 100%;
         width: 65%;
-        background-color:#fff;
+        background-color: #fff;
         border-radius: 0 25px 25px 0;
 
-        .contact_icon{
+        .contact_icon {
             padding-left: 20px;
             padding-right: 40px;
+        }
+
+        .form_content {
+            display: flex;
+            flex-direction: row;
         }
     }
 
@@ -68,6 +70,7 @@ section {
 
             input {
                 padding: 13px;
+                width: 100%;
                 border-radius: 10px;
                 border: 1px solid #00000036;
                 font-size: 20px;
@@ -78,14 +81,15 @@ section {
                     border: 1px solid $light_blue;
                     box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
                 }
-                
-                &.input-error{
+
+                &.input-error {
                     border: 1px solid $light_blue;
-    
-                &::placeholder{
-                    color: rgba(211, 0, 0, 0.534);
+
+                    &::placeholder {
+                        color: rgba(211, 0, 0, 0.534);
+                    }
                 }
-            }}
+            }
 
             img {
                 position: absolute;
@@ -97,23 +101,6 @@ section {
         .btn_container {
             display: flex;
             gap: 15px;
-
-            .close_btn{
-                position: absolute;
-                top:-330px;
-                left:400px;
-                cursor: pointer;
-
-                img{
-                    padding: 3px;
-                }
-                img:hover{
-                    background-color: #00000013;
-                    border-radius: 50%;
-                    
-                }
-            }
-
 
             .cancel_btn {
                 display: flex;
@@ -132,7 +119,7 @@ section {
                     color: $light_blue;
                     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
                 }
-                
+
                 &:hover img {
                     filter: brightness(0) saturate(100%) invert(60%) sepia(90%) saturate(312%) hue-rotate(163deg) brightness(95%) contrast(88%);
                 }
@@ -153,8 +140,8 @@ section {
                 transition: all 125ms ease;
 
                 &:hover {
-                   background-color: $light_blue;
-                   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
+                    background-color: $light_blue;
+                    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
 
                 }
             }
@@ -165,6 +152,195 @@ section {
 .custom-dialog-content {
     padding: 20px;
     border-radius: 15px;
-    max-width: 100%; 
-  }
-  
+    max-width: 100%;
+}
+
+.close_btn {
+    margin-left: auto;
+
+    img {
+        padding: 3px;
+        cursor: pointer;
+
+    }
+
+    img:hover {
+        background-color: #00000013;
+        border-radius: 50%;
+    }
+}
+
+@media (max-width:1252px) {
+    h1 {
+        font-size: 5vw;
+    }
+
+    h3 {
+        font-size: 2vw;
+    }
+
+    section {
+        form {
+            .input_content {
+                input {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:1000px) {
+    section {
+        .add_contacts_content {
+            padding-left: 0px;
+        }
+    }
+}
+
+@media (max-width:950px) {
+    h1 {
+        font-size: 60px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    section {
+        height: auto;
+        flex-direction: column;
+
+        .headline {
+            width: 100%;
+            height: 350px;
+            border-radius: 25px 25px 0 0;
+
+            img {
+                display: none;
+            }
+        }
+
+        .add_contacts_content {
+            padding: 25px;
+            gap: 0px;
+            border-radius: 0 0 25px 25px;
+            width: 100%;
+            height: 420px;
+
+            .form_content {
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+                top: -128px;
+                gap: 25px;
+            }
+            .contact_icon{
+                padding: 0;
+            }
+        }
+
+        form {
+            gap: 18px;
+
+            .btn_container {
+                justify-content: center;
+
+                .cancel_btn {
+                    display: none;
+                }
+            }
+        }
+
+        .close_btn {
+            position: relative;
+            top: -350px;
+            filter: brightness(22.5);
+
+            img {
+                padding: 3px;
+                cursor: pointer;
+            }
+
+            img:hover {
+                background-color: #ffffff13;
+            }
+        }
+    }
+}
+
+@media (max-width:510px) {
+    h1 {
+        font-size: 45px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    section {
+        .headline {
+            height: 270px;
+            padding: 25px;
+        }
+
+        .add_contacts_content {
+            height: 360px;
+
+            .form_content {
+                top: -128px;
+                gap: 20px;
+            }
+        }
+
+        form {
+            width: 300px;
+        }
+
+        .close_btn {
+            top: -279px;
+        }
+    }
+}
+
+@media (max-width:380px) {
+    h1 {
+        font-size: 38px;
+    }
+
+    h3 {
+        font-size: 15px;
+    }
+
+    section {
+        .headline {
+            height: 245px;
+        }
+
+        .add_contacts_content {
+            height: 330px;
+
+            .form_content {
+                top: -108px;
+            }
+            .contact_icon{
+                width: 100px;
+            }
+        }
+
+        form {
+            width: 245px;
+            height: 189px;
+            gap: 12px;
+            .input_content{
+                input{
+                    padding: 9px;
+                }
+            }
+        }
+
+        .close_btn {
+            top: -250px;
+        }
+    }
+}

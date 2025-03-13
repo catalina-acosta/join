@@ -21,6 +21,7 @@ export class AddContactDialogComponent {
     lastname: '',
     email: '',
     phone:'',
+    color:'',
   }
 
   onCreateContact(contactForm: NgForm) {
@@ -51,6 +52,7 @@ export class AddContactDialogComponent {
     lastname: '',
     email: 'Email',
     phone: 'Phone',
+    color:'',
     };
     this.closeDialog();
   }
