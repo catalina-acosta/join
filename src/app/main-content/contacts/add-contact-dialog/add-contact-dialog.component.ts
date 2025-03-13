@@ -48,13 +48,14 @@ export class AddContactDialogComponent {
 
   clearInputFeld(){
     this.newContact = {
-    fullname: 'Name',
-    firstname: '',
-    lastname: '',
-    email: 'Email',
-    phone: 'Phone',
-    color:'',
-
+      fullname: 'Name',
+      firstname: '',
+      lastname: '',
+      email: 'Email',
+      phone: 'Phone',
+      color: '',
+    };
+  
     this.closeDialog();
   }
   
