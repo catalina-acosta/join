@@ -66,5 +66,12 @@
 
 .legal-position a {
     text-decoration: none;
-    color: white;
+    color: #CDCDCD;
+    transition: color 0.2s ease-in-out;
+    padding-top:10px;
+}
+
+.legal-position a:hover {
+    color: #29ABE2;
+    transform: scale(1.1);
 }
