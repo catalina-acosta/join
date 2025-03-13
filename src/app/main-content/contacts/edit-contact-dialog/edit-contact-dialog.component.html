@@ -1,1 +1,55 @@
-<p>edit-contact-dialog works!</p>
+<section class="custom-dialog-content">
+    <div class="headline">
+        <img src="./assets/contact/logo.svg" alt="logo">
+        <h1> Edit contact</h1>
+        <h3>Tasks are better with a team!</h3>
+        <div class="blueline"></div>
+    </div>
+
+    <div class="add_contacts_content">
+        <div class="close_btn" >
+            <img (click)="closeDialog()" src="./assets/btns-icons/close_dark.svg" alt="close">
+        </div>
+        
+        <div class="form_content">
+        <img class="contact_icon" src="./assets/contact/add-contact-overlay.svg" alt="contact_icon">
+        <form (ngSubmit)="onEditContact(contactForm)" #contactForm="ngForm">
+
+
+            <label class="input_content">
+                <input type="text" [(ngModel)]="editedContact.fullname" name="fullname"
+                    [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'"
+                    #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required>
+                <img src="./assets/contact/person.svg" alt="Person">
+            </label>
+
+            <label class="input_content">
+                <input type="email" [(ngModel)]="editedContact.email" name="email"
+                    [placeholder]="email.invalid && email.touched ? 'Please enter a valid email' : 'Email'"
+                    #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required>
+                <img src="./assets/contact/mail.svg" alt="mail">
+            </label>
+
+            <label class="input_content">
+                <input type="text" [(ngModel)]="editedContact.phone" name="phone"
+                    [placeholder]="phone.invalid && phone.touched ? editedContact.phone : editedContact.phone"
+                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required>
+                <img src="./assets/contact/call.svg" alt="phone">
+            </label>
+
+            <div class="btn_container">
+                <button class="cancel_btn" (click)="closeDialog()">
+                    Cancel
+                    <img src="./assets/btns-icons/close_dark.svg" alt="cancel">
+                </button>
+
+                <button class="create_btn" type="submit" [disabled]="!contactForm.valid">
+                    Edit contact
+                    <img src="./assets/btns-icons/check.svg" alt="Create">
+                </button>
+            </div>
+
+        </form>
+    </div>
+    </div>
+</section>

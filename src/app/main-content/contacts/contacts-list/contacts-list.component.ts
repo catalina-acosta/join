@@ -14,6 +14,7 @@ import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-
 export class ContactsListComponent {
   firebase = inject(FirebaseService);
   isDialogOpen = false;  
+  isEditDialogOpen = false;
 
   openDialogDetails() {
     console.log("opening dialog details");
@@ -21,6 +22,10 @@ export class ContactsListComponent {
 
   openAddNewContacts() {
     this.isDialogOpen = true;
+  }
+
+  openEditDialog(index: number) {
+    this.isEditDialogOpen = true;
   }
 
   stopPropagation(event: Event) {

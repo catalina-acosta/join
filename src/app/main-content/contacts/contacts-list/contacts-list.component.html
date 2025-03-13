@@ -4,7 +4,6 @@
             <button (click)="openAddNewContacts()" class="btn_plain_color">
                 <h4>Add new contact</h4><img src="../assets/btns-icons/person_add.svg" alt="">
             </button>
-            <button>edit contact</button>
         </div>
 
         <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
@@ -12,11 +11,13 @@
                 <app-add-contact-dialog (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-add-contact-dialog>
             </div>
         </div>
-        <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
-            <div class="custom-dialog">
-                <app-edit-contact-dialog></app-edit-contact-dialog>
+        @if (isEditDialogOpen) {
+            <div class="overlay_content" (click)="closeDialog()">
+                <div class="custom-dialog">
+                    <app-edit-contact-dialog></app-edit-contact-dialog>
+                </div>
             </div>
-        </div>
+        }
         @if(firebase.orderedContactsList) {
             @for (item of firebase.orderedContactsList; track $index) {
             @if($index === 0 || item.firstname.charAt(0) !== firebase.orderedContactsList[$index - 1].firstname.charAt(0) )
@@ -29,6 +30,7 @@
                         <p class="name">{{item.firstname}} {{item.lastname}}</p>
                         <p class="email">{{item.email}}</p>
                     </div> 
+                    <button (click)="openEditDialog($index)">edit contact</button>
                 </div>
             } @empty {
                 <div>data loading</div>
