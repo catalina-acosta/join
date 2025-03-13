@@ -35,7 +35,7 @@ export class AddContactDialogComponent {
     const nameParts = this.newContact.fullname.trim().split(' ');
     this.newContact.firstname = this.toUpperCaseName(nameParts[0]);
     this.newContact.lastname = this.toUpperCaseName(nameParts.slice(1).join(' ') || '');
-    this.newContact.color = this.firebase.avatarColor[Math.floor(Math.random() * this.firebase.avatarColor.length)]// color: this.firebase.service.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    this.newContact.color = this.firebase.avatarColor[Math.floor(Math.random() * this.firebase.avatarColor.length)];
 
     this.firebase.addContactToData(this.newContact);
     this.clearInputFeld();

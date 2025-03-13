@@ -107,8 +107,6 @@ export class FirebaseService {
   constructor() {
     // this.initializeContacts();
     this.unsubscribe = this.orderedListQuery();
-    console.log(this.orderedContactsList);
-    
   }
 
 // #region vorlage 
