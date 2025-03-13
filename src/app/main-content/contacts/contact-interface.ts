@@ -4,4 +4,5 @@ export interface ContactInterface {
     firstname: string;
     lastname: string;
     phone: string;
+    color: string;
 }
