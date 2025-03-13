@@ -8,25 +8,26 @@
 
         <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
             <div class="custom-dialog">
-              <app-add-contact-dialog (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-add-contact-dialog>
-            </div>
-          </div>
-          
-
-        @for (item of firebase.orderedContactsList; track $index) {
-        @if($index === 0 || item.firstname.charAt(0) !== firebase.orderedContactsList[$index - 1].firstname.charAt(0) )
-        {
-        <h4 class="single_letter">{{ item.firstname.charAt(0) }}</h4>
-        }
-        <div class="contact_info_wrapper" (click)="openDialogDetails()">
-            <div class="avatar">
-                <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
-            </div>
-            <div class="contact_info">
-                <p class="name">{{item.firstname}} {{item.lastname}}</p>
-                <p class="email">{{item.email}}</p>
+                <app-add-contact-dialog (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-add-contact-dialog>
             </div>
         </div>
+        @if(firebase.orderedContactsList) {
+            @for (item of firebase.orderedContactsList; track $index) {
+            @if($index === 0 || item.firstname.charAt(0) !== firebase.orderedContactsList[$index - 1].firstname.charAt(0) )
+                {<h4 class="single_letter">{{ item.firstname.charAt(0) }}</h4>}
+                <div class="contact_info_wrapper" (click)="openDialogDetails()">
+                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                    </div>
+                    <div class="contact_info">
+                        <p class="name">{{item.firstname}} {{item.lastname}}</p>
+                        <p class="email">{{item.email}}</p>
+                    </div> 
+                </div>
+            } @empty {
+                <div>data loading</div>
+            }
         }
+        
     </div>
 </section>
