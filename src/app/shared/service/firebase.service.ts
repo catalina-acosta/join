@@ -105,14 +105,14 @@ export class FirebaseService {
   // unsubscribeOrderedList: Unsubscribe = () => {};
 // 
   constructor() {
-    // this.initializeContacs();
+    // this.initializeContacts();
     this.unsubscribe = this.orderedListQuery();
     console.log(this.orderedContactsList);
     
   }
 
 // #region vorlage 
-  // async initializeContacs() {
+  // async initializeContacts() {
   //   try {
   //     const contactsRef = collection(this.firebase, "contacts");
   //     this.dummyData.forEach(async (element) => {
