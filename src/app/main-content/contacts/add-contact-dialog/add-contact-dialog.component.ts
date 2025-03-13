@@ -53,8 +53,8 @@ export class AddContactDialogComponent {
     lastname: '',
     email: 'Email',
     phone: 'Phone',
-    color: '',
-    };
+    color:'',
+
     this.closeDialog();
   }
   

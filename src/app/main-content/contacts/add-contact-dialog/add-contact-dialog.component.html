@@ -7,6 +7,11 @@
     </div>
 
     <div class="add_contacts_content">
+        <div class="close_btn" >
+            <img (click)="closeDialog()" src="./assets/btns-icons/close_dark.svg" alt="close">
+        </div>
+        
+        <div class="form_content">
         <img class="contact_icon" src="./assets/contact/add-contact-overlay.svg" alt="contact_icon">
         <form (ngSubmit)="onCreateContact(contactForm)" #contactForm="ngForm">
 
@@ -42,12 +47,9 @@
                     Create contact
                     <img src="./assets/btns-icons/check.svg" alt="Create">
                 </button>
-
-                <div class="close_btn" (click)="closeDialog()">
-                    <img src="./assets/btns-icons/close_dark.svg" alt="close">
-                </div>
             </div>
+
         </form>
     </div>
-
+    </div>
 </section>
