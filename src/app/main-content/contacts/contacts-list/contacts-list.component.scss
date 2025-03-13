@@ -86,3 +86,11 @@
 .dialog-closed {
     animation: slideOutToRight 0.5s ease-in forwards;
 }
+
+@media screen and (max-width: 800px) {
+    .list_wrapper {
+        padding: 136px 24px 0 24px;
+        width: 100%;
+        height: 88vh;
+    }
+}
