@@ -20,13 +20,13 @@
 .sidebar ul {
     list-style-type: none;
     padding: 0;
-    padding-top: 100px; 
+    padding-top: 100px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     gap: 10px;
-    
+
 }
 
 .sidebar li {
@@ -46,7 +46,9 @@
 .sidebar ul li:hover {
     background-color: #2A3D59;
     width: 100%;
-}//onclick:#091931;
+}
+
+//onclick:#091931;
 
 .sidebar ul li a {
     color: white;
@@ -60,7 +62,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: auto; 
+    margin-top: auto;
     padding-bottom: 20px;
 }
 
@@ -68,10 +70,43 @@
     text-decoration: none;
     color: #CDCDCD;
     transition: color 0.2s ease-in-out;
-    padding-top:10px;
+    padding-top: 10px;
 }
 
 .legal-position a:hover {
     color: #29ABE2;
     transform: scale(1.1);
 }
+
+@media (max-width:800px) {
+    .container {
+        display: none;
+    }
+
+    .mobile nav {
+        background-color:#2A3647;
+        width:100%;
+        height: 100px;
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        a{
+            color:white;
+        }
+    }
+
+    .mobile li{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:10px;
+    }
+
+    .mobile img{
+        width:30px;
+    }
+}
+
