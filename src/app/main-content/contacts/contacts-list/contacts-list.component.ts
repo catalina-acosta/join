@@ -7,20 +7,26 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { log } from 'console';
 import { loadavg } from 'os';
 import { ContactInterface } from '../contact-interface';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { log } from 'console';
+import { loadavg } from 'os';
+import { ContactInterface } from '../contact-interface';
 
 @Component({
   selector: 'app-contacts-list',
   standalone:true,
-  imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent],
+  imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent, DeleteDialogComponent],
   templateUrl: './contacts-list.component.html',
   styleUrl: './contacts-list.component.scss'
 })
 export class ContactsListComponent {
   firebase = inject(FirebaseService);
-  isDialogOpen:boolean = false;  
+  isDialogOpen:boolean:boolean = false;  
   isDeleteOpen:boolean = false;
   currentContact: ContactInterface| null = null;
   isEditDialogOpen = false;
+  isDeleteOpen:boolean = false;
+  currentContact: ContactInterface| null = null;
 
   openDialogDetails() {
     console.log("opening dialog details");
@@ -32,6 +38,16 @@ export class ContactsListComponent {
 
   openEditDialog(index: number) {
     this.isEditDialogOpen = true;
+  }
+
+  openDeleteContact(index: number){
+    this.isDeleteOpen = true;  
+    this.currentContact = this.firebase.orderedContactsList[index];
+    if (this.currentContact) {
+      console.log('ID:', this.currentContact.id);
+      console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
+      console.log('Color:', this.currentContact.color);
+    }
   }
 
   openDeleteContact(index: number){
