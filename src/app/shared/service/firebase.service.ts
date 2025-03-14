@@ -155,6 +155,8 @@ export class FirebaseService {
       email: data.email,
       phone: data.phone,
     })
+    console.log("data base updated");
+    
   }
   
   setContactObject(id: string, obj: ContactInterface): ContactInterface {
