@@ -26,14 +26,14 @@
             <label class="input_content">
                 <input type="email" [(ngModel)]="newContact.email" name="email"
                     [placeholder]="email.invalid && email.touched ? 'Please enter a valid email' : 'Email'"
-                    #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required>
+                    #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$">
                 <img src="./assets/contact/mail.svg" alt="mail">
             </label>
 
             <label class="input_content">
                 <input type="text" [(ngModel)]="newContact.phone" name="phone"
                     [placeholder]="phone.invalid && phone.touched ? 'Please enter your phone number' : 'Phone'"
-                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required>
+                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required pattern="\+?[0-9\s\-\(\)]{10,}">
                 <img src="./assets/contact/call.svg" alt="phone">
             </label>
 

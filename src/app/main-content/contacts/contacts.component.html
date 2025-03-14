@@ -1,1 +1,7 @@
-<app-contacts-list></app-contacts-list>
+<section>
+<app-contacts-list (contactCreated)="onContactCreated()"></app-contacts-list>
+
+<div *ngIf="contactIsSuccesfully" class="succesfull_content">
+    Contact successfully created
+  </div>
+</section>
