@@ -5,22 +5,23 @@ import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-contact-dialog',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-contact-dialog.component.html',
   styleUrl: './add-contact-dialog.component.scss'
 })
 export class AddContactDialogComponent {
-  firebase =inject(FirebaseService);
+  firebase = inject(FirebaseService);
 
   @Output() closeDialogEvent = new EventEmitter<void>();
   formSubmitted = false;
   newContact = {
-    fullname:'',
-    firstname:'',
+    fullname: '',
+    firstname: '',
     lastname: '',
     email: '',
-    phone:'',
+    phone: '',
+    color: '',
   }
 
   onCreateContact(contactForm: NgForm) {
@@ -34,9 +35,10 @@ export class AddContactDialogComponent {
     const nameParts = this.newContact.fullname.trim().split(' ');
     this.newContact.firstname = this.toUpperCaseName(nameParts[0]);
     this.newContact.lastname = this.toUpperCaseName(nameParts.slice(1).join(' ') || '');
+    this.newContact.color = this.firebase.avatarColor[Math.floor(Math.random() * this.firebase.avatarColor.length)];
 
-      this.firebase.addContactToData(this.newContact);
-      this.clearInputFeld();
+    this.firebase.addContactToData(this.newContact);
+    this.clearInputFeld();
   }
 
   toUpperCaseName(str: string): string {
@@ -44,18 +46,20 @@ export class AddContactDialogComponent {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
-  clearInputFeld(){
+  clearInputFeld() {
     this.newContact = {
-    fullname: 'Name',
-    firstname: '',
-    lastname: '',
-    email: 'Email',
-    phone: 'Phone',
-    };
+      fullname: 'Name',
+      firstname: '',
+      lastname: '',
+      email: 'Email',
+      phone: 'Phone',
+      color: '',
+    }
+
     this.closeDialog();
   }
-  
+
   closeDialog() {
-    this.closeDialogEvent.emit(); 
+    this.closeDialogEvent.emit();
   }
 }
