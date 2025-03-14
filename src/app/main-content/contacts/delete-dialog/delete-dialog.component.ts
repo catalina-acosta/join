@@ -13,14 +13,14 @@ import { ContactInterface } from '../contact-interface';
 export class DeleteDialogComponent {
   firebaseService =inject(FirebaseService);
   @Input() contact!: ContactInterface; 
-    @Output() closeDialogEvent = new EventEmitter<void>();
-   contactId?: string= '';
+  @Output() closeDialogEvent = new EventEmitter<void>();
+  contactId?: string= '';
 
-  deleteItem(id: string){
-    this.contactId = this.firebaseService.contactsList[index].id;
-    if(this.contactId){
-      this.firebaseService.deleteContactFromData(this.contactId);
-    }
+  deleteItem(){
+    // this.contactId = this.firebaseService.contactsList[index].id;
+    // if(this.contactId){
+    //   this.firebaseService.deleteContactFromData(this.contactId);
+    // }
   }
 
   closeDialog() {
