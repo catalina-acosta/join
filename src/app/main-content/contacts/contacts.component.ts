@@ -7,8 +7,7 @@ import { FirebaseService } from '../../shared/service/firebase.service';
 
 @Component({
   selector: 'app-contacts',
-  standalone: true,
-  imports: [ContactsListComponent, ContactDetailsComponent, CommonModule, CommonModule],
+  imports: [ContactsListComponent],
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
