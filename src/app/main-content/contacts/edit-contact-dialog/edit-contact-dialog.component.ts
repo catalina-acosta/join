@@ -14,12 +14,12 @@ export class EditContactDialogComponent {
   firebase = inject(FirebaseService);
   @Output() closeDialogEvent = new EventEmitter<void>();
   @Input() contact!: ContactInterface; 
-  // isEdited: boolean = false;
+  
   formSubmitted: boolean = false;
   contactId: string = "";
   selectedContactIndex: number | null = null;
   editedContact = {
-    fullname:'',
+    fullname: '',
     firstname:'',
     lastname: '',
     email: '',
@@ -29,29 +29,39 @@ export class EditContactDialogComponent {
 
   onEditContact(contactForm: NgForm) {
     this.formSubmitted = true;
-    if (contactForm.valid && this.contactId) {
-      this.editContact(this.contactId);
+    if (contactForm.valid && this.contact.id) {
+      this.editContact();
     }
   }
 
-  editContact(id: string) {
-    // this.isEdited = true;
+  editContact() {
+    console.log('editing contact');
     const nameParts = this.editedContact.fullname.trim().split(' ');
     this.editedContact.firstname = this.toUpperCaseName(nameParts[0]);
     this.editedContact.lastname = this.toUpperCaseName(nameParts.slice(1).join(' ') || '');
-    // this.editedContact = {
-    //   fullname: '',
-    //   firstname: this.firebase.orderedContactsList.id.firstname,
-    //   lastname: this.firebase.orderedContactsList[index].lastname,
-    //   email: this.firebase.orderedContactsList[index].email,
-    //   phone: this.firebase.orderedContactsList[index].phone,
-    //   color: '',
-    // }
+    this.firebase.orderedContactsList.forEach((element) => {
+      if(element.id === this.contact.id) {
+        console.log('contact found: ', this.contact.id);
+        
+        this.editedContact = {
+          fullname: '',
+          firstname: element.firstname,
+          lastname: element.lastname,
+          email: element.email,
+          phone: element.phone,
+          color: '',
+        }
+        console.log('contact edited: ', this.editedContact);
+        this.saveEdit();
+      }
+    })
   }
 
   saveEdit() {
-    if (this.contactId) {
-      this.firebase.editContactToDatabase(this.contactId, this.editedContact)
+    if (this.contact.id) {
+      console.log("saving edit");
+      
+      this.firebase.editContactToDatabase(this.contact.id!, this.editedContact)
     }
   }
 

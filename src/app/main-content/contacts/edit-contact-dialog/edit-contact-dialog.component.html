@@ -8,45 +8,43 @@
 
     <div class="add_contacts_content">
         <div class="close_btn" >
-            <img (click)="closeDialog()" src="./assets/btns-icons/close_dark.svg" alt="close">
+            <img (click)="closeDialog()" src="./assets/contact/Close.svg" alt="close">
         </div>
         
         <div class="form_content">
-            <div class="avatar" [ngStyle]="{'background-color': contact.color}">{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</div>
-        <!-- <img class="contact_icon" src="./assets/contact/add-contact-overlay.svg" alt="contact_icon"> -->
+            <div class="avatar" [ngStyle]="{'background-color': contact.color}"><h2>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</h2></div>
         <form (ngSubmit)="onEditContact(contactForm)" #contactForm="ngForm">
 
             <label class="input_content">
-                <input type="text" [(ngModel)]="editedContact.fullname" name="fullname"
+                <input type="text" [(ngModel)]="contact.firstname" name="fullname"
                     [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'" value="{{contact.firstname}}"
                     #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required>
-                    {{contact.firstname}}
                 <img src="./assets/contact/person.svg" alt="Person">
             </label>
 
             <label class="input_content">
-                <input type="email" [(ngModel)]="editedContact.email" name="email"
+                <input type="email" [(ngModel)]="contact.email" name="email"
                     [placeholder]="email.invalid && email.touched ? 'Please enter a valid email' : 'Email'"
                     #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required>
                 <img src="./assets/contact/mail.svg" alt="mail">
             </label>
 
             <label class="input_content">
-                <input type="text" [(ngModel)]="editedContact.phone" name="phone"
+                <input type="text" [(ngModel)]="contact.phone" name="phone"
                     [placeholder]="phone.invalid && phone.touched ? editedContact.phone : editedContact.phone"
                     #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required>
                 <img src="./assets/contact/call.svg" alt="phone">
             </label>
 
             <div class="btn_container">
-                <button class="cancel_btn" >
+                <button class="cancel_btn" (click)="closeDialog()">
                     Cancel
-                    <img src="./assets/btns-icons/close_dark.svg" alt="cancel">
+                    <img src="./assets/contact/Close.svg" alt="cancel" >
                 </button>
 
                 <button class="create_btn" type="submit" [disabled]="!contactForm.valid">
                     Edit contact
-                    <img src="./assets/btns-icons/check.svg" alt="Create">
+                    <img src="./assets/contact/check.svg" alt="Create">
                 </button>
             </div>
 
