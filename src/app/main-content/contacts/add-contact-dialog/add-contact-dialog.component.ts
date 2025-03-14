@@ -55,6 +55,7 @@ export class AddContactDialogComponent {
       phone: 'Phone',
       color: '',
     }
+
     this.closeDialog();
   }
 

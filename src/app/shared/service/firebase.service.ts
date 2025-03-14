@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, doc, Firestore, onSnapshot, orderBy, query, setDoc } from '@angular/fire/firestore';
+import { addDoc, collection, doc, Firestore, onSnapshot, orderBy, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { ContactInterface } from '../../main-content/contacts/contact-interface';
 
 
@@ -142,6 +142,15 @@ export class FirebaseService {
 
   async addContactToData(contactsList:ContactInterface){
     await addDoc(collection(this.firebase, "contacts"), contactsList);
+  }
+
+  async editContactToDatabase(id: string, data: ContactInterface) {
+    await updateDoc(doc(this.firebase, "contacts", id), {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      email: data.email,
+      phone: data.phone,
+    })
   }
   
   setContactObject(id: string, obj: ContactInterface): ContactInterface {
