@@ -34,10 +34,6 @@
                         
                         <button (click)="openDeleteContact($index)">delete</button>
                         <!-- delet_btn -->
-                         <!-- delet_btn -->
-                        
-                        <button (click)="openDeleteContact($index)">delete</button>
-                        <!-- delet_btn -->
                     </div>     
                     <button (click)="openEditDialog($index)">edit contact</button>
                 </div>
@@ -52,14 +48,6 @@
                 [contact]="currentContact"  (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-delete-dialog>
             </div>
         </div>
-     
 
-         <div *ngIf="isDeleteOpen" class="overlay_content" (click)="closeDialog()">
-            <div class="custom-dialog">
-                <app-delete-dialog  *ngIf="isDeleteOpen && currentContact" 
-                [contact]="currentContact"  (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-delete-dialog>
-            </div>
-        </div>
-     
     </div>
 </section>
