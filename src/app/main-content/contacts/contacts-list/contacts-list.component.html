@@ -18,6 +18,7 @@
                 </div>
             </div>
         }
+
         @if(firebase.orderedContactsList) {
             @for (item of firebase.orderedContactsList; track $index) {
             @if($index === 0 || item.firstname.charAt(0) !== firebase.orderedContactsList[$index - 1].firstname.charAt(0) )
@@ -28,13 +29,37 @@
                     </div>
                     <div class="contact_info">
                         <p class="name">{{item.firstname}} {{item.lastname}}</p>
-                        <p class="email">{{item.email}}</p>
-                    </div> 
+                        <p class="email">{{item.email}}</p>    
+                         <!-- delet_btn -->
+                        
+                        <button (click)="openDeleteContact($index)">delete</button>
+                        <!-- delet_btn -->
+                         <!-- delet_btn -->
+                        
+                        <button (click)="openDeleteContact($index)">delete</button>
+                        <!-- delet_btn -->
+                    </div>     
                     <button (click)="openEditDialog($index)">edit contact</button>
                 </div>
             } @empty {
                 <div>data loading</div>
             }
         }
+
+         <div *ngIf="isDeleteOpen" class="overlay_content" (click)="closeDialog()">
+            <div class="custom-dialog">
+                <app-delete-dialog  *ngIf="isDeleteOpen && currentContact" 
+                [contact]="currentContact"  (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-delete-dialog>
+            </div>
+        </div>
+     
+
+         <div *ngIf="isDeleteOpen" class="overlay_content" (click)="closeDialog()">
+            <div class="custom-dialog">
+                <app-delete-dialog  *ngIf="isDeleteOpen && currentContact" 
+                [contact]="currentContact"  (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-delete-dialog>
+            </div>
+        </div>
+     
     </div>
 </section>
