@@ -84,8 +84,4 @@ onContactCreated() {
   this.contactCreated.emit();
 }
 
-onContactCreated() {
-  this.contactCreated.emit();
-}
-
 }
