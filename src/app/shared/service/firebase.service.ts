@@ -145,13 +145,7 @@ export class FirebaseService {
   }
 
   async deleteContactFromData(id: string){
-await deleteDoc (doc(this.firebase, "contacts", id))
-
-  }
-
-  async deleteContactFromData(id: string){
-await deleteDoc (doc(this.firebase, "contacts", id))
-
+    await deleteDoc (doc(this.firebase, "contacts", id))
   }
 
   async editContactToDatabase(id: string, data: ContactInterface) {
