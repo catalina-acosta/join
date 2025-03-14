@@ -22,7 +22,7 @@ export class ContactsListComponent {
   isDialogOpen:boolean = false;  
   isDeleteOpen:boolean = false;
   currentContact: ContactInterface| null = null;
-  isEditDialogOpen = false;
+  isEditDialogOpen:boolean = false;
 
   openDialogDetails() {
     console.log("opening dialog details");
@@ -34,6 +34,12 @@ export class ContactsListComponent {
 
   openEditDialog(index: number) {
     this.isEditDialogOpen = true;
+    this.currentContact = this.firebase.orderedContactsList[index];
+    if (this.currentContact) {
+      console.log('ID:', this.currentContact.id);
+      console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
+      console.log('Color:', this.currentContact.color);
+    }
   }
 
   openDeleteContact(index: number){
