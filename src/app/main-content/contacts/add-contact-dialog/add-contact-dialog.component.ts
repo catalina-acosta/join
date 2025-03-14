@@ -12,9 +12,9 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class AddContactDialogComponent {
   firebase = inject(FirebaseService);
-
   @Output() closeDialogEvent = new EventEmitter<void>();
-  formSubmitted = false;
+  formSubmitted:boolean = false;
+  
   newContact = {
     fullname: '',
     firstname: '',
