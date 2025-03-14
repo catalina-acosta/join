@@ -13,7 +13,7 @@ export class EditContactDialogComponent {
   firebase = inject(FirebaseService);
   @Output() closeDialogEvent = new EventEmitter<void>();
   @Input() contactIndex: number | null = null;
-  isEdited: boolean = false;
+  // isEdited: boolean = false;
   formSubmitted: boolean = false;
   contactId: string = "";
   selectedContactIndex: number | null = null;
@@ -34,7 +34,7 @@ export class EditContactDialogComponent {
   }
 
   editContact(index: number) {
-    this.isEdited = true;
+    // this.isEdited = true;
     const nameParts = this.editedContact.fullname.trim().split(' ');
     this.editedContact.firstname = this.toUpperCaseName(nameParts[0]);
     this.editedContact.lastname = this.toUpperCaseName(nameParts.slice(1).join(' ') || '');
@@ -59,8 +59,8 @@ export class EditContactDialogComponent {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
-  closeDialog() {
-    this.closeDialogEvent.emit(); 
-  }
+  // closeDialog() {
+  //   this.closeDialogEvent.emit(); 
+  // }
 
 }

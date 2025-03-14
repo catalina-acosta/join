@@ -8,18 +8,18 @@
 
     <div class="add_contacts_content">
         <div class="close_btn" >
-            <img (click)="closeDialog()" src="./assets/btns-icons/close_dark.svg" alt="close">
+            <img src="./assets/btns-icons/close_dark.svg" alt="close">
         </div>
         
         <div class="form_content">
         <img class="contact_icon" src="./assets/contact/add-contact-overlay.svg" alt="contact_icon">
         <form (ngSubmit)="onEditContact(contactForm)" #contactForm="ngForm">
 
-
             <label class="input_content">
                 <input type="text" [(ngModel)]="editedContact.fullname" name="fullname"
                     [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'"
                     #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required>
+                    {{editedContact.fullname}}
                 <img src="./assets/contact/person.svg" alt="Person">
             </label>
 
@@ -38,7 +38,7 @@
             </label>
 
             <div class="btn_container">
-                <button class="cancel_btn" (click)="closeDialog()">
+                <button class="cancel_btn" >
                     Cancel
                     <img src="./assets/btns-icons/close_dark.svg" alt="cancel">
                 </button>

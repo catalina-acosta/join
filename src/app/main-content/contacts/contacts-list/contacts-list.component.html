@@ -14,7 +14,7 @@
         @if (isEditDialogOpen) {
             <div class="overlay_content" (click)="closeDialog()">
                 <div class="custom-dialog">
-                    <app-edit-contact-dialog></app-edit-contact-dialog>
+                    <app-edit-contact-dialog (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-edit-contact-dialog>
                 </div>
             </div>
         }
