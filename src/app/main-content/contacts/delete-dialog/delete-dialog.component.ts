@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
+import { ContactInterface } from '../contact-interface';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -11,16 +12,18 @@ import { FirebaseService } from '../../../shared/service/firebase.service';
 })
 export class DeleteDialogComponent {
   firebaseService =inject(FirebaseService);
-  // contactId?: string= '';
+  @Input() contact!: ContactInterface; 
+    @Output() closeDialogEvent = new EventEmitter<void>();
+   contactId?: string= '';
 
-  // deleteItem(index:number){
-  //   this.contactId = this.firebaseService.contactsList[index].id;
-  //   if(this.contactId){
-  //     this.firebaseService.deleteContactFromData(this.contactId);
-  //   }
-  // }
+  deleteItem(id: string){
+    this.contactId = this.firebaseService.contactsList[index].id;
+    if(this.contactId){
+      this.firebaseService.deleteContactFromData(this.contactId);
+    }
+  }
 
-  closeDialog(){
-    
+  closeDialog() {
+    this.closeDialogEvent.emit();
   }
 }

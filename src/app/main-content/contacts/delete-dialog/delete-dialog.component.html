@@ -1,14 +1,16 @@
 <section class="delete_content">
     
-        <div class="avatar"><p>CR</p></div>
-        <h4>Are you sure you want to delete <strong>(Name)?</strong></h4>
+        <div class="avatar" [ngStyle]="{'background-color': contact.color}">
+            <p>{{ contact.firstname.charAt(0) }}{{ contact.lastname.charAt(0) }}</p>
+        </div>
+        <h4>Are you sure you want to delete <strong>{{ contact.firstname }} {{ contact.lastname }}?</strong></h4>
             <div class="btn_container">
                 <button class="cancel_btn" (click)="closeDialog()">
                     No
                     <img src="./assets/contact/Close.svg" alt="cancel">
                 </button>
 <!-- indec (click)="deleteItem(index)"-->
-                <button class="create_btn" [disabled]="">
+                <button class="create_btn" (click)="deleteItem(contact.id)" [disabled]="">
                     Yes
                     <img src="./assets/contact/check.svg" alt="Create">
                 </button>
