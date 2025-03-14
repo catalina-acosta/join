@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ContactInterface } from '../contact-interface';
 
 @Component({
   selector: 'app-edit-contact-dialog',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class EditContactDialogComponent {
   firebase = inject(FirebaseService);
   @Output() closeDialogEvent = new EventEmitter<void>();
-  @Input() contactIndex: number | null = null;
+  @Input() contact!: ContactInterface; 
   // isEdited: boolean = false;
   formSubmitted: boolean = false;
   contactId: string = "";
@@ -28,24 +29,24 @@ export class EditContactDialogComponent {
 
   onEditContact(contactForm: NgForm) {
     this.formSubmitted = true;
-    if (contactForm.valid && this.contactIndex !== null) {
-      this.editContact(this.contactIndex);
+    if (contactForm.valid && this.contactId) {
+      this.editContact(this.contactId);
     }
   }
 
-  editContact(index: number) {
+  editContact(id: string) {
     // this.isEdited = true;
     const nameParts = this.editedContact.fullname.trim().split(' ');
     this.editedContact.firstname = this.toUpperCaseName(nameParts[0]);
     this.editedContact.lastname = this.toUpperCaseName(nameParts.slice(1).join(' ') || '');
-    this.editedContact = {
-      fullname: '',
-      firstname: this.firebase.orderedContactsList[index].firstname,
-      lastname: this.firebase.orderedContactsList[index].lastname,
-      email: this.firebase.orderedContactsList[index].email,
-      phone: this.firebase.orderedContactsList[index].phone,
-      color: '',
-    }
+    // this.editedContact = {
+    //   fullname: '',
+    //   firstname: this.firebase.orderedContactsList.id.firstname,
+    //   lastname: this.firebase.orderedContactsList[index].lastname,
+    //   email: this.firebase.orderedContactsList[index].email,
+    //   phone: this.firebase.orderedContactsList[index].phone,
+    //   color: '',
+    // }
   }
 
   saveEdit() {
@@ -59,8 +60,8 @@ export class EditContactDialogComponent {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
-  // closeDialog() {
-  //   this.closeDialogEvent.emit(); 
-  // }
+  closeDialog() {
+    this.closeDialogEvent.emit(); 
+  }
 
 }

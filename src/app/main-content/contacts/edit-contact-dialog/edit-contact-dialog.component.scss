@@ -149,6 +149,17 @@ section {
     }
 }
 
+.avatar {
+    border-radius: 50%;
+    height: 88px;
+    width: 88px;
+    padding: 10px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .custom-dialog-content {
     padding: 20px;
     border-radius: 15px;
