@@ -1,5 +1,5 @@
 <div>
-    <app-contacts-list class="contact-list" (openDetails)="detailsOpened($event)"></app-contacts-list>
+<app-contacts-list class="contact-list" (openDetails)="detailsOpened($event)" (contactCreated)="onContactCreated()"></app-contacts-list>
     <app-contact-details class="contact-details" *ngIf="detailsOpen && currentContact" [contact]="currentContact"></app-contact-details>
   </div>
   
