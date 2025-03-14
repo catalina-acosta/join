@@ -13,6 +13,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class AddContactDialogComponent {
   firebase = inject(FirebaseService);
   @Output() closeDialogEvent = new EventEmitter<void>();
+  @Output() contactCreatedEvent = new EventEmitter<void>(); 
+
   formSubmitted:boolean = false;
   
   newContact = {
@@ -57,9 +59,11 @@ export class AddContactDialogComponent {
     }
 
     this.closeDialog();
+    this.contactCreatedEvent.emit();
   }
 
   closeDialog() {
     this.closeDialogEvent.emit();
   }
+
 }
