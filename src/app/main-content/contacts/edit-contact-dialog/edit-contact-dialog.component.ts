@@ -27,7 +27,6 @@ export class EditContactDialogComponent {
     color: '',
   }
 
-
   onEditContact(contactForm: NgForm) {
     this.formSubmitted = true;
     if (contactForm.valid && this.contact.id) {
