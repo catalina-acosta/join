@@ -8,7 +8,7 @@
 
         <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
             <div class="custom-dialog">
-                <app-add-contact-dialog (closeDialogEvent)="closeDialog()" (contactCreatedEvent)="onContactCreated()" (click)="stopPropagation($event)"></app-add-contact-dialog>
+                <app-add-contact-dialog (closeDialogEvent)="closeDialog()" (contactCreatedEvent)="onContactCreated($event)" (contactCreatedEvent)="onContactCreated()" (click)="stopPropagation($event)"></app-add-contact-dialog>
             </div>
         </div>
         @if (isEditDialogOpen) {

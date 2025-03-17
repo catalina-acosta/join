@@ -20,4 +20,5 @@ export class ContactsComponent {
     this.currentContact = contact;
     this.detailsOpen = true;
   }
+  
 }
