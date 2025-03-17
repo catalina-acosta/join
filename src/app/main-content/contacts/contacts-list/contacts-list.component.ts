@@ -23,19 +23,19 @@ export class ContactsListComponent {
   isDeleteOpen:boolean = false;
   currentContact: ContactInterface| null = null;
   isEditDialogOpen:boolean = false;
-  isOpenDetail:boolean = false;
-  @Output() openDetails = new EventEmitter<boolean>();
+  @Output() openDetails = new EventEmitter<ContactInterface>();
 
-  openDialogDetails(index: number) {
-    this.currentContact = this.firebase.orderedContactsList[index];
+
+  openDialogDetails(contact: ContactInterface) {
+    this.currentContact = contact;
     if (this.currentContact) {
       console.log('ID:', this.currentContact.id);
       console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
       console.log('Color:', this.currentContact.color);
-      this.openDetails.emit(true);
+      this.openDetails.emit(contact);
     }
   }
-
+  
   openAddNewContacts() {
     this.isDialogOpen = true;
   }
