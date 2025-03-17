@@ -1,7 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../contact-interface';
-import { ContactsListComponent } from '../contacts-list/contacts-list.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,6 +13,4 @@ import { CommonModule } from '@angular/common';
 export class ContactDetailsComponent {
 firebase = inject(FirebaseService);
  @Input() contact!: ContactInterface; 
- contactId?: string= '';
-
 }
