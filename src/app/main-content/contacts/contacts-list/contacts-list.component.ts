@@ -11,7 +11,6 @@ import { ContactInterface } from '../contact-interface';
 @Component({
   selector: 'app-contacts-list',
   standalone: true,
-  standalone: true,
   imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent],
   templateUrl: './contacts-list.component.html',
   styleUrl: './contacts-list.component.scss'
@@ -23,22 +22,17 @@ export class ContactsListComponent {
   currentContact: ContactInterface | null = null;
   isEditDialogOpen: boolean = false;
   @Output() openDetails = new EventEmitter<ContactInterface>();
-  @Output() contactCreated = new EventEmitter<void>();
-
-  @Output() contactCreated = new EventEmitter<void>();
-
+  // @Output() contactCreated = new EventEmitter<void>();
 
 
   openDialogDetails(contact: ContactInterface) {
-    this.currentContact = contact;
+    this.currentContact = contact;  
+    console.log('Neuer Kontakt:', contact); 
     if (this.currentContact) {
-      console.log('ID:', this.currentContact.id);
-      console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
-      console.log('Color:', this.currentContact.color);
       this.openDetails.emit(contact);
     }
   }
-
+  
 
   openAddNewContacts() {
     this.isDialogOpen = true;
@@ -54,8 +48,6 @@ export class ContactsListComponent {
     }
   }
 
-  openDeleteContact(index: number) {
-    this.isDeleteOpen = true;
   openDeleteContact(index: number) {
     this.isDeleteOpen = true;
     this.currentContact = this.firebase.orderedContactsList[index];
@@ -74,10 +66,6 @@ export class ContactsListComponent {
     const dialogElement = document.querySelector('.custom-dialog');
 
     if (dialogElement) {
-  closeDialog() {
-    const dialogElement = document.querySelector('.custom-dialog');
-
-    if (dialogElement) {
       dialogElement.classList.add('dialog-closed');
       this.isEditDialogOpen = false;
       setTimeout(() => {
@@ -86,7 +74,6 @@ export class ContactsListComponent {
         this.isDialogOpen = false;
         this.isDeleteOpen = false;
       }, 500);
-    } else {
     } else {
       this.isDialogOpen = false;
       this.isDeleteOpen = false;

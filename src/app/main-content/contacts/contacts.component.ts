@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ContactsListComponent } from './contacts-list/contacts-list.component';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
 import { CommonModule } from '@angular/common';
@@ -15,10 +15,16 @@ export class ContactsComponent {
   firebaseService = inject(FirebaseService);
   detailsOpen: boolean = false;
   currentContact: ContactInterface | null = null; 
+  @ViewChild(ContactDetailsComponent) contactDetailsComponent!: ContactDetailsComponent;
 
-  detailsOpened(contact: ContactInterface) {
+  openDialogDetails(contact: ContactInterface) {
     this.currentContact = contact;
     this.detailsOpen = true;
+
+    setTimeout(() => {
+      if (this.contactDetailsComponent) {
+        this.contactDetailsComponent.onContactCreated(contact);
+      }
+    });
   }
-  
 }

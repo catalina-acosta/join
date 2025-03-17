@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Output, EventEmitter, Input } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ContactInterface } from '../contact-interface';
@@ -13,11 +13,13 @@ import { ContactInterface } from '../contact-interface';
 })
 export class AddContactDialogComponent {
   firebase = inject(FirebaseService);
+  @Input() contact!: ContactInterface;
   @Output() closeDialogEvent = new EventEmitter<void>();
   @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
 
-  formSubmitted:boolean = false;
-  
+  formSubmitted: boolean = false;
+  contactIsSuccessfully: boolean = false;
+
   newContact = {
     fullname: '',
     firstname: '',
@@ -41,6 +43,7 @@ export class AddContactDialogComponent {
     this.newContact.color = this.firebase.avatarColor[Math.floor(Math.random() * this.firebase.avatarColor.length)];
 
     this.firebase.addContactToData(this.newContact);
+    this.contactCreatedEvent.emit(this.newContact);
     this.clearInputFeld();
   }
 
@@ -60,11 +63,18 @@ export class AddContactDialogComponent {
     }
 
     this.closeDialog();
-    this.contactCreatedEvent.emit(this.newContact);
   }
 
   closeDialog() {
     this.closeDialogEvent.emit();
   }
 
+  // onContactCreated(newContact: ContactInterface) {
+  //   this.contact = newContact;
+  //   this.contactIsSuccessfully = true;
+
+  //   setTimeout(() => {
+  //     this.contactIsSuccessfully = false;
+  //   }, 3000);
+  // }
 }

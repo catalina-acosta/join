@@ -13,22 +13,15 @@ import { CommonModule } from '@angular/common';
 export class ContactDetailsComponent {
   firebase = inject(FirebaseService);
   @Input() contact!: ContactInterface;
-  contactIsSuccesfully = false;
+  contactIsSuccessfully: boolean = false;
   
-  onContactCreated() {
-    this.contactIsSuccesfully = true;
-  
-    setTimeout(() => {
-      const dialogElement = document.querySelector('.succesfull_content');
-      if (dialogElement) {
-        dialogElement.classList.add('dialog-closed');
-      }
-    }, 2500); 
+  onContactCreated(newContact: ContactInterface) {
+    this.contact = newContact;
+    this.contactIsSuccessfully = true;
   
     setTimeout(() => {
-      this.contactIsSuccesfully = false; 
-    }, 3000); 
+      this.contactIsSuccessfully = false;
+    }, 3000);
   }
-  
 
 }
