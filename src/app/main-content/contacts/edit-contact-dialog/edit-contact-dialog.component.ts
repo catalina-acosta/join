@@ -20,12 +20,27 @@ export class EditContactDialogComponent {
   selectedContactIndex: number | null = null;
   editedContact = {
     fullname: '',
-    firstname:'',
+    firstname: '',
     lastname: '',
     email: '',
-    phone:'',
+    phone: '',
     color: '',
   }
+
+  // constructor() {
+  //   this.loadContact();
+  // }
+
+  // loadContact() {
+  //   this.editedContact = {
+  //     fullname: 'catalina',
+  //     firstname: this.contact.firstname,
+  //     lastname: this.contact.lastname,
+  //     email: this.contact.email,
+  //     phone: this.contact.phone,
+  //     color: this.contact.color,
+  //   };
+  // }
 
   onEditContact(contactForm: NgForm) {
     this.formSubmitted = true;
@@ -60,7 +75,7 @@ export class EditContactDialogComponent {
   saveEdit() {
     if (this.contact.id) {
       console.log("saving edit");
-      
+      this.closeDialog();
       this.firebase.editContactToDatabase(this.contact.id!, this.editedContact)
     }
   }

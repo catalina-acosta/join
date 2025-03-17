@@ -8,8 +8,6 @@ import { log } from 'console';
 import { loadavg } from 'os';
 import { ContactInterface } from '../contact-interface';
 
-
-
 @Component({
   selector: 'app-contacts-list',
   standalone:true,
@@ -61,7 +59,7 @@ closeDialog() {
   
   if (dialogElement) {
       dialogElement.classList.add('dialog-closed');
-
+      this.isEditDialogOpen = false;
       setTimeout(() => {
           this.isDialogOpen = false;
           this.isDeleteOpen = false;

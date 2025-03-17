@@ -16,8 +16,8 @@
         <form (ngSubmit)="onEditContact(contactForm)" #contactForm="ngForm">
 
             <label class="input_content">
-                <input type="text" [(ngModel)]="contact.firstname" name="fullname"
-                    [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'" value="{{contact.firstname}}"
+                <input type="text" [(ngModel)]="contact.firstname + contact.lastname" name="fullname"
+                    [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'" value="{{editedContact.firstname}}"
                     #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required>
                 <img src="./assets/contact/person.svg" alt="Person">
             </label>
@@ -42,7 +42,7 @@
                     <img src="./assets/contact/Close.svg" alt="cancel" >
                 </button>
 
-                <button class="create_btn" type="submit" [disabled]="!contactForm.valid">
+                <button class="create_btn" type="submit" [disabled]="!contactForm.valid" (click)="closeDialog()">
                     Edit contact
                     <img src="./assets/contact/check.svg" alt="Create">
                 </button>
