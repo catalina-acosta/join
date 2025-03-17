@@ -14,8 +14,9 @@ import { FirebaseService } from '../../shared/service/firebase.service';
 export class ContactsComponent {
   firebaseService = inject(FirebaseService);
   detailsOpen: boolean = false;
-  currentContact: ContactInterface | null = null; 
-  
+  currentContact: ContactInterface | null = null;
+  contactIsSuccessfully: boolean = false;
+
   @ViewChild(ContactDetailsComponent) contactDetailsComponent!: ContactDetailsComponent;
 
   openDialogDetails(contact: ContactInterface) {

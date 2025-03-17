@@ -1,5 +1,4 @@
 import { Component, inject, Input } from '@angular/core';
-import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../contact-interface';
 import { CommonModule } from '@angular/common';
 
@@ -11,15 +10,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './contact-details.component.scss'
 })
 export class ContactDetailsComponent {
-  firebase = inject(FirebaseService);
-  
   @Input() contact!: ContactInterface;
-  contactIsSuccessfully: boolean = false;
+  @Input() contactIsSuccessfully: boolean = false;
   
   onContactCreated(newContact: ContactInterface) {
     this.contact = newContact;
-    this.contactIsSuccessfully = true;
-    
+ 
+    if (!this.contact.id) {
+      this.contactIsSuccessfully = true;
     setTimeout(() => {
       const successElement = document.querySelector('.succesfull_content');
       
@@ -31,6 +29,6 @@ export class ContactDetailsComponent {
         this.contactIsSuccessfully = false;
       }, 500);
     }, 1000);
-  }
+  }}
 
 }

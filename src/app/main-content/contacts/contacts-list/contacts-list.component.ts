@@ -4,8 +4,6 @@ import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dia
 import { CommonModule } from '@angular/common';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { log } from 'console';
-import { loadavg } from 'os';
 import { ContactInterface } from '../contact-interface';
 
 @Component({
@@ -21,19 +19,34 @@ export class ContactsListComponent {
   isDeleteOpen: boolean = false;
   currentContact: ContactInterface | null = null;
   isEditDialogOpen: boolean = false;
+  contactIsSuccessfully: boolean = false;
+  
   @Output() openDetails = new EventEmitter<ContactInterface>();
-  // @Output() contactCreated = new EventEmitter<void>();
+  @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
 
 
   openDialogDetails(contact: ContactInterface) {
-    this.currentContact = contact;  
-    console.log('Neuer Kontakt:', contact); 
-    if (this.currentContact) {
       this.openDetails.emit(contact);
-    }
+      this.onContactCreated(contact);
   }
-  
 
+  onContactCreated(contact: ContactInterface) { 
+    this.contactCreatedEvent.emit(contact);
+    this.contactIsSuccessfully = true;    
+    
+    setTimeout(() => {
+      const successElement = document.querySelector('.succesfull_content');
+      
+      if (successElement) {
+        successElement.classList.add('dialog-closed'); 
+      }
+
+      setTimeout(() => {
+        this.contactIsSuccessfully = false;
+      }, 500);
+    }, 1000);
+  }
+   
   openAddNewContacts() {
     this.isDialogOpen = true;
   }
@@ -78,9 +91,9 @@ export class ContactsListComponent {
     }
   }
 
-  onContactCreated(contact: ContactInterface) { 
-    this.isDialogOpen = false;
-    this.currentContact = contact;
-    this.openDetails.emit(contact); 
-  }
+  // onContactCreated(contact: ContactInterface) { 
+  //   this.isDialogOpen = false;
+  //   this.currentContact = contact;
+  //   this.openDetails.emit(contact); 
+  // }
 }
