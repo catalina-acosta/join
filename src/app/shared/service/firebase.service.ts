@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, setDoc, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, setDoc, Unsubscribe, updateDoc } from '@angular/fire/firestore';
 import { ContactInterface } from '../../main-content/contacts/contact-interface';
 
 
@@ -29,81 +29,81 @@ export class FirebaseService {
     "#FFBB2B"
   ];
 
-  // dummyData: { firstname: string; lastname: string; email: string; phone: string; color: string }[] = [
-  //   {
-  //     firstname: "Lena",
-  //     lastname: "Schmidt",
-  //     email: "lena.schmidt82@gmail.com",
-  //     phone: "+49 1521 1234567",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Markus",
-  //     lastname: "Sturmfels",
-  //     email: "mark.thunderrock@gmail.com",
-  //     phone: "+49 171 2345678",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Julia",
-  //     lastname: "Weber",
-  //     email: "julia.weber33@gmail.com",
-  //     phone: "+49 160 3456789",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Thomas",
-  //     lastname: "Eisenherz",
-  //     email: "tom.ironheart@gmail.com",
-  //     phone: "+49 176 4567890",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Sophie",
-  //     lastname: "Bauer",
-  //     email: "sophie.bauer19@gmail.com",
-  //     phone: "+49 151 5678901",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Felix",
-  //     lastname: "Sturmkind",
-  //     email: "felix.stormchild@gmail.com",
-  //     phone: "+49 159 6789012",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Anna",
-  //     lastname: "Keller",
-  //     email: "anna.keller88@gmail.com",
-  //     phone: "+49 172 7890123",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Michael",
-  //     lastname: "Schattenwald",
-  //     email: "mike.shadowwood@gmail.com",
-  //     phone: "+49 175 8901234",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Laura",
-  //     lastname: "Fischer",
-  //     email: "laura.fischer77@gmail.com",
-  //     phone: "+49 157 9012345",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   },
-  //   {
-  //     firstname: "Stefan",
-  //     lastname: "Morgentau",
-  //     email: "stefan.dewlight@gmail.com",
-  //     phone: "+49 162 0123456",
-  //     color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
-  //   }
-  // ];
+  dummyData: { firstname: string; lastname: string; email: string; phone: string; color: string }[] = [
+    {
+      firstname: "Lena",
+      lastname: "Schmidt",
+      email: "lena.schmidt82@gmail.com",
+      phone: "+49 1521 1234567",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Markus",
+      lastname: "Sturmfels",
+      email: "mark.thunderrock@gmail.com",
+      phone: "+49 171 2345678",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Julia",
+      lastname: "Weber",
+      email: "julia.weber33@gmail.com",
+      phone: "+49 160 3456789",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Thomas",
+      lastname: "Eisenherz",
+      email: "tom.ironheart@gmail.com",
+      phone: "+49 176 4567890",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Sophie",
+      lastname: "Bauer",
+      email: "sophie.bauer19@gmail.com",
+      phone: "+49 151 5678901",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Felix",
+      lastname: "Sturmkind",
+      email: "felix.stormchild@gmail.com",
+      phone: "+49 159 6789012",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Anna",
+      lastname: "Keller",
+      email: "anna.keller88@gmail.com",
+      phone: "+49 172 7890123",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Michael",
+      lastname: "Schattenwald",
+      email: "mike.shadowwood@gmail.com",
+      phone: "+49 175 8901234",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Laura",
+      lastname: "Fischer",
+      email: "laura.fischer77@gmail.com",
+      phone: "+49 157 9012345",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    },
+    {
+      firstname: "Stefan",
+      lastname: "Morgentau",
+      email: "stefan.dewlight@gmail.com",
+      phone: "+49 162 0123456",
+      color: this.avatarColor[Math.floor(Math.random() * this.avatarColor.length)]
+    }
+  ];
 
-  // unsubscribeOrderedList: Unsubscribe = () => {};
-// 
+  unsubscribeOrderedList: Unsubscribe = () => {};
+
   constructor() {
     // this.initializeContacts();
     this.unsubscribe = this.orderedListQuery();
@@ -116,6 +116,7 @@ export class FirebaseService {
   //     this.dummyData.forEach(async (element) => {
   //       await setDoc(doc(contactsRef), {
   //         email: element.email,
+  //         fullname: `${element.firstname} ${element.lastname}`,
   //         firstname: element.firstname,
   //         lastname: element.lastname,
   //         phone: element.phone,
@@ -150,19 +151,19 @@ export class FirebaseService {
 
   async editContactToDatabase(id: string, data: ContactInterface) {
     await updateDoc(doc(this.firebase, "contacts", id), {
+      fullname: data.fullname,
       firstname: data.firstname,
       lastname: data.lastname,
       email: data.email,
       phone: data.phone,
     })
-    console.log("data base updated");
-    
   }
   
   setContactObject(id: string, obj: ContactInterface): ContactInterface {
     return {
       id: id,
       email: obj.email,
+      fullname: obj.fullname,
       firstname: obj.firstname,
       lastname: obj.lastname,
       phone: obj.phone,
