@@ -1,24 +1,3 @@
-
-
-// test
-section{
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-}
-.succesfull_content{
-    width: 326px;
-    height: 74px;
-    background-color: #2A3647;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 20px;
-    animation: slideInFromRight 125ms ease-out forwards;
-}
-
 @keyframes slideInFromRight {
     0% {
         transform: translateX(100%);
@@ -42,6 +21,7 @@ section{
 .dialog-closed {
     animation: slideOutToRight 0.5s ease-in forwards;
 }
+
 div {
     display: flex;
     height: 100vh;
@@ -52,6 +32,12 @@ div {
 
     .contact-details{
         width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding-bottom: 15px;
+        padding-right: 15px;
     }
  }
 
