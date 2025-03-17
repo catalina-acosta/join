@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ContactInterface } from '../contact-interface';
 
 @Component({
   selector: 'app-add-contact-dialog',
@@ -13,7 +14,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class AddContactDialogComponent {
   firebase = inject(FirebaseService);
   @Output() closeDialogEvent = new EventEmitter<void>();
-  @Output() contactCreatedEvent = new EventEmitter<void>(); 
+  @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
 
   formSubmitted:boolean = false;
   
@@ -59,7 +60,7 @@ export class AddContactDialogComponent {
     }
 
     this.closeDialog();
-    this.contactCreatedEvent.emit();
+    this.contactCreatedEvent.emit(this.newContact);
   }
 
   closeDialog() {

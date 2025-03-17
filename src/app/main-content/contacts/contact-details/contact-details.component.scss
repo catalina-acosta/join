@@ -69,11 +69,24 @@
    }
 }
 
-
 h4 {
    padding-top: 24px;
    padding-bottom: 24px;
 }
+
+.succesfull_content{
+   width: 326px;
+   height: 74px;
+   background-color: #2A3647;
+   border-radius: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #fff;
+   font-size: 20px;
+   animation: slideInFromRight 125ms ease-out forwards;
+}
+
 
 @keyframes slideInFromRight {
    0% {
