@@ -7,14 +7,14 @@ import { FirebaseService } from '../../shared/service/firebase.service';
 
 @Component({
   selector: 'app-contacts',
-  imports: [ContactsListComponent, CommonModule],
+  imports: [ContactsListComponent, CommonModule, ContactDetailsComponent],
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
 export class ContactsComponent {
   firebaseService = inject(FirebaseService);
   detailsOpen: boolean = false;
-  currentContact: ContactInterface | null = null;
+  currentContact: ContactInterface | null = null; 
   contactIsSuccesfully = false;
 
   onContactCreated() {
@@ -31,7 +31,6 @@ export class ContactsComponent {
       this.contactIsSuccesfully = false; 
     }, 3000); 
   }
-  
   detailsOpened(contact: ContactInterface) {
     this.currentContact = contact;
     this.detailsOpen = true;
