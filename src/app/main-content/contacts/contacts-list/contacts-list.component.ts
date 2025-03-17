@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { ContactInterface } from '../contact-interface';
 @Component({
   selector: 'app-contacts-list',
   standalone:true,
-  imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent, DeleteDialogComponent],
+  imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent],
   templateUrl: './contacts-list.component.html',
   styleUrl: './contacts-list.component.scss'
 })
@@ -21,11 +21,19 @@ export class ContactsListComponent {
   isDeleteOpen:boolean = false;
   currentContact: ContactInterface| null = null;
   isEditDialogOpen:boolean = false;
+  @Output() openDetails = new EventEmitter<ContactInterface>();
 
-  openDialogDetails() {
-    console.log("opening dialog details");
+
+  openDialogDetails(contact: ContactInterface) {
+    this.currentContact = contact;
+    if (this.currentContact) {
+      console.log('ID:', this.currentContact.id);
+      console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
+      console.log('Color:', this.currentContact.color);
+      this.openDetails.emit(contact);
+    }
   }
-
+  
   openAddNewContacts() {
     this.isDialogOpen = true;
   }

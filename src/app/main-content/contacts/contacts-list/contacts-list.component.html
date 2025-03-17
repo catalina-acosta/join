@@ -25,7 +25,7 @@
             @for (item of firebase.orderedContactsList; track $index) {
             @if($index === 0 || item.firstname.charAt(0) !== firebase.orderedContactsList[$index - 1].firstname.charAt(0) )
                 {<h4 class="single_letter">{{ item.firstname.charAt(0) }}</h4>}
-                <div class="contact_info_wrapper" (click)="openDialogDetails()">
+                <div class="contact_info_wrapper" (click)="openDialogDetails(firebase.orderedContactsList[$index])">
                     <div class="avatar" [ngStyle]="{'background-color': item.color}">
                         <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
                     </div>
