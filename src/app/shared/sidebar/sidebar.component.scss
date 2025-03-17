@@ -49,7 +49,7 @@
     color: white;
     text-decoration: none;
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 15px;
 }
 
 
@@ -120,5 +120,16 @@
     .mobile nav a {
         color: white;
         font-size: 14px;
+    }
+}
+
+@media (max-height:600px) {
+    .logo{
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+
+    .menu-item{
+        padding: 9px 52px;
     }
 }
