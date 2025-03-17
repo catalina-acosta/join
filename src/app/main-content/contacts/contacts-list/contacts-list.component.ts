@@ -20,6 +20,7 @@ export class ContactsListComponent {
   isDialogOpen:boolean = false;  
   isDeleteOpen:boolean = false;
   isEditDialogOpen:boolean = false;
+  showDetails: boolean = false;
   currentContact: ContactInterface| null = null;
   @Output() openDetails = new EventEmitter<ContactInterface>();
 

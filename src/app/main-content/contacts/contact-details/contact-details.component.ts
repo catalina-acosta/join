@@ -40,7 +40,7 @@ export class ContactDetailsComponent {
 
     if (dialogElement) {
         dialogElement.classList.add('dialog-closed');
-        this.isDialogOpen = false;
+        // this.isDialogOpen = false;
         setTimeout(() => {
             this.isDialogOpen = false;
 
