@@ -17,6 +17,8 @@ $low_green: #7be129;        //low btns
     scroll-behavior: smooth;
     list-style: none;
     text-decoration: none;
+    // overflow-y: hidden;
+    // overflow-x: hidden;
 }
 
 body {
@@ -24,6 +26,7 @@ body {
     padding: 0;
     font-family: 'Inter';
     background-color: $page_bg;
+   
 }
 
 @font-face {
