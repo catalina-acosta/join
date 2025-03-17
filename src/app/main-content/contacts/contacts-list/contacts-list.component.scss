@@ -98,4 +98,18 @@
         width: 100%;
         height: 88vh;
     }
+    #addNewBtn {
+        position: fixed;
+        top: 636px;
+        left: 198px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        padding: 12px;
+        z-index: 15;
+        >h4 {display: none;}
+    }
+
+    
+
 }
