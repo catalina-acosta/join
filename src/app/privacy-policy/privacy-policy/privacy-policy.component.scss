@@ -1,0 +1,42 @@
+.section_wrapper {
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    height: calc(100vh - 100px);
+}
+
+.section_wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.section_wrapper::-webkit-scrollbar-track {
+    background: #f0f0f0; 
+    border-radius: 10px;
+}
+
+.section_wrapper::-webkit-scrollbar-thumb {
+    background: #2b3646; 
+    border-radius: 10px;
+}
+
+.section_wrapper::-webkit-scrollbar-thumb:hover {
+    background: #091931; 
+}
+
+@media (max-width:950px) {
+    h1 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width:344px) {
+    h1 {
+        font-size: 29px;
+    }
+}
+
+@media (max-width:768px) {
+    .section_wrapper{
+        padding-top:100px;
+    }
+}

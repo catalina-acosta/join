@@ -7,15 +7,15 @@
         
         
         <div class="header_profil_container">
-            <a class="help_btn" href="#"><img src="./assets/icons/help.svg" alt="Help"></a>
+            <a class="help_btn" [routerLink]="['help-page']"><img src="./assets/icons/help.svg" alt="Help"></a>
             <button (click)="toggleMenu()">CS</button>
 
             <div class="dropdown_menu" *ngIf="menuOpen">
 
-                <a [routerLink]="'/help'" class="dropdown_help" (click)="openHelp()">Help</a>
+                <a [routerLink]="['help-page']" class="dropdown_help" (click)="openHelp()">Help</a>
 
-                <a [routerLink]="'/legal-notice'" (click)="openLegalNotice()">Legal Notice</a>
-                <a [routerLink]="'/privacy-policy'" (click)="openPrivacyPolicy()">Privacy Policy</a>
+                <a [routerLink]="['imprint']" (click)="openLegalNotice()">Legal Notice</a>
+                <a [routerLink]="['privacy-policy']" (click)="openPrivacyPolicy()">Privacy Policy</a>
                 <a [routerLink]="'/logout'" (click)="logout()">Log out</a>
               </div>
         </div>
