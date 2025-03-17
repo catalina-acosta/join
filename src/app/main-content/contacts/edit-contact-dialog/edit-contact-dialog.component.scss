@@ -149,6 +149,22 @@ section {
     }
 }
 
+.avatar {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    padding: 10px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        color: white;
+    }
+}
+
+
 .custom-dialog-content {
     padding: 20px;
     border-radius: 15px;
