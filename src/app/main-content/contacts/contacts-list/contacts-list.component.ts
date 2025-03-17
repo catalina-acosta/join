@@ -19,8 +19,8 @@ export class ContactsListComponent {
   firebase = inject(FirebaseService);
   isDialogOpen:boolean = false;  
   isDeleteOpen:boolean = false;
-  currentContact: ContactInterface| null = null;
   isEditDialogOpen:boolean = false;
+  currentContact: ContactInterface| null = null;
   @Output() openDetails = new EventEmitter<ContactInterface>();
 
 
