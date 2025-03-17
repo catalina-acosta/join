@@ -71,8 +71,6 @@ export class ContactsListComponent {
       setTimeout(() => {
         this.isDialogOpen = false;
         this.isDeleteOpen = false;
-        this.isDialogOpen = false;
-        this.isDeleteOpen = false;
       }, 500);
     } else {
       this.isDialogOpen = false;

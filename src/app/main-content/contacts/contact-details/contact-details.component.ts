@@ -19,9 +19,18 @@ export class ContactDetailsComponent {
     this.contact = newContact;
     this.contactIsSuccessfully = true;
   
+    
     setTimeout(() => {
-      this.contactIsSuccessfully = false;
-    }, 3000);
+      const successElement = document.querySelector('.succesfull_content');
+      
+      if (successElement) {
+        successElement.classList.add('dialog-closed'); 
+      }
+
+      setTimeout(() => {
+        this.contactIsSuccessfully = false;
+      }, 500);
+    }, 1000);
   }
 
 }
