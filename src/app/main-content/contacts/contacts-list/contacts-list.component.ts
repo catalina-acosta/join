@@ -1,5 +1,4 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { CommonModule } from '@angular/common';

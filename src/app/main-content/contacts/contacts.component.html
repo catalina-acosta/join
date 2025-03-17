@@ -1,15 +1,10 @@
 <div>
 
-<app-contacts-list class="contact-list" (openDetails)="detailsOpened($event)" (contactCreated)="onContactCreated()" (contactCreated)="onContactCreated()"></app-contacts-list>
+  <app-contacts-list class="contact-list" (openDetails)="detailsOpened($event)" (contactCreated)="onContactCreated()"
+    (contactCreated)="onContactCreated()"></app-contacts-list>
     <app-contact-details class="contact-details" *ngIf="detailsOpen && currentContact" [contact]="currentContact"></app-contact-details>
-  </div>
-  
-<div *ngIf="contactIsSuccesfully" class="succesfull_content">
-    Contact successfully created
-  </div>
+</div>
 
 <div *ngIf="contactIsSuccesfully" class="succesfull_content">
-    Contact successfully created
-  </div>
-
-  
+  Contact successfully created
+</div>
