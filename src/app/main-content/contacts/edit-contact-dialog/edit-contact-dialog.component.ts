@@ -27,20 +27,6 @@ export class EditContactDialogComponent {
     color: '',
   }
 
-  // constructor() {
-  //   this.loadContact();
-  // }
-
-  // loadContact() {
-  //   this.editedContact = {
-  //     fullname: 'catalina',
-  //     firstname: this.contact.firstname,
-  //     lastname: this.contact.lastname,
-  //     email: this.contact.email,
-  //     phone: this.contact.phone,
-  //     color: this.contact.color,
-  //   };
-  // }
 
   onEditContact(contactForm: NgForm) {
     this.formSubmitted = true;
@@ -50,23 +36,20 @@ export class EditContactDialogComponent {
   }
 
   editContact() {
-    console.log('editing contact');
     const nameParts = this.editedContact.fullname.trim().split(' ');
     this.editedContact.firstname = this.toUpperCaseName(nameParts[0]);
     this.editedContact.lastname = this.toUpperCaseName(nameParts.slice(1).join(' ') || '');
     this.firebase.orderedContactsList.forEach((element) => {
       if(element.id === this.contact.id) {
-        console.log('contact found: ', this.contact.id);
-        
+
         this.editedContact = {
-          fullname: '',
+          fullname: element.fullname,
           firstname: element.firstname,
           lastname: element.lastname,
           email: element.email,
           phone: element.phone,
           color: '',
         }
-        console.log('contact edited: ', this.editedContact);
         this.saveEdit();
       }
     })
@@ -74,7 +57,6 @@ export class EditContactDialogComponent {
 
   saveEdit() {
     if (this.contact.id) {
-      console.log("saving edit");
       this.closeDialog();
       this.firebase.editContactToDatabase(this.contact.id!, this.editedContact)
     }

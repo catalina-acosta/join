@@ -16,7 +16,7 @@
         <form (ngSubmit)="onEditContact(contactForm)" #contactForm="ngForm">
 
             <label class="input_content">
-                <input type="text" [(ngModel)]="contact.firstname" name="fullname"
+                <input type="text" [(ngModel)]="contact.fullname" name="fullname"
                     [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'" value="{{editedContact.firstname}}"
                     #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required>
                 <img src="./assets/contact/person.svg" alt="Person">
