@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,8 @@ export class ContactsListComponent {
   isDeleteOpen:boolean = false;
   currentContact: ContactInterface| null = null;
   isEditDialogOpen:boolean = false;
+
+  @Output() contactCreated = new EventEmitter<void>();
 
   openDialogDetails() {
     console.log("opening dialog details");
@@ -70,6 +72,10 @@ closeDialog() {
       this.isDialogOpen = false;
       this.isDeleteOpen = false;
   }
+}
+
+onContactCreated() {
+  this.contactCreated.emit();
 }
 
 }
