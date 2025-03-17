@@ -12,13 +12,13 @@ import { CommonModule } from '@angular/common';
 })
 export class ContactDetailsComponent {
   firebase = inject(FirebaseService);
+  
   @Input() contact!: ContactInterface;
   contactIsSuccessfully: boolean = false;
   
   onContactCreated(newContact: ContactInterface) {
     this.contact = newContact;
     this.contactIsSuccessfully = true;
-  
     
     setTimeout(() => {
       const successElement = document.querySelector('.succesfull_content');

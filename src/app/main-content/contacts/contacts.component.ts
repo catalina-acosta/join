@@ -15,6 +15,7 @@ export class ContactsComponent {
   firebaseService = inject(FirebaseService);
   detailsOpen: boolean = false;
   currentContact: ContactInterface | null = null; 
+  
   @ViewChild(ContactDetailsComponent) contactDetailsComponent!: ContactDetailsComponent;
 
   openDialogDetails(contact: ContactInterface) {

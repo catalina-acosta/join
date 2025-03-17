@@ -1,6 +1,6 @@
-<div *ngIf="contact" class="content section_wrapper">
+<div *ngIf="contact; else welcomeMessage" class="content section_wrapper">
     <div class="headline">
-        <h1>Contacs</h1>
+        <h1>Contacts</h1>
         <div class="divider"></div>
         <h3>Better with a team</h3>
     </div>
@@ -35,6 +35,16 @@
     </div>
 
 </div>
+
+
+<ng-template #welcomeMessage>
+    <div class="content section_wrapper">
+    <div class="headline">
+        <h1>Contacts</h1>
+        <div class="divider"></div>
+        <h3>Better with a team</h3>
+    </div></div>
+</ng-template>
 
 <div *ngIf="contactIsSuccessfully" class="succesfull_content">
     Contact successfully created
