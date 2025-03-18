@@ -1,11 +1,19 @@
+
 @if (isEdited) {
     <div class="overlay_content" (click)="closeDialog()">
-                <div class="custom-dialog">
-                    <app-edit-contact-dialog *ngIf="isEdited && contact" 
-                    [contact]="contact"  
-                    (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-edit-contact-dialog>
-                </div>
-            </div>
+        <div class="custom-dialog">
+            <app-edit-contact-dialog *ngIf="isEdited && contact" 
+            [contact]="contact"  
+            (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-edit-contact-dialog>
+        </div>
+    </div>
+} @else if(isDeleteOpen) {
+    <div class="overlay_content" (click)="closeDialog()">
+        <div class="custom-dialog">
+            <app-delete-dialog  *ngIf="isDeleteOpen && contact" 
+            [contact]="contact"  (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-delete-dialog>
+        </div>
+    </div>
 } @else {
     <div *ngIf="contact; else detailStart" class="content section_wrapper">
         <div class="headline">
@@ -18,12 +26,12 @@
             <div class="fullname">
                 <h2>{{ contact.fullname}}</h2>
                 <div class="icons">
-                <div class="actions">
-                    <img src="./assets/contact/edit.svg" alt="" (click)="openEditDialog()">
+                <div class="actions" (click)="openEditDialog()">
+                    <img src="./assets/contact/edit.svg" alt="" >
                     <p>edit</p>
                 </div>
-                <div class="actions">
-                    <img src="./assets/contact/delete.svg" alt="">
+                <div class="actions" (click)="openDeleteContact()">
+                    <img src="./assets/contact/delete.svg" alt="" >
                     <p>delete</p>
                 </div>
             </div>
@@ -38,7 +46,6 @@
         </div>
     </div>
 }
-
 
 <ng-template #detailStart>
     <div class="content section_wrapper">
