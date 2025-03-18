@@ -33,6 +33,20 @@
    margin-top: 32px;
 }
 
+.avatar {
+   border-radius: 50%;
+   height: 120px;
+   width: 120px;
+   padding: 10px;
+   border: 2px solid white;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   h2 {
+      color: white;
+   }
+}
 
 .fullname {
    display: flex;
@@ -90,6 +104,28 @@ h4 {
    animation: slideInFromRight 125ms ease-out forwards;
 }
 
+
+.custom-dialog {
+   position: fixed;
+   top: 0;
+   right: 0;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 100;
+   animation: slideInFromRight 125ms ease-out forwards;
+}
+.overlay_content{
+   background-color: rgba(0, 0, 0, 0.349); 
+   position: fixed;
+   top: 0;
+   right: 0;
+   width: 100%;
+   height: 100vh;
+   z-index: 1000;
+}
 
 @keyframes slideInFromRight {
    0% {
