@@ -20,13 +20,14 @@ export class ContactsListComponent {
   currentContact: ContactInterface | null = null;
   isEditDialogOpen: boolean = false;
   contactIsSuccessfully: boolean = false;
+  selectedContactEmail: string | null = null;
   
   @Output() openDetails = new EventEmitter<ContactInterface>();
   @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
 
-
   openDialogDetails(contact: ContactInterface) {
-      this.openDetails.emit(contact);
+    this.selectedContactEmail = contact.email;
+    this.openDetails.emit(contact);
   }
 
   onContactCreated(contact: ContactInterface) { 

@@ -37,11 +37,14 @@
         border-radius: 8px;
     }
 
-    &.new-contact {
-        background-color: blue !important;
+    &.selected-contact {
+        background-color: #2A3647; 
         color: white;
+        border-radius: 8px;
     }
 }
+
+
 
 .avatar {
     border-radius: 50%;
