@@ -4,6 +4,8 @@ import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dia
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../contact-interface';
 import { RouterModule } from '@angular/router';
+import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-contacts-list',
