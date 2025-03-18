@@ -60,10 +60,12 @@ export class ContactDetailsComponent {
         // this.isDialogOpen = false;
         setTimeout(() => {
             this.isDialogOpen = false;
+            this.isDialogOpen=false;  
 
         }, 500);
     } else {
         this.isDialogOpen = false;
+        this.isDialogOpen=false;  
       }
   }
 }
