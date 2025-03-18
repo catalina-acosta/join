@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContactInterface } from '../contact-interface';
 import { CommonModule } from '@angular/common';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-contact-details',
   standalone:true,
-  imports: [CommonModule,EditContactDialogComponent],
+  imports: [CommonModule,EditContactDialogComponent, RouterModule],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss'
 })
@@ -16,8 +17,13 @@ export class ContactDetailsComponent {
   currentContact!: ContactInterface;
   isEdited: boolean = false;
   isDialogOpen:boolean = false;  
+  menuOpen = false;
   @Output() openDetails = new EventEmitter<ContactInterface>();
 
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+  
   onContactCreated(newContact: ContactInterface) {
     this.contact = newContact;
  

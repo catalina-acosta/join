@@ -1,11 +1,11 @@
 <section class="contacts_list">
     <div class="list_wrapper">
         <div class="btn_wrapper">
-            <button (click)="openAddNewContacts()" class="btn_plain_color" id="addNewBtn">
+            <button (click)="openAddNewContacts()" class="btn_plain_color">
                 <h4>Add new contact</h4><img src="../assets/icons/person_add.svg" alt="">
             </button>
         </div>
-
+        
         <div *ngIf="isDeleteOpen" class="overlay_content" (click)="closeDialog()">
             <div class="custom-dialog">
                 <app-delete-dialog  *ngIf="isDeleteOpen && currentContact" 
@@ -51,6 +51,9 @@
             }
         }
     </div>
+    <div class="three_dot_menu" (click)="openAddNewContacts()">
+        <img src="./assets/contact/add-contact.svg" alt="">
+    </div>
     <!-- <div>
         <div class="content section_wrapper">
             <div class="headline">
@@ -87,4 +90,6 @@
             
         </div>
     </div> -->
+
+
 </section>

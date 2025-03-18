@@ -98,6 +98,15 @@
     animation: slideInFromRight 125ms ease-out forwards;
  }
  
+ .three_dot_menu{
+    cursor:pointer;
+    bottom: 81px;
+    left: 83%;
+ }
+
+ .three_dot_menu img:hover{
+    content: url('../../../../../public/assets/contact/add-contact-hover.svg');
+ }
 
 @keyframes slideInFromRight {
     0% {
@@ -119,11 +128,22 @@
     }
 }
 
+ 
+
 .dialog-closed {
     animation: slideOutToRight 0.5s ease-in forwards;
 }
 
+@media (min-width:900px) {
+    .three_dot_menu{
+        display: none;
+    }
+}
+
 @media (max-width:900px) {
+    .btn_wrapper{
+        display:none;
+    }
     .list_wrapper {
         width: 100vw;
         padding-top: 100px;
@@ -131,7 +151,7 @@
 
     #addNewBtn {
         position: fixed;
-        top: 77%;
+        top: 86%;
         left: 83%;
         width: 56px;
         height: 56px;

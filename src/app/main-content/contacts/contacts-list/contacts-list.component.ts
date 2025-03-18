@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ContactInterface } from '../contact-interface';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-contacts-list',
   standalone: true,
-  imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent],
+  imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent, RouterModule],
   templateUrl: './contacts-list.component.html',
   styleUrl: './contacts-list.component.scss'
 })

@@ -4,10 +4,11 @@ import { ContactDetailsComponent } from './contact-details/contact-details.compo
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from './contact-interface';
 import { FirebaseService } from '../../shared/service/firebase.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-contacts',
-  imports: [ContactsListComponent, CommonModule, ContactDetailsComponent],
+  imports: [ContactsListComponent, CommonModule, ContactDetailsComponent, RouterModule],
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
