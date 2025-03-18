@@ -21,6 +21,7 @@ div {
     .contact-details {
         display: none;
         width: 100vw;
+        
     }
 
 
@@ -33,6 +34,7 @@ div {
         background: white; /* Falls nötig, um Überlappungen zu verdecken */
         width: 100%;
         padding-top:100px;
+        height: calc(100vh - 100px);
 
     .contact-details{
         width: 60%;

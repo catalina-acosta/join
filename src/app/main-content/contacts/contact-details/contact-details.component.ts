@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { ContactInterface } from '../contact-interface';
 import { CommonModule } from '@angular/common';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
@@ -86,6 +86,17 @@ export class ContactDetailsComponent {
     } else {
         this.isDialogOpen = false;
       }
+  }
+
+  // HostListener für Klicks überall auf der Seite
+  @HostListener('document:click', ['$event'])
+  closeMenuOnOutsideClick(event: Event) {
+    const targetElement = event.target as HTMLElement;
+    
+    // Überprüfen, ob das geklickte Element Teil des Three-Dot-Menüs oder des Dropdowns ist
+    if (!targetElement.closest('.three_dot_menu') && !targetElement.closest('.dropdown_menu')) {
+      this.menuOpen = false;
+    }
   }
 }
 
