@@ -6,10 +6,13 @@
     </div>
 </div>
 } @else if(isDeleteOpen) {
-<div class="overlay_content" (click)="closeDialog()">
-    <div class="custom-dialog">
-        <app-delete-dialog *ngIf="isDeleteOpen && contact" [contact]="contact" (closeDialogEvent)="closeDialog()"
-            (click)="stopPropagation($event)"></app-delete-dialog>
+
+    <div class="overlay_content" (click)="closeDialog()">
+        <div class="custom-dialog">
+            <app-delete-dialog *ngIf="isDeleteOpen && contact" 
+            [contact]="contact"  (closeDialogEvent)="closeDialog()" (contactDeletedEvent)="handleContactDeleted()" (click)="stopPropagation($event)"></app-delete-dialog>
+        </div>
+
     </div>
 </div>
 } @else {
