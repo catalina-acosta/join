@@ -90,10 +90,4 @@ export class ContactsListComponent {
       this.isDeleteOpen = false;
     }
   }
-
-  // onContactCreated(contact: ContactInterface) { 
-  //   this.isDialogOpen = false;
-  //   this.currentContact = contact;
-  //   this.openDetails.emit(contact); 
-  // }
 }
