@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Output, EventEmitter, Input } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ContactInterface } from '../contact-interface';
 
 @Component({
   selector: 'app-add-contact-dialog',
@@ -12,9 +13,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class AddContactDialogComponent {
   firebase = inject(FirebaseService);
+  @Input() contact!: ContactInterface;
   @Output() closeDialogEvent = new EventEmitter<void>();
-  formSubmitted:boolean = false;
-  
+  @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
+
+  formSubmitted: boolean = false;
+  contactIsSuccessfully: boolean = false;
+
   newContact = {
     fullname: '',
     firstname: '',
@@ -38,6 +43,7 @@ export class AddContactDialogComponent {
     this.newContact.color = this.firebase.avatarColor[Math.floor(Math.random() * this.firebase.avatarColor.length)];
 
     this.firebase.addContactToData(this.newContact);
+    this.contactCreatedEvent.emit(this.newContact);
     this.clearInputFeld();
   }
 

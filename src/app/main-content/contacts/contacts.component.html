@@ -1,5 +1,11 @@
 <div>
-    <app-contacts-list class="contact-list" (openDetails)="detailsOpened($event)"></app-contacts-list>
-    <app-contact-details class="contact-details" *ngIf="detailsOpen && currentContact" [contact]="currentContact"></app-contact-details>
-  </div>
-  
+  <app-contacts-list class="contact-list"  (openDetails)="openDialogDetails($event)"></app-contacts-list>
+
+  <app-contact-details class="contact-details" *ngIf="detailsOpen && currentContact; else detailStart" [contact]="currentContact"
+    #contactDetailsComponent></app-contact-details>
+
+
+<ng-template #detailStart>
+  <app-contact-details class="contact-details"></app-contact-details>
+</ng-template>
+</div>
