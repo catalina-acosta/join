@@ -15,9 +15,6 @@
    justify-content: space-between;
 }
 
-
-
-
 .main_info {
    height: 120px;
    display: flex;
@@ -207,10 +204,30 @@ h4 {
    }
 }
 
-
 .dialog-closed {
    animation: slideOutToRight 0.5s ease-in forwards;
 }
+
+@media (max-width:1490px){
+   .section_wrapper {
+       padding-right: 80px;
+       padding-left: 80px;
+   }
+}
+
+@media (max-width:1190px){
+    .section_wrapper {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+    h1{
+      font-size:43px;
+  }
+  h3{
+   font-size: 20px;
+}
+}
+
 @media (min-width:900px) {
    .three_dot_menu{
        display: none;
