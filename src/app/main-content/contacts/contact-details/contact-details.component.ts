@@ -1,5 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { FirebaseService } from '../../../shared/service/firebase.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContactInterface } from '../contact-interface';
 import { CommonModule } from '@angular/common';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
@@ -12,12 +11,30 @@ import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-
   styleUrl: './contact-details.component.scss'
 })
 export class ContactDetailsComponent {
-  firebase = inject(FirebaseService);
-  @Input() contact!: ContactInterface; 
+  @Input() contact!: ContactInterface;
+  @Input() contactIsSuccessfully: boolean = false;
   currentContact!: ContactInterface;
   isEdited: boolean = false;
   isDialogOpen:boolean = false;  
   @Output() openDetails = new EventEmitter<ContactInterface>();
+
+  onContactCreated(newContact: ContactInterface) {
+    this.contact = newContact;
+ 
+    if (!this.contact.id) {
+      this.contactIsSuccessfully = true;
+    setTimeout(() => {
+      const successElement = document.querySelector('.succesfull_content');
+      
+      if (successElement) {
+        successElement.classList.add('dialog-closed'); 
+      }
+
+      setTimeout(() => {
+        this.contactIsSuccessfully = false;
+      }, 500);
+    }, 1000);
+  }}
 
   openEditDialog() {
     this.isEdited = true; 

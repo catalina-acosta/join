@@ -3,8 +3,13 @@
     <app-contact-details 
     class="contact-details" 
     [ngClass]="{'open': detailsOpen && currentContact}" 
-    *ngIf="detailsOpen && currentContact" 
-    [contact]="currentContact">
-</app-contact-details>
-  </div>
+    *ngIf="detailsOpen && currentContact;else detailStart" 
+    [contact]="currentContact"  #contactDetailsComponent>
+    </app-contact-details>
+  <ng-template #detailStart>
+  <app-contact-details class="contact-details"></app-contact-details>
+  </ng-template>
+</div>
   
+
+

@@ -31,6 +31,16 @@
     padding: 20px 10px;
     gap: 32px;
     cursor: pointer;
+
+    &:hover {
+        background-color: #2a364710;
+        border-radius: 8px;
+    }
+
+    &.new-contact {
+        background-color: blue !important;
+        color: white;
+    }
 }
 
 .avatar {
@@ -71,6 +81,23 @@
     height: 100vh;
     z-index: 1000;
 }
+
+.succesfull_content{
+    width: 326px;
+    height: 74px;
+    background-color: #2A3647;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    bottom: 120px;
+    left:50%;
+    animation: slideInFromRight 125ms ease-out forwards;
+ }
+ 
 
 @keyframes slideInFromRight {
     0% {
