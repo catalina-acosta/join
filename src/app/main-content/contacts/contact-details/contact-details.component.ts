@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContactInterface } from '../contact-interface';
 import { CommonModule } from '@angular/common';
 import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-contact-details',
   standalone:true,
-  imports: [CommonModule,EditContactDialogComponent],
+  imports: [CommonModule,EditContactDialogComponent, DeleteDialogComponent],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss'
 })
@@ -15,6 +16,7 @@ export class ContactDetailsComponent {
   @Input() contactIsSuccessfully: boolean = false;
   currentContact!: ContactInterface;
   isEdited: boolean = false;
+  isDeleteOpen: boolean = false;
   isDialogOpen:boolean = false;  
   @Output() openDetails = new EventEmitter<ContactInterface>();
 
@@ -48,18 +50,31 @@ export class ContactDetailsComponent {
     // }
   }
 
+  openDeleteContact() {
+    this.isDeleteOpen = true;
+    
+    // if (this.currentContact) {
+    //   console.log('ID:', this.currentContact.id);
+    //   console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
+    //   console.log('Color:', this.currentContact.color);
+    // }
+  }
+
+
   stopPropagation(event: Event) {
     event.stopPropagation();
   }
 
   closeDialog() { 
     const dialogElement = document.querySelector('.custom-dialog');
-
+    this.isDialogOpen = false;
     if (dialogElement) {
         dialogElement.classList.add('dialog-closed');
-        // this.isDialogOpen = false;
+        this.isDialogOpen = false;
         setTimeout(() => {
-            this.isDialogOpen = false;
+          this.isDialogOpen = false;
+          this.isDeleteOpen = false;
+          this.isEdited = false;
 
         }, 500);
     } else {
