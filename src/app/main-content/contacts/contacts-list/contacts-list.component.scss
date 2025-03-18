@@ -36,11 +36,12 @@
         background-color: #2a364710;
         border-radius: 8px;
     }
-.highlighted-contact {
-    background-color: #ffeb3b !important; 
-    transition: background-color 3s ease-in-out;
-}
-  
+
+    &.selected-contact {
+        background-color: #2A3647; 
+        color: white;
+        border-radius: 8px;
+    }
 }
 
 

@@ -20,21 +20,19 @@ export class ContactsListComponent {
   currentContact: ContactInterface | null = null;
   isEditDialogOpen: boolean = false;
   contactIsSuccessfully: boolean = false;
+  selectedContactEmail: string | null = null;
   
   @Output() openDetails = new EventEmitter<ContactInterface>();
   @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
 
-  newlyAddedContacts = new Set<string>();
-
-
   openDialogDetails(contact: ContactInterface) {
-      this.openDetails.emit(contact);
+    this.selectedContactEmail = contact.email;
+    this.openDetails.emit(contact);
   }
 
   onContactCreated(contact: ContactInterface) { 
     this.contactCreatedEvent.emit(contact);
     this.contactIsSuccessfully = true;    
-    this.newlyAddedContacts.add(contact.email);
     
     setTimeout(() => {
       const successElement = document.querySelector('.succesfull_content');
@@ -45,7 +43,6 @@ export class ContactsListComponent {
 
       setTimeout(() => {
         this.contactIsSuccessfully = false;
-        this.newlyAddedContacts.delete(contact.email);
       }, 500);
     }, 1000);
   }
