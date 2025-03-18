@@ -3,11 +3,13 @@ import { FirebaseService } from '../../../shared/service/firebase.service';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../contact-interface';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-contacts-list',
   standalone: true,
-  imports: [CommonModule, AddContactDialogComponent],
+  imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent, RouterModule],
+
   templateUrl: './contacts-list.component.html',
   styleUrl: './contacts-list.component.scss'
 })
