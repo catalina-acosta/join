@@ -24,7 +24,6 @@ export class DeleteDialogComponent {
       this.firebaseService.deleteContactFromData(this.contactId);
       this.closeDialog();
     }
-
   }
 
   closeDialog() {

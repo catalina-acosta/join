@@ -2,8 +2,6 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { AddContactDialogComponent } from '../add-contact-dialog/add-contact-dialog.component';
 import { CommonModule } from '@angular/common';
-import { EditContactDialogComponent } from '../edit-contact-dialog/edit-contact-dialog.component';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { ContactInterface } from '../contact-interface';
 import { RouterModule } from '@angular/router';
 
@@ -11,6 +9,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-contacts-list',
   standalone: true,
   imports: [CommonModule, AddContactDialogComponent, EditContactDialogComponent, DeleteDialogComponent, RouterModule],
+
   templateUrl: './contacts-list.component.html',
   styleUrl: './contacts-list.component.scss'
 })
@@ -46,29 +45,9 @@ export class ContactsListComponent {
       }, 500);
     }, 1000);
   }
-   
+
   openAddNewContacts() {
     this.isDialogOpen = true;
-  }
-
-  openEditDialog(index: number) {
-    this.isEditDialogOpen = true;
-    this.currentContact = this.firebase.orderedContactsList[index];
-    if (this.currentContact) {
-      console.log('ID:', this.currentContact.id);
-      console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
-      console.log('Color:', this.currentContact.color);
-    }
-  }
-
-  openDeleteContact(index: number) {
-    this.isDeleteOpen = true;
-    this.currentContact = this.firebase.orderedContactsList[index];
-    if (this.currentContact) {
-      console.log('ID:', this.currentContact.id);
-      console.log('Name:', `${this.currentContact.firstname} ${this.currentContact.lastname}`);
-      console.log('Color:', this.currentContact.color);
-    }
   }
 
   stopPropagation(event: Event) {
