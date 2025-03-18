@@ -20,6 +20,8 @@ export class ContactsListComponent {
   currentContact: ContactInterface | null = null;
   isEditDialogOpen: boolean = false;
   contactIsSuccessfully: boolean = false;
+  newContactId: string | null | undefined = null;
+
   
   @Output() openDetails = new EventEmitter<ContactInterface>();
   @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
@@ -27,7 +29,7 @@ export class ContactsListComponent {
 
   openDialogDetails(contact: ContactInterface) {
       this.openDetails.emit(contact);
-      this.onContactCreated(contact);
+      this.newContactId = null;
   }
 
   onContactCreated(contact: ContactInterface) { 

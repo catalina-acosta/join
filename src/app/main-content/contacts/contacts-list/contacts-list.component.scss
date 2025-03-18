@@ -28,6 +28,16 @@
     padding: 20px 10px;
     gap: 32px;
     cursor: pointer;
+
+    &:hover {
+        background-color: #2a364710;
+        border-radius: 8px;
+    }
+
+    &.new-contact {
+        background-color: blue !important;
+        color: white;
+    }
 }
 
 .avatar {

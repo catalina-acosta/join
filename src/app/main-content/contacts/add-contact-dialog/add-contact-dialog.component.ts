@@ -16,8 +16,6 @@ export class AddContactDialogComponent {
   @Input() contact!: ContactInterface;
   @Output() closeDialogEvent = new EventEmitter<void>();
   @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
-  // @Output() contactIsSuccessfullyEvent = new EventEmitter<boolean>();
-
 
   formSubmitted: boolean = false;
   contactIsSuccessfully: boolean = false;
@@ -70,15 +68,4 @@ export class AddContactDialogComponent {
   closeDialog() {
     this.closeDialogEvent.emit();
   }
-
-  // onContactCreated(newContact: ContactInterface) {
-  //   this.contact = newContact;
-  //   this.contactIsSuccessfully = true;
-  //   this.contactIsSuccessfullyEvent.emit(this.contactIsSuccessfully);
-
-  //   setTimeout(() => {
-  //     this.contactIsSuccessfully = false;
-  //     this.contactIsSuccessfullyEvent.emit(this.contactIsSuccessfully);
-  //   }, 3000);
-  // }
 }
