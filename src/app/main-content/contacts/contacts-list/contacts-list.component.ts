@@ -24,6 +24,8 @@ export class ContactsListComponent {
   @Output() openDetails = new EventEmitter<ContactInterface>();
   @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
 
+  newlyAddedContacts = new Set<string>();
+
 
   openDialogDetails(contact: ContactInterface) {
       this.openDetails.emit(contact);
@@ -32,6 +34,7 @@ export class ContactsListComponent {
   onContactCreated(contact: ContactInterface) { 
     this.contactCreatedEvent.emit(contact);
     this.contactIsSuccessfully = true;    
+    this.newlyAddedContacts.add(contact.email);
     
     setTimeout(() => {
       const successElement = document.querySelector('.succesfull_content');
@@ -42,6 +45,7 @@ export class ContactsListComponent {
 
       setTimeout(() => {
         this.contactIsSuccessfully = false;
+        this.newlyAddedContacts.delete(contact.email);
       }, 500);
     }, 1000);
   }

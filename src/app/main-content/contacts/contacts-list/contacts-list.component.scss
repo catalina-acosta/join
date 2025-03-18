@@ -36,12 +36,14 @@
         background-color: #2a364710;
         border-radius: 8px;
     }
-
-    &.new-contact {
-        background-color: blue !important;
-        color: white;
-    }
+.highlighted-contact {
+    background-color: #ffeb3b !important; 
+    transition: background-color 3s ease-in-out;
 }
+  
+}
+
+
 
 .avatar {
     border-radius: 50%;
