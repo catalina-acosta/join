@@ -20,7 +20,9 @@ export class ContactDetailsComponent {
   isDeleteOpen: boolean = false;
   isDialogOpen:boolean = false;  
   menuOpen = false;
+  
   @Output() openDetails = new EventEmitter<ContactInterface>();
+  @Output() contactDeleted = new EventEmitter<void>(); 
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -66,6 +68,9 @@ export class ContactDetailsComponent {
     // }
   }
 
+  handleContactDeleted() {
+    this.contactDeleted.emit();
+  }
 
   stopPropagation(event: Event) {
     event.stopPropagation();

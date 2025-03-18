@@ -30,4 +30,9 @@ export class ContactsComponent {
       }
     });
   }
+
+  handleContactDeleted() {
+    this.currentContact = null;
+    this.detailsOpen = false;
+  }
 }
