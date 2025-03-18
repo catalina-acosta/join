@@ -2,9 +2,36 @@ div {
     display: flex;
     height: 100vh;
 
-    .contact-list{
-        width: 40%;
+  
+}
+
+.contact-list{
+    width: 40%;
+}
+
+.contact-details{
+    width: 60%;
+}
+
+@media (max-width: 900px) {
+    .contact-list {
+        width: 100%;
     }
+
+    .contact-details {
+        display: none;
+        width: 100vw;
+    }
+
+
+    .contact-details.open {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        background: white; /* Falls nötig, um Überlappungen zu verdecken */
+        width: 100%;
 
     .contact-details{
         width: 60%;
@@ -13,6 +40,7 @@ div {
         align-items: flex-end;
         gap: 80px;
         padding-top: 100px;
+
     }
 }
 
