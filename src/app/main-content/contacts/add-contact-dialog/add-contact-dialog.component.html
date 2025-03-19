@@ -20,7 +20,7 @@
                 #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required minlength="4">
                 <img src="./assets/contact/person.svg" alt="Person">
             </label>
-            @if (fullname.invalid && fullname.touched) {
+            @if (fullname.invalid && fullname.touched || formSubmitted && !fullname.touched) {
                 <p class="error-color">please enter name and last name</p>
             } 
 
@@ -30,7 +30,7 @@
                     #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$" minlength="4">
                 <img src="./assets/contact/mail.svg" alt="mail">
             </label>
-            @if (email.invalid && email.touched) {
+            @if (email.invalid && email.touched || !email.touched && formSubmitted) {
                 <p class="error-color">please enter a valid email address</p>
             } 
 
@@ -40,7 +40,7 @@
                     #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required pattern="\+?[0-9\s\-\(\)]{10,}" minlength="7">
                 <img src="./assets/contact/call.svg" alt="phone">
             </label>
-            @if (phone.invalid && phone.touched) {
+            @if (phone.invalid && phone.touched || !phone.touched && formSubmitted) {
                 <p class="error-color">please enter a valid phone number of 8 digits</p>
             } 
 
