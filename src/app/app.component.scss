@@ -12,8 +12,7 @@ app-shared {
 @media screen and (max-width: 900px) {
     .content_wrapper{
         position: relative;
-        width: 0;
-        top: 0;
-        left: 0;
+        padding-left: 0;
+        padding-top: 0;
     }
 }
