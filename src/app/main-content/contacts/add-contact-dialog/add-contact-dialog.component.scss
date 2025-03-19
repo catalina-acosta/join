@@ -60,7 +60,12 @@ section {
         flex-direction: column;
         justify-content: space-between;
         width: 422px;
-        height: 215px;
+        height: 270px;
+
+        .error-color {
+            font-size: 14px;
+            color: rgba(211, 0, 0, 0.534);
+        }
 
         .input_content {
             width: 100%;
@@ -83,7 +88,7 @@ section {
                 }
 
                 &.input-error {
-                    border: 1px solid $light_blue;
+                    border: 1px solid rgba(211, 0, 0, 0.534);
 
                     &::placeholder {
                         color: rgba(211, 0, 0, 0.534);

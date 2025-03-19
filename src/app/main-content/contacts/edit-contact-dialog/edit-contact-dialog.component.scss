@@ -60,7 +60,12 @@ section {
         flex-direction: column;
         justify-content: space-between;
         width: 422px;
-        height: 215px;
+        height: 270px;
+
+        p {
+            font-size: 14px;
+            color: rgba(211, 0, 0, 0.534);
+        }
 
         .input_content {
             width: 100%;

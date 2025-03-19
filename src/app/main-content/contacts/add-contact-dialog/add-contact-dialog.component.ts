@@ -18,6 +18,7 @@ export class AddContactDialogComponent {
   @Output() contactCreatedEvent = new EventEmitter<ContactInterface>();
 
   formSubmitted: boolean = false;
+  submitButtonClicked = false;
   contactIsSuccessfully: boolean = false;
 
   newContact = {
@@ -28,9 +29,16 @@ export class AddContactDialogComponent {
     phone: '',
     color: '',
   }
-
+  
+  formValidation() {
+    this.submitButtonClicked = true;
+    console.log("button clicked");
+    
+  }
   onCreateContact(contactForm: NgForm) {
+    console.log("form submitted");
     this.formSubmitted = true;
+    
     if (contactForm.valid) {
       this.addNewContact();
     }
