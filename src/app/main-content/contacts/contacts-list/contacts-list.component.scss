@@ -143,6 +143,13 @@
     }
 }
 
+@media (max-width: 1160px) {
+    .btn_plain_color {
+        padding: 8px;
+        gap: 8px;
+    }
+}
+
 @media (max-width:900px) {
     .btn_wrapper{
         display:none;
