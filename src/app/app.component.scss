@@ -1,9 +1,12 @@
-.content_wrapper {
-        position: relative;
-        top: -811px;
-        left: 250px;
-        max-width: 1440px;
-        width: 100%;
+.content_wrapper { 
+    padding-left: 250px;
+    padding-top: 96px;
+    max-width: 1440px;
+    width: 100%;
+}
+
+app-shared {
+    position: fixed;
 }
 
 @media screen and (max-width: 900px) {
