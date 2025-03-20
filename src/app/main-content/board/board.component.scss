@@ -1,15 +1,27 @@
 @use './../../../styles.scss' as *;
 
-section{
+section {
     padding: 80px;
 }
-.headline_content{
+
+.headline_content {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.find_task_content{
+.headline_box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.add_btn_respo {
+    display: none;
+}
+
+.find_task_content {
     display: flex;
     gap: 10px;
 }
@@ -23,41 +35,41 @@ section{
     background-color: #f8f8f8;
     width: 312px;
     height: 48px;
-    transition: all 125ms ease-in-out; 
+    transition: all 125ms ease-in-out;
 
     &:focus-within {
         border: 1px solid $light_blue;
         box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
     }
-  
+
     .search-input {
-      border: none;
-      outline: none;
-      background: transparent;
-      flex: 1;
-      padding: 5px;
-      font-size: 20px;
+        border: none;
+        outline: none;
+        background: transparent;
+        flex: 1;
+        padding: 5px;
+        font-size: 20px;
     }
-  
+
     .search-button {
-      background: none;
-      border: none;
-      cursor: pointer;
+        background: none;
+        border: none;
+        cursor: pointer;
 
-      img{
-        padding: 8px;
-      }
+        img {
+            padding: 8px;
+        }
 
-      img:hover{
-        background-color: #70707017;
-        border-radius: 12px;
-      }
+        img:hover {
+            background-color: #70707017;
+            border-radius: 12px;
+        }
     }
-  }
-  
+}
 
 
-.add_btn{
+
+.add_btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +80,7 @@ section{
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    padding: 12px 25px 10px 25px;
+    width: 148px;
     transition: all 125ms ease;
 
     &:hover {
@@ -76,39 +88,121 @@ section{
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
     }
 
-    img{
+    img {
         width: 18px;
         height: 18px;
     }
 }
 
-.task_container{
+.task_container {
     display: flex;
     justify-content: space-between;
     padding-top: 50px;
 }
 
-.title_content{
+.title_content {
     display: flex;
     align-items: center;
     gap: 60px;
-    color:$lightblack;
+    color: $lightblack;
     font-size: 20px;
 
-button{
-    border: 2px solid $lightblack;
-    border-radius: 5px;
-    height: 25px;
-    width: 25px;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    button {
+        border: 2px solid $lightblack;
+        border-radius: 5px;
+        height: 25px;
+        width: 25px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
 
-    &:hover{
-        color: $light_blue;
-        border: 2px solid $light_blue;
+        &:hover {
+            color: $light_blue;
+            border: 2px solid $light_blue;
+        }
     }
 }
+
+@media (max-width:1090px) {
+    section {
+        padding: 40px;
+        padding-top: 80px;
+    }
+
+    .find_task_content {
+        height: 43px;
+    }
+
+    .search-container {
+        width: 255px;
+        height: auto;
+
+        .search-input {
+            font-size: 15px;
+        }
+    }
+
+    .add_btn {
+        font-size: 15px;
+        width: 115px;
+
+        img {
+            width: 16px;
+            height: 14px;
+        }
+    }
+}
+
+@media (max-width:900px) {
+    section {
+        padding: 20px 30px;
+        padding-top: 120px;
+    }
+}
+
+@media (max-width:645px) {
+    .headline_content {
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    .find_task_content {
+        width: 100%;
+
+        .add_btn {
+            display: none;
+        }
+
+        .search-container {
+            width: 100%;
+        }
+    }
+
+    .add_btn_respo {
+        display: flex;
+        height: 35px;
+        width: 35px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background-color: $lightblack;
+        border: none;
+        border-radius: 7px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 125ms ease;
+    
+        &:hover {
+            background-color: $light_blue;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
+        }
+    }
 }
