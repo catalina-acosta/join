@@ -24,13 +24,15 @@ export class ContactDetailsComponent {
   
   @Output() openDetails = new EventEmitter<ContactInterface>();
   @Output() contactDeleted = new EventEmitter<void>(); 
+  @Output() closeDetails = new EventEmitter<void>(); 
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
   
   toggleCloseDetails() {
-    this.isVisible = !this.isVisible;
+    this.closeDetails.emit();
+    this.isVisible = false;
   }
 
   onContactCreated(newContact: ContactInterface) {
