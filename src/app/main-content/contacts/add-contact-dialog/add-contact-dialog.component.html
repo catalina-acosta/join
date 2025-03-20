@@ -14,28 +14,35 @@
         <div class="form_content">
         <img class="contact_icon" src="./assets/contact/add-contact-overlay.svg" alt="contact_icon">
         <form (ngSubmit)="onCreateContact(contactForm)" #contactForm="ngForm">
-
-
             <label class="input_content">
                 <input type="text" [(ngModel)]="newContact.fullname" name="fullname"
-                    [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'"
-                    #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required>
+                [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'"
+                #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched }" required minlength="4">
                 <img src="./assets/contact/person.svg" alt="Person">
             </label>
+            @if (fullname.invalid && fullname.touched || formSubmitted && !fullname.touched) {
+                <p class="error-color">please enter name and last name</p>
+            } 
 
             <label class="input_content">
                 <input type="email" [(ngModel)]="newContact.email" name="email"
                     [placeholder]="email.invalid && email.touched ? 'Please enter a valid email' : 'Email'"
-                    #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$">
+                    #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$" minlength="4">
                 <img src="./assets/contact/mail.svg" alt="mail">
             </label>
+            @if (email.invalid && email.touched || !email.touched && formSubmitted) {
+                <p class="error-color">please enter a valid email address</p>
+            } 
 
             <label class="input_content">
                 <input type="text" [(ngModel)]="newContact.phone" name="phone"
                     [placeholder]="phone.invalid && phone.touched ? 'Please enter your phone number' : 'Phone'"
-                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required pattern="\+?[0-9\s\-\(\)]{10,}">
+                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched }" required pattern="\+?[0-9\s\-\(\)]{10,}" minlength="7">
                 <img src="./assets/contact/call.svg" alt="phone">
             </label>
+            @if (phone.invalid && phone.touched || !phone.touched && formSubmitted) {
+                <p class="error-color">please enter a valid phone number of 8 digits</p>
+            } 
 
             <div class="btn_container">
                 <button class="cancel_btn" (click)="closeDialog()">
@@ -43,7 +50,7 @@
                     <img src="./assets/contact/Close.svg" alt="cancel">
                 </button>
 
-                <button class="create_btn" type="submit" [disabled]="!contactForm.valid">
+                <button class="create_btn" type="submit" (click)="formValidation()">
                     Create contact
                     <img src="./assets/contact/check.svg" alt="Create">
                 </button>
