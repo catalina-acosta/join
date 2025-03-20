@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-task',
-  imports: [ReactiveFormsModule],
+  imports: [FormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-  form = new FormControl('');
+
+  addTaskData = {
+    title: '',
+    description: '',
+    dueDate: '',
+    priority: '',
+    assignedTo: '',
+    category: '',
+    subtask: ''
+  }
+
+  onSubmit() {
+    console.log ("form funktioniert");
+  }
 }

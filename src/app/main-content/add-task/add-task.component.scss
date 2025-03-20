@@ -1,0 +1,27 @@
+.red {color:red;}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.upper_form {
+    display: flex;
+    align-items: center;
+    height: 424px;
+}
+
+.lower_form {
+    display: flex;
+    align-items: center;
+}
+
+.left_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.right_content {
+    display: flex;
+    flex-direction: column;
+}

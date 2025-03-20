@@ -1,1 +1,49 @@
-<p>add-task works!</p>
+<section class="section_wrapper">
+    <h1>Add Task</h1>
+        <form>
+            <div class="upper_form">
+                <div class="left_content">
+                    <label for="taskTitle">Title <span class="red">*</span></label>
+                    <input type="text" id="taskTitle" name="title" placeholder="Enter a title">
+            
+                    <label for="taskDescription">Subject</label>
+                    <textarea id="taskDescription" name="description" placeholder="enter a description" style="height:200px"></textarea>
+    
+                    <label for="dueDate">Due date <span class="red">*</span></label>
+                    <select id="dueDate" name="dueDate">
+                        <option value="today">today</option>
+                        <option value="tomorrow">tomorrow</option>
+                        <option value="never">never</option>
+                    </select>
+                </div>
+    
+                <svg width="2" height="426" viewBox="0 0 2 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.24805 1L1.24854 425" stroke="#D1D1D1" stroke-linecap="round"/>
+                    </svg>
+    
+                <div class="right_content">
+                    <label for="taskPriority">Priority</label>
+                    <input type="text" id="taskTitle" name="title" placeholder="low medium high">
+    
+                    <label for="assignedTo">Assigned to</label>
+                    <select id="assignedTo" name="assignedTo">
+                        <option value="today">Person 1</option>
+                        <option value="tomorrow">Person 2</option>
+                        <option value="never">Person 3</option>
+                    </select>
+    
+                    <label for="taskCategory">Category <span class="red">*</span></label>
+                    <select id="taskCategory" name="taskCategory">
+                        <option value="today">Technical Task</option>
+                        <option value="tomorrow">User Story</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="lower_form">
+                <span><span class="red">*</span> this field is required</span>
+                <img src="./assets/tasks/clear.svg" alt="">
+                <input type="submit" value="Submit">
+            </div>  
+        </form>
+</section>
