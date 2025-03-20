@@ -170,11 +170,12 @@ h4 {
 
 .three_dot_menu {
    display: flex;
-   justify-content: flex-end;
-   align-items: flex-end;
+   justify-self: flex-end;
+   align-self: flex-end;
    padding-right: 20px;
    cursor: pointer;
    position: relative;
+   width: fit-content;
 }
 
 .three_dot_menu > img:hover {
@@ -335,20 +336,20 @@ h4 {
 }
 
 @media (max-width: 450px) {
-   h2 {
+   .main_info h2 {
       font-size: 24px;
-   }
-   .avatar {
+   }  
+   .main_info .avatar {
       height: 60px;
       width: 60px;
    }
 }
 
 @media (max-width: 340px) {
-   h2 {
+   .main_info h2 {
       font-size: 20px;
    }
-   .avatar {
+   .main_info .avatar {
       height: 40px;
       width: 40px;
       font-size: 16px;
