@@ -26,7 +26,7 @@
         <div *ngFor="let item of menuItems; let i = index"
              [class.active]="selectedMobileIndex === i"
              (click)="setMobileActive(i)">
-            <div class="menu-item" [routerLink]="item.link">
+            <div class="menu-item-mobile" [routerLink]="item.link">
                 <img [src]="item.icon" alt="">
                 <span>{{ item.label }}</span>
             </div>

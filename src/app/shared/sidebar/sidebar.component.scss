@@ -112,17 +112,14 @@ span{
         color:white;
     }
 
-    .menu-item-mobile{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+   
 
     .mobile nav div {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 10px;
+        padding:10px;
+        border-radius:20px;
         cursor: pointer;
     }
 
@@ -131,6 +128,14 @@ span{
        
     }
 }
+
+@media (max-width:412px) {
+    .mobile nav div {
+        padding:4px;
+    
+    }
+}
+
 
 @media (max-width:400px) {
     .mobile img {
