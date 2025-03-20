@@ -12,7 +12,13 @@ export class FirebaseService {
   contactsList: ContactInterface[] = [];
   orderedContactsList: ContactInterface[] = [];
   tasksList: TaskInterface[] = [];
+  todo: TaskInterface[] = [];
+  inProgress: TaskInterface[] = [];
+  awaitFeedback: TaskInterface[] = [];
+  done: TaskInterface[] = [];
+
   unsubscribe;
+
   avatarColor: string[] = [
     "#FF7A00",
     "#FF5EB3",
@@ -251,9 +257,16 @@ export class FirebaseService {
 
   getTasksList() {
     return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
-      this.tasksList = [];
+      this.todo = [];
+      this.inProgress = [];
+      this.awaitFeedback = [];
+      this.done = [];
+
+      // this.tasksList = [];
       taskObject.forEach((element) => {
-        this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
+        const task = this.setTaskObject(element.id, element.data() as TaskInterface);
+        this.categorizeTask(task);
+        // this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
       })
     })
   }
@@ -310,6 +323,10 @@ export class FirebaseService {
     category: obj.category,
     subtask: obj.subtask,
     }
+  }
+
+  categorizeTask(task: TaskInterface){
+    if(task.category === "toDo")
   }
   
   ngOnDestroy() {
