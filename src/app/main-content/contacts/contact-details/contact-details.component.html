@@ -53,25 +53,6 @@
         <p>{{ contact.phone}}</p>
     </div>
 </div>
-}
-
-<ng-template #detailStart>
-    <div class="content section_wrapper">
-        <div class="headline">
-            <h1>Contacts</h1>
-            <!-- <div class="divider"></div> -->
-            <div class="line">
-                <img src="./assets/contact/line.svg" alt="">
-            </div>
-            <h3>Better with a team</h3>
-        </div>
-    </div>
-</ng-template>
-
-<div *ngIf="contactIsSuccessfully" class="succesfull_content">
-    Contact successfully created
-</div>
-
 <div class="three_dot_menu" (click)="toggleMenu()">
     <img src="./assets/contact/three_dots.svg" alt="">
     <div class="dropdown_menu" *ngIf="menuOpen">
@@ -85,3 +66,24 @@
         </div>
     </div>
 </div>
+}
+
+
+<ng-template #detailStart>
+    <div class="content section_wrapper">
+        <div class="headline">
+            <h1>Contacts</h1>
+            <!-- <div class="divider"></div> -->
+            <div class="line">
+                <img src="./assets/contact/line.svg" alt="">
+            </div>
+            <h3>Better with a team</h3>
+        </div>
+    </div>
+    
+</ng-template>
+
+<div *ngIf="contactIsSuccessfully" class="succesfull_content">
+    Contact successfully created
+</div>
+
