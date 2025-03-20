@@ -7,6 +7,7 @@ import { ContactsListComponent } from './main-content/contacts/contacts-list/con
 import { ContactsComponent } from './main-content/contacts/contacts.component';
 import { BoardComponent } from './main-content/board/board.component';
 import { AddTaskComponent } from './main-content/add-task/add-task.component';
+import { AddTaskDialogComponent } from './main-content/add-task/add-task-dialog/add-task-dialog.component';
 
 export const routes: Routes = [
     { path: '', component: MainContentComponent},
@@ -17,4 +18,5 @@ export const routes: Routes = [
     { path: 'contact', component: ContactsComponent},
     { path: 'board', component: BoardComponent},
     { path: 'add-task', component: AddTaskComponent},
+    { path: 'add-task-dialog', component: AddTaskDialogComponent},
 ];
