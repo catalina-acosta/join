@@ -1,17 +1,61 @@
 @use './../../../styles.scss' as *;
 
 section{
-    padding: 50px;
+    padding: 80px;
 }
 .headline_content{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .find_task_content{
     display: flex;
     gap: 10px;
 }
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 5px;
+    background-color: #f8f8f8;
+    width: 312px;
+    height: 48px;
+    transition: all 125ms ease-in-out; 
+
+    &:focus-within {
+        border: 1px solid $light_blue;
+        box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
+    }
+  
+    .search-input {
+      border: none;
+      outline: none;
+      background: transparent;
+      flex: 1;
+      padding: 5px;
+      font-size: 20px;
+    }
+  
+    .search-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      img{
+        padding: 8px;
+      }
+
+      img:hover{
+        background-color: #70707017;
+        border-radius: 12px;
+      }
+    }
+  }
+  
+
 
 .add_btn{
     display: flex;
@@ -24,12 +68,12 @@ section{
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    padding: 7px 12px 7px 12px;
+    padding: 7px 25px 7px 25px;
     transition: all 125ms ease;
+
     &:hover {
         background-color: $light_blue;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
-
     }
 }
 
