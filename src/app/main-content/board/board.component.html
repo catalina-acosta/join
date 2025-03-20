@@ -1,1 +1,5 @@
 <p>board works!</p>
+@for (item of firebase.tasksList; track $index) {
+    <p>{{item.title}}</p>
+    <p>{{item.category}}</p>
+}

@@ -55,9 +55,8 @@ div {
     .contact-details {
         display: none;
         width: 100vw;
-
     }
-
+    
     .contact-details.open {
         display: block;
         position: absolute;
@@ -67,6 +66,7 @@ div {
         background: white;
         padding-top: 100px;
         height: calc(100vh - 100px);
+        z-index: 3;
 
         .contact-details {
             width: 60%;

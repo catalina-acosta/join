@@ -7,7 +7,9 @@
     *ngIf="detailsOpen && currentContact;else detailStart" 
     [contact]="currentContact" 
     (contactDeleted)="handleContactDeleted()"
-    #contactDetailsComponent>
+    #contactDetailsComponent
+    (closeDetails)="detailsOpen = false">
+
   </app-contact-details>
 
   <ng-template #detailStart>
