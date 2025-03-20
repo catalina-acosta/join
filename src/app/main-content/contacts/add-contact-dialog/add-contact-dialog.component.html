@@ -17,7 +17,7 @@
             <label class="input_content">
                 <input type="text" [(ngModel)]="newContact.fullname" name="fullname"
                 [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'"
-                #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required minlength="4">
+                #fullname="ngModel" [ngClass]="{'input-error': fullname.invalid && fullname.touched }" required minlength="4">
                 <img src="./assets/contact/person.svg" alt="Person">
             </label>
             @if (fullname.invalid && fullname.touched || formSubmitted && !fullname.touched) {
@@ -37,7 +37,7 @@
             <label class="input_content">
                 <input type="text" [(ngModel)]="newContact.phone" name="phone"
                     [placeholder]="phone.invalid && phone.touched ? 'Please enter your phone number' : 'Phone'"
-                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required pattern="\+?[0-9\s\-\(\)]{10,}" minlength="7">
+                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched }" required pattern="\+?[0-9\s\-\(\)]{10,}" minlength="7">
                 <img src="./assets/contact/call.svg" alt="phone">
             </label>
             @if (phone.invalid && phone.touched || !phone.touched && formSubmitted) {

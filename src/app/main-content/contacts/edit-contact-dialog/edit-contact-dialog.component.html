@@ -36,7 +36,7 @@
             <label class="input_content">
                 <input type="text" [(ngModel)]="contact.phone" name="phone"
                     [placeholder]="phone.invalid && phone.touched ? editedContact.phone : editedContact.phone"
-                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched}" required pattern="\+?[0-9\s\-\(\)]{10,}" minlength="7">
+                    #phone="ngModel" [ngClass]="{'input-error': phone.invalid && phone.touched }" required pattern="\+?[0-9\s\-\(\)]{10,}" minlength="7">
                 <img src="./assets/contact/call.svg" alt="phone">
             </label>
             @if (phone.invalid && phone.touched) {
