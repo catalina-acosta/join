@@ -103,14 +103,15 @@
  
  .three_dot_menu{
     cursor:pointer;
-    // bottom: 99px;
-    // left: 83%;
-    // width: fit-content;
-    // padding-right: 20px;
-    z-index: 105;
-    position: static;
-    justify-self: flex-end;
-   align-self: flex-end;
+    bottom: 99px;
+    left: 83%;
+    width: fit-content;
+    padding-right: 20px;
+//     z-index: 105;
+//     display: flex;
+//     position: static;
+//     justify-self: flex-end;
+//    align-self: flex-end;
  }
 
  .three_dot_menu img:hover{
