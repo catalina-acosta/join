@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 })
 export class SidebarComponent {
   selectedIndex: number | null = null;
+  selectedMobileIndex: number | null = null;
 
   menuItems = [
     { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/imprint' },
@@ -20,6 +21,10 @@ export class SidebarComponent {
 
   setActive(index: number) {
     this.selectedIndex = index;
+  }
+
+  setMobileActive(index: number) {
+    this.selectedMobileIndex = index;
   }
   
 }

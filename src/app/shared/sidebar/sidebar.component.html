@@ -2,12 +2,8 @@
     <nav class="sidebar">
         <div class="logo"><img src="assets/sidebar/logo.svg" alt=""></div>
         <div class="menu">
-            <div 
-                class="menu-item-wrapper" 
-                *ngFor="let item of menuItems; let i = index"
-                [class.active]="selectedIndex === i"
-                (click)="setActive(i)"
-            >
+            <div class="menu-item-wrapper" *ngFor="let item of menuItems; let i = index"
+                [class.active]="selectedIndex === i" (click)="setActive(i)">
                 <a [routerLink]="item.link" class="menu-link">
                     <div class="menu-item">
                         <img [src]="item.icon" alt="">
@@ -27,9 +23,13 @@
 
 <div class="mobile">
     <nav>
-        <li><img src="assets/sidebar/summary.svg" alt=""><a href="">Summary</a></li>
-        <li><img src="assets/sidebar/add-task.svg" alt=""><a href="">Add Task</a></li>
-        <li><img src="assets/sidebar/board.svg" alt=""><a href="">Board</a></li>
-        <li><img src="assets/sidebar/contacts.svg" alt=""><a href="">Contacts</a></li>
+        <div *ngFor="let item of menuItems; let i = index"
+             [class.active]="selectedMobileIndex === i"
+             (click)="setMobileActive(i)">
+            <div class="menu-item" [routerLink]="item.link">
+                <img [src]="item.icon" alt="">
+                <span>{{ item.label }}</span>
+            </div>
+        </div>
     </nav>
 </div>
