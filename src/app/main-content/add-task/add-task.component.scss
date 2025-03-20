@@ -7,21 +7,96 @@ form {
 
 .upper_form {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     height: 424px;
+    gap: 42px;
 }
 
 .lower_form {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    >.notice {
+        align-self: flex-start;
+    }
+    >.clear_submit {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    }
 }
 
 .left_content {
     display: flex;
     flex-direction: column;
+    height: 376px;
+    width: 440px;
+    align-items: space-between;
 }
 
 .right_content {
     display: flex;
     flex-direction: column;
+    height: 400px;
+    width: 440px;
+    align-self: flex-start;
+}
+
+label {
+    font-size: 20px;
+    padding: 8px;
+    padding-top: 16px;
+}
+
+input[type="text"] {
+    height: 48px;
+    border: 1px;
+    border-radius: 10px;
+    padding: 12px 16px;
+    &::placeholder {
+        font-size: 12px;
+        color: #d1d1d1;
+    //font family Poppins!
+    }
+}
+textarea {
+    height: 120px;
+    border: 1px;
+    border-radius: 10px;
+    padding: 18px 16px;
+    &::placeholder {
+        font-size: 12px;
+        color: #d1d1d1;
+    //font family Poppins!
+    }
+}
+
+select {
+    height: 48px;
+    border: 1px;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 20px;
+    padding: 12px 16px;
+    //font family Poppins!
+    select {
+        option:disabled {   
+        font-size: 12px;
+        color: #d1d1d1;
+        //font family Poppins!
+    }
+}
+}
+
+input[type="submit"] {
+    border: unset;
+    height: 56px;
+    width: 185px;
+    background-image: url(./../../../../public/assets/tasks/create_task.svg);
+    background-size: cover;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    color: transparent;
 }

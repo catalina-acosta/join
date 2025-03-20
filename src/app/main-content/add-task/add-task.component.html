@@ -34,6 +34,7 @@
     
                     <label for="taskCategory">Category <span class="red">*</span></label>
                     <select id="taskCategory" name="taskCategory">
+                        <option value="" disabled selected>Select task category</option>
                         <option value="today">Technical Task</option>
                         <option value="tomorrow">User Story</option>
                     </select>
@@ -41,9 +42,11 @@
             </div>
 
             <div class="lower_form">
-                <span><span class="red">*</span> this field is required</span>
-                <img src="./assets/tasks/clear.svg" alt="">
-                <input type="submit" value="Submit">
+                <span class="notice"><span class="red">*</span> this field is required</span>
+                <div class="clear_submit">
+                    <img src="./assets/tasks/clear.svg" alt="">
+                    <input type="submit">
+                </div>
             </div>  
         </form>
 </section>
