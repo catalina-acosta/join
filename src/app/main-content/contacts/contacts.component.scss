@@ -1,16 +1,14 @@
 div {
     display: flex;
     height: 100vh;
-
-
 }
 
 .contact-list {
     width: 30%;
 }
 
-.contact-details {
-    width: 60%;
+.contact-details.open {
+    width: 100%;
 }
 
 @keyframes slideInFromRight {
@@ -37,11 +35,11 @@ div {
     animation: slideOutToRight 0.5s ease-in forwards;
 }
 
-@media (max-width: 1490px) {
-    .contact-details {
-        width: 50%;
-    }
-}
+// @media (max-width: 1490px) {
+//     .contact-details {
+//         width: 50%;
+//     }
+// }
 
 @media (max-width: 1150px) {
     .contact-details {

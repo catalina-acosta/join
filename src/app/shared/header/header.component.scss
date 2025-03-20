@@ -84,26 +84,21 @@ header {
     }
 }
 
-@media (max-width:900px) {
-
+@media (max-width: 900px) {
     .header_title {
         display: none;
     }
-
     .logo_container {
         display: block !important;
         width: 32px;
         height: 39px;
     }
-
     .help_btn {
         display: none;
     }
-
     .dropdown_help {
         display: block !important;
     }
-
     header {
         margin-left: 0;
         width: 100%;
@@ -113,7 +108,4 @@ header {
             justify-content: flex-end;
         }
     }
-
-
-
 }

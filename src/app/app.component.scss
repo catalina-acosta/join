@@ -7,14 +7,14 @@
 
 app-shared {
     position: fixed;
-    z-index: 2;
+    z-index: 20;
+
 }
 
 @media screen and (max-width: 900px) {
     .content_wrapper{
         position: relative;
-        width: 0;
-        top: 0;
-        left: 0;
+        padding-left: 0;
+        padding-top: 0;
     }
 }
