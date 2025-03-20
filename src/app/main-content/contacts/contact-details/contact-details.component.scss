@@ -98,7 +98,6 @@ h4 {
    animation: slideInFromRight 125ms ease-out forwards;
 }
 
-
 .custom-dialog {
    position: fixed;
    top: 0;
@@ -120,6 +119,10 @@ h4 {
    height: 100vh;
    z-index: 1000;
 }
+
+.hidden {
+   display: none;
+ }
 
 .line{
       transform: rotate(90deg);
@@ -309,6 +312,7 @@ h4 {
 
    .arrow {
       display:block;
+      cursor: pointer;
    }
 
    .arrow img{
