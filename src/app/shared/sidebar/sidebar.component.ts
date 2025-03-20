@@ -1,12 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  selectedIndex: number | null = null;
 
+  menuItems = [
+    { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/imprint' },
+    { label: 'Add Task', icon: 'assets/sidebar/add-task.svg', link: '/imprint' },
+    { label: 'Board', icon: 'assets/sidebar/board.svg', link: '/imprint' },
+    { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact' }
+  ];
+
+  setActive(index: number) {
+    this.selectedIndex = index;
+  }
+  
 }
