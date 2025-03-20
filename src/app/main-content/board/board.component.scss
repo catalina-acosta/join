@@ -1,0 +1,65 @@
+@use './../../../styles.scss' as *;
+
+section{
+    padding: 50px;
+}
+.headline_content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.find_task_content{
+    display: flex;
+    gap: 10px;
+}
+
+.add_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: $lightblack;
+    border: none;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 7px 12px 7px 12px;
+    transition: all 125ms ease;
+    &:hover {
+        background-color: $light_blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
+
+    }
+}
+
+.task_container{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 50px;
+}
+
+.title_content{
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    color:$lightblack;
+    font-size: 20px;
+
+button{
+    border: 2px solid $lightblack;
+    border-radius: 5px;
+    height: 25px;
+    width: 25px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover{
+        color: $light_blue;
+        border: 2px solid $light_blue;
+    }
+}
+}
