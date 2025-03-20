@@ -1,5 +1,49 @@
-<p>board works!</p>
+<!-- <p>board works!</p>
 @for (item of firebase.tasksList; track $index) {
-    <p>{{item.title}}</p>
-    <p>{{item.category}}</p>
-}
+<p>{{item.title}}</p>
+<p>{{item.category}}</p>
+} -->
+
+<section>
+    <div class="headline_content">
+        <h1>Board</h1>
+        <div class="find_task_content">
+            <input type="text" placeholder="Find Task">
+            <button class="add_btn">Add task +</button>
+        </div>
+    </div>
+
+<!-- tast container -->
+
+    <div class="task_container">
+
+        <div class="todo_box">
+            <div class="title_content">
+                <h5>To do</h5>
+                <button>+</button>
+            </div>
+        </div>
+
+        <div class="progress_box">
+            <div class="title_content">
+                <h5>In progress</h5>
+                <button>+</button>
+            </div>
+        </div>
+
+        <div class="await_box">
+            <div class="title_content">
+                <h5>Await feedback</h5>
+                <button>+</button>
+            </div>
+        </div>
+
+        <div class="done_box">
+            <div class="title_content">
+                <h5>Done</h5>
+                <button>+</button>
+            </div>
+        </div>
+
+    </div>
+</section>
