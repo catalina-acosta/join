@@ -305,10 +305,10 @@ export class FirebaseService {
     title: obj.title,
     description: obj.description,
     date: obj.date,
-    priority: string,
-    userId: string,
-    category: string,
-    subtask: string,
+    priority: obj.priority,
+    userId: obj.userId,
+    category: obj.category,
+    subtask: obj.subtask,
     }
   }
   
