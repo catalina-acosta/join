@@ -261,12 +261,11 @@ export class FirebaseService {
       this.inProgress = [];
       this.awaitFeedback = [];
       this.done = [];
-
-      // this.tasksList = [];
+      this.tasksList = [];
       taskObject.forEach((element) => {
         const task = this.setTaskObject(element.id, element.data() as TaskInterface);
         this.categorizeTask(task);
-        // this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
+        this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
       })
     })
   }
@@ -326,7 +325,15 @@ export class FirebaseService {
   }
 
   categorizeTask(task: TaskInterface){
-    if(task.category === "toDo")
+    if(task.category === "To do") {
+      this.todo.push(task);
+    } else if(task.category === "Await feedback") {
+      this.awaitFeedback.push(task);
+    } else if(task.category === "In progress") {
+      this.inProgress.push(task);
+    } else if(task.category === "Done") {
+      this.done.push(task);
+    }
   }
   
   ngOnDestroy() {

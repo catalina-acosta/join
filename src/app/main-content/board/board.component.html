@@ -22,6 +22,13 @@
                 <h5>To do</h5>
                 <button>+</button>
             </div>
+            @for (item of firebase.todo ; track $index) {
+                <div>
+                    <p>{{item.title}}</p>
+                    <p>{{item.description}}</p>
+                    <p>{{item.category}}</p>
+                </div>
+            }
         </div>
 
         <div class="progress_box">
