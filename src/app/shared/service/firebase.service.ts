@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, setDoc, Unsubscribe, updateDoc } from '@angular/fire/firestore';
 import { ContactInterface } from '../../main-content/contacts/contact-interface';
+import { TaskInterface } from '../../main-content/board/task.interface';
 
 
 @Injectable({
@@ -10,6 +11,7 @@ export class FirebaseService {
   firebase = inject(Firestore);
   contactsList: ContactInterface[] = [];
   orderedContactsList: ContactInterface[] = [];
+  tasksList: TaskInterface[] = [];
   unsubscribe;
   avatarColor: string[] = [
     "#FF7A00",
@@ -102,11 +104,106 @@ export class FirebaseService {
     }
   ];
 
+  dummyDataTasks: { title: string; description: string; date: string; priority: string; userId: string; category: string, subtask: string }[] = [
+    {
+      title: "Task 1",
+      description: "Description for task 1",
+      date: "2025-03-20",
+      priority: "High",
+      userId: "",
+      category: "To do",
+      subtask: "Subtask 1"
+    },
+    {
+      title: "Task 2",
+      description: "Description for task 2",
+      date: "2025-03-21",
+      priority: "Medium",
+      userId: "",
+      category: "In progress",
+      subtask: "Subtask 2"
+    },
+    {
+      title: "Task 3",
+      description: "Description for task 3",
+      date: "2025-03-22",
+      priority: "Low",
+      userId: "",
+      category: "Await feedback",
+      subtask: "Subtask 3"
+    },
+    {
+      title: "Task 4",
+      description: "Description for task 4",
+      date: "2025-03-23",
+      priority: "High",
+      userId: "",
+      category: "Done",
+      subtask: "Subtask 4"
+    },
+    {
+      title: "Task 5",
+      description: "Description for task 5",
+      date: "2025-03-24",
+      priority: "Medium",
+      userId: "",
+      category: "To do",
+      subtask: "Subtask 5"
+    },
+    {
+      title: "Task 6",
+      description: "Description for task 6",
+      date: "2025-03-25",
+      priority: "Low",
+      userId: "",
+      category: "In progress",
+      subtask: "Subtask 6"
+    },
+    {
+      title: "Task 7",
+      description: "Description for task 7",
+      date: "2025-03-26",
+      priority: "High",
+      userId: "",
+      category: "Await feedback",
+      subtask: "Subtask 7"
+    },
+    {
+      title: "Task 8",
+      description: "Description for task 8",
+      date: "2025-03-27",
+      priority: "Medium",
+      userId: "",
+      category: "Done",
+      subtask: "Subtask 8"
+    },
+    {
+      title: "Task 9",
+      description: "Description for task 9",
+      date: "2025-03-28",
+      priority: "Low",
+      userId: "",
+      category: "To do",
+      subtask: "Subtask 9"
+    },
+    {
+      title: "Task 10",
+      description: "Description for task 10",
+      date: "2025-03-29",
+      priority: "High",
+      userId: "",
+      category: "In progress",
+      subtask: "Subtask 10"
+    }
+  ];
+
   unsubscribeOrderedList: Unsubscribe = () => {};
 
   constructor() {
     // this.initializeContacts();
+    // this.initializeTasks();
     this.unsubscribe = this.orderedListQuery();
+    this.unsubscribe = this.getTasksList();
   }
 
 // #region vorlage 
@@ -129,6 +226,37 @@ export class FirebaseService {
   //   }
   // }
 // #endregion
+
+//region Vorlage tasks
+  // async initializeTasks() {
+  //   try {
+  //         const tasksRef = collection(this.firebase, "tasks");
+  //         this.dummyDataTasks.forEach(async (element) => {
+  //           await setDoc(doc(tasksRef), {
+  //             title: element.title,
+  //             description: element.description,
+  //             date: element.date,
+  //             priority: element.priority,
+  //             userId: element.userId,
+  //             category: element.category,
+  //             subtask: element.subtask,
+  //           });
+  //         })
+  //         console.log('Tasks initialized successfully');
+  //       } catch (error) {
+  //         console.error('Error initializing task:', error);
+  //       }
+  // }
+//endregion
+
+  getTasksList() {
+    return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
+      this.tasksList = [];
+      taskObject.forEach((element) => {
+        this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface))
+      })
+    })
+  }
 
   orderedListQuery() {
     const contactsRef = collection(this.firebase, "contacts")
@@ -168,6 +296,19 @@ export class FirebaseService {
       lastname: obj.lastname,
       phone: obj.phone,
       color: obj.color,
+    }
+  }
+
+  setTaskObject(id:string, obj: TaskInterface): TaskInterface {
+    return {
+    id: id,
+    title: obj.title,
+    description: obj.description,
+    date: obj.date,
+    priority: string,
+    userId: string,
+    category: string,
+    subtask: string,
     }
   }
   
