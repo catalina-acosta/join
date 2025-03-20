@@ -253,7 +253,7 @@ export class FirebaseService {
     return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
       this.tasksList = [];
       taskObject.forEach((element) => {
-        this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface))
+        this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
       })
     })
   }
