@@ -20,6 +20,7 @@ export class ContactDetailsComponent {
   isDeleteOpen: boolean = false;
   isDialogOpen:boolean = false;  
   menuOpen = false;
+  isVisible: boolean = true;
   
   @Output() openDetails = new EventEmitter<ContactInterface>();
   @Output() contactDeleted = new EventEmitter<void>(); 
@@ -28,6 +29,10 @@ export class ContactDetailsComponent {
     this.menuOpen = !this.menuOpen;
   }
   
+  toggleCloseDetails() {
+    this.isVisible = !this.isVisible;
+  }
+
   onContactCreated(newContact: ContactInterface) {
     this.contact = newContact;
  
