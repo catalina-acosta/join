@@ -349,6 +349,14 @@ export class FirebaseService {
       phone: data.phone,
     })
   }
+
+  async updateTaskStatus(taskId: string, newStatus: string){
+    const taskDocRef = doc(this.firebase, `tasks/${taskId}`);
+    await updateDoc(taskDocRef, { status: newStatus })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   
   setContactObject(id: string, obj: ContactInterface): ContactInterface {
     return {
