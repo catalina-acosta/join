@@ -31,22 +31,21 @@
                 <h5>To do</h5>
                 <button>+</button>
             </div>
-
-            <div *ngFor="let task of filteredTasks">
-                <div class="task-card">
-                  <h3>{{ task.title }}</h3>
-                  <p>{{ task.description }}</p>
-                  <small>{{ task.date }} | Priority: {{ task.priority }}</small>
-                </div>
-              </div>
-
         </div>
 
         <div class="progress_box">
             <div class="title_content">
                 <h5>In progress</h5>
                 <button>+</button>
-            </div>
+            </div>  
+            
+            <!-- <div *ngFor="let task of filteredTasks">
+                <div class="task-card">
+                  <h3>{{ task.title }}</h3>
+                  <p>{{ task.description }}</p>
+                  <small>{{ task.date }} | Priority: {{ task.priority }}</small>
+                </div>
+              </div> -->
         </div>
 
         <div class="await_box">
