@@ -12,6 +12,7 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-board',
@@ -79,11 +80,12 @@ export class BoardComponent {
       const currentTask = event.container.data[event.currentIndex];
 
       console.log("Task ID ", currentTask.id);
-      console.log("Old status ", currentTask.priority);
+      console.log("Old status ", currentTask.status);
       console.log("New status ", event.container.id);
+      console.log("assigned users: ", currentTask.assignedToUserId)
 
       // Update the status of the task in the database (Parameter: taskId, newStatus)
-      // this.data.updateTaskStatus(currentTask.id!, event.container.id);
+      this.firebase.updateTaskStatus(currentTask.id!, event.container.id);
     }
   }
 

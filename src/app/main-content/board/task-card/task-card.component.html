@@ -1,17 +1,25 @@
 <p class="category">{{item.category}}</p>
 <p class="title">{{item.title}}</p>
 <p class="description">{{item.description}}</p>
-<p class="subtasks">Subtasks</p>
+<p class="subtasks">{{item.subtasks?.length}}</p>
 <div class="content-wrapper">
     <div class="assigned_to">
-        <div class="avatar" [ngStyle]="{'background-color': firebase.orderedContactsList[0].color}">
-            <p>{{firebase.orderedContactsList[0].firstname.charAt(0)}}{{firebase.orderedContactsList[0].lastname.charAt(0)}}</p>
-        </div>
-        <div class="avatar" [ngStyle]="{'background-color': firebase.orderedContactsList[1].color}">
-            <p>{{firebase.orderedContactsList[1].firstname.charAt(0)}}{{firebase.orderedContactsList[1].lastname.charAt(0)}}</p>
-        </div>
+        @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
+            @for (userId of item.assignedToUserId; track $index) {
+                @for (contact of firebase.orderedContactsList; track $index) {
+                    @if(contact.id === userId) {
+                        <div class="avatar" [ngStyle]="{'background-color': contact.color}">
+                            <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                        </div>
+                    }
+                }
+            } 
+        } @else {
+            <p>no users assigned</p>
+        }
     </div>
     <div class="priority">
+        <p>{{item.priority}}</p>
         <img src="" alt="">
     </div>
 </div>

@@ -39,7 +39,7 @@
                 <button>+</button>
             </div>
             <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.todo; track item) {
+                @for (item of firebase.todo; track $index) {
                     <div class="card" cdkDrag (click)="openCardDialog()">
                         <app-task-card [item]="item"></app-task-card>
                     </div>
@@ -52,8 +52,8 @@
                 <h5>In progress</h5>
                 <button>+</button>
             </div>  
-            <div id="in-progress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.inProgress; track item) {
+            <div id="inProgress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
+                @for (item of firebase.inProgress; track $index) {
                     <div class="card" cdkDrag (click)="openCardDialog()">
                         <app-task-card [item]="item"></app-task-card>
                     </div>
@@ -61,14 +61,13 @@
             </div>
         </div>
 
-
         <div class="await_box">
             <div class="title_content">
                 <h5>Await feedback</h5>
                 <button>+</button>
             </div>
-            <div cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="firebase.awaitFeedback" [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.awaitFeedback; track item) {
+            <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="firebase.awaitFeedback" [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
+                @for (item of firebase.awaitFeedback; track $index) {
                     <div class="card" cdkDrag (click)="openCardDialog()">
                         <app-task-card [item]="item"></app-task-card>
                     </div>
@@ -81,8 +80,8 @@
                 <h5>Done</h5>
                 <button>+</button>
             </div>
-            <div cdkDropList #done="cdkDropList" [cdkDropListData]="firebase.done" [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.done; track item) {
+            <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="firebase.done" [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
+                @for (item of firebase.done; track $index) {
                     <div class="card" cdkDrag (click)="openCardDialog()">
                         <app-task-card [item]="item"></app-task-card>
                     </div>
