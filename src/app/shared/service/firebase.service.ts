@@ -116,7 +116,7 @@ export class FirebaseService {
       description: "Create new component for the homepage",
       date: "20/04/2025",
       priority: "high",
-      assignedToUserId: [],
+      assignedToUserId: ["CCptP0yIlYy5X2uwA4de", "IzjGbNzLyv7OkpGeg3B4"],
       status: "todo",
       category: "techTask",
       subtasks: [
@@ -129,7 +129,7 @@ export class FirebaseService {
       description: "Develop the recipe list page",
       date: "21/04/2025",
       priority: "medium",
-      assignedToUserId: [],
+      assignedToUserId: ["KTbjIpLnVGi8q3OjCSHr", "XztzCuRkUPxQ2HOSqPBg", "e0Qb9uGieBOxesbvWUQd"],
       status: "inProgress",
       category: "userStory",
       subtasks: [
@@ -143,7 +143,7 @@ export class FirebaseService {
       description: "Create a form for adding new recipes",
       date: "22/04/2025",
       priority: "low",
-      assignedToUserId: [],
+      assignedToUserId: ["i2Zsc7SoKgQPbLa8OKOx"],
       status: "awaitFeedback",
       category: "techTask",
       subtasks: [
@@ -157,7 +157,7 @@ export class FirebaseService {
       description: "Implement user authentication",
       date: "23/04/2025",
       priority: "high",
-      assignedToUserId: [],
+      assignedToUserId: ["mywr0t26HhjyiDGSNPS5", "vxNrGLk2bKtm4KZNXHJM"],
       status: "done",
       category: "userStory",
       subtasks: [
@@ -171,7 +171,7 @@ export class FirebaseService {
       description: "Develop the recipe detail page",
       date: "24/04/2025",
       priority: "medium",
-      assignedToUserId: [],
+      assignedToUserId: ["wANKfeaSFQO0R6lBYzAJ"],
       status: "todo",
       category: "techTask",
       subtasks: [
@@ -185,7 +185,7 @@ export class FirebaseService {
       description: "Implement search functionality for recipes",
       date: "25/04/2025",
       priority: "low",
-      assignedToUserId: [],
+      assignedToUserId: ["xS1ognbuTPARIklB3HfT", "xbVEjSZTNdq26NFYdsr9"],
       status: "inProgress",
       category: "userStory",
       subtasks: [
@@ -199,7 +199,7 @@ export class FirebaseService {
       description: "Ensure the website is responsive",
       date: "26/04/2025",
       priority: "high",
-      assignedToUserId: [],
+      assignedToUserId: ["CCptP0yIlYy5X2uwA4de", "IzjGbNzLyv7OkpGeg3B4", "KTbjIpLnVGi8q3OjCSHr"],
       status: "awaitFeedback",
       category: "techTask",
       subtasks: [
@@ -213,7 +213,7 @@ export class FirebaseService {
       description: "Develop user profile page",
       date: "27/04/2025",
       priority: "medium",
-      assignedToUserId: [],
+      assignedToUserId: ["XztzCuRkUPxQ2HOSqPBg", "e0Qb9uGieBOxesbvWUQd"],
       status: "done",
       category: "userStory",
       subtasks: [
@@ -227,7 +227,7 @@ export class FirebaseService {
       description: "Implement feature to favorite recipes",
       date: "28/04/2025",
       priority: "low",
-      assignedToUserId: [],
+      assignedToUserId: ["i2Zsc7SoKgQPbLa8OKOx", "mywr0t26HhjyiDGSNPS5"],
       status: "todo",
       category: "techTask",
       subtasks: [
@@ -241,7 +241,7 @@ export class FirebaseService {
       description: "Implement notifications for users",
       date: "29/04/2025",
       priority: "high",
-      assignedToUserId: [],
+      assignedToUserId: ["vxNrGLk2bKtm4KZNXHJM", "wANKfeaSFQO0R6lBYzAJ", "xS1ognbuTPARIklB3HfT"],
       status: "inProgress",
       category: "userStory",
       subtasks: [
@@ -292,7 +292,7 @@ export class FirebaseService {
   //             description: element.description,
   //             date: element.date,
   //             priority: element.priority,
-  //             asignetToUserId: element.assignedToUserId,
+  //             assignedToUserId: element.assignedToUserId,
   //             status: element.status,
   //             category: element.category,
   //             subtasks: element.subtasks,
@@ -316,7 +316,6 @@ export class FirebaseService {
         const task = this.setTaskObject(element.id, element.data() as TaskInterface);
         this.categorizeTask(task);
         this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
-        
       })
     })
   }
@@ -377,7 +376,7 @@ export class FirebaseService {
     description: obj.description,
     date: obj.date,
     priority: obj.priority,
-    asignedToUserId: obj.asignedToUserId,
+    assignedToUserId: obj.assignedToUserId,
     status: obj.status,
     category: obj.category,
     subtasks: obj.subtasks,
