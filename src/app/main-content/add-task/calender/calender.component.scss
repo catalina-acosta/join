@@ -22,6 +22,10 @@ mat-label {
   background-color: #ffffff;
 }
 
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #fefeff;
+}
+
 .mat-mdc-form-field-infix {
   padding: 12px 16px;
   font-size: 16px;
