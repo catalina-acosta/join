@@ -49,9 +49,23 @@
 
                 <label for="assignedTo">Assigned to</label>
                 <select id="assignedTo" name="assignedTo">
-                    <option value="today">Person 1</option>
+                    <!-- <option value="today">Person 1</option>
                     <option value="tomorrow">Person 2</option>
-                    <option value="never">Person 3</option>
+                    <option value="never">Person 3</option> -->
+                    @if(firebase.orderedContactsList) {
+                        @for (item of firebase.orderedContactsList; track $index) {
+                            <option>
+                                <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                                    <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                                </div>
+                                <div class="contact_info">
+                                    <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
+                                </div>     
+                            </option>
+                        } @empty {
+                            <div>data loading</div>
+                        }
+                    }
                 </select>
 
                 <label for="taskCategory">Category <span class="red">*</span></label>
