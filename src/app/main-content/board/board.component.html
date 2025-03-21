@@ -22,6 +22,14 @@
         </div>
     </div>
 
+<!-- Open Card Dialog -->
+    <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
+        <div class="custom-dialog">
+            <app-card (click)="stopPropagation($event)"></app-card>
+            <!-- <app-card (closeDialogEvent)="closeDialog()" (contactCreatedEvent)="openDialogDetails($event)" (click)="stopPropagation($event)"></app-card> -->
+        </div>
+    </div>
+
     <!-- tast container -->
 
     <div class="task_container">
@@ -33,7 +41,7 @@
             </div>
             <div id="todo" cdkDropList #todoList="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="['To do']" class="drop-area" (cdkDropListDropped)="drop($event)">
                 @for (item of firebase.todo; track item) {
-                    <div class="card" cdkDrag>
+                    <div class="card" cdkDrag (click)="openCardDialog()">
                         <p class="category">{{item.category}}</p>
                         <p class="title">{{item.title}}</p>
                         <p class="description">{{item.description}}</p>

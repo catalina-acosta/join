@@ -1,0 +1,249 @@
+@use './../../../../styles.scss' as *;
+
+section {
+    height: 80vh;
+    width: 100%;
+    max-width: 1212px;
+    display: flex;
+
+    .headline {
+        background-color: #fff;
+        padding: 20px;
+        height: 100%;
+        width: 100%;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+
+
+        h1 {
+            color: #000000;
+        }
+
+        h4 {
+            color: #000000;
+            font-weight: 400;
+            font-size: 18px;
+        }
+    }
+}
+
+.date_prio_content {
+    display: flex;
+    gap: 20px;
+    width: 50%;
+
+    .title2 {
+        width: 74px;
+    }
+}
+
+.assigned_content {
+    width: 100%;
+}
+
+// .assigned_content
+
+.members_content {
+    height: 100px;
+    width: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: gray transparent;
+}
+
+.person_box {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 10px 0px 0px 20px;
+
+    .color_icon {
+        background-color: rgb(12, 170, 117);
+        border-radius: 50px;
+        border: 1px solid #fff;
+        width: 34px;
+        height: 34px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+}
+
+// subtasks_content
+.subtasks_content {
+    width: 100%;
+
+    .show_subtask {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 16px;
+        width: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: gray transparent;
+    }
+    .checkbox_content{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+}
+
+// delete_edit_content
+.delete_edit_content{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    width: 100%;
+    gap: 15px;
+
+    .delete_box{
+        display: flex;
+        align-items: center;
+        gap:5px;
+    }
+    .edit_box{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+    }
+}
+
+
+.custom-dialog-content {
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 100%;
+}
+
+.close_btn {
+    margin-left: auto;
+
+    img {
+        padding: 3px;
+        cursor: pointer;
+
+    }
+
+    img:hover {
+        background-color: #00000013;
+        border-radius: 50%;
+    }
+}
+
+// @media (max-width:1252px) {
+//     h1 {
+//         font-size: 5vw;
+//     }
+
+//     h3 {
+//         font-size: 2vw;
+//     }
+
+// }
+
+// @media (max-width:1000px) {
+//     section {
+//         .add_contacts_content {
+//             padding-left: 0px;
+//         }
+//     }
+// }
+
+// @media (max-width:950px) {
+//     h1 {
+//         font-size: 60px;
+//     }
+
+//     h3 {
+//         font-size: 25px;
+//     }
+
+//     section {
+//         height: auto;
+//         flex-direction: column;
+
+//         .headline {
+//             width: 100%;
+//         }
+
+//         .add_contacts_content {
+//             padding: 25px;
+//             gap: 0px;
+//             width: 100%;
+//             height: 420px;
+
+//         }
+
+//         .close_btn {
+//             position: relative;
+//             top: -350px;
+//             filter: brightness(22.5);
+
+//             img {
+//                 padding: 3px;
+//                 cursor: pointer;
+//             }
+
+//         }
+//     }
+// }
+
+// @media (max-width:510px) {
+//     h1 {
+//         font-size: 45px;
+//     }
+
+//     h3 {
+//         font-size: 18px;
+//     }
+
+//     section {
+//         .headline {
+//             padding: 25px;
+//         }
+
+//         .add_contacts_content {
+//             height: 360px;
+
+
+//         }
+
+
+//         .close_btn {
+//             top: -279px;
+//         }
+//     }
+// }
+
+// @media (max-width:380px) {
+//     h1 {
+//         font-size: 38px;
+//     }
+
+//     h3 {
+//         font-size: 15px;
+//     }
+
+//     section {
+
+
+//         .add_contacts_content {
+//             height: 330px;
+//         }
+
+//         .close_btn {
+//             top: -250px;
+//         }
+//     }
+// }
