@@ -110,96 +110,145 @@ export class FirebaseService {
     }
   ];
 
-  dummyDataTasks: { title: string; description: string; date: string; priority: string; userId: string; category: string, subtask: string }[] = [
+  dummyDataTasks: { title: string; description: string; date: string; priority: string; assignedToUserId: string[]; status: string; category: string; subtasks: { subtask: string; isCompleted: boolean }[] }[] = [
     {
-      title: "Task 1",
-      description: "Description for task 1",
-      date: "2025-03-20",
-      priority: "High",
-      userId: "",
-      category: "To do",
-      subtask: "Subtask 1"
+      title: "HomePage",
+      description: "Create new component for the homepage",
+      date: "20/04/2025",
+      priority: "high",
+      assignedToUserId: [],
+      status: "todo",
+      category: "techTask",
+      subtasks: [
+        { subtask: "create hero page", isCompleted: true },
+        { subtask: "navbar", isCompleted: false }
+      ]
     },
     {
-      title: "Task 2",
-      description: "Description for task 2",
-      date: "2025-03-21",
-      priority: "Medium",
-      userId: "",
-      category: "In progress",
-      subtask: "Subtask 2"
+      title: "Recipe List",
+      description: "Develop the recipe list page",
+      date: "21/04/2025",
+      priority: "medium",
+      assignedToUserId: [],
+      status: "inProgress",
+      category: "userStory",
+      subtasks: [
+        { subtask: "fetch recipes from API", isCompleted: false },
+        { subtask: "display recipes in a grid", isCompleted: true },
+        { subtask: "add pagination", isCompleted: false }
+      ]
     },
     {
-      title: "Task 3",
-      description: "Description for task 3",
-      date: "2025-03-22",
-      priority: "Low",
-      userId: "",
-      category: "Await feedback",
-      subtask: "Subtask 3"
+      title: "Add Recipe Form",
+      description: "Create a form for adding new recipes",
+      date: "22/04/2025",
+      priority: "low",
+      assignedToUserId: [],
+      status: "awaitFeedback",
+      category: "techTask",
+      subtasks: [
+        { subtask: "create form layout", isCompleted: false },
+        { subtask: "add validation", isCompleted: true },
+        { subtask: "connect to backend", isCompleted: false }
+      ]
     },
     {
-      title: "Task 4",
-      description: "Description for task 4",
-      date: "2025-03-23",
-      priority: "High",
-      userId: "",
-      category: "Done",
-      subtask: "Subtask 4"
+      title: "User Authentication",
+      description: "Implement user authentication",
+      date: "23/04/2025",
+      priority: "high",
+      assignedToUserId: [],
+      status: "done",
+      category: "userStory",
+      subtasks: [
+        { subtask: "create login page", isCompleted: true },
+        { subtask: "create registration page", isCompleted: true },
+        { subtask: "implement JWT authentication", isCompleted: true }
+      ]
     },
     {
-      title: "Task 5",
-      description: "Description for task 5",
-      date: "2025-03-24",
-      priority: "Medium",
-      userId: "",
-      category: "To do",
-      subtask: "Subtask 5"
+      title: "Recipe Detail Page",
+      description: "Develop the recipe detail page",
+      date: "24/04/2025",
+      priority: "medium",
+      assignedToUserId: [],
+      status: "todo",
+      category: "techTask",
+      subtasks: [
+        { subtask: "fetch recipe details from API", isCompleted: false },
+        { subtask: "display recipe details", isCompleted: false },
+        { subtask: "add comments section", isCompleted: false }
+      ]
     },
     {
-      title: "Task 6",
-      description: "Description for task 6",
-      date: "2025-03-25",
-      priority: "Low",
-      userId: "",
-      category: "In progress",
-      subtask: "Subtask 6"
+      title: "Search Functionality",
+      description: "Implement search functionality for recipes",
+      date: "25/04/2025",
+      priority: "low",
+      assignedToUserId: [],
+      status: "inProgress",
+      category: "userStory",
+      subtasks: [
+        { subtask: "create search bar", isCompleted: true },
+        { subtask: "implement search logic", isCompleted: false },
+        { subtask: "display search results", isCompleted: false }
+      ]
     },
     {
-      title: "Task 7",
-      description: "Description for task 7",
-      date: "2025-03-26",
-      priority: "High",
-      userId: "",
-      category: "Await feedback",
-      subtask: "Subtask 7"
+      title: "Responsive Design",
+      description: "Ensure the website is responsive",
+      date: "26/04/2025",
+      priority: "high",
+      assignedToUserId: [],
+      status: "awaitFeedback",
+      category: "techTask",
+      subtasks: [
+        { subtask: "test on mobile devices", isCompleted: false },
+        { subtask: "test on tablets", isCompleted: true },
+        { subtask: "test on desktops", isCompleted: false }
+      ]
     },
     {
-      title: "Task 8",
-      description: "Description for task 8",
-      date: "2025-03-27",
-      priority: "Medium",
-      userId: "",
-      category: "Done",
-      subtask: "Subtask 8"
+      title: "User Profile",
+      description: "Develop user profile page",
+      date: "27/04/2025",
+      priority: "medium",
+      assignedToUserId: [],
+      status: "done",
+      category: "userStory",
+      subtasks: [
+        { subtask: "fetch user data from API", isCompleted: true },
+        { subtask: "display user data", isCompleted: true },
+        { subtask: "allow user to edit profile", isCompleted: true }
+      ]
     },
     {
-      title: "Task 9",
-      description: "Description for task 9",
-      date: "2025-03-28",
-      priority: "Low",
-      userId: "",
-      category: "To do",
-      subtask: "Subtask 9"
+      title: "Favorites Feature",
+      description: "Implement feature to favorite recipes",
+      date: "28/04/2025",
+      priority: "low",
+      assignedToUserId: [],
+      status: "todo",
+      category: "techTask",
+      subtasks: [
+        { subtask: "add favorite button", isCompleted: false },
+        { subtask: "store favorites in database", isCompleted: false },
+        { subtask: "display favorites on profile", isCompleted: false }
+      ]
     },
     {
-      title: "Task 10",
-      description: "Description for task 10",
-      date: "2025-03-29",
-      priority: "High",
-      userId: "",
-      category: "In progress",
-      subtask: "Subtask 10"
+      title: "Notifications",
+      description: "Implement notifications for users",
+      date: "29/04/2025",
+      priority: "high",
+      assignedToUserId: [],
+      status: "inProgress",
+      category: "userStory",
+      subtasks: [
+        { subtask: "create notification system", isCompleted: true },
+        { subtask: "send notifications on new recipes", isCompleted: false },
+        { subtask: "display notifications in UI", isCompleted: false }
+      ]
     }
   ];
 
@@ -243,9 +292,10 @@ export class FirebaseService {
   //             description: element.description,
   //             date: element.date,
   //             priority: element.priority,
-  //             userId: element.userId,
+  //             asignetToUserId: element.assignedToUserId,
+  //             status: element.status,
   //             category: element.category,
-  //             subtask: element.subtask,
+  //             subtasks: element.subtasks,
   //           });
   //         })
   //         console.log('Tasks initialized successfully');
@@ -266,6 +316,7 @@ export class FirebaseService {
         const task = this.setTaskObject(element.id, element.data() as TaskInterface);
         this.categorizeTask(task);
         this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
+        
       })
     })
   }
@@ -318,20 +369,21 @@ export class FirebaseService {
     description: obj.description,
     date: obj.date,
     priority: obj.priority,
-    userId: obj.userId,
+    asignedToUserId: obj.asignedToUserId,
+    status: obj.status,
     category: obj.category,
-    subtask: obj.subtask,
+    subtasks: obj.subtasks,
     }
   }
 
   categorizeTask(task: TaskInterface){
-    if(task.category === "To do") {
+    if(task.status === "todo") {
       this.todo.push(task);
-    } else if(task.category === "Await feedback") {
+    } else if(task.status === "awaitFeedback") {
       this.awaitFeedback.push(task);
-    } else if(task.category === "In progress") {
+    } else if(task.status === "inProgress") {
       this.inProgress.push(task);
-    } else if(task.category === "Done") {
+    } else if(task.status === "done") {
       this.done.push(task);
     }
   }

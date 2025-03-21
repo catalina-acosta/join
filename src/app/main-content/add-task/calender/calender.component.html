@@ -1,8 +1,3 @@
-
-<mat-form-field>
-    <mat-label>Due date</mat-label>
-    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy">
-    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<div>
+  <input type="date" id="dueDate" [min]="todaysDate">
+</div>

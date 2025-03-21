@@ -3,6 +3,7 @@ import { FirebaseService } from '../../shared/service/firebase.service';
 import { TaskInterface } from './task.interface';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TaskCardComponent } from './task-card/task-card.component';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -15,7 +16,7 @@ import { CardComponent } from './card/card.component';
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent],
+  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -40,6 +41,7 @@ export class BoardComponent {
     );
   }
 
+
   openCardDialog() {
     this.isDialogOpen = true;
   }
@@ -63,7 +65,6 @@ export class BoardComponent {
       // this.isDeleteOpen = false;
     }
   }
-
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {

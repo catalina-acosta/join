@@ -1,0 +1,30 @@
+
+.category {
+    background-color: #0038FF;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 8px;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.description {
+    color: #A8A8A8;
+}
+
+.avatar {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    padding: 10px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        color: #FFFFFF;
+    }
+}
