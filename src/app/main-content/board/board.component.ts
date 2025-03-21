@@ -29,6 +29,14 @@ export class BoardComponent {
         event.previousIndex,
         event.currentIndex,
       );
+      const currentTask = event.container.data[event.currentIndex];
+
+      console.log("Task ID ", currentTask.id);
+      console.log("Old status ", currentTask.priority);
+      console.log("New status ", event.container.id);
+
+      // Update the status of the task in the database (Parameter: taskId, newStatus)
+      // this.data.updateTaskStatus(currentTask.id!, event.container.id);
     }
   }
 }

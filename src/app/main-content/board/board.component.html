@@ -22,7 +22,7 @@
                 <h5>To do</h5>
                 <button>+</button>
             </div>
-            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="['To do']" class="drop-area" (cdkDropListDropped)="drop($event)">
+            <div id="todo" cdkDropList #todoList="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="['To do']" class="drop-area" (cdkDropListDropped)="drop($event)">
                 @for (item of firebase.todo; track item) {
                     <div class="card" cdkDrag>
                         <p class="category">{{item.category}}</p>
@@ -52,7 +52,7 @@
                 <h5>In progress</h5>
                 <button>+</button>
             </div>
-            <div cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="['In progress']" class="drop-area" (cdkDropListDropped)="drop($event)">
+            <div id="in-progress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="['In progress']" class="drop-area" (cdkDropListDropped)="drop($event)">
                 @for (item of firebase.inProgress; track item) {
                     <div class="example-box" cdkDrag>
                         <p>{{item.category}}</p>
