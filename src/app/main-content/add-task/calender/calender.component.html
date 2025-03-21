@@ -1,8 +1,11 @@
-
-<mat-form-field>
-    <mat-label>Due date</mat-label>
-    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy">
-    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<div>
+  <input type="date" id="dueDate" [min]="todaysDate">
+  <!-- <input
+  placeholder="dd/mm/yyyy"
+  class="textbox-n"
+  type="text"
+  onfocus="(this.type='date')"
+  onblur="(this.type='text')"
+  id="date" [min]="todaysDate"/> -->
+  <!-- <input placeholder="Your Date" type="text" onfocus="(this.type='date')" onblur="(this.type= this.value ? 'date' : 'text')"> -->
+</div>
