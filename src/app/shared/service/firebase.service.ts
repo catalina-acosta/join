@@ -316,6 +316,7 @@ export class FirebaseService {
         const task = this.setTaskObject(element.id, element.data() as TaskInterface);
         this.categorizeTask(task);
         this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
+        
       })
     })
   }
@@ -376,13 +377,13 @@ export class FirebaseService {
   }
 
   categorizeTask(task: TaskInterface){
-    if(task.category === "To do") {
+    if(task.status === "todo") {
       this.todo.push(task);
-    } else if(task.category === "Await feedback") {
+    } else if(task.status === "awaitFeedback") {
       this.awaitFeedback.push(task);
-    } else if(task.category === "In progress") {
+    } else if(task.status === "inProgress") {
       this.inProgress.push(task);
-    } else if(task.category === "Done") {
+    } else if(task.status === "done") {
       this.done.push(task);
     }
   }
