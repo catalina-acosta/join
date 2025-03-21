@@ -33,27 +33,9 @@
                 <button>+</button>
             </div>
             <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.todo; track item) {
-                    <div class="card" cdkDrag>
-                        <p class="category">{{item.category}}</p>
-                        <p class="title">{{item.title}}</p>
-                        <p class="description">{{item.description}}</p>
-                        <p class="subtasks">Subtasks</p>
-                        <div class="content-wrapper">
-                            <div class="assigned_to">
-                                <div class="avatar" [ngStyle]="{'background-color': firebase.orderedContactsList[0].color}">
-                                    <p>{{firebase.orderedContactsList[0].firstname.charAt(0)}}{{firebase.orderedContactsList[0].lastname.charAt(0)}}</p>
-                                </div>
-                                <div class="avatar" [ngStyle]="{'background-color': firebase.orderedContactsList[1].color}">
-                                    <p>{{firebase.orderedContactsList[1].firstname.charAt(0)}}{{firebase.orderedContactsList[1].lastname.charAt(0)}}</p>
-                                </div>
-                            </div>
-                            <div class="priority">
-                                <img src="" alt="">
-                            </div>
-                        </div>
-                    </div>
-                }
+                <div *ngFor="let item of firebase.todo; track: index" class="card" cdkDrag>
+                    <app-task-card [item]="item"></app-task-card>
+                </div>
             </div>
         </div>
 
