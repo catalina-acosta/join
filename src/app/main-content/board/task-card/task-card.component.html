@@ -1,7 +1,7 @@
 <p class="category">{{item.category}}</p>
 <p class="title">{{item.title}}</p>
 <p class="description">{{item.description}}</p>
-<p class="subtasks"></p>
+<p class="subtasks">{{item.subtasks?.length}}</p>
 <div class="content-wrapper">
     <div class="assigned_to">
         @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
@@ -19,6 +19,7 @@
         }
     </div>
     <div class="priority">
+        <p>{{item.priority}}</p>
         <img src="" alt="">
     </div>
 </div>
