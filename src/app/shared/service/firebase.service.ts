@@ -12,7 +12,13 @@ export class FirebaseService {
   contactsList: ContactInterface[] = [];
   orderedContactsList: ContactInterface[] = [];
   tasksList: TaskInterface[] = [];
+  todo: TaskInterface[] = [];
+  inProgress: TaskInterface[] = [];
+  awaitFeedback: TaskInterface[] = [];
+  done: TaskInterface[] = [];
+
   unsubscribe;
+
   avatarColor: string[] = [
     "#FF7A00",
     "#FF5EB3",
@@ -251,8 +257,14 @@ export class FirebaseService {
 
   getTasksList() {
     return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
+      this.todo = [];
+      this.inProgress = [];
+      this.awaitFeedback = [];
+      this.done = [];
       this.tasksList = [];
       taskObject.forEach((element) => {
+        const task = this.setTaskObject(element.id, element.data() as TaskInterface);
+        this.categorizeTask(task);
         this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
       })
     })
@@ -309,6 +321,18 @@ export class FirebaseService {
     userId: obj.userId,
     category: obj.category,
     subtask: obj.subtask,
+    }
+  }
+
+  categorizeTask(task: TaskInterface){
+    if(task.category === "To do") {
+      this.todo.push(task);
+    } else if(task.category === "Await feedback") {
+      this.awaitFeedback.push(task);
+    } else if(task.category === "In progress") {
+      this.inProgress.push(task);
+    } else if(task.category === "Done") {
+      this.done.push(task);
     }
   }
   
