@@ -26,8 +26,7 @@
 <!-- Open Card Dialog -->
     <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
         <div class="custom-dialog">
-            <app-card (click)="stopPropagation($event)"></app-card>
-            <!-- <app-card (closeDialogEvent)="closeDialog()" (contactCreatedEvent)="openDialogDetails($event)" (click)="stopPropagation($event)"></app-card> -->
+            <app-card (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
         </div>
     </div>
 
