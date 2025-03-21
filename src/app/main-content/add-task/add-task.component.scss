@@ -1,3 +1,6 @@
+.red{
+    color: red;
+}
 
 form {
     display: flex;
@@ -15,9 +18,11 @@ form {
     display: flex;
     justify-content: space-between;
     height: 56px;
+
     >.notice {
         align-self: flex-start;
     }
+
     >.clear_submit {
         display: flex;
         justify-content: center;
@@ -53,6 +58,7 @@ input[type="text"] {
     border: 1px;
     border-radius: 10px;
     padding: 12px 16px;
+
     &::placeholder {
         font-size: 12px;
         color: #d1d1d1;
@@ -71,13 +77,14 @@ input[type="date"] {
     font-size: 12px;
     color: #d1d1d1;
     font-family: 'Poppins';
-  }
+}
 
 textarea {
     height: 120px;
     border: 1px;
     border-radius: 10px;
     padding: 18px 16px;
+
     &::placeholder {
         font-size: 12px;
         color: #d1d1d1;
@@ -92,22 +99,65 @@ select {
     padding: 12px 16px;
     font-size: 20px;
     padding: 12px 16px;
+
     select {
-        option:disabled {   
-        font-size: 12px;
-        color: #d1d1d1;
+        option:disabled {
+            font-size: 12px;
+            color: #d1d1d1;
+        }
     }
 }
+
+//altes button, welcher nur Bild war
+// input[type="submit"] {
+//     border: unset;
+//     height: 56px;
+//     width: 185px;
+//     background-image: url(./../../../../public/assets/tasks/default_new.svg);
+//     background-size: cover;
+//     background-position: center;
+//     border: none;
+//     cursor: pointer;
+//     color: transparent;
+//     &:hover {
+//         border: unset;
+//     height: 56px;
+//     width: 185px;
+//         background-image: url(./../../../../public/assets/tasks/hover_new.svg);
+//         background-size: cover;
+//         background-position: center;
+//         box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+//     }
+// }
+
+
+.prio_btns {
+    display: flex;
+    align-items: center;
+    font-family: 'Inter';
+    gap: 16px;
+    >button {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 19px 10px;
+        border-radius: 10px;
+        border: unset;
+        background-color: white;
+        width: 136px;
+        height: 56px;
+        color: black;
+        font-weight: 400;
+        font-size: 16px;
+        &:hover{
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+    }
 }
 
-input[type="submit"] {
-    border: unset;
-    height: 56px;
-    width: 185px;
-    background-image: url(./../../../../public/assets/tasks/create_task.svg);
-    background-size: cover;
-    background-position: center;
-    border: none;
-    cursor: pointer;
-    color: transparent;
+.prio_urgent.selected {
+    background-color: #ff3d00;
+    color: white;
 }
