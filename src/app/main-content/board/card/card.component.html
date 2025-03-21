@@ -1,64 +1,97 @@
-<section class="custom-dialog-content">
-    <div class="headline">
-        <h1>Titel title title</h1>
+<section>
+    <div class="dialog_content">
+
+        <div class="headline">
+            <div class="category">User Story</div>
+            <div class="close_btn" (click)="closeDialog()">
+                <img src="./assets/contact/Close.svg" alt="close">
+            </div>
+        </div>
+
+        <h1 class="title_content">Titel</h1>
         <h4>discription</h4>
+
         <div class="date_prio_content">
             <p class="title2">Due date:</p>
-            <p>date???</p>
+            <p>??date???</p>
         </div>
         <div class="date_prio_content">
             <p class="title2">Priority:</p>
-            <p>Meduim???</p>
+            <p>?? Meduim???</p>
         </div>
 
         <div class="assigned_content">
-            <p>Assigned To:</p>
+            <p class="title2">Assigned To:</p>
             <div class="members_content">
                 <div class="person_box">
                     <div class="color_icon">CS</div>
                     <p>Caryen Song</p>
                 </div>
                 <div class="person_box">
-                    <div class="color_icon">CS</div>
-                    <p>Caryen Song</p>
+                    <div class="color_icon">B</div>
+                    <p>Babora</p>
                 </div>
                 <div class="person_box">
-                    <div class="color_icon">CS</div>
-                    <p>Caryen Song</p>
+                    <div class="color_icon">CR</div>
+                    <p>Catalina R</p>
                 </div>
+                <div class="person_box">
+                    <div class="color_icon">A</div>
+                    <p>Albina </p>
+                </div>
+                
             </div>
         </div>
 
         <div class="subtasks_content">
-            <p>Subtasks</p>
-
+            <p class="title2">Subtasks</p>
+        
             <div class="show_subtask">
-                <label class="checkbox_content" for="">
+                <label class="checkbox_content">
                     <input type="checkbox">
+                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
+                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
+                    <p>lernen</p>
+                </label>
+                <label class="checkbox_content">
+                    <input type="checkbox">
+                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
+                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
+                    <p>Einkaufen</p>
+                </label>
+                <label class="checkbox_content">
+                    <input type="checkbox">
+                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
+                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
+                    <p>Shoppen</p>
+                </label>
+                <label class="checkbox_content">
+                    <input type="checkbox">
+                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
+                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
+                    <p>Auto Waschen</p>
+                </label>
+                <label class="checkbox_content">
+                    <input type="checkbox">
+                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
+                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
                     <p>lernen</p>
                 </label>
             </div>
-            
-        </div>
-
-<div class="delete_edit_content">
-    <div class="delete_box">
-        <img src="./assets/contact/delete.svg" alt="delete">
-        <p>Delete</p>
-    </div>
-
-    <div class="edit_box">
-        <img src="./assets/contact/edit.svg" alt="edit">
-        <p>Edit</p>
-    </div>
-</div>
-
-    </div>
-
-    <!-- <div class="add_contacts_content">
-        <div class="close_btn" >
-            <img (click)="closeDialog()" src="./assets/contact/Close.svg" alt="close">
         </div>
         
-    </div> -->
+
+        <div class="delete_edit_content">
+            <div class="delete_box">
+                <img src="./assets/contact/delete.svg" alt="delete">
+                <p>Delete</p>
+            </div>
+            <img src="/assets/tasks/Vector 3.svg" alt="">
+            <div class="edit_box">
+                <img src="./assets/contact/edit.svg" alt="edit">
+                <p>Edit</p>
+            </div>
+        </div>
+
+    </div>
 </section>
