@@ -12,7 +12,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 })
 export class AddTaskComponent {
   todaysDate: string = new Date().toISOString().split('T')[0];
-  selectedPriority: string = '';
+  selectedPriority: string = 'medium';
 
   selectPriority(priority: string) {
     this.selectedPriority = priority;
