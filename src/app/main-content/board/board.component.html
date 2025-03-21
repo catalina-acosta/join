@@ -6,14 +6,23 @@
 
 <section>
     <div class="headline_content">
-        <h1>Board</h1>
+        <div class="headline_box">
+            <h1>Board</h1>
+            <button class="add_btn_respo"><img src="./assets/tasks/add.svg" alt="add"></button>
+        </div>
         <div class="find_task_content">
-            <input type="text" placeholder="Find Task">
-            <button class="add_btn">Add task +</button>
+            <div class="search-container">
+                <input type="text" placeholder="Find Task" class="search-input" [(ngModel)]="searchQuery" (input)="filterTasks()"/>
+                <img src="./assets/tasks/Vector 3.svg" alt="">
+                <button class="search-button">
+                    <img src="./assets/tasks/search.svg" alt="seach">
+                </button>
+            </div>
+            <button class="add_btn">Add task <img src="./assets/tasks/add.svg" alt="add"></button>
         </div>
     </div>
 
-<!-- tast container -->
+    <!-- tast container -->
 
     <div class="task_container">
 
@@ -51,6 +60,17 @@
             <div class="title_content">
                 <h5>In progress</h5>
                 <button>+</button>
+
+            </div>  
+            
+            <!-- <div *ngFor="let task of filteredTasks">
+                <div class="task-card">
+                  <h3>{{ task.title }}</h3>
+                  <p>{{ task.description }}</p>
+                  <small>{{ task.date }} | Priority: {{ task.priority }}</small>
+                </div>
+              </div> -->
+
             </div>
             <div id="in-progress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="['In progress']" class="drop-area" (cdkDropListDropped)="drop($event)">
                 @for (item of firebase.inProgress; track item) {
@@ -61,6 +81,7 @@
                     </div>
                 }
             </div>
+
         </div>
 
         <div class="await_box">

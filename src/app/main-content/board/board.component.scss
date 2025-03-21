@@ -1,7 +1,7 @@
 @use './../../../styles.scss' as *;
 
-section{
-    padding: 50px;
+section {
+    padding: 80px;
 }
 
 .headline_content{
@@ -10,12 +10,64 @@ section{
     justify-content: space-between;
 }
 
-.find_task_content{
+.headline_box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.add_btn_respo {
+    display: none;
+}
+
+.find_task_content {
     display: flex;
     gap: 10px;
 }
 
-.add_btn{
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 5px;
+    background-color: #f8f8f8;
+    width: 312px;
+    height: 48px;
+    transition: all 125ms ease-in-out;
+
+    &:focus-within {
+        border: 1px solid $light_blue;
+        box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
+    }
+
+    .search-input {
+        border: none;
+        outline: none;
+        background: transparent;
+        flex: 1;
+        padding: 5px;
+        font-size: 20px;
+    }
+
+    .search-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        img {
+            padding: 8px;
+        }
+
+        img:hover {
+            background-color: #70707017;
+            border-radius: 12px;
+        }
+    }
+}
+
+.add_btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,26 +78,32 @@ section{
     color: #fff;
     font-size: 20px;
     cursor: pointer;
-    padding: 7px 12px 7px 12px;
+    width: 148px;
     transition: all 125ms ease;
+
     &:hover {
         background-color: $light_blue;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
+    }
 
+    img {
+        width: 18px;
+        height: 18px;
     }
 }
 
-.task_container{
+.task_container {
     display: flex;
     justify-content: space-between;
     padding-top: 50px;
 }
 
-.title_content{
+.title_content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 60px;
-    color:$lightblack;
+    color: $lightblack;
     font-size: 20px;
 
     button{
@@ -59,10 +117,91 @@ section{
         justify-content: center;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             color: $light_blue;
             border: 2px solid $light_blue;
         }
+    }
+}
+
+@media (max-width:1090px) {
+    section {
+        padding: 40px;
+        padding-top: 80px;
+    }
+
+    .find_task_content {
+        height: 43px;
+    }
+
+    .search-container {
+        width: 255px;
+        height: auto;
+
+        .search-input {
+            font-size: 16px;
+        }
+    }
+
+    .add_btn {
+        font-size: 16px;
+        width: 115px;
+
+        img {
+            width: 16px;
+            height: 14px;
+        }
+    }
+}
+
+@media (max-width:900px) {
+    section {
+        padding: 20px 30px;
+        padding-top: 120px;
+    }
+}
+
+@media (max-width:645px) {
+    .headline_content {
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    .find_task_content {
+        width: 100%;
+
+        .add_btn {
+            display: none;
+        }
+
+        .search-container {
+            width: 100%;
+        }
+    }
+
+    .add_btn_respo {
+        display: flex;
+        height: 35px;
+        width: 35px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background-color: $lightblack;
+        border: none;
+        border-radius: 7px;
+        color: #fff;
+        cursor: pointer;
+        transition: all 125ms ease;
+    
+        &:hover {
+            background-color: $light_blue;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
     }
 }
 
