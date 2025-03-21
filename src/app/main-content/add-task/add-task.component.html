@@ -22,9 +22,7 @@
                 <label for="taskPriority">Priority</label>
                 <div class="prio_btns">
                     <!-- urgent button -->
-                    <!-- <button type="button" class="prio_urgent" [class.selected]="selectedPrio === 'urgent'"
-                        (click)="selectPrio('low')"> -->
-                        <button type="button" class="prio_urgent">
+                        <button type="button" class="prio_urgent" [class.selected]="selectedPriority === 'urgent'" (click)="selectPriority('urgent')">
                         <span>Urgent</span>
                         <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19.5708 14.755C19.3361 14.7554 19.1076 14.6805 18.9187 14.5414L10.6666 8.45824L2.4146 14.5414C2.29874 14.627 2.16716 14.6889 2.02736 14.7237C1.88756 14.7584 1.74228 14.7653 1.59981 14.7439C1.45734 14.7226 1.32048 14.6734 1.19703 14.5992C1.07359 14.525 0.965978 14.4272 0.880349 14.3114C0.79472 14.1957 0.732748 14.0642 0.697971 13.9245C0.663194 13.7848 0.656294 13.6396 0.677664 13.4973C0.720823 13.2097 0.876514 12.9511 1.11049 12.7783L10.0146 6.20786C10.2033 6.06826 10.4319 5.99292 10.6666 5.99292C10.9014 5.99292 11.13 6.06826 11.3187 6.20786L20.2228 12.7783C20.4087 12.9153 20.5466 13.1074 20.6168 13.3272C20.6869 13.5471 20.6858 13.7835 20.6135 14.0027C20.5411 14.2219 20.4014 14.4126 20.2141 14.5477C20.0269 14.6828 19.8017 14.7554 19.5708 14.755Z" fill="#FF3D00"/>
@@ -69,7 +67,17 @@
             <span class="notice"><span class="red">*</span> this field is required</span>
             <div class="clear_submit">
                 <img src="./assets/tasks/clear.svg" alt="">
-                <input type="submit">
+                <button type="submit" (click)="submitPrio()" class="btn_bold">
+                    <span>Create Task</span>
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask0_71766_5971" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25">
+                        <rect x="0.0166626" y="0.5" width="24" height="24" fill="#D9D9D9"/>
+                        </mask>
+                        <g mask="url(#mask0_71766_5971)">
+                        <path d="M9.56669 15.65L18.0417 7.175C18.2417 6.975 18.4792 6.875 18.7542 6.875C19.0292 6.875 19.2667 6.975 19.4667 7.175C19.6667 7.375 19.7667 7.6125 19.7667 7.8875C19.7667 8.1625 19.6667 8.4 19.4667 8.6L10.2667 17.8C10.0667 18 9.83335 18.1 9.56669 18.1C9.30002 18.1 9.06669 18 8.86669 17.8L4.56669 13.5C4.36669 13.3 4.27085 13.0625 4.27919 12.7875C4.28752 12.5125 4.39169 12.275 4.59169 12.075C4.79169 11.875 5.02919 11.775 5.30419 11.775C5.57919 11.775 5.81669 11.875 6.01669 12.075L9.56669 15.65Z" fill="white"/>
+                        </g>
+                    </svg>
+                  </button>
             </div>
         </div>
     </form>
