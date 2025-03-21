@@ -4,7 +4,8 @@ export interface TaskInterface {
     description: string,
     date: string,
     priority: string,
-    userId: string,
+    asignedToUserId?: string[],
+    status: string,
     category: string,
-    subtask: string,
+    subtasks?: { subtask: string; isCompleted: boolean }[]
 }

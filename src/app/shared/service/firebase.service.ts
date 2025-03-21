@@ -292,9 +292,10 @@ export class FirebaseService {
   //             description: element.description,
   //             date: element.date,
   //             priority: element.priority,
-  //             userId: element.userId,
+  //             asignetToUserId: element.assignedToUserId,
+  //             status: element.status,
   //             category: element.category,
-  //             subtask: element.subtask,
+  //             subtasks: element.subtasks,
   //           });
   //         })
   //         console.log('Tasks initialized successfully');
@@ -367,9 +368,10 @@ export class FirebaseService {
     description: obj.description,
     date: obj.date,
     priority: obj.priority,
-    userId: obj.userId,
+    asignedToUserId: obj.asignedToUserId,
+    status: obj.status,
     category: obj.category,
-    subtask: obj.subtask,
+    subtasks: obj.subtasks,
     }
   }
 
