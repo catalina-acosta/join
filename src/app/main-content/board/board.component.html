@@ -33,9 +33,11 @@
                 <button>+</button>
             </div>
             <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                <div *ngFor="let item of firebase.todo; track: index" class="card" cdkDrag>
-                    <app-task-card [item]="item"></app-task-card>
-                </div>
+                @for (item of firebase.todo; track item) {
+                    <div class="card" cdkDrag>
+                        <app-task-card [item]="item"></app-task-card>
+                    </div>
+                }
             </div>
         </div>
 
@@ -46,7 +48,7 @@
             </div>  
             <div id="in-progress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
                 @for (item of firebase.inProgress; track item) {
-                    <div *ngFor="let item of firebase.inProgress; track: index" class="card" cdkDrag>
+                    <div class="card" cdkDrag>
                         <app-task-card [item]="item"></app-task-card>
                     </div>
                 }
@@ -61,7 +63,7 @@
             </div>
             <div cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="firebase.awaitFeedback" [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
                 @for (item of firebase.awaitFeedback; track item) {
-                    <div *ngFor="let item of firebase.awaitFeedback; track: index" class="card" cdkDrag>
+                    <div class="card" cdkDrag>
                         <app-task-card [item]="item"></app-task-card>
                     </div>
                 }
@@ -75,7 +77,7 @@
             </div>
             <div cdkDropList #done="cdkDropList" [cdkDropListData]="firebase.done" [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
                 @for (item of firebase.done; track item) {
-                    <div *ngFor="let item of firebase.done; track: index" class="card" cdkDrag>
+                    <div class="card" cdkDrag>
                         <app-task-card [item]="item"></app-task-card>
                     </div>
                 }
