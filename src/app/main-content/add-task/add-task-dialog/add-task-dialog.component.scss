@@ -1,0 +1,113 @@
+@use './../../../../styles.scss' as *;
+.red {color:red;}
+
+.custom-dialog-content {
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 100%;
+}
+
+input,textarea{
+    padding: 13px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #00000036;
+    font-size: 20px;
+    outline: none;
+    transition: border 125ms ease;
+
+    &:focus {
+        border: 1px solid $light_blue;
+        box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
+    }
+
+}
+
+.add_tasks_content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px;
+    height: 100%;
+    width: 65%;
+    background-color: #fff;
+    border-radius: 25px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.upper_form {
+    display: flex;
+    align-items: flex-start;
+    height: 424px;
+    gap: 42px;
+}
+
+.lower_form {
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    >.notice {
+        align-self: flex-start;
+    }
+    >.clear_submit {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+.left_content {
+    display: flex;
+    flex-direction: column;
+    height: 376px;
+    width: 440px;
+    align-items: space-between;
+}
+
+.right_content {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 440px;
+    align-self: flex-start;
+}
+
+label {
+    font-size: 20px;
+    padding: 8px;
+    padding-top: 16px;
+}
+
+select {
+    height: 48px;
+    border: 1px;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 20px;
+    padding: 12px 16px;
+    //font family Poppins!
+    select {
+        option:disabled {   
+        font-size: 12px;
+        color: #d1d1d1;
+        //font family Poppins!
+    }
+}
+}
+
+input[type="submit"] {
+    border: unset;
+    height: 56px;
+    width: 185px;
+    background-image: url(../../../../../public/assets/tasks/create_task.svg);
+    background-size: cover;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    color: transparent;
+}
