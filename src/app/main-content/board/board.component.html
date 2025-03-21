@@ -22,12 +22,44 @@
                 <h5>To do</h5>
                 <button>+</button>
             </div>
+            <div id="todo" cdkDropList #todoList="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="['To do']" class="drop-area" (cdkDropListDropped)="drop($event)">
+                @for (item of firebase.todo; track item) {
+                    <div class="card" cdkDrag>
+                        <p class="category">{{item.category}}</p>
+                        <p class="title">{{item.title}}</p>
+                        <p class="description">{{item.description}}</p>
+                        <p class="subtasks">Subtasks</p>
+                        <div class="content-wrapper">
+                            <div class="assigned_to">
+                                <div class="avatar" [ngStyle]="{'background-color': firebase.orderedContactsList[0].color}">
+                                    <p>{{firebase.orderedContactsList[0].firstname.charAt(0)}}{{firebase.orderedContactsList[0].lastname.charAt(0)}}</p>
+                                </div>
+                                <div class="avatar" [ngStyle]="{'background-color': firebase.orderedContactsList[1].color}">
+                                    <p>{{firebase.orderedContactsList[1].firstname.charAt(0)}}{{firebase.orderedContactsList[1].lastname.charAt(0)}}</p>
+                                </div>
+                            </div>
+                            <div class="priority">
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
 
         <div class="progress_box">
             <div class="title_content">
                 <h5>In progress</h5>
                 <button>+</button>
+            </div>
+            <div id="in-progress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="['In progress']" class="drop-area" (cdkDropListDropped)="drop($event)">
+                @for (item of firebase.inProgress; track item) {
+                    <div class="example-box" cdkDrag>
+                        <p>{{item.category}}</p>
+                        <p>{{item.title}}</p>
+                        <p>{{item.description}}</p>
+                    </div>
+                }
             </div>
         </div>
 
@@ -36,12 +68,30 @@
                 <h5>Await feedback</h5>
                 <button>+</button>
             </div>
+            <div cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="firebase.awaitFeedback" [cdkDropListConnectedTo]="['Await feedback']" class="drop-area" (cdkDropListDropped)="drop($event)">
+                @for (item of firebase.awaitFeedback; track item) {
+                    <div class="example-box" cdkDrag>
+                        <p>{{item.category}}</p>
+                        <p>{{item.title}}</p>
+                        <p>{{item.description}}</p>
+                    </div>
+                }
+            </div>
         </div>
 
         <div class="done_box">
             <div class="title_content">
                 <h5>Done</h5>
                 <button>+</button>
+            </div>
+            <div cdkDropList #done="cdkDropList" [cdkDropListData]="firebase.done" [cdkDropListConnectedTo]="['Done']" class="drop-area" (cdkDropListDropped)="drop($event)">
+                @for (item of firebase.done; track item) {
+                    <div class="example-box" cdkDrag>
+                        <p>{{item.category}}</p>
+                        <p>{{item.title}}</p>
+                        <p>{{item.description}}</p>
+                    </div>
+                }
             </div>
         </div>
 
