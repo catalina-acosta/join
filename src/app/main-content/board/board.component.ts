@@ -12,7 +12,7 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
-import { log } from 'node:console';
+
 
 @Component({
   selector: 'app-board',
@@ -26,22 +26,35 @@ export class BoardComponent {
   firebase = inject(FirebaseService);
   searchQuery: string = '';
   isDialogOpen: boolean = false;
-  tasks: TaskInterface[] = [
-    //   { id: '1', title: 'Einkaufen', description: 'Apfel', date: '2025-03-22', priority: 'High', userId: '123', category: 'User Story', subtask: '' },
-    //   { id: '2', title: 'Daily Stand UP', description: 'Project Besprechung', date: '2025-03-23', priority: 'Medium', userId: '456', category: 'Technical Task', subtask: '' },
-    //   { id: '3', title: 'Arbeiten', description: 'Join Projekt', date: '2025-03-24', priority: 'Low', userId: '789', category: '', subtask: '' }
-  ];
+  tasks: TaskInterface[] = [];
+  filteredTasks: TaskInterface[] = [];
 
-  filteredTasks: TaskInterface[] = [...this.tasks];
+  constructor() {
+    this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
+      this.tasks = tasks;
+      this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
+    });
+  }
 
   filterTasks(): void {
     const query = this.searchQuery.toLowerCase().trim();
+    if (!query) {
+      this.filteredTasks = [...this.tasks];
+      return;
+    }
+
     this.filteredTasks = this.tasks.filter(task =>
-      task.title.toLowerCase().includes(query) ||
-      task.description.toLowerCase().includes(query)
+      task.title.toLowerCase().includes(query) || task.description.toLowerCase().includes(query)
     );
   }
 
+  filterTasksByStatusAndQuery(status: string): TaskInterface[] {
+    return this.filteredTasks.filter(task =>
+      task.status === status &&
+      (task.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+       task.description.toLowerCase().includes(this.searchQuery.toLowerCase()))
+    );
+  }
 
   openCardDialog() {
     this.isDialogOpen = true;
