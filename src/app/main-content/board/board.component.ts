@@ -45,7 +45,7 @@ export class BoardComponent {
     }
 
     this.filteredTasks = this.tasks.filter(task =>
-      task.title.toLowerCase().includes(query) || task.description.toLowerCase().includes(query)
+      task.title.toLowerCase().includes(query) || task.description?.toLowerCase().includes(query)
     );
   }
 
@@ -53,7 +53,7 @@ export class BoardComponent {
     return this.filteredTasks.filter(task =>
       task.status === status &&
       (task.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
-       task.description.toLowerCase().includes(this.searchQuery.toLowerCase()))
+       task.description?.toLowerCase().includes(this.searchQuery.toLowerCase()))
     );
   }
 

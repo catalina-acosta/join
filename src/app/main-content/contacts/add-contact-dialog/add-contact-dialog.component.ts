@@ -33,6 +33,7 @@ export class AddContactDialogComponent {
   formValidation() {
     this.submitButtonClicked = true;
   }
+  
   onCreateContact(contactForm: NgForm) {
     this.formSubmitted = true;
     

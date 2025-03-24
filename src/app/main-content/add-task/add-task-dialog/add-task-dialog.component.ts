@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { TaskInterface } from '../../board/task.interface';
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -18,6 +19,17 @@ export class AddTaskDialogComponent {
   taskCategory: string = '';
   subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
   subtaskInput: string = ''; // Model für das Eingabefeld
+  formSubmitted: boolean = false;
+    newTask: TaskInterface = {
+      title: "",
+      description: "",
+      date: "",
+      priority: "",
+      assignedToUserId: [],
+      status: "",
+      category: "",
+      subtasks: []
+    }
 
   addSubtask() {
     if (this.subtaskInput.trim()) {
@@ -50,5 +62,16 @@ export class AddTaskDialogComponent {
 
   closeDialog() {
     // Logic to close the dialog
+  }
+
+  onCreateTask(taskForm: NgForm) {
+    this.formSubmitted = true; 
+    if(this.formSubmitted) {
+      this.createNewTask();
+    }
+  }
+
+  createNewTask() {
+    
   }
 }

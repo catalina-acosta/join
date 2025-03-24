@@ -4,7 +4,7 @@
             <div class="add_tasks_content">
                 <h1>Add Task</h1>
 
-                <form>
+                <form (ngSubmit)="onCreateTask(taskForm)" #taskForm="ngForm">
                     <div class="upper_form">
                         <div class="left_content">
                             <label for="taskTitle">Title <span class="red">*</span></label>
