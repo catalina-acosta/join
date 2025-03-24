@@ -1,7 +1,4 @@
-@if(item){
-
-<section>
-
+<section *ngIf = item>
     <div class="dialog_content">
 
         <div class="headline">
@@ -14,81 +11,90 @@
                 <img src="./assets/contact/Close.svg" alt="close">
             </div>
         </div>
-        <p>Title</p>
-        <input type="text" name="title" id="" placeholder="Enter a title" value="{{item.title}}">
-        <p>Description</p>
-        <input type="text" name="title" id="" placeholder="Enter a description" value="{{item.description}}">
 
+        <form (ngSubmit)="saveEditedTask()">
 
-        <div class="date_prio_content">
-            <p class="title2">Due date:</p>
-            <p>{{item.date}}</p>
-        </div>
-        <div class="date_prio_content">
-            <p class="title2">Priority:</p>
-            <div class="priority">
-                <p>{{item.priority | titlecase }}</p>
-                @if (item.priority === "high") {
-                <img src="./assets/tasks/Prio alta.svg" alt="">
-                } @else if(item.priority === "medium") {
-                <img src="./assets/tasks/Prio media.svg" alt="">
-                } @else if(item.priority === "low") {
-                <img src="./assets/tasks/Prio baja.svg" alt="">
-                }
+            <p>Title</p>
+            <label class="input_content">
+                <input type="text" name="title" id="" placeholder="Enter a title" value="{{item.title}}">
+            </label>
+            <p>Description</p>
+            <label class="input_content">
+                <input type="text" name="title" id="" placeholder="Enter a description" value="{{item.description}}">
+            </label>
+
+            <div class="date_prio_content">
+                <label class="input_content" for="dueDate">Due date
+                    <input type="date" id="dueDate" [value]="item.date">
+
+                </label>
             </div>
-
-        </div>
-
-        <div class="assigned_content">
-            <p class="title2">Assigned To:</p>
-            <div class="members_content">
-                <div class="assigned_to">
-                    @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
-                    @for (userId of item.assignedToUserId; track $index) {
-                    @for (contact of firebase.orderedContactsList; track $index) {
-                    @if(contact.id === userId) {
-                    <div class="person_box">
-                        <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
-                            <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
-                        </div>
-                        <p>{{contact.fullname| titlecase }}</p>
-                    </div>
-                    }
-                    }
-                    }
-                    } @else {
-                    <p>no users assigned</p>
+            <div class="date_prio_content">
+                <p class="title2">Priority</p>
+                <div class="priority">
+                    <p>{{item.priority | titlecase }}</p>
+                    @if (item.priority === "high") {
+                    <img src="./assets/tasks/Prio alta.svg" alt="">
+                    } @else if(item.priority === "medium") {
+                    <img src="./assets/tasks/Prio media.svg" alt="">
+                    } @else if(item.priority === "low") {
+                    <img src="./assets/tasks/Prio baja.svg" alt="">
                     }
                 </div>
 
             </div>
-        </div>
 
-        <div class="subtasks_content">
-            <p class="title2">Subtasks</p>
+            <div class="assigned_content">
+                <p class="title2">Assigned To:</p>
+                <div class="members_content">
+                    <div class="assigned_to">
+                        @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
+                        @for (userId of item.assignedToUserId; track $index) {
+                        @for (contact of firebase.orderedContactsList; track $index) {
+                        @if(contact.id === userId) {
+                        <div class="person_box">
+                            <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
+                                <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                            </div>
+                            <p>{{contact.fullname| titlecase }}</p>
+                        </div>
+                        }
+                        }
+                        }
+                        } @else {
+                        <p>no users assigned</p>
+                        }
+                    </div>
 
-            <div class="show_subtask" *ngFor="let subtask of item.subtasks">
-
-                <label class="checkbox_content">
-                    <input type="checkbox" [checked]="subtask.isCompleted">
-                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked"
-                        *ngIf="!subtask.isCompleted">
-                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked"
-                        *ngIf="subtask.isCompleted">
-                    <p>{{subtask.subtask}}</p>
-                </label>
-
+                </div>
             </div>
-        </div>
 
+            <div class="subtasks_content">
+                <p class="title2">Subtasks</p>
 
-        <div class="save_edit_content">
-            <div class="edit_box">
-                <p>Ok</p>
-                <img src="./assets/tasks/check.svg" alt="save">
+                <div class="show_subtask" *ngFor="let subtask of item.subtasks">
+
+                    <label class="checkbox_content">
+                        <input type="checkbox" [checked]="subtask.isCompleted">
+                        <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked"
+                            *ngIf="!subtask.isCompleted">
+                        <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked"
+                            *ngIf="subtask.isCompleted">
+                        <p>{{subtask.subtask}}</p>
+                    </label>
+
+                </div>
             </div>
-        </div>
+
+
+            <div class="save_edit_content">
+                <div class="edit_box">
+                    <p>Ok</p>
+                    <img src="./assets/tasks/check.svg" alt="save">
+                </div>
+            </div>
+
+        </form>
+
     </div>
-
 </section>
-}
