@@ -57,6 +57,64 @@ form{
 }
 
 
+.prio_btns {
+    display: flex;
+    align-items: center;
+    font-family: 'Inter';
+    gap: 16px;
+
+    >button {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 10px;
+        border-radius: 10px;
+        border: 1px solid #8a898921;
+        background-color: white;
+        width: 100%;
+        color: black;
+        font-weight: 400;
+        font-size: 18px;
+
+        &:hover {
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+.prio.selected.urgent {
+    background-color: #ff3d00;
+    color: white;
+    font-size: 18px;
+
+    >svg path {
+        fill: white;
+    }
+}
+
+.prio.selected.medium {
+    background-color: #fea800;
+    color: white;
+    font-size: 18px;
+
+    >svg path {
+        fill: white;
+    }
+}
+
+.prio.selected.low {
+    background-color: #7be129;
+    color: white;
+    font-size: 18px;
+
+    >svg path {
+        fill: white;
+    }
+}
+
+
 .close_btn {
     img {
         padding: 1px;
@@ -166,27 +224,40 @@ form{
     }
 }
 
-.checkbox_content input {
+
+
+.subtask-input {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2117647059);
+    border-radius: 10px;
+    padding: 12px 16px;
+    padding-right: 40px;
+
+    &::placeholder {
+        color: #d1d1d1;
+    }
+}
+
+.input-icon,
+.input-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 8px; // Adjust the margin as needed
+    position: absolute;
+    right: 0;
+    padding-right: 10px;
+}
+
+.hidden {
     display: none;
 }
 
-.checkbox_content .unchecked {
-    display: block;
-
+.visible {
+    display: flex;
+    gap: 8px;
 }
-
-.checkbox_content .checked {
-    display: none;
-}
-
-.checkbox_content input:checked+.unchecked {
-    display: none;
-}
-
-.checkbox_content input:checked~.checked {
-    display: block;
-}
-
 
 
 // save_edit_content
