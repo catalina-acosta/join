@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TaskInterface } from '../task.interface';
 
 @Component({
   selector: 'app-card',
@@ -10,6 +11,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class CardComponent {
    @Output() closeDialogEvent = new EventEmitter<void>();
+   @Input() item?: TaskInterface;
 
   closeDialog() {
     this.closeDialogEvent.emit();

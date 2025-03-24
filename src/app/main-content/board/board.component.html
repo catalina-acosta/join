@@ -19,7 +19,7 @@
     <!-- Open Card Dialog -->
     <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
         <div class="custom-dialog">
-            <app-card (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
+            <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
         </div>
     </div>
 
@@ -37,7 +37,7 @@
                 <p>❌ No matching tasks found!</p>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('todo')" class="card" cdkDrag (click)="openCardDialog()">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('todo')" class="card" cdkDrag (click)="openCardDialog(item)">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
@@ -55,7 +55,7 @@
                 <p>❌ No matching tasks found!</p>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" cdkDrag (click)="openCardDialog()">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" cdkDrag (click)="openCardDialog(item)">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
@@ -73,7 +73,7 @@
                 <p>❌ No matching tasks found!</p>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" cdkDrag (click)="openCardDialog()">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" cdkDrag (click)="openCardDialog(item)">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
@@ -91,7 +91,7 @@
                 <p>❌ No matching tasks found!</p>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('done')" class="card" cdkDrag (click)="openCardDialog()">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('done')" class="card" cdkDrag (click)="openCardDialog(item)">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>

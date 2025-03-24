@@ -28,6 +28,7 @@ export class BoardComponent {
   isDialogOpen: boolean = false;
   tasks: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
+  selectedItem!: TaskInterface;
 
   constructor() {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
@@ -56,8 +57,10 @@ export class BoardComponent {
     );
   }
 
-  openCardDialog() {
+  openCardDialog(item: TaskInterface) {
+    this.selectedItem = item;
     this.isDialogOpen = true;
+    console.log(this.selectedItem);
   }
 
   stopPropagation(event: Event) {
