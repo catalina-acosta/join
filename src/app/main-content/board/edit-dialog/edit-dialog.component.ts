@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef, AfterViewInit} from '@angular/core';
 import { TaskInterface } from '../task.interface';
 import { FirebaseService } from '../../../shared/service/firebase.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -23,7 +23,7 @@ export class EditDialogComponent implements AfterViewInit {
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   subtaskInputFocused: boolean = false;
   subtaskInput: string = '';
-  subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
+  subtasks: { name: string, isCompleted: boolean }[] = []; // Array für Subtasks
 
   ngOnInit() {
     if (this.item?.priority) {
@@ -58,7 +58,7 @@ export class EditDialogComponent implements AfterViewInit {
     }
   }
 
-  saveEditedTask() {
+  saveEditedTask(taskForm: NgForm) {
     if (this.item?.id && this.item?.date) {
       const [year, month, day] = this.item.date.split('-');
       this.item.date = `${day}/${month}/${year}`;
@@ -100,7 +100,7 @@ export class EditDialogComponent implements AfterViewInit {
 
 addSubtask() {
   if (this.subtaskInput.trim()) {
-    this.subtasks.push({ name: this.subtaskInput.trim(), isEditing: false }); // Subtask zur Liste hinzufügen
+    this.subtasks.push({ name: this.subtaskInput.trim(), isCompleted: false }); // Subtask zur Liste hinzufügen
     this.subtaskInput = ''; // Eingabefeld leeren
   }
 }
@@ -110,7 +110,7 @@ removeSubtask(index: number) {
 }
 
 editSubtask(index: number) {
-  this.subtasks[index].isEditing = true;
+  this.subtasks[index].isCompleted = true;
   setTimeout(() => {
     const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
     inputElement?.focus();
@@ -123,7 +123,7 @@ saveSubtask(index: number) {
   if (inputElement) {
     this.subtasks[index].name = inputElement.value;
   }
-  this.subtasks[index].isEditing = false;
+  this.subtasks[index].isCompleted = false;
 }
 handleKeyUp(event: KeyboardEvent, index: number) {
   if (event.key === 'Enter') {

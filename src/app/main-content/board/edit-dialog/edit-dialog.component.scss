@@ -21,7 +21,6 @@ section {
     }
 }
 
-
 // .headline
 .headline {
     display: flex;
@@ -55,7 +54,6 @@ form{
         }
     }
 }
-
 
 .prio_btns {
     display: flex;
@@ -113,7 +111,6 @@ form{
         fill: white;
     }
 }
-
 
 .close_btn {
     img {
@@ -188,7 +185,6 @@ form{
         display: flex;
         align-items: center;
         justify-content: center;
-
     }
 }
 
@@ -259,6 +255,67 @@ form{
     gap: 8px;
 }
 
+ul {
+    padding: 0;
+    padding-top: 10px;
+    width: 100%;
+}
+
+li {
+    padding: 15px 10px 15px 20px;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 20px;
+
+    .subtask-circle {
+        width: 5px;
+        height: 5px;
+        background-color: black;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .subtask-actions {
+        display: none;
+        margin-left: auto;
+
+        .edit-button,
+        .remove-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    }
+
+    &:hover .subtask-actions {
+        display: flex;
+
+    }
+}
+
+.subtask-item:hover {
+    background-color: rgb(235, 234, 234);
+    border-radius: 8px;
+}
+
+.subtask-input-edit{
+    padding: 8px;
+    width: 100%;
+    border-bottom: 1px solid $light_blue;; 
+    font-size: 16px;
+    border: none; 
+    outline: none;
+    transition: border 125ms ease;
+
+    &:focus {
+        border-bottom: 1px solid $light_blue;; 
+    }
+}
 
 // save_edit_content
 .save_edit_content {
