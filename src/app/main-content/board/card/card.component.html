@@ -5,7 +5,10 @@
     <div class="dialog_content">
 
         <div class="headline">
-            <div class="category">User Story</div>
+            <div class="category" [ngStyle]="{'background-color': item.category === 'User Story' ? 'blue' : item.category === 'Technical Task' ? '#1fd7c1' : 'gray'}">
+                {{ item.category }}
+            </div>
+            
             <div class="close_btn" (click)="closeDialog()">
                 <img src="./assets/contact/Close.svg" alt="close">
             </div>
