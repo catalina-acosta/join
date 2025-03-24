@@ -116,6 +116,6 @@ onCreateTask(taskForm: NgForm) {
 createNewTask() {
   this.newTask.date = this.todaysDate;
 
-  console.log(this.newTask);
+  this.firebase.addTaskToData(this.newTask);
   }
 }
