@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, setDoc, Unsubscribe, updateDoc } from '@angular/fire/firestore';
 import { ContactInterface } from '../../main-content/contacts/contact-interface';
 import { TaskInterface } from '../../main-content/board/task.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -9,6 +10,9 @@ import { TaskInterface } from '../../main-content/board/task.interface';
 })
 export class FirebaseService {
   firebase = inject(Firestore);
+  private tasksListSubject: BehaviorSubject<TaskInterface[]> = new BehaviorSubject<TaskInterface[]>([]); // BehaviorSubject verwenden, um Aufgaben zu speichern
+  tasksList$: Observable<TaskInterface[]> = this.tasksListSubject.asObservable(); // 
+
   contactsList: ContactInterface[] = [];
   orderedContactsList: ContactInterface[] = [];
   tasksList: TaskInterface[] = [];
@@ -305,20 +309,24 @@ export class FirebaseService {
   // }
 //endregion
 
-  getTasksList() {
-    return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
-      this.todo = [];
-      this.inProgress = [];
-      this.awaitFeedback = [];
-      this.done = [];
-      this.tasksList = [];
-      taskObject.forEach((element) => {
-        const task = this.setTaskObject(element.id, element.data() as TaskInterface);
-        this.categorizeTask(task);
-        this.tasksList.push(this.setTaskObject(element.id, element.data() as TaskInterface));
-      })
-    })
-  }
+getTasksList() {
+  return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
+    this.todo = [];
+    this.inProgress = [];
+    this.awaitFeedback = [];
+    this.done = [];
+    const tasksList: TaskInterface[] = [];
+    
+    taskObject.forEach((element) => {
+      const task = this.setTaskObject(element.id, element.data() as TaskInterface);
+      this.categorizeTask(task);
+      tasksList.push(task);
+    });
+
+    // Aufgabenliste im BehaviorSubject aktualisieren
+    this.tasksListSubject.next(tasksList);
+  });
+}
 
   orderedListQuery() {
     const contactsRef = collection(this.firebase, "contacts")

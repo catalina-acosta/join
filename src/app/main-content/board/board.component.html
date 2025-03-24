@@ -1,92 +1,101 @@
-<!-- <div *ngFor="let task of filteredTasks">
-    <div class="task-card">
-      <h3>{{ task.title }}</h3>
-      <p>{{ task.description }}</p>
-      <small>{{ task.date }} | Priority: {{ task.priority }}</small>
-    </div>
-  </div> -->
 <section>
     <div class="headline_content">
-        <div class="headline_box">
-            <h1>Board</h1>
-            <button class="add_btn_respo"><img src="./assets/tasks/add.svg" alt="add"></button>
+      <div class="headline_box">
+        <h1>Board</h1>
+        <button class="add_btn_respo"><img src="./assets/tasks/add.svg" alt="add"></button>
+      </div>
+      <div class="find_task_content">
+        <div class="search-container">
+          <input type="text" placeholder="Find Task" class="search-input" [(ngModel)]="searchQuery" (input)="filterTasks()"/>
+          <img src="./assets/tasks/Vector 3.svg" alt="">
+          <button class="search-button">
+            <img src="./assets/tasks/search.svg" alt="seach">
+          </button>
         </div>
-        <div class="find_task_content">
-            <div class="search-container">
-                <input type="text" placeholder="Find Task" class="search-input" [(ngModel)]="searchQuery" (input)="filterTasks()"/>
-                <img src="./assets/tasks/Vector 3.svg" alt="">
-                <button class="search-button">
-                    <img src="./assets/tasks/search.svg" alt="seach">
-                </button>
-            </div>
-            <button class="add_btn">Add task <img src="./assets/tasks/add.svg" alt="add"></button>
-        </div>
+        <button class="add_btn">Add task <img src="./assets/tasks/add.svg" alt="add"></button>
+      </div>
     </div>
 
-<!-- Open Card Dialog -->
+    <!-- Open Card Dialog -->
     <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
         <div class="custom-dialog">
-            <app-card (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
+            <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
         </div>
     </div>
 
-    <!-- tast container -->
-
+  
     <div class="task_container">
-        <div class="todo_box">
-            <div class="title_content">
-                <h5>To do</h5>
-                <button>+</button>
-            </div>
-            <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="firebase.todo" [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.todo; track $index) {
-                    <div class="card" cdkDrag (click)="openCardDialog()">
-                        <app-task-card [item]="item"></app-task-card>
-                    </div>
-                }
-            </div>
+      <div class="todo_box">
+        <div class="title_content">
+          <h5>To do</h5>
+          <button>+</button>
         </div>
+        <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('todo')" 
+             [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
 
-        <div class="progress_box">
-            <div class="title_content">
-                <h5>In progress</h5>
-                <button>+</button>
-            </div>  
-            <div id="inProgress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="firebase.inProgress" [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.inProgress; track $index) {
-                    <div class="card" cdkDrag (click)="openCardDialog()">
-                        <app-task-card [item]="item"></app-task-card>
-                    </div>
-                }
-            </div>
-        </div>
+             <div *ngIf="filterTasksByStatusAndQuery('todo').length === 0" class="no_match_box">
+                <p>❌ No matching tasks found!</p>
+              </div>
 
-        <div class="await_box">
-            <div class="title_content">
-                <h5>Await feedback</h5>
-                <button>+</button>
-            </div>
-            <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="firebase.awaitFeedback" [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.awaitFeedback; track $index) {
-                    <div class="card" cdkDrag (click)="openCardDialog()">
-                        <app-task-card [item]="item"></app-task-card>
-                    </div>
-                }
-            </div>
+          <div *ngFor="let item of filterTasksByStatusAndQuery('todo')" class="card" cdkDrag (click)="openCardDialog(item)">
+            <app-task-card [item]="item"></app-task-card>
+          </div>
         </div>
-        
-        <div class="done_box">
-            <div class="title_content">
-                <h5>Done</h5>
-                <button>+</button>
-            </div>
-            <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="firebase.done" [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
-                @for (item of firebase.done; track $index) {
-                    <div class="card" cdkDrag (click)="openCardDialog()">
-                        <app-task-card [item]="item"></app-task-card>
-                    </div>
-                }
-            </div>
+      </div>
+  
+      <div class="progress_box">
+        <div class="title_content">
+          <h5>In progress</h5>
+          <button>+</button>
+        </div>  
+        <div id="inProgress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('inProgress')" 
+             [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
+
+             <div *ngIf="filterTasksByStatusAndQuery('inProgress').length === 0" class="no_match_box">
+                <p>❌ No matching tasks found!</p>
+              </div>
+
+          <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" cdkDrag (click)="openCardDialog(item)">
+            <app-task-card [item]="item"></app-task-card>
+          </div>
         </div>
+      </div>
+  
+      <div class="await_box">
+        <div class="title_content">
+          <h5>Await feedback</h5>
+          <button>+</button>
+        </div>
+        <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('awaitFeedback')" 
+             [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
+
+             <div *ngIf="filterTasksByStatusAndQuery('awaitFeedback').length === 0" class="no_match_box">
+                <p>❌ No matching tasks found!</p>
+              </div>
+
+          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" cdkDrag (click)="openCardDialog(item)">
+            <app-task-card [item]="item"></app-task-card>
+          </div>
+        </div>
+      </div>
+  
+      <div class="done_box">
+        <div class="title_content">
+          <h5>Done</h5>
+          <button>+</button>
+        </div>
+        <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('done')" 
+             [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
+
+             <div *ngIf="filterTasksByStatusAndQuery('done').length === 0" class="no_match_box"s>
+                <p>❌ No matching tasks found!</p>
+              </div>
+
+          <div *ngFor="let item of filterTasksByStatusAndQuery('done')" class="card" cdkDrag (click)="openCardDialog(item)">
+            <app-task-card [item]="item"></app-task-card>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
+  

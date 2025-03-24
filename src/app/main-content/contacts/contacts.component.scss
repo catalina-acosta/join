@@ -1,6 +1,6 @@
 div {
     display: flex;
-    height: 100vh;
+    // height: 100vh;
 }
 
 .contact-list {
@@ -67,6 +67,8 @@ div {
         padding-top: 100px;
         height: calc(100vh - 100px);
         z-index: 3;
+        flex-direction: column;
+        justify-content: space-between;
 
         .contact-details {
             width: 60%;

@@ -157,6 +157,12 @@ section {
     z-index: 1000;
 }
 
+// no_match_box
+.no_match_box{
+    width: 252ox;
+    padding-top: 20px;
+}
+
 @keyframes slideInFromRight {
     0% {
         transform: translateX(100%);
