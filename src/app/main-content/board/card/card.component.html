@@ -82,12 +82,19 @@
                 <p>Delete</p>
             </div>
             <img src="/assets/tasks/Vector 3.svg" alt="">
-            <div class="edit_box">
+            <div class="edit_box" (click)="openEditDialog(item)">
                 <img src="./assets/contact/edit.svg" alt="edit">
                 <p>Edit</p>
             </div>
         </div>
-
     </div>
+
+       <!-- Open Edit Dialog -->
+       <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
+        <div class="custom-dialog">
+            <app-edit-dialog [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-edit-dialog>
+        </div>
+    </div>
+
 </section>
 }
