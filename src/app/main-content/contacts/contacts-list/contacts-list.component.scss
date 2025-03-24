@@ -13,9 +13,13 @@
 
 .btn_wrapper {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .btn_plain_color {
-        width: 100%;
+        width: 80%;
+        margin-top: 16px;
     }
 }
 
@@ -139,6 +143,10 @@
 }
 
  
+#add_contact_btn {
+    position: sticky;
+    z-index: 30;
+}
 
 .dialog-closed {
     animation: slideOutToRight 0.5s ease-in forwards;

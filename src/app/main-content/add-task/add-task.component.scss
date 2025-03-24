@@ -187,10 +187,16 @@ select {
     }
 }
 
+
+//selection of contacts
 .avatar {
     height: 15px;
     width:15px;
     border-radius: 50%;
     background-color: red;
+}
+
+.rotate {
+    transform: rotate(180deg);
 }
 

@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { TaskInterface } from '../../board/task.interface';
+import { Component, inject } from '@angular/core';
+import { FirebaseService } from '../../../shared/service/firebase.service';
+import { ContactInterface } from '../../contacts/contact-interface';
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -10,14 +13,37 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-task-dialog.component.scss'
 })
 export class AddTaskDialogComponent {
-  taskTitle: string = '';
-  taskDescription: string = '';
-  dueDate: string = '';
-  taskPriority: string = '';
-  assignedTo: string = '';
-  taskCategory: string = '';
+  subtaskInputFocused: boolean = false;
   subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
   subtaskInput: string = ''; // Model für das Eingabefeld
+  formSubmitted: boolean = false;
+    newTask: TaskInterface = {
+      title: "",
+      description: "",
+      date: "",
+      priority: "",
+      assignedToUserId: [],
+      status: "",
+      category: "",
+      subtasks: []
+    }
+
+  firebase = inject(FirebaseService);
+  currentContact: ContactInterface | null = null;
+  todaysDate: string = new Date().toISOString().split('T')[0];
+  selectedPriority: string = 'medium';
+  selectedContacts = [];  //dass ich das unten anzeigen kann
+  showAddButton: boolean = true;
+  hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  selectPriority(priority: string) {
+    this.selectedPriority = priority;
+  }
+
+  submitPrio() {
+    console.log("Ausgewählte Priorität:", this.selectedPriority);
+  }
+
 
   addSubtask() {
     if (this.subtaskInput.trim()) {
@@ -39,9 +65,12 @@ export class AddTaskDialogComponent {
   }
 
   saveSubtask(index: number) {
+    const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+    if (inputElement) {
+      this.subtasks[index].name = inputElement.value;
+    }
     this.subtasks[index].isEditing = false;
   }
-
   handleKeyUp(event: KeyboardEvent, index: number) {
     if (event.key === 'Enter') {
       this.saveSubtask(index);
@@ -51,4 +80,38 @@ export class AddTaskDialogComponent {
   closeDialog() {
     // Logic to close the dialog
   }
+
+  onCreateTask(taskForm: NgForm) {
+    this.formSubmitted = true; 
+    if(this.formSubmitted) {
+      this.createNewTask();
+    }
+  }
+
+  createNewTask() {
+    }
+
+  clearSubtaskInput() {
+    this.subtaskInput = '';
+    this.subtaskInputFocused = false;
+  }
+
+  focusSubtaskInput() {
+    const subtaskInput = document.querySelector('.subtask-input') as HTMLInputElement;
+    if (subtaskInput) {
+      subtaskInput.focus();
+    }
+  }
+
+  onSubtaskInputBlur() {
+    this.hideInputIconTimeout = setTimeout(() => {
+      this.subtaskInputFocused = false;
+    }, 1000/2); // 2 seconds delay
+  }
+
+  onSubtaskInputFocus() {
+    if (this.hideInputIconTimeout) {
+      clearTimeout(this.hideInputIconTimeout);
+    }
+    this.subtaskInputFocused = true;
 }

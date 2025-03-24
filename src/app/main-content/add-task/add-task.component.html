@@ -47,26 +47,31 @@
                     </button>
                 </div>
 
-                <label for="assignedTo">Assigned to</label>
-                <select id="assignedTo" name="assignedTo">
-                    <!-- <option value="today">Person 1</option>
-                    <option value="tomorrow">Person 2</option>
-                    <option value="never">Person 3</option> -->
-                    @if(firebase.orderedContactsList) {
-                        @for (item of firebase.orderedContactsList; track $index) {
-                            <option>
-                                <div class="avatar" [ngStyle]="{'background-color': item.color}">
-                                    <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
-                                </div>
-                                <div class="contact_info">
-                                    <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
-                                </div>     
-                            </option>
-                        } @empty {
+                <div class="dropdown">
+                    <label for="assignedTo">Assigned to</label>
+                    <div class="select_contacts" (click)="toggleDropdown()">
+                        <span>Select contacts to assign</span>
+                        <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
+                    </div>
+                    <div class="dropdown_menu" *ngIf="dropdownVisible">
+                        @if(firebase.orderedContactsList) {
+                            @for (item of firebase.orderedContactsList; track $index) {      
+                                <div class="one_contact">
+                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                                    </div>
+                                    <div class="contact_info">
+                                        <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
+                                    </div>
+                                    <input type="checkbox"> 
+                                </div>                                                                             
+                            } @empty {
                             <div>data loading</div>
+                            }
                         }
-                    }
-                </select>
+                    </div>
+                    <div class="selected_contacts"></div>
+                </div>
 
                 <label for="taskCategory">Category <span class="red">*</span></label>
                 <select id="taskCategory" name="taskCategory">
@@ -91,7 +96,7 @@
                         <path d="M9.56669 15.65L18.0417 7.175C18.2417 6.975 18.4792 6.875 18.7542 6.875C19.0292 6.875 19.2667 6.975 19.4667 7.175C19.6667 7.375 19.7667 7.6125 19.7667 7.8875C19.7667 8.1625 19.6667 8.4 19.4667 8.6L10.2667 17.8C10.0667 18 9.83335 18.1 9.56669 18.1C9.30002 18.1 9.06669 18 8.86669 17.8L4.56669 13.5C4.36669 13.3 4.27085 13.0625 4.27919 12.7875C4.28752 12.5125 4.39169 12.275 4.59169 12.075C4.79169 11.875 5.02919 11.775 5.30419 11.775C5.57919 11.775 5.81669 11.875 6.01669 12.075L9.56669 15.65Z" fill="white"/>
                         </g>
                     </svg>
-                  </button>
+                </button>
             </div>
         </div>
     </form>

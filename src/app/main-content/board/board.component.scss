@@ -96,6 +96,7 @@ section {
     display: flex;
     justify-content: space-between;
     padding-top: 50px;
+    gap: 24px;
 }
 
 .title_content {
@@ -105,10 +106,11 @@ section {
     gap: 60px;
     color: $lightblack;
     font-size: 20px;
+    margin-bottom: 14px;
 
     button {
-        border: 2px solid $lightblack;
-        border-radius: 5px;
+        border: 2px solid $dark_grey;
+        border-radius: 8px;
         height: 25px;
         width: 25px;
         font-size: 20px;
@@ -122,21 +124,54 @@ section {
             border: 2px solid $light_blue;
         }
     }
+
+    h5 {
+        color: $dark_grey;
+        font-size: 20px;
+    }
 }
 
 .card {
     width: 252px;
-    height: 263px;
+    min-width: 252px;
     background-color: #FFFFFF;
     border-radius: 24px;
     padding: 16px;
     margin-bottom: 16px;
+
+    &:hover {
+        cursor: pointer;
+        scale: 1.02;
+    }
 }
 
-// no_match_box
-.no_match_box{
-    width: 252ox;
-    padding-top: 20px;
+// .card.cdk-drag{
+//     transform: rotate(-30deg);
+// }
+
+.card.cdk-drag-preview {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: rotate(-30deg);
+}
+
+.card.cdk-drag-placeholder {
+    opacity: 0.5;
+}
+
+.card.cdk-drag-animating {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.no_tasks_card {
+    width: 246px;
+    height: 48px;
+    background-color: #E7E7E7;
+    border: 1px dashed #A8A8A8;
+    color: #A8A8A8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 // open card dialog
@@ -187,6 +222,18 @@ section {
     animation: slideOutToRight 0.5s ease-in forwards;
 }
 
+@media screen and (max-width: 1428px) {
+    .task_container {
+        flex-direction: column;
+    }
+
+    .cdk-drop-list {
+        display: flex;
+        overflow-x: scroll;
+        gap: 16px;
+    }
+}
+
 @media (max-width:1090px) {
     section {
         padding: 40px;
@@ -225,6 +272,12 @@ section {
 }
 
 @media (max-width:645px) {
+
+    section {
+        padding: 20px 22px;
+        margin-bottom: 90px;
+    }
+
     .headline_content {
         justify-content: space-between;
         flex-direction: column;

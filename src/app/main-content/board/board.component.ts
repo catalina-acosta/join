@@ -46,7 +46,7 @@ export class BoardComponent {
     }
 
     this.filteredTasks = this.tasks.filter(task =>
-      task.title.toLowerCase().includes(query) || task.description.toLowerCase().includes(query)
+      task.title.toLowerCase().includes(query) || task.description?.toLowerCase().includes(query)
     );
   }
 
@@ -54,7 +54,7 @@ export class BoardComponent {
     return this.filteredTasks.filter(task =>
       task.status === status &&
       (task.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
-       task.description.toLowerCase().includes(this.searchQuery.toLowerCase()))
+       task.description?.toLowerCase().includes(this.searchQuery.toLowerCase()))
     );
   }
 
@@ -94,11 +94,6 @@ export class BoardComponent {
         event.currentIndex,
       );
       const currentTask = event.container.data[event.currentIndex];
-
-      console.log("Task ID ", currentTask.id);
-      console.log("Old status ", currentTask.status);
-      console.log("New status ", event.container.id);
-      console.log("assigned users: ", currentTask.assignedToUserId)
 
       // Update the status of the task in the database (Parameter: taskId, newStatus)
       this.firebase.updateTaskStatus(currentTask.id!, event.container.id);
