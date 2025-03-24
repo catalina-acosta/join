@@ -133,10 +133,33 @@ section {
 
 .card {
     width: 252px;
+    min-width: 252px;
     background-color: #FFFFFF;
     border-radius: 24px;
     padding: 16px;
     margin-bottom: 16px;
+
+    &:hover {
+        cursor: pointer;
+        scale: 1.02;
+    }
+}
+
+// .card.cdk-drag{
+//     transform: rotate(-30deg);
+// }
+
+.card.cdk-drag-preview {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: rotate(-30deg);
+}
+
+.card.cdk-drag-placeholder {
+    opacity: 0.5;
+}
+
+.card.cdk-drag-animating {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .no_tasks_card {
@@ -150,6 +173,7 @@ section {
     align-items: center;
     justify-content: center;
 }
+
 
 // open card dialog
 .custom-dialog {
@@ -205,6 +229,18 @@ section {
     animation: slideOutToRight 0.5s ease-in forwards;
 }
 
+@media screen and (max-width: 1428px) {
+    .task_container {
+        flex-direction: column;
+    }
+
+    .cdk-drop-list {
+        display: flex;
+        overflow-x: scroll;
+        gap: 16px;
+    }
+}
+
 @media (max-width:1090px) {
     section {
         padding: 40px;
@@ -243,6 +279,12 @@ section {
 }
 
 @media (max-width:645px) {
+
+    section {
+        padding: 20px 22px;
+        margin-bottom: 90px;
+    }
+
     .headline_content {
         justify-content: space-between;
         flex-direction: column;
