@@ -28,13 +28,15 @@
       <div class="todo_box">
         <div class="title_content">
           <h5>To do</h5>
-          <button>+</button>
+          <button class="plus_btn">+</button>
         </div>
         <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('todo')" 
-             [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
+          [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
 
              <div *ngIf="filterTasksByStatusAndQuery('todo').length === 0" class="no_match_box">
-                <p>❌ No matching tasks found!</p>
+                <div class="no_tasks_card">
+                  <p>No tasks To do</p>
+                </div>
               </div>
 
           <div *ngFor="let item of filterTasksByStatusAndQuery('todo')" class="card" cdkDrag (click)="openCardDialog(item)">
@@ -46,13 +48,15 @@
       <div class="progress_box">
         <div class="title_content">
           <h5>In progress</h5>
-          <button>+</button>
+          <button class="plus_btn">+</button>
         </div>  
         <div id="inProgress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('inProgress')" 
-             [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
+          [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
 
              <div *ngIf="filterTasksByStatusAndQuery('inProgress').length === 0" class="no_match_box">
-                <p>❌ No matching tasks found!</p>
+                <div class="no_tasks_card">
+                  <p>No tasks In progress</p>
+                </div>
               </div>
 
           <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" cdkDrag (click)="openCardDialog(item)">
@@ -64,13 +68,15 @@
       <div class="await_box">
         <div class="title_content">
           <h5>Await feedback</h5>
-          <button>+</button>
+          <button class="plus_btn">+</button>
         </div>
         <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('awaitFeedback')" 
-             [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
+          [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
 
              <div *ngIf="filterTasksByStatusAndQuery('awaitFeedback').length === 0" class="no_match_box">
-                <p>❌ No matching tasks found!</p>
+                <div class="no_tasks_card">
+                  <p>No tasks Await feedback</p>
+                </div>
               </div>
 
           <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" cdkDrag (click)="openCardDialog(item)">
@@ -82,13 +88,15 @@
       <div class="done_box">
         <div class="title_content">
           <h5>Done</h5>
-          <button>+</button>
+          <button class="plus_btn">+</button>
         </div>
         <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('done')" 
-             [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
+          [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
 
-             <div *ngIf="filterTasksByStatusAndQuery('done').length === 0" class="no_match_box"s>
-                <p>❌ No matching tasks found!</p>
+             <div *ngIf="filterTasksByStatusAndQuery('done').length === 0" class="no_match_box">
+                <div class="no_tasks_card">
+                  <p>No tasks Done</p>
+                </div>
               </div>
 
           <div *ngFor="let item of filterTasksByStatusAndQuery('done')" class="card" cdkDrag (click)="openCardDialog(item)">

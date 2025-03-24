@@ -1,17 +1,40 @@
 
 .category {
-    background-color: #0038FF;
     color: white;
     padding: 4px 16px;
     border-radius: 8px;
+    max-width: 104px;
+    margin-bottom: 14px;
 }
 
 .title {
     font-weight: 700;
+    margin-bottom: 8px;
 }
 
 .description {
     color: #A8A8A8;
+    margin-bottom: 8px;
+}
+
+.content_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assigned_to {
+    display: flex;
+    align-items: center;
+}
+
+.avatar_wrapper {
+    position: relative;
+    margin-left: -8px;
+}
+
+.avatar_wrapper:first-child {
+    margin-left: 0; 
 }
 
 .avatar {
@@ -23,8 +46,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
 
     p {
         color: #FFFFFF;
+        font-size: 12px;
     }
+}
+
+.subtasks {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+        font-size: 12px;
+        font-weight: 400;
+    }
+}
+
+.progress_bar {
+    width: 50%;
+    height: 10px;
+    background-color: #F4F4F4;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4589FF;
+    transition: width 0.3s ease;
 }

@@ -13,4 +13,13 @@ export class TaskCardComponent {
   @Input()
   item!: TaskInterface; 
   firebase = inject(FirebaseService);
+  completedSubtasks: number = 0;
+
+  getCompletedPercentage(): number {
+    if (!this.item.subtasks || this.item.subtasks.length === 0) {
+      return 0;
+    }
+    this.completedSubtasks = this.item.subtasks.filter(subtask => subtask.isCompleted).length;
+    return (this.completedSubtasks / this.item.subtasks.length) * 100;
+  }
 }
