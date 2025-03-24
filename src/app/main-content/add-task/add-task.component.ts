@@ -18,7 +18,17 @@ export class AddTaskComponent {
   currentContact: ContactInterface | null = null;
   todaysDate: string = new Date().toISOString().split('T')[0];
   selectedPriority: string = 'medium';
+  dropdownVisible = false;
   selectedContacts = [];  //dass ich das unten anzeigen kann
+
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+  
+  hideDropdown() {
+    this.dropdownVisible = false;
+  }
+
 
   selectPriority(priority: string) {
     this.selectedPriority = priority;
