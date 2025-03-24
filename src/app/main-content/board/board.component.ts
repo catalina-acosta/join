@@ -12,6 +12,7 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
+import { EditContactDialogComponent } from '../contacts/edit-contact-dialog/edit-contact-dialog.component';
 
 
 @Component({
@@ -60,7 +61,6 @@ export class BoardComponent {
   openCardDialog(item: TaskInterface) {
     this.selectedItem = item;
     this.isDialogOpen = true;
-    console.log(this.selectedItem);
   }
 
   stopPropagation(event: Event) {
