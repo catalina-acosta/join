@@ -50,17 +50,17 @@
                 <div class="dropdown">
                     <label for="assignedTo">Assigned to</label>
                     <div class="select_contacts" (click)="toggleDropdown()">
-                        <span>Select contacts to assign</span>
+                        <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
                         <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
                     </div>
                     <div class="dropdown_menu" *ngIf="dropdownVisible">
                         @if(firebase.orderedContactsList) {
                             @for (item of firebase.orderedContactsList; track $index) {      
                                 <div class="one_contact">
-                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
-                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
-                                    </div>
                                     <div class="contact_info">
+                                        <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                                            <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                                        </div>
                                         <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
                                     </div>
                                     <input type="checkbox"> 
