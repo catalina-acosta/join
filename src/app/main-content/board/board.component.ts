@@ -12,7 +12,6 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
-import { EditContactDialogComponent } from '../contacts/edit-contact-dialog/edit-contact-dialog.component';
 
 
 @Component({
@@ -96,7 +95,8 @@ export class BoardComponent {
       const currentTask = event.container.data[event.currentIndex];
 
       // Update the status of the task in the database (Parameter: taskId, newStatus)
-      this.firebase.updateTaskStatus(currentTask.id!, event.container.id);
+      this.firebase.updateTaskStatus(currentTask.id!, { status: event.container.id });
+
     }
   }
 

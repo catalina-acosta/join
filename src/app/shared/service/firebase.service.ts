@@ -369,9 +369,9 @@ export class FirebaseService {
     await deleteDoc (doc(this.firebase, "tasks", id))
   }
 
-  async updateTaskStatus(taskId: string, newStatus: string){
+  async updateTaskStatus(taskId: string, updatedData: Partial<TaskInterface>){
     const taskDocRef = doc(this.firebase, `tasks/${taskId}`);
-    await updateDoc(taskDocRef, { status: newStatus })
+    await updateDoc(taskDocRef, updatedData)
       .catch((error) => {
         console.error(error);
       });

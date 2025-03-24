@@ -63,15 +63,17 @@
         <div class="subtasks_content">
             <p class="title2">Subtasks</p>
         
-            <div class="show_subtask" *ngFor="let subtask of item.subtasks">
-
+            <div class="show_subtask" *ngFor="let subtask of item.subtasks; let i = index">
                 <label class="checkbox_content">
-                    <input type="checkbox" [checked]="subtask.isCompleted">
+                    <input 
+                        type="checkbox" 
+                        [checked]="subtask.isCompleted" 
+                        (change)="updateSubtaskStatus(item.id, i)"
+                    >
                     <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked" *ngIf="!subtask.isCompleted">
                     <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked" *ngIf="subtask.isCompleted">
                     <p>{{subtask.subtask}}</p>
                 </label>
-
             </div>
         </div>
         
