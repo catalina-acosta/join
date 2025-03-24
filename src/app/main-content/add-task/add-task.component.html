@@ -1,4 +1,4 @@
-<section class="section_wrapper">
+<section class="section_wrapper" (click)="hideDropdown()">
     <h1>Add Task</h1>
     <form #addTask="ngForm">
         <div class="upper_form">
@@ -45,11 +45,11 @@
 
                 <div class="dropdown">
                     <label for="assignedTo">Assigned to</label>
-                    <div class="select_contacts" (click)="toggleDropdown()" ngModel>
+                    <div class="select_contacts" (click)="toggleDropdown()" ngModel (click)="$event.stopPropagation()">
                         <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
                         <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
                     </div>
-                    <div class="dropdown_menu" *ngIf="dropdownVisible">
+                    <div class="dropdown_menu" *ngIf="dropdownVisible" (click)="$event.stopPropagation()">
                         @if(firebase.orderedContactsList) {
                             @for (item of firebase.orderedContactsList; track $index) {      
                                 <div class="one_contact">
