@@ -17,7 +17,16 @@
         </div>
         <div class="date_prio_content">
             <p class="title2">Priority:</p>
-            <p>{{item?.priority}}</p>
+            <div class="priority"> <p>{{item?.priority}}</p>
+                @if (item?.priority === "high") {
+                    <img src="./assets/tasks/Prio alta.svg" alt="">
+                } @else if(item?.priority === "medium") {
+                    <img src="./assets/tasks/Prio media.svg" alt="">
+                } @else if(item?.priority === "low") {
+                    <img src="./assets/tasks/Prio baja.svg" alt="">
+                }
+            </div>
+           
         </div>
 
         <div class="assigned_content">

@@ -90,6 +90,12 @@ section {
     color: $darkblack;
 }
 
+.priority{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 // .assigned_content
 .assigned_content {
     width: 100%;
