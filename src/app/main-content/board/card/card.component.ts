@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { TaskInterface } from '../task.interface';
+import { FirebaseService } from '../../../shared/service/firebase.service';
 
 @Component({
   selector: 'app-card',
@@ -10,6 +11,7 @@ import { TaskInterface } from '../task.interface';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
+ firebase = inject(FirebaseService);
    @Output() closeDialogEvent = new EventEmitter<void>();
    @Input() item?: TaskInterface;
 

@@ -22,7 +22,7 @@
                         <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
                     </div>
                     <div class="contact_info">
-                        <p class="name">{{item.fullname.length > 12 ? (item.fullname.slice(0, 12) + '...') : item.fullname}}</p>
+                        <p class="name">{{item.fullname.length > 12 ? (item.fullname.slice(0, 12) + '...') : item.fullname | titlecase }}</p>
                         <p class="email">{{item.email.length > 12 ? (item.email.slice(0, 12) + '...') : item.email}}</p>    
                     </div>     
                 </div>

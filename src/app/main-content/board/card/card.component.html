@@ -1,4 +1,7 @@
+@if(item){
+
 <section>
+
     <div class="dialog_content">
 
         <div class="headline">
@@ -8,21 +11,21 @@
             </div>
         </div>
 
-        <h1 class="title_content">{{item?.title}}</h1>
-        <h4>{{item?.description}}</h4>
+        <h1 class="title_content">{{item.title}}</h1>
+        <h4>{{item.description}}</h4>
 
         <div class="date_prio_content">
             <p class="title2">Due date:</p>
-            <p>{{item?.date}}</p>
+            <p>{{item.date}}</p>
         </div>
         <div class="date_prio_content">
             <p class="title2">Priority:</p>
-            <div class="priority"> <p>{{item?.priority}}</p>
-                @if (item?.priority === "high") {
+            <div class="priority"> <p>{{item.priority | titlecase }}</p>
+                @if (item.priority === "high") {
                     <img src="./assets/tasks/Prio alta.svg" alt="">
-                } @else if(item?.priority === "medium") {
+                } @else if(item.priority === "medium") {
                     <img src="./assets/tasks/Prio media.svg" alt="">
-                } @else if(item?.priority === "low") {
+                } @else if(item.priority === "low") {
                     <img src="./assets/tasks/Prio baja.svg" alt="">
                 }
             </div>
@@ -32,60 +35,40 @@
         <div class="assigned_content">
             <p class="title2">Assigned To:</p>
             <div class="members_content">
-                <div class="person_box">
-                    <div class="color_icon">CS</div>
-                    <p>Caryen Song</p>
+                <div class="assigned_to">
+                    @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
+                        @for (userId of item.assignedToUserId; track $index) {
+                            @for (contact of firebase.orderedContactsList; track $index) {
+                                @if(contact.id === userId) {
+                                    <div class="person_box">
+                                    <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
+                                        <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                                    </div>
+                                    <p>{{contact.fullname| titlecase }}</p>
+                                </div>
+                                }
+                            }
+                        } 
+                    } @else {
+                        <p>no users assigned</p>
+                    }
                 </div>
-                <div class="person_box">
-                    <div class="color_icon">B</div>
-                    <p>Babora</p>
-                </div>
-                <div class="person_box">
-                    <div class="color_icon">CR</div>
-                    <p>Catalina R</p>
-                </div>
-                <div class="person_box">
-                    <div class="color_icon">A</div>
-                    <p>Albina </p>
-                </div>
-                
+            
             </div>
         </div>
 
         <div class="subtasks_content">
             <p class="title2">Subtasks</p>
         
-            <div class="show_subtask">
+            <div class="show_subtask" *ngFor="let subtask of item.subtasks">
+
                 <label class="checkbox_content">
                     <input type="checkbox">
                     <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
                     <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
-                    <p>lernen</p>
+                    <p>{{subtask.subtask}}</p>
                 </label>
-                <label class="checkbox_content">
-                    <input type="checkbox">
-                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
-                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
-                    <p>Einkaufen</p>
-                </label>
-                <label class="checkbox_content">
-                    <input type="checkbox">
-                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
-                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
-                    <p>Shoppen</p>
-                </label>
-                <label class="checkbox_content">
-                    <input type="checkbox">
-                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
-                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
-                    <p>Auto Waschen</p>
-                </label>
-                <label class="checkbox_content">
-                    <input type="checkbox">
-                    <img class="unchecked" src="./assets/tasks/checkbox-unchecked.svg" alt="unchecked">
-                    <img class="checked" src="./assets/tasks/checkbox-checked.svg" alt="checked">
-                    <p>lernen</p>
-                </label>
+
             </div>
         </div>
         
@@ -104,3 +87,4 @@
 
     </div>
 </section>
+}
