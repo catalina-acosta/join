@@ -259,3 +259,11 @@ select {
     width:15px;
     border-radius: 50%;
 }
+
+.btn_plain {
+    &:hover {
+        >img {
+            content: url(./../../../../public/assets/tasks/close_blue.svg)
+        }
+    }
+}

@@ -81,7 +81,11 @@
         <div class="lower_form">
             <span class="notice"><span class="red">*</span> this field is required</span>
             <div class="clear_submit" >
-                <img src="./assets/tasks/clear.svg" alt="" (click)="clearFormular(addTask)" >
+                <button class="btn_plain" (click)="clearFormular(addTask)">
+                    <span>Clear</span>
+                    <img src="./assets/tasks/close-black.svg" alt="x icon">
+                </button>
+                
                 <button type="submit" (click)="submitPrio()" [disabled]="!addTask.valid" class="btn_bold">
                     <span>Create Task</span>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
