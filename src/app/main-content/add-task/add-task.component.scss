@@ -150,14 +150,47 @@ select {
         height: 56px;
         color: black;
         font-weight: 400;
-        font-size: 16px;
+        font-size: 20px;
         &:hover{
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
         }
     }
 }
 
-.prio_urgent.selected {
+.prio.selected.urgent {
     background-color: #ff3d00;
     color: white;
+    font-size: 21px;
+    font-weight: 700;
+    >svg path {
+        fill: white;
+    }
 }
+
+.prio.selected.medium {
+    background-color: #fea800;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    >svg path {
+        fill: white;
+    }
+}
+
+.prio.selected.low {
+    background-color: #7be129;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    >svg path {
+        fill: white;
+    }
+}
+
+.avatar {
+    height: 15px;
+    width:15px;
+    border-radius: 50%;
+    background-color: red;
+}
+
