@@ -1,56 +1,76 @@
-<section class="custom-dialog-content">
-    <div class="add_tasks_content">
-        <h1>Add Task</h1>
-        
-        <form>
-            <div class="upper_form">
-                <div class="left_content">
-                    <label for="taskTitle">Title <span class="red">*</span></label>
-                    <input type="text" id="taskTitle" name="title" placeholder="Enter a title">
-            
-                    <label for="taskDescription">Subject</label>
-                    <textarea id="taskDescription" name="description" placeholder="enter a description" style="height:200px"></textarea>
-    
-                    <label for="dueDate">Due date <span class="red">*</span></label>
-                    <select id="dueDate" name="dueDate">
-                        <option value="today">today</option>
-                        <option value="tomorrow">tomorrow</option>
-                        <option value="never">never</option>
-                    </select>
-                </div>
-    
-                <svg width="2" height="426" viewBox="0 0 2 426" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.24805 1L1.24854 425" stroke="#D1D1D1" stroke-linecap="round"/>
-                    </svg>
-    
-                <div class="right_content">
-                    <label for="taskPriority">Priority</label>
-                    <input type="text" id="taskTitle" name="title" placeholder="low medium high">
-    
-                    <label for="assignedTo">Assigned to</label>
-                    <select id="assignedTo" name="assignedTo">
-                        <option value="today">Person 1</option>
-                        <option value="tomorrow">Person 2</option>
-                        <option value="never">Person 3</option>
-                    </select>
-    
-                    <label for="taskCategory">Category <span class="red">*</span></label>
-                    <select id="taskCategory" name="taskCategory">
-                        <option value="" disabled selected>Select task category</option>
-                        <option value="today">Technical Task</option>
-                        <option value="tomorrow">User Story</option>
-                    </select>
-                </div>
+<div class="dialog-overlay" (click)="closeDialog()">
+    <div class="dialog-content" (click)="$event.stopPropagation()">
+        <section class="custom-dialog-content">
+            <div class="add_tasks_content">
+                <h1>Add Task</h1>
+
+                <form>
+                    <div class="upper_form">
+                        <div class="left_content">
+                            <label for="taskTitle">Title <span class="red">*</span></label>
+                            <input [(ngModel)]="taskTitle" type="text" id="taskTitle" name="title" placeholder="Enter a title">
+
+                            <label for="taskDescription">Description</label>
+                            <textarea [(ngModel)]="taskDescription" id="taskDescription" name="description" placeholder="Enter a Description" style="height:200px"></textarea>
+
+                            <label for="dueDate">Due date <span class="red">*</span></label>
+                            <input [(ngModel)]="dueDate" type="text" id="dueDate" name="dueDate" placeholder="dd/mm/yyyy">
+                        </div>
+
+                        <svg width="2" height="426" viewBox="0 0 2 426" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.24805 1L1.24854 425" stroke="#D1D1D1" stroke-linecap="round" />
+                        </svg>
+
+                        <div class="right_content">
+                            <label for="taskPriority">Priority</label>
+                            <div class="priority-buttons">
+                                <button type="button" class="priority-button urgent">Urgent</button>
+                                <button type="button" class="priority-button medium">Medium</button>
+                                <button type="button" class="priority-button low">Low</button>
+                            </div>
+
+                            <label for="assignedTo">Assigned to</label>
+                            <select [(ngModel)]="assignedTo" id="assignedTo" name="assignedTo">
+                                <option value="" disabled selected>Select contacts to assign</option>
+                                <option value="Person 1">Person 1</option>
+                                <option value="Person 2">Person 2</option>
+                                <option value="Person 3">Person 3</option>
+                            </select>
+
+                            <label for="taskCategory">Category <span class="red">*</span></label>
+                            <select [(ngModel)]="taskCategory" id="taskCategory" name="taskCategory">
+                                <option value="" disabled selected>Select task category</option>
+                                <option value="Technical Task">Technical Task</option>
+                                <option value="User Story">User Story</option>
+                            </select>
+
+                            <label for="subtasksTitle">Subtasks</label>
+                            <input class="subtask-input" [(ngModel)]="subtaskInput" name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()" />
+                            
+
+                            <ul class="subtask-list">
+                                <li *ngFor="let subtask of subtasks; let i = index" class="subtask-item">
+                                    <span class="subtask-circle"></span>
+                                    <span *ngIf="!subtask.isEditing">{{ subtask.name }}</span>
+                                    <input *ngIf="subtask.isEditing" [(ngModel)]="subtask.name" id="subtask-input-{{i}}" (blur)="saveSubtask(i)" (keyup.enter)="saveSubtask(i)" />
+                                    <div class="subtask-actions">
+                                        <button type="button" class="edit-button" (click)="editSubtask(i)"><img src="assets/tasks/edit.svg" alt="Edit"></button>
+                                        <button type="button" class="remove-button" (click)="removeSubtask(i)"><img src="assets/tasks/delete.svg" alt="Delete"></button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lower_form">
+                        <span class="notice"><span class="red">*</span> This field is required</span>
+                        <div class="clear_submit">
+                            <button type="button" class="cancel-button" (click)="closeDialog()">Cancel</button>
+                            <input type="submit" value="Create Task" class="submit-button">
+                        </div>
+                    </div>
+                </form>
             </div>
-
-            <div class="lower_form">
-                <span class="notice"><span class="red">*</span> this field is required</span>
-                <div class="clear_submit">
-                    <img src="./assets/tasks/clear.svg" alt="">
-                    <input type="submit">
-                </div>
-            </div>  
-        </form>
+        </section>
     </div>
-
-</section>
+</div>
