@@ -21,9 +21,9 @@ export class AddTaskDialogComponent {
       title: "",
       description: "",
       date: "",
-      priority: "",
+      priority: "medium",
       assignedToUserId: [],
-      status: "",
+      status: "todo",
       category: "",
       subtasks: []
     }
@@ -81,16 +81,6 @@ export class AddTaskDialogComponent {
     // Logic to close the dialog
   }
 
-  onCreateTask(taskForm: NgForm) {
-    this.formSubmitted = true; 
-    if(this.formSubmitted) {
-      this.createNewTask();
-    }
-  }
-
-  createNewTask() {
-    }
-
   clearSubtaskInput() {
     this.subtaskInput = '';
     this.subtaskInputFocused = false;
@@ -115,4 +105,17 @@ export class AddTaskDialogComponent {
     }
     this.subtaskInputFocused = true;
 }
+
+onCreateTask(taskForm: NgForm) {
+  this.formSubmitted = true; 
+  if(this.formSubmitted) {
+    this.createNewTask();
+  }
+}
+
+createNewTask() {
+  this.newTask.date = this.todaysDate;
+
+  console.log(this.newTask);
+  }
 }
