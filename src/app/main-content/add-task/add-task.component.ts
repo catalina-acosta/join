@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { FirebaseService } from '../../shared/service/firebase.service';
 import { ContactInterface } from '../contacts/contact-interface';
@@ -29,7 +29,6 @@ export class AddTaskComponent {
     this.dropdownVisible = false;
   }
 
-
   selectPriority(priority: string) {
     this.selectedPriority = priority;
   }
@@ -37,4 +36,10 @@ export class AddTaskComponent {
   submitPrio() {
     console.log("Ausgewählte Priorität:", this.selectedPriority);
   }
+
+  clearFormular(form: NgForm) {
+      form.reset(); 
+      this.selectedPriority = 'medium';
+  }
+
 }
