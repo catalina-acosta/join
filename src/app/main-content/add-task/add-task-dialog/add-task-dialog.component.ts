@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
+import { TaskInterface } from '../../board/task.interface';
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../../contacts/contact-interface';
 
@@ -15,6 +16,18 @@ export class AddTaskDialogComponent {
   subtaskInputFocused: boolean = false;
   subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
   subtaskInput: string = ''; // Model für das Eingabefeld
+  formSubmitted: boolean = false;
+    newTask: TaskInterface = {
+      title: "",
+      description: "",
+      date: "",
+      priority: "",
+      assignedToUserId: [],
+      status: "",
+      category: "",
+      subtasks: []
+    }
+
   firebase = inject(FirebaseService);
   currentContact: ContactInterface | null = null;
   todaysDate: string = new Date().toISOString().split('T')[0];
@@ -30,6 +43,7 @@ export class AddTaskDialogComponent {
   submitPrio() {
     console.log("Ausgewählte Priorität:", this.selectedPriority);
   }
+
 
   addSubtask() {
     if (this.subtaskInput.trim()) {
@@ -67,6 +81,16 @@ export class AddTaskDialogComponent {
     // Logic to close the dialog
   }
 
+  onCreateTask(taskForm: NgForm) {
+    this.formSubmitted = true; 
+    if(this.formSubmitted) {
+      this.createNewTask();
+    }
+  }
+
+  createNewTask() {
+    }
+
   clearSubtaskInput() {
     this.subtaskInput = '';
     this.subtaskInputFocused = false;
@@ -90,5 +114,4 @@ export class AddTaskDialogComponent {
       clearTimeout(this.hideInputIconTimeout);
     }
     this.subtaskInputFocused = true;
-  }
 }

@@ -309,25 +309,9 @@ export class FirebaseService {
   // }
 //endregion
 
-getTasksList() {
-  return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
-    this.todo = [];
-    this.inProgress = [];
-    this.awaitFeedback = [];
-    this.done = [];
-    const tasksList: TaskInterface[] = [];
-    
-    taskObject.forEach((element) => {
-      const task = this.setTaskObject(element.id, element.data() as TaskInterface);
-      this.categorizeTask(task);
-      tasksList.push(task);
-    });
 
-    // Aufgabenliste im BehaviorSubject aktualisieren
-    this.tasksListSubject.next(tasksList);
-  });
-}
 
+  // 
   orderedListQuery() {
     const contactsRef = collection(this.firebase, "contacts")
     const q = query(contactsRef, orderBy('firstname'));
@@ -355,6 +339,34 @@ getTasksList() {
       email: data.email,
       phone: data.phone,
     })
+  }
+  // TASKS 
+
+  getTasksList() {
+    return onSnapshot(collection(this.firebase, "tasks"), (taskObject) => {
+      this.todo = [];
+      this.inProgress = [];
+      this.awaitFeedback = [];
+      this.done = [];
+      const tasksList: TaskInterface[] = [];
+      
+      taskObject.forEach((element) => {
+        const task = this.setTaskObject(element.id, element.data() as TaskInterface);
+        this.categorizeTask(task);
+        tasksList.push(task);
+      });
+  
+      // Aufgabenliste im BehaviorSubject aktualisieren
+      this.tasksListSubject.next(tasksList);
+    });
+  }
+
+  async addTaskToData(newTask:TaskInterface){
+    await addDoc(collection(this.firebase, "tasks"), newTask);
+  }
+
+  async deleteTaskFromData(id: string){
+    await deleteDoc (doc(this.firebase, "tasks", id))
   }
 
   async updateTaskStatus(taskId: string, newStatus: string){
