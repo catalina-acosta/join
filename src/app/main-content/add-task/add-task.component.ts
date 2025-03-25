@@ -22,6 +22,7 @@ export class AddTaskComponent {
   dropdownVisible = false;
   checkboxActive = false;
   selectedContacts = [];  //dass ich das unten anzeigen kann
+  newTaskAdded: boolean = false;
 
   newTask: TaskInterface = {
     title: "",
@@ -47,13 +48,20 @@ export class AddTaskComponent {
   }
 
   submitForm(ngform: NgForm) {
+    this.newTaskAdded = true;
     this.newTask.priority = this.selectedPriority;
     if (ngform.valid && ngform.submitted){
-      console.log(this.newTask); 
-      ngform.reset();   
+      this.addNewTask();
     }
-    
   }
+
+  //formular nich direkt nach dem absenden clearen, sondern erst nach der bestätigenden Nachricht, dass ich newTaskAdded
+  //auf false setzen kann, sonst zeigt es überall this field is required
+
+  addNewTask(){
+    this.firebase.addTaskToData(this.newTask)
+    console.log("zu der Database hinzugefügt");
+    }
 
   clearFormular(ngform: NgForm) {
       ngform.reset(); 

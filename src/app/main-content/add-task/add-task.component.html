@@ -4,18 +4,18 @@
         <div class="upper_form">
             <div class="left_content">
                 <label for="taskTitle">Title <span class="red">*</span></label>
-                <input type="text" id="taskTitle" name="title" placeholder="Enter a title" [(ngModel)]="newTask.title" required #title="ngModel">
-                @if (!title.valid && title.touched) {
+                <input type="text" id="taskTitle" name="title" placeholder="Enter a title" [(ngModel)]="newTask.title" required #title="ngModel" [ngModelOptions]="{standalone: true}">
+                @if (!title.valid && title.touched || newTaskAdded && !title.touched) {
                     <span class="error_message">This field is required</span>
                 }
 
                 <label for="taskDescription">Subject</label>
                 <textarea id="taskDescription" name="description" placeholder="enter a description"
-                    style="height:200px" [(ngModel)]="newTask.description"></textarea>
+                    style="height:200px" [(ngModel)]="newTask.description" [ngModelOptions]="{standalone: true}"></textarea>
 
                 <label for="dueDate">Due date <span class="red">*</span></label>
-                <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel"> 
-                @if (!date.valid && date.touched) {
+                <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel" [ngModelOptions]="{standalone: true}"> 
+                @if (!date.valid && date.touched || newTaskAdded && !date.touched) {
                     <span class="error_message">This field is required</span>
                 }
             </div>
@@ -86,12 +86,12 @@
                 </div>
 
                 <label for="taskCategory">Category <span class="red">*</span></label>
-                <select id="taskCategory" name="taskCategory" [(ngModel)]="newTask.category" required #category="ngModel">
+                <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel" [ngModelOptions]="{standalone: true}">
                     <option value="" disabled selected>Select task category</option>
                     <option value="technicalTask">Technical Task</option>
                     <option value="userStory">User Story</option>
                 </select>
-                @if (!category.valid && category.touched) {
+                @if (!category.valid && category.touched || newTaskAdded && !category.touched) {
                     <span class="error_message">This field is required</span>
                 }
             </div>
