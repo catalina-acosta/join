@@ -51,6 +51,7 @@ export class AddTaskComponent {
     this.newTaskAdded = true;
     this.newTask.priority = this.selectedPriority;
     if (ngform.valid && ngform.submitted){
+      console.log(this.newTask);
       this.addNewTask();
     }
   }
