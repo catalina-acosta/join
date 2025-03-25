@@ -128,7 +128,7 @@
                         <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item">
                             <span class="subtask-circle"></span>
                             <span *ngIf="!subtask.isCompleted">{{ subtask.subtask }}</span>
-                            <input class="subtask-input-edit" *ngIf="subtask.isCompleted" [(ngModel)]="subtask.subtask"
+                            <input class="subtask-input-edit" *ngIf="subtask.isCompleted" name="subtask" [(ngModel)]="subtask.subtask"
                                 id="subtask-input-{{i}}" (blur)="saveSubtask(i)" (keyup.enter)="saveSubtask(i)" placeholder="{{ subtask.subtask }}" />
                             <div class="subtask-actions">
                                 <button type="button" class="edit-button" (click)="editSubtask(i)"><img
