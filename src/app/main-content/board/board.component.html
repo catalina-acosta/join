@@ -2,7 +2,6 @@
     <div class="headline_content">
       <div class="headline_box">
         <h1>Board</h1>
-        <button (click)="openAddTaskDialog()" class="add_btn_respo"><img src="./assets/tasks/add.svg" alt="add"></button>
       </div>
       <div class="find_task_content">
         <div class="search-container">
@@ -12,7 +11,9 @@
             <img src="./assets/tasks/search.svg" alt="seach">
           </button>
         </div>
-        <button class="add_btn">Add task <img src="./assets/tasks/add.svg" alt="add"></button>
+        <button class="add_btn" (click)="openAddTaskDialog()">
+          Add task <img src="./assets/tasks/add.svg" alt="add">
+        </button>
       </div>
     </div>
 
