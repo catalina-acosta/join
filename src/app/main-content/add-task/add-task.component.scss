@@ -249,6 +249,9 @@ select {
     padding: 8px 16px;
     height: 56px;
     font-size: 20px;
+    &:hover{
+        cursor: pointer;
+    }
     >.contact_info {
         display: flex;
         align-items: center;
@@ -270,9 +273,28 @@ select {
 }
 
 .btn_plain {
+    font-size: 20px;
+    box-sizing: border-box;
     &:hover {
         >img {
-            content: url(./../../../../public/assets/tasks/close_blue.svg)
+            content: url(./../../../../public/assets/tasks/close_blue.svg);
         }
     }
+}
+
+.checked {
+        content: url(./../../../../public/assets/tasks/checkbox-checked.svg);
+    }
+
+.selected_contacts {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+}
+
+.error_message {
+    color:red;
+    font-size: 12px;
+    font-family: 'Poppins';
 }
