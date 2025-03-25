@@ -4,7 +4,6 @@ import { ContactInterface } from '../../main-content/contacts/contact-interface'
 import { TaskInterface } from '../../main-content/board/task.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -118,11 +117,11 @@ export class FirebaseService {
     {
       title: "HomePage",
       description: "Create new component for the homepage",
-      date: "20/04/2025",
+      date: "2025-04-20",
       priority: "high",
       assignedToUserId: ["CCptP0yIlYy5X2uwA4de", "IzjGbNzLyv7OkpGeg3B4"],
       status: "todo",
-      category: "techTask",
+      category: "Technical Task",
       subtasks: [
         { subtask: "create hero page", isCompleted: true },
         { subtask: "navbar", isCompleted: false }
@@ -131,11 +130,11 @@ export class FirebaseService {
     {
       title: "Recipe List",
       description: "Develop the recipe list page",
-      date: "21/04/2025",
+      date: "2025-04-21",
       priority: "medium",
       assignedToUserId: ["KTbjIpLnVGi8q3OjCSHr", "XztzCuRkUPxQ2HOSqPBg", "e0Qb9uGieBOxesbvWUQd"],
       status: "inProgress",
-      category: "userStory",
+      category: "User Story",
       subtasks: [
         { subtask: "fetch recipes from API", isCompleted: false },
         { subtask: "display recipes in a grid", isCompleted: true },
@@ -145,25 +144,22 @@ export class FirebaseService {
     {
       title: "Add Recipe Form",
       description: "Create a form for adding new recipes",
-      date: "22/04/2025",
+      date: "2025-04-22",
       priority: "low",
       assignedToUserId: ["i2Zsc7SoKgQPbLa8OKOx"],
       status: "awaitFeedback",
-      category: "techTask",
+      category: "Technical Task",
       subtasks: [
-        { subtask: "create form layout", isCompleted: false },
-        { subtask: "add validation", isCompleted: true },
-        { subtask: "connect to backend", isCompleted: false }
       ]
     },
     {
       title: "User Authentication",
       description: "Implement user authentication",
-      date: "23/04/2025",
+      date: "2025-04-23",
       priority: "high",
       assignedToUserId: ["mywr0t26HhjyiDGSNPS5", "vxNrGLk2bKtm4KZNXHJM"],
       status: "done",
-      category: "userStory",
+      category: "User Story",
       subtasks: [
         { subtask: "create login page", isCompleted: true },
         { subtask: "create registration page", isCompleted: true },
@@ -173,11 +169,11 @@ export class FirebaseService {
     {
       title: "Recipe Detail Page",
       description: "Develop the recipe detail page",
-      date: "24/04/2025",
+      date: "2025-04-24",
       priority: "medium",
       assignedToUserId: ["wANKfeaSFQO0R6lBYzAJ"],
       status: "todo",
-      category: "techTask",
+      category: "Technical Task",
       subtasks: [
         { subtask: "fetch recipe details from API", isCompleted: false },
         { subtask: "display recipe details", isCompleted: false },
@@ -187,11 +183,11 @@ export class FirebaseService {
     {
       title: "Search Functionality",
       description: "Implement search functionality for recipes",
-      date: "25/04/2025",
+      date: "2025-04-25",
       priority: "low",
       assignedToUserId: ["xS1ognbuTPARIklB3HfT", "xbVEjSZTNdq26NFYdsr9"],
       status: "inProgress",
-      category: "userStory",
+      category: "User Story",
       subtasks: [
         { subtask: "create search bar", isCompleted: true },
         { subtask: "implement search logic", isCompleted: false },
@@ -201,11 +197,11 @@ export class FirebaseService {
     {
       title: "Responsive Design",
       description: "Ensure the website is responsive",
-      date: "26/04/2025",
+      date: "2025-04-26",
       priority: "high",
       assignedToUserId: ["CCptP0yIlYy5X2uwA4de", "IzjGbNzLyv7OkpGeg3B4", "KTbjIpLnVGi8q3OjCSHr"],
       status: "awaitFeedback",
-      category: "techTask",
+      category: "Technical Task",
       subtasks: [
         { subtask: "test on mobile devices", isCompleted: false },
         { subtask: "test on tablets", isCompleted: true },
@@ -215,11 +211,11 @@ export class FirebaseService {
     {
       title: "User Profile",
       description: "Develop user profile page",
-      date: "27/04/2025",
+      date: "2025-04-27",
       priority: "medium",
       assignedToUserId: ["XztzCuRkUPxQ2HOSqPBg", "e0Qb9uGieBOxesbvWUQd"],
       status: "done",
-      category: "userStory",
+      category: "User Story",
       subtasks: [
         { subtask: "fetch user data from API", isCompleted: true },
         { subtask: "display user data", isCompleted: true },
@@ -229,11 +225,11 @@ export class FirebaseService {
     {
       title: "Favorites Feature",
       description: "Implement feature to favorite recipes",
-      date: "28/04/2025",
+      date: "2025-04-28",
       priority: "low",
       assignedToUserId: ["i2Zsc7SoKgQPbLa8OKOx", "mywr0t26HhjyiDGSNPS5"],
       status: "todo",
-      category: "techTask",
+      category: "Technical Task",
       subtasks: [
         { subtask: "add favorite button", isCompleted: false },
         { subtask: "store favorites in database", isCompleted: false },
@@ -243,11 +239,11 @@ export class FirebaseService {
     {
       title: "Notifications",
       description: "Implement notifications for users",
-      date: "29/04/2025",
+      date: "2025-04-29",
       priority: "high",
       assignedToUserId: ["vxNrGLk2bKtm4KZNXHJM", "wANKfeaSFQO0R6lBYzAJ", "xS1ognbuTPARIklB3HfT"],
       status: "inProgress",
-      category: "userStory",
+      category: "User Story",
       subtasks: [
         { subtask: "create notification system", isCompleted: true },
         { subtask: "send notifications on new recipes", isCompleted: false },
