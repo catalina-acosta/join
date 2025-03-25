@@ -34,7 +34,6 @@ export class EditDialogComponent{
     }
   }
   
-  
 
   selectPriority(priority: string) {
     this.selectedPriority = priority;
@@ -81,8 +80,13 @@ export class EditDialogComponent{
 addSubtask() {
   if (this.subtaskInput.trim()) {
     const newSubtask = { subtask: this.subtaskInput.trim(), isCompleted: false };
-    // Verwende die non-null Assertion (Achtung: hier wird davon ausgegangen, dass `this.item` immer definiert ist)
-    this.item!.subtasks!.push(newSubtask);
+    
+    // Wenn 'this.item' und 'subtasks' vorhanden sind, füge Subtask hinzu
+    if (this.item && this.item.subtasks) {
+      this.item.subtasks.push(newSubtask);
+    } else {
+      console.error('Item or subtasks is undefined');
+    }
     this.subtaskInput = ''; // Eingabefeld leeren
   }
 }
