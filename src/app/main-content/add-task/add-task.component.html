@@ -51,7 +51,7 @@
 
                 <div class="dropdown">
                     <label for="assignedTo">Assigned to</label>
-                    <div class="select_contacts" (click)="toggleDropdown()" ngModel (click)="$event.stopPropagation()">
+                    <div class="select_contacts" (click)="toggleDropdown()" (click)="$event.stopPropagation()">
                         <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
                         <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
                     </div>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <label for="taskCategory">Category <span class="red">*</span></label>
+                <!-- <label for="taskCategory">Category <span class="red">*</span></label>
                 <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel">
                     <option value="" disabled selected>Select task category</option>
                     <option value="technicalTask">Technical Task</option>
@@ -93,9 +93,9 @@
                 </select>
                 @if (!category.valid && (category.touched || addTask.submitted)) {
                     <span class="error_message">This field is required</span>
-                }
+                } -->
 <!-- subtask von Albina -->
-                <label for="subtasksTitle">Subtasks</label>
+                <!-- <label for="subtasksTitle">Subtasks</label>
                             <div class="input-container">
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
@@ -131,7 +131,7 @@
                                                 src="assets/tasks/delete.svg" alt="Delete"></button>
                                     </div>
                                 </li>
-                            </ul>
+                            </ul> -->
 
             </div>
         </div>
