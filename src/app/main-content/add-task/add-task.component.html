@@ -88,8 +88,8 @@
                 <!-- <label for="taskCategory">Category <span class="red">*</span></label>
                 <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel">
                     <option value="" disabled selected>Select task category</option>
-                    <option value="technicalTask">Technical Task</option>
-                    <option value="userStory">User Story</option>
+                    <option value="Technical Task">Technical Task</option>
+                    <option value="User Story">User Story</option>
                 </select>
                 @if (!category.valid && (category.touched || addTask.submitted)) {
                     <span class="error_message">This field is required</span>

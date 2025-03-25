@@ -27,7 +27,14 @@ export class EditDialogComponent{
     if (this.item?.priority) {
       this.selectedPriority = this.item.priority;  // Setze gespeicherte Priorität
     }
+  
+    // Stelle sicher, dass 'subtasks' immer ein Array ist
+    if (!this.item?.subtasks) {
+      this.item!.subtasks = []; // Initialisiere 'subtasks' als leeres Array, falls nicht vorhanden
+    }
   }
+  
+  
 
   selectPriority(priority: string) {
     this.selectedPriority = priority;
@@ -73,10 +80,13 @@ export class EditDialogComponent{
 
 addSubtask() {
   if (this.subtaskInput.trim()) {
-    this.subtasks.push({ name: this.subtaskInput.trim(), isCompleted: false }); // Subtask zur Liste hinzufügen
+    const newSubtask = { subtask: this.subtaskInput.trim(), isCompleted: false };
+    // Verwende die non-null Assertion (Achtung: hier wird davon ausgegangen, dass `this.item` immer definiert ist)
+    this.item!.subtasks!.push(newSubtask);
     this.subtaskInput = ''; // Eingabefeld leeren
   }
 }
+
 
 removeSubtask(index: number) {
   this.subtasks.splice(index, 1); // Subtask entfernen
@@ -90,14 +100,15 @@ editSubtask(index: number) {
   }, 0);
 }
 
-
 saveSubtask(index: number) {
   const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-  if (inputElement) {
-    this.subtasks[index].name = inputElement.value;
+  if (inputElement && this.item?.subtasks) {
+    // Hier 'subtask' statt 'name' verwenden
+    this.item.subtasks[index].subtask = inputElement.value.trim();
+    this.item.subtasks[index].isCompleted = false;
   }
-  this.subtasks[index].isCompleted = false;
 }
+
 handleKeyUp(event: KeyboardEvent, index: number) {
   if (event.key === 'Enter') {
     this.saveSubtask(index);
