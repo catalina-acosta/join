@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { TaskInterface } from '../task.interface';
 import { FirebaseService } from '../../../shared/service/firebase.service';
-import { EditContactDialogComponent } from '../../contacts/edit-contact-dialog/edit-contact-dialog.component';
 import { EditDialogComponent } from "../edit-dialog/edit-dialog.component";
 
 @Component({
@@ -16,9 +15,26 @@ export class CardComponent {
  firebase = inject(FirebaseService);
    @Output() closeDialogEvent = new EventEmitter<void>();
    @Input() item?: TaskInterface;
+   private cdr = inject(ChangeDetectorRef); // ChangeDetector für UI-Updates
 
    selectedItem?: TaskInterface;
    isDialogOpen: boolean = false;
+
+   updateSubtaskStatus(taskId: string | undefined, subtaskIndex: number) {
+    if (!this.item?.id || !this.item?.subtasks) return;
+
+    // Status der Subtask umkehren
+    this.item.subtasks[subtaskIndex].isCompleted = !this.item.subtasks[subtaskIndex].isCompleted;
+
+    // UI sofort aktualisieren
+    this.cdr.detectChanges();
+    this.firebase.updateTaskStatus(this.item.id, { subtasks: this.item.subtasks, status: this.item.status })
+      .then(() => {
+        console.log('Subtask updated successfully');
+        this.cdr.detectChanges(); 
+      })
+      .catch((error) => console.error('Error updating subtask:', error));
+}
 
   closeDialog() {
     this.closeDialogEvent.emit();
@@ -30,7 +46,6 @@ export class CardComponent {
     console.log(this.selectedItem);
   }
 
-  
   stopPropagation(event: Event) {
     event.stopPropagation();
   }
