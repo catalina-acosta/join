@@ -5,6 +5,7 @@ import { Component, inject } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../../contacts/contact-interface';
 
+
 @Component({
   selector: 'app-add-task-dialog',
   standalone: true,
