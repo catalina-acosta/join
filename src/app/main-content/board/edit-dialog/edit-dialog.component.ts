@@ -16,8 +16,6 @@ export class EditDialogComponent{
   @Output() closeDialogEvent = new EventEmitter<void>();
   @Input() item?: TaskInterface;
 
-  private cdr = inject(ChangeDetectorRef);
-
   isDialogOpen: boolean = false;
   selectedPriority: string = 'medium';
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
