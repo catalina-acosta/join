@@ -20,6 +20,13 @@ export class CardComponent {
    selectedItem?: TaskInterface;
    isDialogOpen: boolean = false;
 
+   formatDate(date: string | Date | undefined): string {
+    if (!date) return ''; // Falls kein Datum vorhanden ist
+    const dateObj = new Date(date);
+    return dateObj.toLocaleDateString('en-GB'); // Ausgabe im Format DD/MM/YYYY
+  }
+  
+
    updateSubtaskStatus(taskId: string | undefined, subtaskIndex: number) {
     if (!this.item?.id || !this.item?.subtasks) return;
 
