@@ -20,6 +20,14 @@ export class CardComponent {
    selectedItem?: TaskInterface;
    isDialogOpen: boolean = false;
 
+   deleteTask() {
+    if (this.item?.id) {
+      this.firebase.deleteTaskFromData(this.item.id);
+      this.closeDialogEvent.emit();
+      this.closeDialog();
+      }
+  }
+  
    formatDate(date: string | Date | undefined): string {
     if (!date) return ''; // Falls kein Datum vorhanden ist
     const dateObj = new Date(date);
