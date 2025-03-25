@@ -14,8 +14,8 @@ import { TaskInterface } from '../board/task.interface';
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
-  standalone: true
 })
+
 export class AddTaskComponent {
   firebase = inject(FirebaseService);
   currentContact: ContactInterface | null = null;
