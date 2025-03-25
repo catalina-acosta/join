@@ -36,7 +36,6 @@ form {
     flex-direction: column;
     height: 376px;
     width: 440px;
-    align-items: space-between;
 }
 
 .right_content {
@@ -44,7 +43,6 @@ form {
     flex-direction: column;
     height: 400px;
     width: 440px;
-    align-self: flex-start;
 }
 
 label {
@@ -53,12 +51,19 @@ label {
     padding-top: 16px;
 }
 
+.dropdown {
+    padding-top: 16px;
+}
+
+.dropdown.select_contacts {
+    padding-top: 8px;
+}
+
 input[type="text"] {
     height: 48px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 12px 16px;
-
     &::placeholder {
         font-size: 12px;
         color: #d1d1d1;
@@ -77,6 +82,7 @@ input[type="date"] {
     font-size: 12px;
     color: #d1d1d1;
     font-family: 'Poppins';
+    cursor: pointer;
 }
 
 textarea {
@@ -84,7 +90,6 @@ textarea {
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 18px 16px;
-
     &::placeholder {
         font-size: 12px;
         color: #d1d1d1;
@@ -99,7 +104,6 @@ select {
     padding: 12px 16px;
     font-size: 20px;
     padding: 12px 16px;
-
     select {
         option:disabled {
             font-size: 12px;
@@ -210,6 +214,7 @@ select {
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 12px 16px;
+    margin-top: 8px;
         &:hover {
             cursor: pointer;
         }
@@ -241,6 +246,12 @@ select {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 8px 16px;
+    height: 56px;
+    font-size: 20px;
+    &:hover{
+        cursor: pointer;
+    }
     >.contact_info {
         display: flex;
         align-items: center;
@@ -250,9 +261,40 @@ select {
 }
 
 .avatar {
-    height: 15px;
-    width:15px;
+    height: 42px;
+    width: 42px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+    color: white;
 }
 
-//ich will nochmal pushen!
+.btn_plain {
+    font-size: 20px;
+    box-sizing: border-box;
+    &:hover {
+        >img {
+            content: url(./../../../../public/assets/tasks/close_blue.svg);
+        }
+    }
+}
+
+.checked {
+        content: url(./../../../../public/assets/tasks/checkbox-checked.svg);
+    }
+
+.selected_contacts {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+}
+
+.error_message {
+    color:red;
+    font-size: 12px;
+    font-family: 'Poppins';
+}

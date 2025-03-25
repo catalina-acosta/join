@@ -1,22 +1,24 @@
-<section class="section_wrapper">
+<section class="section_wrapper" (click)="hideDropdown()">
     <h1>Add Task</h1>
-    <form>
+    <form #addTask="ngForm" (ngSubmit)="submitForm(addTask)">
         <div class="upper_form">
             <div class="left_content">
                 <label for="taskTitle">Title <span class="red">*</span></label>
-                <input type="text" id="taskTitle" name="title" placeholder="Enter a title">
+                <input type="text" id="taskTitle" name="title" placeholder="Enter a title" [(ngModel)]="newTask.title" required #title="ngModel" [ngModelOptions]="{standalone: true}">
+                @if (!title.valid && title.touched || newTaskAdded && !title.touched) {
+                    <span class="error_message">This field is required</span>
+                }
 
                 <label for="taskDescription">Subject</label>
                 <textarea id="taskDescription" name="description" placeholder="enter a description"
-                    style="height:200px"></textarea>
+                    style="height:200px" [(ngModel)]="newTask.description" [ngModelOptions]="{standalone: true}"></textarea>
 
                 <label for="dueDate">Due date <span class="red">*</span></label>
-                <input type="date" id="dueDate" [min]="todaysDate">
+                <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel" [ngModelOptions]="{standalone: true}"> 
+                @if (!date.valid && date.touched || newTaskAdded && !date.touched) {
+                    <span class="error_message">This field is required</span>
+                }
             </div>
-
-            <svg width="2" height="426" viewBox="0 0 2 426" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.24805 1L1.24854 425" stroke="#D1D1D1" stroke-linecap="round" />
-            </svg>
 
             <div class="right_content">
                 <label for="taskPriority">Priority</label>
@@ -49,44 +51,61 @@
 
                 <div class="dropdown">
                     <label for="assignedTo">Assigned to</label>
-                    <div class="select_contacts" (click)="toggleDropdown()">
+                    <div class="select_contacts" (click)="toggleDropdown()" ngModel (click)="$event.stopPropagation()">
                         <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
                         <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
                     </div>
-                    <div class="dropdown_menu" *ngIf="dropdownVisible">
+                    <div class="dropdown_menu" *ngIf="dropdownVisible" (click)="$event.stopPropagation()">
                         @if(firebase.orderedContactsList) {
                             @for (item of firebase.orderedContactsList; track $index) {      
                                 <div class="one_contact">
-                                    <div class="contact_info">
+                                    <div class="contact_info" (click)="assignContact()" >
                                         <div class="avatar" [ngStyle]="{'background-color': item.color}">
                                             <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
                                         </div>
                                         <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
                                     </div>
-                                    <input type="checkbox"> 
+                                    <img src="./assets/tasks/checkbox-unchecked.svg" alt="checkbox unchecked" [ngClass]="{ 'checked': checkboxActive }">
                                 </div>                                                                             
                             } @empty {
                             <div>data loading</div>
                             }
                         }
                     </div>
-                    <div class="selected_contacts"></div>
+                    <div class="selected_contacts" *ngIf="checkboxActive">
+                        @if(firebase.orderedContactsList) {
+                            @for (item of firebase.orderedContactsList; track $index) {      
+                                        <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                                            <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                                        </div>                                                                             
+                            } @empty {
+                            <div>data loading</div>
+                            }
+                        }
+                    </div>
                 </div>
 
                 <label for="taskCategory">Category <span class="red">*</span></label>
-                <select id="taskCategory" name="taskCategory">
+                <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel" [ngModelOptions]="{standalone: true}">
                     <option value="" disabled selected>Select task category</option>
-                    <option value="today">Technical Task</option>
-                    <option value="tomorrow">User Story</option>
+                    <option value="technicalTask">Technical Task</option>
+                    <option value="userStory">User Story</option>
                 </select>
+                @if (!category.valid && category.touched || newTaskAdded && !category.touched) {
+                    <span class="error_message">This field is required</span>
+                }
             </div>
         </div>
 
         <div class="lower_form">
             <span class="notice"><span class="red">*</span> this field is required</span>
-            <div class="clear_submit">
-                <img src="./assets/tasks/clear.svg" alt="">
-                <button type="submit" (click)="submitPrio()" class="btn_bold">
+            <div class="clear_submit" >
+                <button class="btn_plain" (click)="clearFormular(addTask)">
+                    <span>Clear</span>
+                    <img src="./assets/tasks/close-black.svg" alt="x icon">
+                </button>
+                
+                <button type="submit" [disabled]="addTask.invalid" class="btn_bold">
                     <span>Create Task</span>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_71766_5971" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25">
