@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef, AfterViewInit} from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef} from '@angular/core';
 import { TaskInterface } from '../task.interface';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -11,7 +11,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   templateUrl: './edit-dialog.component.html',
   styleUrl: './edit-dialog.component.scss'
 })
-export class EditDialogComponent implements AfterViewInit {
+export class EditDialogComponent{
   firebase = inject(FirebaseService);
   @Output() closeDialogEvent = new EventEmitter<void>();
   @Input() item?: TaskInterface;
@@ -28,26 +28,6 @@ export class EditDialogComponent implements AfterViewInit {
   ngOnInit() {
     if (this.item?.priority) {
       this.selectedPriority = this.item.priority;  // Setze gespeicherte Priorität
-    }
-
-    if (this.item?.date) {
-      console.log('Firebase Datum:', this.item.date);
-  
-      const [day, month, year] = this.item.date.split('/'); 
-      const formattedDate = `${year}-${month}-${day}`; 
-      const date = new Date(`${formattedDate}T00:00:00`);
-  
-      if (!isNaN(date.getTime())) {
-        const yyyy = date.getFullYear();
-        const mm = String(date.getMonth() + 1).padStart(2, '0');
-        const dd = String(date.getDate()).padStart(2, '0');
-        this.item.date = `${yyyy}-${mm}-${dd}`;
-        console.log('Input Datum:', this.item.date);
-      } else {
-        console.error('Ungültiges Datum:', this.item.date);
-      }
-    } else {
-      console.warn('Kein Datum vorhanden');
     }
   }
 
@@ -91,11 +71,6 @@ export class EditDialogComponent implements AfterViewInit {
     event.stopPropagation();
   }
 
-  ngAfterViewInit() {
-    if (this.item?.date) {
-      this.cdr.detectChanges();
-    }
-  }
 // subtaks
 
 addSubtask() {
