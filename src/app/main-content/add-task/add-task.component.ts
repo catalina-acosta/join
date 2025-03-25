@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { FirebaseService } from '../../shared/service/firebase.service';
 import { ContactInterface } from '../contacts/contact-interface';
 import { CommonModule } from '@angular/common';
+import { TaskInterface } from '../board/task.interface';
 
 
 @Component({
@@ -19,7 +20,20 @@ export class AddTaskComponent {
   todaysDate: string = new Date().toISOString().split('T')[0];
   selectedPriority: string = 'medium';
   dropdownVisible = false;
+  checkboxActive = false;
   selectedContacts = [];  //dass ich das unten anzeigen kann
+  newTaskAdded: boolean = false;
+
+  newTask: TaskInterface = {
+    title: "",
+    description: "",
+    date: "",
+    priority: "",
+    assignedToUserId: [],
+    status: "",
+    category: "",
+    subtasks: []
+  }
 
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;
@@ -29,12 +43,33 @@ export class AddTaskComponent {
     this.dropdownVisible = false;
   }
 
-
   selectPriority(priority: string) {
     this.selectedPriority = priority;
   }
 
-  submitPrio() {
-    console.log("Ausgewählte Priorität:", this.selectedPriority);
+  submitForm(ngform: NgForm) {
+    this.newTaskAdded = true;
+    this.newTask.priority = this.selectedPriority;
+    if (ngform.valid && ngform.submitted){
+      console.log(this.newTask);
+      this.addNewTask();
+    }
+  }
+
+  //formular nich direkt nach dem absenden clearen, sondern erst nach der bestätigenden Nachricht, dass ich newTaskAdded
+  //auf false setzen kann, sonst zeigt es überall this field is required
+
+  addNewTask(){
+    this.firebase.addTaskToData(this.newTask)
+    console.log("zu der Database hinzugefügt");
+    }
+
+  clearFormular(ngform: NgForm) {
+      ngform.reset(); 
+      this.selectedPriority = 'medium';
+  }
+
+  assignContact() {
+    this.checkboxActive = !this.checkboxActive;
   }
 }

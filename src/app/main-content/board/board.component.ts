@@ -17,6 +17,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component';
 
 
+
+
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -111,7 +113,8 @@ export class BoardComponent {
       const currentTask = event.container.data[event.currentIndex];
 
       // Update the status of the task in the database (Parameter: taskId, newStatus)
-      this.firebase.updateTaskStatus(currentTask.id!, event.container.id);
+      this.firebase.updateTaskStatus(currentTask.id!, { status: event.container.id });
+
     }
   }
 
