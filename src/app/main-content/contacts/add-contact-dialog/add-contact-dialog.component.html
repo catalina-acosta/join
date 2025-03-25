@@ -13,7 +13,7 @@
         
         <div class="form_content">
         <img class="contact_icon" src="./assets/contact/add-contact-overlay.svg" alt="contact_icon">
-        <form (ngSubmit)="onCreateContact(contactForm)" #contactForm="ngForm">
+        <form (ngSubmit)="onCreateContact(taskForm)" #taskForm="ngForm">
             <label class="input_content">
                 <input type="text" [(ngModel)]="newContact.fullname" name="fullname"
                 [placeholder]="fullname.invalid && fullname.touched ? 'Please enter your name' : 'Name'"

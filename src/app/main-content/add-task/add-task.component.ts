@@ -29,7 +29,6 @@ export class AddTaskComponent {
     this.dropdownVisible = false;
   }
 
-
   selectPriority(priority: string) {
     this.selectedPriority = priority;
   }

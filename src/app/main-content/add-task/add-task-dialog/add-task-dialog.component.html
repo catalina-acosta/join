@@ -8,14 +8,15 @@
                     <div class="upper_form">
                         <div class="left_content">
                             <label for="taskTitle">Title <span class="red">*</span></label>
-                            <input type="text" id="taskTitle" name="title" placeholder="Enter a title">
+                            <input type="text" [(ngModel)]="newTask.title" id="taskTitle" name="title" 
+                            placeholder="Enter a title" #title="ngModel">
 
                             <label for="taskDescription">Subject</label>
-                            <textarea id="taskDescription" name="description" placeholder="enter a description"
+                            <textarea [(ngModel)]="newTask.description" id="taskDescription" name="description" placeholder="enter a description"
                                 style="height:200px"></textarea>
 
                             <label for="dueDate">Due date <span class="red">*</span></label>
-                            <input type="date" id="dueDate" [min]="todaysDate">
+                            <input [(ngModel)]="newTask.date" type="date" id="dueDate" [min]="todaysDate">
                         </div>
 
                         <svg width="2" height="426" viewBox="0 0 2 426" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +90,7 @@
                             </select>
 
                             <label for="taskCategory">Category <span class="red">*</span></label>
-                            <select id="taskCategory" name="taskCategory">
+                            <select [(ngModel)]="newTask.category" id="taskCategory" name="taskCategory">
                                 <option value="" disabled selected>Select task category</option>
                                 <option value="today">Technical Task</option>
                                 <option value="tomorrow">User Story</option>
@@ -122,7 +123,7 @@
                                     <span *ngIf="!subtask.isEditing">{{ subtask.name }}</span>
                                     <input class="subtask-input-edit" *ngIf="subtask.isEditing" [(ngModel)]="subtask.name"
                                         id="subtask-input-{{i}}" (blur)="saveSubtask(i)"
-                                        (keyup.enter)="saveSubtask(i)" />
+                                        (keyup.enter)="saveSubtask(i)" name="subtask"/>
                                     <div class="subtask-actions">
                                         <button type="button" class="edit-button" (click)="editSubtask(i)"><img
                                                 src="assets/tasks/edit.svg" alt="Edit"></button>
