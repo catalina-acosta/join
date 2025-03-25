@@ -13,6 +13,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
 import { EditContactDialogComponent } from '../contacts/edit-contact-dialog/edit-contact-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component';
 
 
 @Component({
@@ -31,10 +33,23 @@ export class BoardComponent {
   filteredTasks: TaskInterface[] = [];
   selectedItem!: TaskInterface;
 
-  constructor() {
+  constructor(private dialog: MatDialog) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
+    });
+  }
+
+  openAddTaskDialog() {
+    const dialogRef = this.dialog.open(AddTaskDialogComponent, {
+      width: '400px', // Größe des Dialogs
+      disableClose: true, // Verhindert Schließen durch Klick außerhalb
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Neue Aufgabe wurde hinzugefügt:', result);
+      }
     });
   }
 
