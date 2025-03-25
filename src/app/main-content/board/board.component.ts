@@ -12,12 +12,18 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
+import { EditContactDialogComponent } from '../contacts/edit-contact-dialog/edit-contact-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component'; 
+
+
+
 
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent],
+  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent, AddTaskDialogComponent, MatDialogModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -30,10 +36,19 @@ export class BoardComponent {
   filteredTasks: TaskInterface[] = [];
   selectedItem!: TaskInterface;
 
-  constructor() {
+
+  constructor(private dialog: MatDialog) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
+    });
+  }
+
+
+
+  openAddTaskDialog(): void {
+    this.dialog.open(AddTaskDialogComponent, {
+      width: '400px', 
     });
   }
 

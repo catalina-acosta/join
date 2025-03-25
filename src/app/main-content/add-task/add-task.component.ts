@@ -9,6 +9,7 @@ import { TaskInterface } from '../board/task.interface';
 
 @Component({
   selector: 'app-add-task',
+  standalone: true,
   imports: [FormsModule, CommonModule],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   templateUrl: './add-task.component.html',
@@ -37,9 +38,10 @@ export class AddTaskComponent {
     date: "",
     priority: "",
     assignedToUserId: [],
-    status: "",
+    status: "todo",
     category: "",
     subtasks: []
+
   }
 
   toggleDropdown() {
@@ -55,39 +57,17 @@ export class AddTaskComponent {
   }
 
   submitForm(ngform: NgForm) {
-    if (ngform.valid && ngform.submitted){
+    this.newTask.priority = this.selectedPriority;
+    if (ngform.valid) { // Only check if the form is valid
+      this.firebase.addTaskToData(this.newTask);
       this.newTaskAdded = true;
-      this.newTask.priority = this.selectedPriority;
-      console.log(this.newTask);
-      console.log(this.todaysDate);
-      this.addNewTask();
-    }
-    else {
-      console.log ("invalid");
-    }
+      console.log(this.newTask); // Log only when the task is valid and added
+    } 
   }
 
-  //formular nich direkt nach dem absenden clearen, sondern erst nach der bestätigenden Nachricht, dass ich newTaskAdded
-  //auf false setzen kann, sonst zeigt es überall this field is required
-
-  addNewTask(){
-    this.firebase.addTaskToData(this.newTask)
-    console.log("zu der Database hinzugefügt");
-    }
-
   clearFormular(ngform: NgForm) {
-    this.newTask = {
-      title: "",
-      description: "",
-      date: "",
-      priority: "",
-      assignedToUserId: [],
-      status: "",
-      category: "",
-      subtasks: []
-    };
-      this.selectedPriority = 'medium';
-
+    ngform.reset(); 
+    this.selectedPriority = 'medium';
   }
 
   assignContact() {
