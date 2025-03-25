@@ -125,6 +125,7 @@
                 </div>
                 <div class="show_subtask">
                     <ul class="subtask-list">
+
                       <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item">
                         <span class="subtask-circle"></span>
                         <span *ngIf="!subtask.isCompleted">{{ subtask.subtask }}</span>
@@ -140,6 +141,8 @@
                           </button>
                         </div>
                       </li>
+
+                      
                     </ul>
                   </div>
                   
