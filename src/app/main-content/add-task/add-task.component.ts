@@ -12,7 +12,8 @@ import { TaskInterface } from '../board/task.interface';
   imports: [FormsModule, CommonModule],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   templateUrl: './add-task.component.html',
-  styleUrl: './add-task.component.scss'
+  styleUrl: './add-task.component.scss',
+  standalone: true
 })
 export class AddTaskComponent {
   firebase = inject(FirebaseService);
@@ -23,6 +24,12 @@ export class AddTaskComponent {
   checkboxActive = false;
   selectedContacts = [];  //dass ich das unten anzeigen kann
   newTaskAdded: boolean = false;
+  subtaskInputFocused: boolean = false;
+  subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
+  subtaskInput: string = ''; // Model für das Eingabefeld
+  formSubmitted: boolean = false;
+  showAddButton: boolean = true;
+  hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
 
   newTask: TaskInterface = {
     title: "",
@@ -48,11 +55,15 @@ export class AddTaskComponent {
   }
 
   submitForm(ngform: NgForm) {
-    this.newTaskAdded = true;
-    this.newTask.priority = this.selectedPriority;
     if (ngform.valid && ngform.submitted){
+      this.newTaskAdded = true;
+      this.newTask.priority = this.selectedPriority;
       console.log(this.newTask);
+      console.log(this.todaysDate);
       this.addNewTask();
+    }
+    else {
+      console.log ("invalid");
     }
   }
 
@@ -65,11 +76,84 @@ export class AddTaskComponent {
     }
 
   clearFormular(ngform: NgForm) {
-      ngform.reset(); 
+    this.newTask = {
+      title: "",
+      description: "",
+      date: "",
+      priority: "",
+      assignedToUserId: [],
+      status: "",
+      category: "",
+      subtasks: []
+    };
       this.selectedPriority = 'medium';
+
   }
 
   assignContact() {
     this.checkboxActive = !this.checkboxActive;
   }
+
+  submitPrio() {
+    console.log("Ausgewählte Priorität:", this.selectedPriority);
+  }
+
+
+  addSubtask() {
+    if (this.subtaskInput.trim()) {
+      this.subtasks.push({ name: this.subtaskInput.trim(), isEditing: false }); // Subtask zur Liste hinzufügen
+      this.subtaskInput = ''; // Eingabefeld leeren
+    }
+  }
+
+  removeSubtask(index: number) {
+    this.subtasks.splice(index, 1); // Subtask entfernen
+  }
+
+  editSubtask(index: number) {
+    this.subtasks[index].isEditing = true;
+    setTimeout(() => {
+      const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+      inputElement?.focus();
+    }, 0);
+  }
+
+  saveSubtask(index: number) {
+    const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+    if (inputElement) {
+      this.subtasks[index].name = inputElement.value;
+    }
+    this.subtasks[index].isEditing = false;
+  }
+  handleKeyUp(event: KeyboardEvent, index: number) {
+    if (event.key === 'Enter') {
+      this.saveSubtask(index);
+    }
+  }
+
+  clearSubtaskInput() {
+    this.subtaskInput = '';
+    this.subtaskInputFocused = false;
+  }
+
+  focusSubtaskInput() {
+    const subtaskInput = document.querySelector('.subtask-input') as HTMLInputElement;
+    if (subtaskInput) {
+      subtaskInput.focus();
+    }
+  }
+
+  onSubtaskInputBlur() {
+    this.hideInputIconTimeout = setTimeout(() => {
+      this.subtaskInputFocused = false;
+    }, 1000/2); // 2 seconds delay
+  }
+
+  onSubtaskInputFocus() {
+    if (this.hideInputIconTimeout) {
+      clearTimeout(this.hideInputIconTimeout);
+    }
+    this.subtaskInputFocused = true;
+}
+
 }
