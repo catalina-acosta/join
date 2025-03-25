@@ -79,7 +79,7 @@
                 </div>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" cdkDrag (click)="openCardDialog(item)">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" cdkDrag (click)="openCardDialog(item)" >
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>

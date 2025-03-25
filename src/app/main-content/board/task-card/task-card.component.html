@@ -2,11 +2,13 @@
 <p class="title">{{item.title}}</p>
 <p class="description">{{item.description}}</p>
 <div class="subtasks">
-    @if (item.subtasks !== []) {
-        <div class="progress_bar">
-            <div class="progress" [ngStyle]="{'width': getCompletedPercentage() + '%'}"></div>
-        </div>
-        <p>{{completedSubtasks}}/{{item.subtasks?.length}} Subtasks</p>
+    @if(item.subtasks) {
+        @if (item.subtasks.length !== 0) {
+            <div class="progress_bar">
+                <div class="progress" [ngStyle]="{'width': getCompletedPercentage() + '%'}"></div>
+            </div>
+            <p>{{completedSubtasks}}/{{item.subtasks.length}} Subtasks</p>
+        }
     }
 </div>
 <div class="content_wrapper">

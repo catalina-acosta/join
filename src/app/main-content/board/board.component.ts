@@ -17,8 +17,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component';
 
 
-
-
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -71,7 +69,7 @@ export class BoardComponent {
     return this.filteredTasks.filter(task =>
       task.status === status &&
       (task.title.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
-       task.description?.toLowerCase().includes(this.searchQuery.toLowerCase()))
+        task.description?.toLowerCase().includes(this.searchQuery.toLowerCase()))
     );
   }
 
