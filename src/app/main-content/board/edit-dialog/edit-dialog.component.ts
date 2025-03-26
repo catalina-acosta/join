@@ -22,7 +22,7 @@ export class EditDialogComponent{
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   subtaskInputFocused: boolean = false;
   subtaskInput: string = '';
-  subtasks: { name: string, isCompleted: boolean }[] = []; // Array für Subtasks
+  subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
   dropdownVisible: boolean = false;
 
   assignContact(contactId: string) {
@@ -94,19 +94,20 @@ export class EditDialogComponent{
     event.stopPropagation();
   }
 
-  // subtaks
+// subtaks
 
-  addSubtask() {
-    if (this.subtaskInput.trim()) {
-      const newSubtask = { subtask: this.subtaskInput.trim(), isCompleted: false };
-      
-      // Wenn 'this.item' und 'subtasks' vorhanden sind, füge Subtask hinzu
-      if (this.item && this.item.subtasks) {
-        this.item.subtasks.push(newSubtask);
-      } else {
-        console.error('Item or subtasks is undefined');
-      }
-      this.subtaskInput = ''; // Eingabefeld leeren
+addSubtask() {
+  if (this.subtaskInput.trim()) {
+    const newSubtask = { 
+      subtask: this.subtaskInput.trim(), 
+      isCompleted: false,
+      isEditing: false // Füge isEditing hinzu
+    };
+
+    if (this.item && this.item.subtasks) {
+      this.item.subtasks.push(newSubtask);
+    } else {
+      console.error('Item or subtasks is undefined');
     }
   }
 
@@ -115,34 +116,37 @@ export class EditDialogComponent{
     this.subtasks.splice(index, 1); // Subtask entfernen
   }
 
-  editSubtask(index: number) {
-    this.subtasks[index].isCompleted = true;
+
+editSubtask(index: number) {
+  if (this.item?.subtasks) {
+    this.item.subtasks[index].isEditing = true;
+  
+    // Fokussiere das Input-Feld nach einer kurzen Verzögerung
     setTimeout(() => {
       const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
       inputElement?.focus();
     }, 0);
   }
 
-  saveSubtask(index: number) {
-    const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-    if (inputElement && this.item?.subtasks) {
-      // Hier 'subtask' statt 'name' verwenden
-      this.item.subtasks[index].subtask = inputElement.value.trim();
-      this.item.subtasks[index].isCompleted = false;
-    }
-  }
-
-  handleKeyUp(event: KeyboardEvent, index: number) {
-    if (event.key === 'Enter') {
-      this.saveSubtask(index);
-    }
-  }
+}
 
 
-  clearSubtaskInput() {
-    this.subtaskInput = '';
-    this.subtaskInputFocused = false;
+saveSubtask(index: number) {
+  const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+  if (inputElement && this.item?.subtasks) {
+    this.item.subtasks[index].subtask = inputElement.value.trim();
+    this.item.subtasks[index].isEditing = false;
   }
+
+handleKeyUp(event: KeyboardEvent, index: number) {
+  if (event.key === 'Enter') {
+    this.saveSubtask(index);
+  }
+
+clearSubtaskInput() {
+  this.subtaskInput = '';
+  this.subtaskInputFocused = false;
+}
 
   focusSubtaskInput() {
     const subtaskInput = document.querySelector('.subtask-input') as HTMLInputElement;
@@ -151,11 +155,11 @@ export class EditDialogComponent{
     }
   }
 
-  onSubtaskInputBlur() {
-    this.hideInputIconTimeout = setTimeout(() => {
-      this.subtaskInputFocused = false;
-    }, 1000/2); // 2 seconds delay
-  }
+onSubtaskInputBlur() {
+  this.hideInputIconTimeout = setTimeout(() => {
+    this.subtaskInputFocused = false;
+  }, 1000/2);
+}
 
   onSubtaskInputFocus() {
     if (this.hideInputIconTimeout) {
