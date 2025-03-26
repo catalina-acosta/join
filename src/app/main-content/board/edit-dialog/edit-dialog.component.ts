@@ -21,7 +21,7 @@ export class EditDialogComponent{
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   subtaskInputFocused: boolean = false;
   subtaskInput: string = '';
-  subtasks: { name: string, isCompleted: boolean }[] = []; // Array für Subtasks
+  subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
   dropdownVisible: boolean = false;
   checkboxActive = false;
 
@@ -88,9 +88,12 @@ export class EditDialogComponent{
 
 addSubtask() {
   if (this.subtaskInput.trim()) {
-    const newSubtask = { subtask: this.subtaskInput.trim(), isCompleted: false };
-    
-    // Wenn 'this.item' und 'subtasks' vorhanden sind, füge Subtask hinzu
+    const newSubtask = { 
+      subtask: this.subtaskInput.trim(), 
+      isCompleted: false,
+      isEditing: false // Füge isEditing hinzu
+    };
+
     if (this.item && this.item.subtasks) {
       this.item.subtasks.push(newSubtask);
     } else {
@@ -106,28 +109,32 @@ removeSubtask(index: number) {
 }
 
 editSubtask(index: number) {
-  this.subtasks[index].isCompleted = true;
-  setTimeout(() => {
-    const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-    inputElement?.focus();
-  }, 0);
+  if (this.item?.subtasks) {
+    this.item.subtasks[index].isEditing = true;
+  
+    // Fokussiere das Input-Feld nach einer kurzen Verzögerung
+    setTimeout(() => {
+      const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+      inputElement?.focus();
+    }, 0);
+  }
 }
+
 
 saveSubtask(index: number) {
   const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
   if (inputElement && this.item?.subtasks) {
-    // Hier 'subtask' statt 'name' verwenden
     this.item.subtasks[index].subtask = inputElement.value.trim();
-    this.item.subtasks[index].isCompleted = false;
+    this.item.subtasks[index].isEditing = false;
   }
 }
+
 
 handleKeyUp(event: KeyboardEvent, index: number) {
   if (event.key === 'Enter') {
     this.saveSubtask(index);
   }
 }
-
 
 clearSubtaskInput() {
   this.subtaskInput = '';
@@ -144,7 +151,7 @@ focusSubtaskInput() {
 onSubtaskInputBlur() {
   this.hideInputIconTimeout = setTimeout(() => {
     this.subtaskInputFocused = false;
-  }, 1000/2); // 2 seconds delay
+  }, 1000/2);
 }
 
 onSubtaskInputFocus() {
