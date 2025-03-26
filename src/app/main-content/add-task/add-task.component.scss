@@ -381,6 +381,28 @@ select:focus,
     gap: 8px;
 }
 
+// .report {
+//     display: flex;
+//     justify-content: center;
+//     gap: 10px;
+//     align-items: center;
+//     border-radius: 8px;
+//     border: unset;
+//     padding: 15px 24px;
+//     font-size: 16px;
+//     font-weight: 400;
+//     color: white;
+//     background-color: #2A3647;
+//     width: 246px;
+//     top: 100px;
+//     left: -80%;
+//     transition: transform 0.5s ease;
+// }
+
+// .show_report {
+//     top:-308px;
+// }
+
 .report {
     display: flex;
     justify-content: center;
@@ -394,11 +416,14 @@ select:focus,
     color: white;
     background-color: #2A3647;
     width: 246px;
-    top: 100px;
-    left: -80%;
-    transition: transform 0.5s ease;
+    position: fixed; /* Position ändern, um von unten zu fliegen */
+    bottom: -100%; /* Start außerhalb des Bildschirms */
+    left: 50%; /* In der Mitte des Bildschirms */
+    transform: translateX(-50%); /* Um es genau mittig zu platzieren */
+    transition: bottom 0.5s ease-in-out; /* Sanfter Übergang für die Bewegung */
+    z-index: 50;
 }
 
 .show_report {
-    top:-308px;
+    bottom: 447px; /* Die Position, an der die Box landen soll */
 }
