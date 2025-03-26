@@ -127,7 +127,8 @@
                         placeholder="Add new subtask" (keyup.enter)="addSubtask()" (focus)="onSubtaskInputFocus()"
                         (blur)="onSubtaskInputBlur()" />
 
-                    <div class="input-icon" [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
+                    <div class="input-icon" 
+                    [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
                         (click)="focusSubtaskInput()">
                         <img src="assets/tasks/add-black.svg" alt="Add">
                     </div>
@@ -141,14 +142,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="show_subtask">
                     <ul class="subtask-list">
-
                       <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item">
                         <span class="subtask-circle"></span>
-                        <span *ngIf="!subtask.isCompleted">{{ subtask.subtask }}</span>
-                        <input class="subtask-input-edit" *ngIf="subtask.isCompleted || !subtask.isCompleted" [(ngModel)]="subtask.subtask"
-                               id="subtask-input-{{i}}" (blur)="saveSubtask(i)" (keyup.enter)="saveSubtask(i)" placeholder="{{ subtask.subtask }}" />
+                        <span *ngIf="!subtask.isEditing">{{ subtask.subtask }}</span>
+                        <input class="subtask-input-edit" *ngIf="subtask.isEditing" [(ngModel)]="subtask.subtask"
+                               id="subtask-input-{{i}}" (blur)="saveSubtask(i)" (keyup.enter)="saveSubtask(i)"/>
+                        
                         <div class="subtask-actions">
                           <button type="button" class="edit-button" (click)="editSubtask(i)">
                             <img src="assets/tasks/edit.svg" alt="Edit">
@@ -159,12 +159,8 @@
                           </button>
                         </div>
                       </li>
-
-                      
                     </ul>
                   </div>
-                  
-            </div>
 
 <!-- save btn -->
 

@@ -256,20 +256,6 @@ form{
 .subtasks_content {
     width: 100%;
 
-    .show_subtask {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        max-height: 80px;
-        overflow: auto;
-        overflow-x: hidden;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
-        margin-top: 10px;
-        gap: 6px;
-    }
-
     .checkbox_content {
         display: flex;
         flex-direction: row;
@@ -283,9 +269,6 @@ form{
         }
     }
 }
-
-
-
 .subtask-input {
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2117647059);
@@ -380,6 +363,8 @@ li {
         border-bottom: 1px solid $light_blue;; 
     }
 }
+
+
 
 // save_edit_content
 .save_edit_content {
