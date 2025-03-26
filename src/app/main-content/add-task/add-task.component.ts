@@ -23,7 +23,7 @@ export class AddTaskComponent {
   selectedPriority: string = 'medium';
   dropdownVisible = false;
   checkboxActive = false;
-  selectedContacts = [];  //dass ich das unten anzeigen kann
+  selectedContacts: string[] = [];  //dass ich das unten anzeigen kann
   newTaskAdded: boolean = false;
   subtaskInputFocused: boolean = false;
   subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
@@ -68,14 +68,6 @@ export class AddTaskComponent {
   clearFormular(ngform: NgForm) {
     ngform.reset(); 
     this.selectedPriority = 'medium';
-  }
-
-  assignContact() {
-    this.checkboxActive = !this.checkboxActive;
-  }
-
-  submitPrio() {
-    console.log("Ausgewählte Priorität:", this.selectedPriority);
   }
 
 

@@ -59,7 +59,7 @@
                         @if(firebase.orderedContactsList) {
                             @for (item of firebase.orderedContactsList; track $index) {      
                                 <div class="one_contact">
-                                    <div class="contact_info" (click)="assignContact()" >
+                                    <div class="contact_info">
                                         <div class="avatar" [ngStyle]="{'background-color': item.color}">
                                             <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
                                         </div>
@@ -85,7 +85,7 @@
                     </div>
                 </div>
 
-                <!-- <label for="taskCategory">Category <span class="red">*</span></label>
+                <label for="taskCategory">Category <span class="red">*</span></label>
                 <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel">
                     <option value="" disabled selected>Select task category</option>
                     <option value="Technical Task">Technical Task</option>
@@ -93,9 +93,9 @@
                 </select>
                 @if (!category.valid && (category.touched || addTask.submitted)) {
                     <span class="error_message">This field is required</span>
-                } -->
-<!-- subtask von Albina -->
-                <!-- <label for="subtasksTitle">Subtasks</label>
+                }
+
+            <label for="subtasksTitle">Subtasks</label>
                             <div class="input-container">
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
@@ -131,7 +131,7 @@
                                                 src="assets/tasks/delete.svg" alt="Delete"></button>
                                     </div>
                                 </li>
-                            </ul> -->
+                            </ul>
 
             </div>
         </div>
@@ -158,4 +158,10 @@
             </div>
         </div>
     </form>
+
+    <div class="btn_plain_color report show_report" >
+        <span>Task added to board</span>
+        <img src="./assets/tasks/board_icon.svg" alt="">
+    </div>
+    <!-- [ngClass] = "{ 'show_report' : dropdownVisible }" -->
 </section>
