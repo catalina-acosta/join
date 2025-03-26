@@ -110,7 +110,7 @@ addSubtask() {
       console.error('Item or subtasks is undefined');
     }
   }
-
+}
 
   removeSubtask(index: number) {
     this.subtasks.splice(index, 1); // Subtask entfernen
@@ -137,11 +137,13 @@ saveSubtask(index: number) {
     this.item.subtasks[index].subtask = inputElement.value.trim();
     this.item.subtasks[index].isEditing = false;
   }
+}
 
 handleKeyUp(event: KeyboardEvent, index: number) {
   if (event.key === 'Enter') {
     this.saveSubtask(index);
   }
+}
 
 clearSubtaskInput() {
   this.subtaskInput = '';
