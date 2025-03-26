@@ -89,7 +89,7 @@
                                         <div class="avatar" [ngStyle]="{'background-color': contact.color}">
                                             <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
                                         </div>
-                                        <p class="name">{{contact.fullname.length > 32 ? (contact.fullname.slice(0, 32) + '...') : contact.fullname}}</p>    
+                                        <p class="name">{{contact.fullname.length > 32 ? (contact.fullname.slice(0, 32) + '...') : contact.fullname | titlecase}}</p>    
                                     </div>
                                     @if(contact.id) {
                                         <img [src]="item.assignedToUserId?.includes(contact.id) ? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg'" alt="checkbox">
