@@ -75,26 +75,31 @@
             </div>
 
             <div class="assigned_content">
-                <div class="select_contacts" (click)="toggleDropdown()" (click)="$event.stopPropagation()">
-                    <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
-                    <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
-                </div>
-                <div class="dropdown_menu" *ngIf="dropdownVisible" (click)="$event.stopPropagation()">
-                    @if(firebase.orderedContactsList) {
-                        @for (item of firebase.orderedContactsList; track $index) {      
-                            <div class="one_contact">
-                                <div class="contact_info" (click)="item.id && assignContact(item.id)" >
-                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
-                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                <div class="dropdown">
+                    <label for="assignedTo">Assigned to</label>
+                    <div class="select_contacts" (click)="toggleDropdown()" (click)="$event.stopPropagation()">
+                        <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
+                        <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
+                    </div>
+                    <div class="dropdown_menu" *ngIf="dropdownVisible" (click)="$event.stopPropagation()">
+                        @if(firebase.orderedContactsList) {
+                            @for (contact of firebase.orderedContactsList; track $index) {      
+                                <div class="one_contact"  (click)="contact.id && assignContact(contact.id)">
+                                    <div class="contact_info">
+                                        <div class="avatar" [ngStyle]="{'background-color': contact.color}">
+                                            <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                                        </div>
+                                        <p class="name">{{contact.fullname.length > 32 ? (contact.fullname.slice(0, 32) + '...') : contact.fullname}}</p>    
                                     </div>
-                                    <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
-                                </div>
-                                <img src="./assets/tasks/checkbox-unchecked.svg" alt="checkbox unchecked" [ngClass]="{ 'checked': checkboxActive }">
-                            </div>                                                                             
-                        } @empty {
-                        <div>data loading</div>
+                                    @if(contact.id) {
+                                        <img [src]="item.assignedToUserId?.includes(contact.id) ? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg'" alt="checkbox">
+                                    }
+                                </div>                                                                             
+                            } @empty {
+                            <div>data loading</div>
+                            }
                         }
-                    }
+                    </div>
                 </div>
                 <div class="members_content">
                     <div class="assigned_to">

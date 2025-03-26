@@ -3,6 +3,7 @@ import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef} from
 import { TaskInterface } from '../task.interface';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ContactInterface } from '../../contacts/contact-interface';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -23,11 +24,20 @@ export class EditDialogComponent{
   subtaskInput: string = '';
   subtasks: { name: string, isCompleted: boolean }[] = []; // Array für Subtasks
   dropdownVisible: boolean = false;
-  checkboxActive = false;
 
   assignContact(contactId: string) {
-    this.checkboxActive = !this.checkboxActive;
-    this.item?.assignedToUserId?.push(contactId);
+    if(this.item) {
+      if(this.item.assignedToUserId) {
+        if (this.item.assignedToUserId) {
+          const index = this.item.assignedToUserId.indexOf(contactId);
+          if (index === -1) {
+            this.item.assignedToUserId.push(contactId);
+          } else {
+            this.item.assignedToUserId.splice(index, 1);
+          }
+        }
+      }
+    }
     console.log(this.item?.assignedToUserId);
   }
 
@@ -84,74 +94,74 @@ export class EditDialogComponent{
     event.stopPropagation();
   }
 
-// subtaks
+  // subtaks
 
-addSubtask() {
-  if (this.subtaskInput.trim()) {
-    const newSubtask = { subtask: this.subtaskInput.trim(), isCompleted: false };
-    
-    // Wenn 'this.item' und 'subtasks' vorhanden sind, füge Subtask hinzu
-    if (this.item && this.item.subtasks) {
-      this.item.subtasks.push(newSubtask);
-    } else {
-      console.error('Item or subtasks is undefined');
+  addSubtask() {
+    if (this.subtaskInput.trim()) {
+      const newSubtask = { subtask: this.subtaskInput.trim(), isCompleted: false };
+      
+      // Wenn 'this.item' und 'subtasks' vorhanden sind, füge Subtask hinzu
+      if (this.item && this.item.subtasks) {
+        this.item.subtasks.push(newSubtask);
+      } else {
+        console.error('Item or subtasks is undefined');
+      }
+      this.subtaskInput = ''; // Eingabefeld leeren
     }
-    this.subtaskInput = ''; // Eingabefeld leeren
   }
-}
 
 
-removeSubtask(index: number) {
-  this.subtasks.splice(index, 1); // Subtask entfernen
-}
+  removeSubtask(index: number) {
+    this.subtasks.splice(index, 1); // Subtask entfernen
+  }
 
-editSubtask(index: number) {
-  this.subtasks[index].isCompleted = true;
-  setTimeout(() => {
+  editSubtask(index: number) {
+    this.subtasks[index].isCompleted = true;
+    setTimeout(() => {
+      const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+      inputElement?.focus();
+    }, 0);
+  }
+
+  saveSubtask(index: number) {
     const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-    inputElement?.focus();
-  }, 0);
-}
-
-saveSubtask(index: number) {
-  const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-  if (inputElement && this.item?.subtasks) {
-    // Hier 'subtask' statt 'name' verwenden
-    this.item.subtasks[index].subtask = inputElement.value.trim();
-    this.item.subtasks[index].isCompleted = false;
+    if (inputElement && this.item?.subtasks) {
+      // Hier 'subtask' statt 'name' verwenden
+      this.item.subtasks[index].subtask = inputElement.value.trim();
+      this.item.subtasks[index].isCompleted = false;
+    }
   }
-}
 
-handleKeyUp(event: KeyboardEvent, index: number) {
-  if (event.key === 'Enter') {
-    this.saveSubtask(index);
+  handleKeyUp(event: KeyboardEvent, index: number) {
+    if (event.key === 'Enter') {
+      this.saveSubtask(index);
+    }
   }
-}
 
 
-clearSubtaskInput() {
-  this.subtaskInput = '';
-  this.subtaskInputFocused = false;
-}
-
-focusSubtaskInput() {
-  const subtaskInput = document.querySelector('.subtask-input') as HTMLInputElement;
-  if (subtaskInput) {
-    subtaskInput.focus();
-  }
-}
-
-onSubtaskInputBlur() {
-  this.hideInputIconTimeout = setTimeout(() => {
+  clearSubtaskInput() {
+    this.subtaskInput = '';
     this.subtaskInputFocused = false;
-  }, 1000/2); // 2 seconds delay
-}
-
-onSubtaskInputFocus() {
-  if (this.hideInputIconTimeout) {
-    clearTimeout(this.hideInputIconTimeout);
   }
-  this.subtaskInputFocused = true;
-}
+
+  focusSubtaskInput() {
+    const subtaskInput = document.querySelector('.subtask-input') as HTMLInputElement;
+    if (subtaskInput) {
+      subtaskInput.focus();
+    }
+  }
+
+  onSubtaskInputBlur() {
+    this.hideInputIconTimeout = setTimeout(() => {
+      this.subtaskInputFocused = false;
+    }, 1000/2); // 2 seconds delay
+  }
+
+  onSubtaskInputFocus() {
+    if (this.hideInputIconTimeout) {
+      clearTimeout(this.hideInputIconTimeout);
+    }
+    this.subtaskInputFocused = true;
+  }
 
 }
