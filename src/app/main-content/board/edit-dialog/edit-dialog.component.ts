@@ -3,6 +3,7 @@ import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef} from
 import { TaskInterface } from '../task.interface';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ContactInterface } from '../../contacts/contact-interface';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -21,7 +22,28 @@ export class EditDialogComponent{
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   subtaskInputFocused: boolean = false;
   subtaskInput: string = '';
-  subtasks: { name: string, isCompleted: boolean }[] = []; // Array für Subtasks
+  subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
+  dropdownVisible: boolean = false;
+
+  assignContact(contactId: string) {
+    if(this.item) {
+      if(this.item.assignedToUserId) {
+        if (this.item.assignedToUserId) {
+          const index = this.item.assignedToUserId.indexOf(contactId);
+          if (index === -1) {
+            this.item.assignedToUserId.push(contactId);
+          } else {
+            this.item.assignedToUserId.splice(index, 1);
+          }
+        }
+      }
+    }
+    console.log(this.item?.assignedToUserId);
+  }
+
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
 
   ngOnInit() {
     if (this.item?.priority) {
@@ -34,8 +56,6 @@ export class EditDialogComponent{
     }
   }
   
-  
-
   selectPriority(priority: string) {
     this.selectedPriority = priority;
     if (this.item) {
@@ -45,21 +65,19 @@ export class EditDialogComponent{
 
   saveEditedTask(taskForm: NgForm) {
     if (this.item?.id && this.item?.date) {
-      const [year, month, day] = this.item.date.split('-');
-      this.item.date = `${day}/${month}/${year}`;
-  
-      console.log('Speichere Aufgabe:', this.item);
+      console.log('Vor Update:', this.item.date); // Debugging
   
       this.firebase.updateTaskStatus(this.item.id, {
         title: this.item.title,
         description: this.item.description,
-        date: this.item.date,
-        priority: this.selectedPriority,  // Speichere ausgewählte Priorität
+        date: this.item.date,  
+        priority: this.selectedPriority,  
         assignedToUserId: this.item.assignedToUserId,
         status: this.item.status,
         category: this.item.category,
         subtasks: this.item.subtasks
       }).then(() => {
+        console.log('Nach Update:', this.item?.date); // Debugging
         console.log('Aufgabe erfolgreich aktualisiert!');
         this.closeDialog();
       }).catch((error) => {
@@ -67,7 +85,7 @@ export class EditDialogComponent{
       });
     }
   }
-
+  
   closeDialog() {
     this.closeDialogEvent.emit();
   }
@@ -80,32 +98,44 @@ export class EditDialogComponent{
 
 addSubtask() {
   if (this.subtaskInput.trim()) {
-    const newSubtask = { subtask: this.subtaskInput.trim(), isCompleted: false };
-    // Verwende die non-null Assertion (Achtung: hier wird davon ausgegangen, dass `this.item` immer definiert ist)
-    this.item!.subtasks!.push(newSubtask);
-    this.subtaskInput = ''; // Eingabefeld leeren
+    const newSubtask = { 
+      subtask: this.subtaskInput.trim(), 
+      isCompleted: false,
+      isEditing: false // Füge isEditing hinzu
+    };
+
+    if (this.item && this.item.subtasks) {
+      this.item.subtasks.push(newSubtask);
+    } else {
+      console.error('Item or subtasks is undefined');
+    }
   }
 }
 
+  removeSubtask(index: number) {
+    this.subtasks.splice(index, 1); // Subtask entfernen
+  }
 
-removeSubtask(index: number) {
-  this.subtasks.splice(index, 1); // Subtask entfernen
-}
 
 editSubtask(index: number) {
-  this.subtasks[index].isCompleted = true;
-  setTimeout(() => {
-    const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-    inputElement?.focus();
-  }, 0);
+  if (this.item?.subtasks) {
+    this.item.subtasks[index].isEditing = true;
+  
+    // Fokussiere das Input-Feld nach einer kurzen Verzögerung
+    setTimeout(() => {
+      const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+      inputElement?.focus();
+    }, 0);
+  }
+
 }
+
 
 saveSubtask(index: number) {
   const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
   if (inputElement && this.item?.subtasks) {
-    // Hier 'subtask' statt 'name' verwenden
     this.item.subtasks[index].subtask = inputElement.value.trim();
-    this.item.subtasks[index].isCompleted = false;
+    this.item.subtasks[index].isEditing = false;
   }
 }
 
@@ -115,30 +145,29 @@ handleKeyUp(event: KeyboardEvent, index: number) {
   }
 }
 
-
 clearSubtaskInput() {
   this.subtaskInput = '';
   this.subtaskInputFocused = false;
 }
 
-focusSubtaskInput() {
-  const subtaskInput = document.querySelector('.subtask-input') as HTMLInputElement;
-  if (subtaskInput) {
-    subtaskInput.focus();
+  focusSubtaskInput() {
+    const subtaskInput = document.querySelector('.subtask-input') as HTMLInputElement;
+    if (subtaskInput) {
+      subtaskInput.focus();
+    }
   }
-}
 
 onSubtaskInputBlur() {
   this.hideInputIconTimeout = setTimeout(() => {
     this.subtaskInputFocused = false;
-  }, 1000/2); // 2 seconds delay
+  }, 1000/2);
 }
 
-onSubtaskInputFocus() {
-  if (this.hideInputIconTimeout) {
-    clearTimeout(this.hideInputIconTimeout);
+  onSubtaskInputFocus() {
+    if (this.hideInputIconTimeout) {
+      clearTimeout(this.hideInputIconTimeout);
+    }
+    this.subtaskInputFocused = true;
   }
-  this.subtaskInputFocused = true;
-}
 
 }
