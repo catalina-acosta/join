@@ -16,17 +16,17 @@
 
             <p>Title</p>
             <label class="input_content">
-                <input type="text" name="title" id="" placeholder="Enter a title" value="{{item.title}}">
+                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="item.title">
+
             </label>
             <p>Description</p>
             <label class="input_content">
-                <input type="text" name="title" id="" placeholder="Enter a description" value="{{item.description}}">
+                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="item.description">
             </label>
 
             <div class="date_prio_content">
                 <label class="input_content" for="dueDate">Due date
-                    <input type="date" id="dueDate" [value]="item.date">
-
+                    <input type="date" id="dueDate" [value]="item.date" [(ngModel)]="item.date">
                 </label>
             </div>
             <div class="date_prio_content">
@@ -129,7 +129,7 @@
                       <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item">
                         <span class="subtask-circle"></span>
                         <span *ngIf="!subtask.isCompleted">{{ subtask.subtask }}</span>
-                        <input class="subtask-input-edit" *ngIf="subtask.isCompleted" [(ngModel)]="subtask.subtask"
+                        <input class="subtask-input-edit" *ngIf="subtask.isCompleted || !subtask.isCompleted" [(ngModel)]="subtask.subtask"
                                id="subtask-input-{{i}}" (blur)="saveSubtask(i)" (keyup.enter)="saveSubtask(i)" placeholder="{{ subtask.subtask }}" />
                         <div class="subtask-actions">
                           <button type="button" class="edit-button" (click)="editSubtask(i)">
@@ -150,7 +150,7 @@
 
 <!-- save btn -->
 
-            <div class="save_edit_content">
+            <div class="save_edit_content" (click)="saveEditedTask(taskForm)">
                 <div class="edit_box">
                     <p>Ok</p>
                     <img src="./assets/tasks/check.svg" alt="save">
