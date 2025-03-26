@@ -208,6 +208,15 @@ form{
     overflow-y: scroll;
 }
 
+.select_contacts {
+    border: 1px solid #d1d1d1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+    border-radius: 8px;
+}
+
 .one_contact {
     display: flex;
     justify-content: space-between;
