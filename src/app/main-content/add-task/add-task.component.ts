@@ -68,13 +68,13 @@ export class AddTaskComponent {
   showReport() {
     setTimeout(() => {
       this.newTaskAdded = false;
-    }, 1000);
+    }, 5000);
   }
 
   //falls ich es mit klick irgendwohin auf der Seite verschwinden lassen mag
-  // dismissReport() {    
-  //   this.newTaskAdded = false;
-  // }
+  dismissReport() {    
+    this.newTaskAdded = false;
+  }
 
   clearFormular(ngform: NgForm) {
     ngform.reset(); 
