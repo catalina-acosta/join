@@ -22,7 +22,19 @@ export class EditDialogComponent{
   subtaskInputFocused: boolean = false;
   subtaskInput: string = '';
   subtasks: { name: string, isCompleted: boolean }[] = []; // Array für Subtasks
- 
+  dropdownVisible: boolean = false;
+  checkboxActive = false;
+
+  assignContact(contactId: string) {
+    this.checkboxActive = !this.checkboxActive;
+    this.item?.assignedToUserId?.push(contactId);
+    console.log(this.item?.assignedToUserId);
+  }
+
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+
   ngOnInit() {
     if (this.item?.priority) {
       this.selectedPriority = this.item.priority;  // Setze gespeicherte Priorität

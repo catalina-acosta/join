@@ -75,27 +75,45 @@
             </div>
 
             <div class="assigned_content">
-                <p class="title2">Assigned To:</p>
+                <div class="select_contacts" (click)="toggleDropdown()" (click)="$event.stopPropagation()">
+                    <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
+                    <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
+                </div>
+                <div class="dropdown_menu" *ngIf="dropdownVisible" (click)="$event.stopPropagation()">
+                    @if(firebase.orderedContactsList) {
+                        @for (item of firebase.orderedContactsList; track $index) {      
+                            <div class="one_contact">
+                                <div class="contact_info" (click)="item.id && assignContact(item.id)" >
+                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                                    </div>
+                                    <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
+                                </div>
+                                <img src="./assets/tasks/checkbox-unchecked.svg" alt="checkbox unchecked" [ngClass]="{ 'checked': checkboxActive }">
+                            </div>                                                                             
+                        } @empty {
+                        <div>data loading</div>
+                        }
+                    }
+                </div>
                 <div class="members_content">
                     <div class="assigned_to">
                         @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
-                        @for (userId of item.assignedToUserId; track $index) {
-                        @for (contact of firebase.orderedContactsList; track $index) {
-                        @if(contact.id === userId) {
-                        <div class="person_box">
-                            <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
-                                <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
-                            </div>
-                            <p>{{contact.fullname| titlecase }}</p>
-                        </div>
-                        }
-                        }
-                        }
+                            @for (userId of item.assignedToUserId; track $index) {
+                                @for (contact of firebase.orderedContactsList; track $index) {
+                                    @if(contact.id === userId) {
+                                    <div class="person_box">
+                                        <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
+                                            <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                                        </div>
+                                    </div>
+                                    }
+                                }
+                            }
                         } @else {
                         <p>no users assigned</p>
                         }
                     </div>
-
                 </div>
             </div>
 
