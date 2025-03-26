@@ -147,24 +147,41 @@
                         </div>
                     </div>
                 </div>
-                    <ul class="subtask-list">
-                      <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item">
-                        <span class="subtask-circle"></span>
-                        <span *ngIf="!subtask.isEditing">{{ subtask.subtask }}</span>
-                        <input class="subtask-input-edit" *ngIf="subtask.isEditing" [(ngModel)]="subtask.subtask"
-                               id="subtask-input-{{i}}" (blur)="saveSubtask(i)" (keyup.enter)="saveSubtask(i)"/>
-                        
-                        <div class="subtask-actions">
-                          <button type="button" class="edit-button" (click)="editSubtask(i)">
-                            <img src="assets/tasks/edit.svg" alt="Edit">
-                          </button>
-                          <img src="assets/tasks/line-small.svg" alt="">
-                          <button type="button" class="remove-button" (click)="removeSubtask(i)">
-                            <img src="assets/tasks/delete.svg" alt="Delete">
-                          </button>
-                        </div>
-                      </li>
-                    </ul>
+                <ul class="subtask-list">
+                    <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item">
+            
+                      <span class="subtask-circle" *ngIf="!subtask.isEditing"></span>
+                      
+                      <span *ngIf="!subtask.isEditing">{{ subtask.subtask }}</span>
+                      <input class="subtask-input-edit" 
+                             *ngIf="subtask.isEditing" 
+                             [(ngModel)]="subtask.subtask"
+                             id="subtask-input-{{i}}" 
+                             (keyup.enter)="saveSubtask(i)" 
+                             placeholder="{{ subtask.subtask }}"/>
+                  
+                      <!-- Aktionen (Speichern/ Löschen) -->
+                      <div class="subtask-actions">
+                        <!-- Check-Button wird nur angezeigt, wenn der Subtask bearbeitet wird -->
+                        <button *ngIf="subtask.isEditing" type="button" class="edit-button" (click)="saveSubtask(i)">
+                          <img src="assets/tasks/check-black.svg" alt="Check">
+                        </button>
+                  
+                        <!-- Edit-Button wird nur angezeigt, wenn der Subtask nicht bearbeitet wird -->
+                        <button *ngIf="!subtask.isEditing" type="button" class="edit-button" (click)="editSubtask(i)">
+                          <img src="assets/tasks/edit.svg" alt="Edit">
+                        </button>
+                  
+                        <img src="assets/tasks/line-small.svg" alt="">
+                  
+                        <!-- Löschen-Button -->
+                        <button type="button" class="remove-button" (click)="removeSubtask(i)">
+                          <img src="assets/tasks/delete.svg" alt="Delete">
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                    
                   </div>
 
 <!-- save btn -->
