@@ -177,28 +177,28 @@ section {
 }
 
 // open card dialog
-// .custom-dialog {
-//     position: fixed;
-//     top: 0;
-//     right: 0;
-//     width: 100%;
-//     height: 100vh;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     z-index: 100;
-//     animation: slideInFromRight 125ms ease-out forwards;
-// }
+.custom-dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    animation: slideInFromRight 125ms ease-out forwards;
+}
 
-// .overlay_content {
-//     background-color: rgba(0, 0, 0, 0.349);
-//     position: fixed;
-//     top: 0;
-//     right: 0;
-//     width: 100%;
-//     height: 100vh;
-//     z-index: 1000;
-// }
+.overlay_content {
+    background-color: rgba(0, 0, 0, 0.349);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+}
 
 .dialog-overlay {
     position: fixed;
@@ -214,7 +214,7 @@ section {
 }
 
 .dialog-content {
-    width: 830px;
+    width: 950px;
     height: 800px;
     padding: 20px;
     background-color: #fff;

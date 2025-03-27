@@ -32,6 +32,7 @@ export class BoardComponent {
   firebase = inject(FirebaseService);
   searchQuery: string = '';
   isDialogOpen: boolean = false;
+  isAddDialogOpen: boolean = false;
   tasks: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
   selectedItem!: TaskInterface;
@@ -48,7 +49,7 @@ export class BoardComponent {
     if (window.innerWidth <= 900) {
       this.router.navigate(['/add-task']);
     } else {
-      this.isDialogOpen = true;
+      this.isAddDialogOpen = true;
     }
   }
 
@@ -81,6 +82,13 @@ export class BoardComponent {
     event.stopPropagation();
   }
 
+  closeAddDialog() {
+    setTimeout(() => {
+      this.isDialogOpen = false;
+      // this.isDeleteOpen = false;
+    }, 500);
+}
+  
   closeDialog() {
       setTimeout(() => {
         this.isDialogOpen = false;
@@ -89,7 +97,7 @@ export class BoardComponent {
   }
 
   receiveEmitFromDialog(dialogClosed: boolean) {
-    this.isDialogOpen = false;
+    this.isAddDialogOpen = false;
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {

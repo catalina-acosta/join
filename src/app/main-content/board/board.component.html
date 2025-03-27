@@ -1,4 +1,4 @@
-<div class="dialog-overlay" [ngStyle]="{ 'display': isDialogOpen ? 'flex' : 'none' }" (click)="closeDialog()">
+<div class="dialog-overlay" [ngStyle]="{ 'display': isAddDialogOpen ? 'flex' : 'none' }" (click)="closeAddDialog()">
   <div class="dialog-content">
       <section class="custom-dialog">
         <app-add-task-dialog (dialogStatusOutput)="receiveEmitFromDialog($event)"></app-add-task-dialog>
