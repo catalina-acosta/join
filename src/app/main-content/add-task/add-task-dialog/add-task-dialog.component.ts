@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { TaskInterface } from '../../board/task.interface';
-import { Component, Inject, inject } from '@angular/core';
+import { Component, EventEmitter, Inject, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../../contacts/contact-interface';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -29,6 +27,8 @@ export class AddTaskDialogComponent {
   formSubmitted: boolean = false;
   showAddButton: boolean = true;
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
+  @Output() dialogStatusOutput = new EventEmitter<boolean>();
+  isDialogOpen: boolean = false;
 
   newTask: TaskInterface = {
     title: "",
@@ -41,8 +41,8 @@ export class AddTaskDialogComponent {
     subtasks: []
   }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { status: string }) {
-    this.newTask.status = data.status;
+  emitDialogStatus() {
+    this.dialogStatusOutput.emit(this.isDialogOpen);
   }
 
   toggleDropdown() {
@@ -61,14 +61,15 @@ export class AddTaskDialogComponent {
     this.newTask.priority = this.selectedPriority;
     this.newTask.assignedToUserId = this.selectedContacts.map(contact => contact.id).filter((id): id is string => id !== undefined); // Add selected contacts' IDs to the task
     this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
-
+    this.formSubmitted = true;
     if (ngform.valid) { // Only check if the form is valid
         this.firebase.addTaskToData(this.newTask); // Save the task to the database
         this.newTaskAdded = true;
-        console.log(this.newTask); // Log the task for debugging
+        // console.log(this.newTask); // Log the task for debugging
         this. clearFormular(ngform); // Reset the form after submission
         this.selectedContacts = []; // Clear selected contacts
         this.subtasks = []; // Clear subtasks
+        this.formSubmitted = false;
     }
 }
 
@@ -85,6 +86,7 @@ export class AddTaskDialogComponent {
   clearFormular(ngform: NgForm) {
     ngform.reset(); 
     this.selectedPriority = 'medium';
+    this.emitDialogStatus();
   }
 
   assignContact(contact: ContactInterface) {
@@ -100,9 +102,9 @@ export class AddTaskDialogComponent {
     return this.selectedContacts.some(c => c.id === contact.id);
   }
 
-  submitPrio() {
-    console.log("Ausgewählte Priorität:", this.selectedPriority);
-  }
+  // submitPrio() {
+  //   console.log("Ausgewählte Priorität:", this.selectedPriority);
+  // }
 
 
   addSubtask() {
