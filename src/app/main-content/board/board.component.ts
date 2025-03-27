@@ -103,14 +103,17 @@ export class BoardComponent {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
+  
       const currentTask = event.container.data[event.currentIndex];
-
-      // Update the status of the task in the database (Parameter: taskId, newStatus)
       this.firebase.updateTaskStatus(currentTask.id!, { status: event.container.id });
-
     }
+  
+    const cardElement = event.item.element.nativeElement;
+    const randomRotation = Math.random() * 10 - 5;
+    cardElement.style.transform = `rotate(${randomRotation}deg)`;
   }
+  
 
 }

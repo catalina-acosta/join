@@ -11,7 +11,6 @@ section {
     .dialog_content {
         background-color: #fff;
         padding: 25px;
-        // height: 90vh;
         width: 100%;
         border-radius: 25px;
         display: flex;
@@ -30,9 +29,10 @@ section {
 }
 
 // form
-form{
+form {
     width: 100%;
 }
+
 .input_content {
     width: 100%;
     display: flex;
@@ -142,7 +142,7 @@ form{
     color: $darkblack;
 }
 
-.priority{
+.priority {
     display: flex;
     gap: 8px;
     align-items: center;
@@ -206,6 +206,8 @@ form{
     padding: 12px 16px;
     max-height: 200px;
     overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
 }
 
 .select_contacts {
@@ -224,9 +226,11 @@ form{
     padding: 8px 16px;
     height: 56px;
     font-size: 20px;
-    &:hover{
+
+    &:hover {
         cursor: pointer;
     }
+
     >.contact_info {
         display: flex;
         align-items: center;
@@ -250,6 +254,7 @@ form{
 .btn_plain {
     font-size: 20px;
     box-sizing: border-box;
+
     &:hover {
         >img {
             content: url(/assets/tasks/close_blue.svg);
@@ -258,8 +263,8 @@ form{
 }
 
 .checked {
-        content: url(/assets/tasks/checkbox-checked.svg);
-    }
+    content: url(/assets/tasks/checkbox-checked.svg);
+}
 
 // subtasks_content
 .subtasks_content {
@@ -278,12 +283,14 @@ form{
         }
     }
 }
+
 .subtask-input {
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2117647059);
     border-radius: 10px;
     padding: 12px 16px;
     padding-right: 40px;
+
 
     &::placeholder {
         color: #d1d1d1;
@@ -326,8 +333,10 @@ li {
     align-items: center;
     margin-bottom: 10px;
     height: 20px;
+    position: relative;
 
     .subtask-circle {
+        // display: none; 
         width: 5px;
         height: 5px;
         background-color: black;
@@ -344,36 +353,55 @@ li {
             background: none;
             border: none;
             cursor: pointer;
-            margin-left: 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+            padding: 3px 6px 3px 6px;
+
+            &:hover{
+                padding: 3px 6px 3px 6px;
+                border-radius: 20px;
+                background-color: rgb(235, 234, 234);
+            }
         }
     }
 
     &:hover .subtask-actions {
         display: flex;
-
     }
 }
 
 .subtask-item:hover {
     background-color: rgb(235, 234, 234);
     border-radius: 8px;
+    transition: background-color 0.3s ease, border 0.3s ease;
+
+    &.editing {
+        background-color: rgb(255, 255, 255) !important;
+        border-bottom: 1px solid $light_blue;
+        border-radius: 0px;
+    }
 }
 
-.subtask-input-edit{
-    padding: 8px;
+.subtask-item input:focus {
+    background-color: white;
+    border-bottom: 1px solid $light_blue;
+}
+
+.subtask-input-edit {
+    padding: 6px;
     width: 100%;
-    border-bottom: 1px solid $light_blue;; 
+    border-bottom: 1px solid $light_blue;
+    ;
     font-size: 16px;
-    border: none; 
+    border: none;
     outline: none;
     transition: border 125ms ease;
 
     &:focus {
-        border-bottom: 1px solid $light_blue;; 
+        border-bottom: 1px solid $light_blue;
+        ;
     }
 }
-
-
 
 // save_edit_content
 .save_edit_content {
@@ -403,4 +431,55 @@ li {
 
         }
     }
+}
+
+@media (max-width: 450px) {
+    section .dialog_content {
+        padding: 15px;
+    }
+
+    .prio_btns {
+        gap: 5px
+    }
+
+    .prio_btns button {
+        padding: 5px;
+        font-size: 16px;
+
+        svg {
+            width: 15px;
+        }
+    }
+
+    .prio.selected.low {
+        font-size: 16px;
+    }
+
+    .prio.selected.medium {
+        font-size: 16px;
+    }
+
+    .prio.selected.urgent {
+        font-size: 16px;
+    }
+
+    .dropdown_menu {
+        max-height: 100px;
+    }
+
+    .one_contact {
+        padding: 0;
+        height: 36px;
+
+        .contact_info {
+            gap: 8px;
+
+            .avatar {
+                height: 30px;
+                width: 30px;
+            }
+        }
+
+    }
+
 }
