@@ -24,6 +24,7 @@ export class EditDialogComponent{
   subtaskInput: string = '';
   subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
   dropdownVisible: boolean = false;
+  newDate: string = "";
 
   assignContact(contactId: string) {
     if(this.item) {
@@ -66,6 +67,7 @@ export class EditDialogComponent{
   saveEditedTask(taskForm: NgForm) {
     if (this.item?.id && this.item?.date) {
       console.log('Vor Update:', this.item.date); // Debugging
+      console.log(this.newDate);
   
       this.firebase.updateTaskStatus(this.item.id, {
         title: this.item.title,
