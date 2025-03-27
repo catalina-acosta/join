@@ -535,7 +535,9 @@ li {
         position: fixed;
         right: 32px;
         bottom: 114px;
-        z-index: 40;}
+        z-index: 40;
+        background-color: #F0F0F0;
+    }
     body {overflow-x: visible;}
     .section_wrapper {padding-right: 30px; padding-left: 30px;}
 }
