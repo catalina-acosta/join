@@ -1,5 +1,10 @@
 @use './../../../styles.scss' as *;
 
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .red{
     color: red;
 }
@@ -13,6 +18,7 @@
 form {
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .upper_form {
@@ -124,7 +130,6 @@ select {
     height: 48px;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    padding: 12px 16px;
     font-size: 20px;
     padding: 12px 16px;
     outline: none;
@@ -132,12 +137,11 @@ select {
         border: 1px solid $light_blue;
         box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
     }
-    select {
-        option:disabled {
-            font-size: 12px;
-            color: #d1d1d1;
-        }
-    }
+}
+
+select option:disabled {
+    font-size: 12px;
+    color: #d1d1d1;
 }
 
 .prio_btns {
@@ -155,7 +159,7 @@ select {
         border-radius: 10px;
         border: unset;
         background-color: white;
-        width: 136px;
+        width: 35%;
         height: 56px;
         color: black;
         font-weight: 400;
@@ -167,38 +171,30 @@ select {
     }
 }
 
-.prio.selected.urgent {
+.prio.selected.urgent, .prio.selected.medium, .prio.selected.low {
     border: none;
-    background-color: #ff3d00;
+    font-size: 21px;
+    font-weight: 700;
     color: white;
     font-size: 21px;
     font-weight: 700;
     >svg path {
         fill: white;
     }
+}
+
+.prio.selected.urgent {
+    background-color: #ff3d00;
 }
 
 .prio.selected.medium {
-    border: none;
     background-color: #fea800;
-    color: white;
-    font-size: 21px;
-    font-weight: 700;
-    >svg path {
-        fill: white;
-    }
 }
 
 .prio.selected.low {
-    border: none;
     background-color: #7be129;
-    color: white;
-    font-size: 21px;
-    font-weight: 700;
-    >svg path {
-        fill: white;
-    }
 }
+
 
 
 //selection of contacts
@@ -209,6 +205,7 @@ select {
 .white {
     color: white;
 }
+
 
 .select_contacts {
     background-color: white;
@@ -223,12 +220,13 @@ select {
     cursor: pointer;  
 }
 
-.select_contacts img {
-    &:hover {
-        background-color: #d1d1d1;
-        border-radius: 50%;
-    }
-}
+
+// .select_contacts img {
+//     &:hover {
+//         background-color: #d1d1d1;
+//         border-radius: 50%;
+//     }
+// }
 
 .like_placeholder {
     font-size: 20px;
@@ -452,28 +450,6 @@ li {
     }
 }
 
-// .report {
-//     display: flex;
-//     justify-content: center;
-//     gap: 10px;
-//     align-items: center;
-//     border-radius: 8px;
-//     border: unset;
-//     padding: 15px 24px;
-//     font-size: 16px;
-//     font-weight: 400;
-//     color: white;
-//     background-color: #2A3647;
-//     width: 246px;
-//     top: 100px;
-//     left: -80%;
-//     transition: transform 0.5s ease;
-// }
-
-// .show_report {
-//     top:-308px;
-// }
-
 .report {
     display: flex;
     justify-content: center;
@@ -498,3 +474,85 @@ li {
 .show_report {
     bottom: 447px; /* Die Position, an der die Box landen soll */
 }
+
+
+@media (max-width: 1200px) {
+    .prio_btns {
+        >button{
+            font-size: 16px;
+            padding: 0;
+            >svg {width: 12px;}
+        }
+    }
+    .prio.selected.urgent {
+        font-size: 17px;
+    }
+    .prio.selected.medium {
+        font-size: 17px;
+    }
+    .prio.selected.low {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 1145px) {
+    .prio.selected.urgent {
+        font-size: 16px;
+    }
+    .prio.selected.medium {
+        font-size: 16px;
+    }
+    .prio.selected.low {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1110px) {
+    .prio_btns {gap: 8px;}
+    select {font-size: 16px;}
+    .like_placeholder {font-size: 16px;}
+}
+
+@media (max-width: 1065px) {
+    .prio_btns {gap: 2px;}
+    .upper_form { gap: 8px;}
+    .left_content {width: auto;}
+}
+
+@media (max-width: 935px) {
+    .section_wrapper {padding-right: 72px; padding-left: 72px;}
+}
+
+@media (max-width: 900px) {
+    h1 {font-size: 56px; margin-top: 70px;}
+    .upper_form {flex-direction: column;}
+    .left_content {width: 100%;}
+    .right_content {width: 100%;}
+    .prio_btns {gap: 8px;}
+    .upper_form {height: 804px;}
+    .lower_form {margin-bottom: 122px; flex-direction: column; position: relative; height: 95px;}
+    .clear_submit{
+        position: fixed;
+        right: 32px;
+        bottom: 114px;
+        z-index: 40;}
+    body {overflow-x: visible;}
+    .section_wrapper {padding-right: 30px; padding-left: 30px;}
+}
+
+@media (max-width: 390px) {
+    .btn_plain{
+        padding: 8px 16px;
+        >span{font-size: 16px;}
+    }
+    .btn_bold {padding: 8px;}
+    button [type=submit] {
+        >span{font-size: 16px;}
+    }
+}
+
+@media (max-width: 365px) {
+    .section_wrapper {padding-right: 16px; padding-left: 16px;}
+    .clear_submit{right: 16px;}
+}
+

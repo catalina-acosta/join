@@ -200,25 +200,8 @@ section {
     z-index: 1000;
 }
 
-@keyframes slideInFromRight {
-    0% {
-        transform: translateX(100%);
-    }
 
-    100% {
-        transform: translateX(0);
-    }
-}
 
-@keyframes slideOutToRight {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(100%);
-    }
-}
 
 .dialog-closed {
     animation: slideOutToRight 0.5s ease-in forwards;
