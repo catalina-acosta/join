@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { TaskInterface } from '../../board/task.interface';
-import { Component, inject } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../../contacts/contact-interface';
 
@@ -28,6 +28,8 @@ export class AddTaskDialogComponent {
   formSubmitted: boolean = false;
   showAddButton: boolean = true;
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
+
+ 
 
   newTask: TaskInterface = {
     title: "",
@@ -157,4 +159,6 @@ export class AddTaskDialogComponent {
     }
     this.subtaskInputFocused = true;
 }
+
+
 }
