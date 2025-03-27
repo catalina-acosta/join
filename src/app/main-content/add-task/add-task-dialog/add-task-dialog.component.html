@@ -1,165 +1,181 @@
-<div class="dialog-overlay" (click)="closeDialog()">
-    <div class="dialog-content" (click)="$event.stopPropagation()">
+<div class="dialog-overlay">
+    <div class="dialog-content">
         <section class="custom-dialog-content">
             <div class="add_tasks_content">
                 <h1>Add Task</h1>
 
-                <form (ngSubmit)="onCreateTask(taskForm)" #taskForm="ngForm">
+                <form #addTask="ngForm" (ngSubmit)="submitForm(addTask)">
                     <div class="upper_form">
                         <div class="left_content">
                             <label for="taskTitle">Title <span class="red">*</span></label>
-                            <input type="text" [(ngModel)]="newTask.title" id="taskTitle" name="title" 
-                            placeholder="Enter a title" #title="ngModel">
-
+                            <input type="text" id="taskTitle" name="title" placeholder="Enter a title" [(ngModel)]="newTask.title" required #title="ngModel">
+                            @if (!title.valid && (title.touched)) {
+                                <span class="error_message">This field is required</span>
+                            }
+            
                             <label for="taskDescription">Subject</label>
-                            <textarea [(ngModel)]="newTask.description" id="taskDescription" name="description" placeholder="enter a description"
-                                style="height:200px"></textarea>
-
+                            <textarea id="taskDescription" name="description" placeholder="enter a description"
+                                style="height:200px" [(ngModel)]="newTask.description"></textarea>
+            
                             <label for="dueDate">Due date <span class="red">*</span></label>
-                            <input [(ngModel)]="newTask.date" type="date" name="date" id="dueDate" [min]="todaysDate">
+                            <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel"> 
+                            @if (!date.valid && (date.touched)) {
+                                <span class="error_message">This field is required</span>
+                            }
                         </div>
-
-                        <svg width="2" height="426" viewBox="0 0 2 426" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.24805 1L1.24854 425" stroke="#D1D1D1" stroke-linecap="round" />
-                        </svg>
-
+            
                         <div class="right_content">
                             <label for="taskPriority">Priority</label>
                             <div class="prio_btns">
                                 <!-- urgent button -->
-                                <button type="button" class="prio urgent"
-                                    [class.selected]="selectedPriority === 'urgent'" (click)="selectPriority('urgent')">
+                                    <button type="button" class="prio urgent" [class.selected]="selectedPriority === 'urgent'" (click)="selectPriority('urgent')">
                                     <span>Urgent</span>
-                                    <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M19.5708 14.755C19.3361 14.7554 19.1076 14.6805 18.9187 14.5414L10.6666 8.45824L2.4146 14.5414C2.29874 14.627 2.16716 14.6889 2.02736 14.7237C1.88756 14.7584 1.74228 14.7653 1.59981 14.7439C1.45734 14.7226 1.32048 14.6734 1.19703 14.5992C1.07359 14.525 0.965978 14.4272 0.880349 14.3114C0.79472 14.1957 0.732748 14.0642 0.697971 13.9245C0.663194 13.7848 0.656294 13.6396 0.677664 13.4973C0.720823 13.2097 0.876514 12.9511 1.11049 12.7783L10.0146 6.20786C10.2033 6.06826 10.4319 5.99292 10.6666 5.99292C10.9014 5.99292 11.13 6.06826 11.3187 6.20786L20.2228 12.7783C20.4087 12.9153 20.5466 13.1074 20.6168 13.3272C20.6869 13.5471 20.6858 13.7835 20.6135 14.0027C20.5411 14.2219 20.4014 14.4126 20.2141 14.5477C20.0269 14.6828 19.8017 14.7554 19.5708 14.755Z"
-                                            fill="#FF3D00" />
-                                        <path
-                                            d="M19.5708 9.00581C19.3361 9.00621 19.1076 8.93136 18.9187 8.79226L10.6667 2.7091L2.4146 8.79226C2.18063 8.96507 1.88754 9.03793 1.59981 8.9948C1.31209 8.95167 1.05329 8.7961 0.880353 8.5623C0.707418 8.3285 0.63451 8.03563 0.677669 7.74811C0.720828 7.4606 0.876518 7.20199 1.11049 7.02919L10.0146 0.45871C10.2033 0.319119 10.4319 0.243774 10.6667 0.243774C10.9014 0.243774 11.13 0.319119 11.3187 0.45871L20.2228 7.02919C20.4087 7.1661 20.5466 7.35822 20.6168 7.5781C20.6869 7.79797 20.6858 8.03438 20.6135 8.25356C20.5412 8.47274 20.4014 8.6635 20.2141 8.79859C20.0269 8.93368 19.8017 9.0062 19.5708 9.00581Z"
-                                            fill="#FF3D00" />
+                                    <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.5708 14.755C19.3361 14.7554 19.1076 14.6805 18.9187 14.5414L10.6666 8.45824L2.4146 14.5414C2.29874 14.627 2.16716 14.6889 2.02736 14.7237C1.88756 14.7584 1.74228 14.7653 1.59981 14.7439C1.45734 14.7226 1.32048 14.6734 1.19703 14.5992C1.07359 14.525 0.965978 14.4272 0.880349 14.3114C0.79472 14.1957 0.732748 14.0642 0.697971 13.9245C0.663194 13.7848 0.656294 13.6396 0.677664 13.4973C0.720823 13.2097 0.876514 12.9511 1.11049 12.7783L10.0146 6.20786C10.2033 6.06826 10.4319 5.99292 10.6666 5.99292C10.9014 5.99292 11.13 6.06826 11.3187 6.20786L20.2228 12.7783C20.4087 12.9153 20.5466 13.1074 20.6168 13.3272C20.6869 13.5471 20.6858 13.7835 20.6135 14.0027C20.5411 14.2219 20.4014 14.4126 20.2141 14.5477C20.0269 14.6828 19.8017 14.7554 19.5708 14.755Z" fill="#FF3D00"/>
+                                        <path d="M19.5708 9.00581C19.3361 9.00621 19.1076 8.93136 18.9187 8.79226L10.6667 2.7091L2.4146 8.79226C2.18063 8.96507 1.88754 9.03793 1.59981 8.9948C1.31209 8.95167 1.05329 8.7961 0.880353 8.5623C0.707418 8.3285 0.63451 8.03563 0.677669 7.74811C0.720828 7.4606 0.876518 7.20199 1.11049 7.02919L10.0146 0.45871C10.2033 0.319119 10.4319 0.243774 10.6667 0.243774C10.9014 0.243774 11.13 0.319119 11.3187 0.45871L20.2228 7.02919C20.4087 7.1661 20.5466 7.35822 20.6168 7.5781C20.6869 7.79797 20.6858 8.03438 20.6135 8.25356C20.5412 8.47274 20.4014 8.6635 20.2141 8.79859C20.0269 8.93368 19.8017 9.0062 19.5708 9.00581Z" fill="#FF3D00"/>
                                     </svg>
                                 </button>
                                 <!-- medium button -->
-                                <button type="button" class="prio medium"
-                                    [class.selected]="selectedPriority === 'medium'" (click)="selectPriority('medium')">
+                                <button type="button" class="prio medium" [class.selected]="selectedPriority === 'medium'" (click)="selectPriority('medium')">
                                     <span>Medium</span>
-                                    <svg width="21" height="9" viewBox="0 0 21 9" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M19.4041 8.22552H1.59589C1.30524 8.22552 1.0265 8.10922 0.820979 7.90221C0.61546 7.6952 0.5 7.41443 0.5 7.12167C0.5 6.82891 0.61546 6.54814 0.820979 6.34113C1.0265 6.13412 1.30524 6.01782 1.59589 6.01782H19.4041C19.6948 6.01782 19.9735 6.13412 20.179 6.34113C20.3845 6.54814 20.5 6.82891 20.5 7.12167C20.5 7.41443 20.3845 7.6952 20.179 7.90221C19.9735 8.10922 19.6948 8.22552 19.4041 8.22552Z"
-                                            fill="#FFA800" />
-                                        <path
-                                            d="M19.4041 2.98223H1.59589C1.30524 2.98223 1.0265 2.86594 0.820979 2.65892C0.61546 2.45191 0.5 2.17114 0.5 1.87839C0.5 1.58563 0.61546 1.30486 0.820979 1.09785C1.0265 0.890834 1.30524 0.774536 1.59589 0.774536L19.4041 0.774536C19.6948 0.774536 19.9735 0.890834 20.179 1.09785C20.3845 1.30486 20.5 1.58563 20.5 1.87839C20.5 2.17114 20.3845 2.45191 20.179 2.65892C19.9735 2.86594 19.6948 2.98223 19.4041 2.98223Z"
-                                            fill="#FFA800" />
+                                    <svg width="21" height="9" viewBox="0 0 21 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.4041 8.22552H1.59589C1.30524 8.22552 1.0265 8.10922 0.820979 7.90221C0.61546 7.6952 0.5 7.41443 0.5 7.12167C0.5 6.82891 0.61546 6.54814 0.820979 6.34113C1.0265 6.13412 1.30524 6.01782 1.59589 6.01782H19.4041C19.6948 6.01782 19.9735 6.13412 20.179 6.34113C20.3845 6.54814 20.5 6.82891 20.5 7.12167C20.5 7.41443 20.3845 7.6952 20.179 7.90221C19.9735 8.10922 19.6948 8.22552 19.4041 8.22552Z" fill="#FFA800"/>
+                                        <path d="M19.4041 2.98223H1.59589C1.30524 2.98223 1.0265 2.86594 0.820979 2.65892C0.61546 2.45191 0.5 2.17114 0.5 1.87839C0.5 1.58563 0.61546 1.30486 0.820979 1.09785C1.0265 0.890834 1.30524 0.774536 1.59589 0.774536L19.4041 0.774536C19.6948 0.774536 19.9735 0.890834 20.179 1.09785C20.3845 1.30486 20.5 1.58563 20.5 1.87839C20.5 2.17114 20.3845 2.45191 20.179 2.65892C19.9735 2.86594 19.6948 2.98223 19.4041 2.98223Z" fill="#FFA800"/>
                                     </svg>
                                 </button>
                                 <!-- low button -->
-                                <button type="button" class="prio low" [class.selected]="selectedPriority === 'low'"
-                                    (click)="selectPriority('low')">
+                                <button type="button" class="prio low" [class.selected]="selectedPriority === 'low'" (click)="selectPriority('low')">
                                     <span>Low</span>
-                                    <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M10.333 9.00614C10.0984 9.00654 9.86988 8.9317 9.68103 8.79262L0.777921 2.22288C0.662083 2.13733 0.564243 2.02981 0.489988 1.90647C0.415732 1.78313 0.366516 1.64638 0.345148 1.50404C0.301994 1.21655 0.374893 0.923717 0.547809 0.689945C0.720726 0.456173 0.979494 0.300615 1.26719 0.257493C1.55488 0.21437 1.84794 0.287216 2.08188 0.460004L10.333 6.54248L18.5841 0.460004C18.7 0.374448 18.8315 0.312529 18.9713 0.277782C19.1111 0.243035 19.2564 0.236141 19.3988 0.257493C19.5413 0.278844 19.6781 0.328025 19.8016 0.402225C19.925 0.476425 20.0326 0.574193 20.1182 0.689945C20.2038 0.805697 20.2658 0.937168 20.3006 1.07685C20.3353 1.21653 20.3422 1.36169 20.3209 1.50404C20.2995 1.64638 20.2503 1.78313 20.176 1.90647C20.1018 2.02981 20.0039 2.13733 19.8881 2.22288L10.985 8.79262C10.7961 8.9317 10.5676 9.00654 10.333 9.00614Z"
-                                            fill="#7AE229" />
-                                        <path
-                                            d="M10.333 14.7547C10.0984 14.7551 9.86988 14.6802 9.68103 14.5412L0.777921 7.97142C0.543975 7.79863 0.388302 7.54005 0.345148 7.25257C0.301994 6.96509 0.374893 6.67225 0.54781 6.43848C0.720726 6.20471 0.979494 6.04915 1.26719 6.00603C1.55488 5.96291 1.84794 6.03575 2.08188 6.20854L10.333 12.291L18.5841 6.20854C18.8181 6.03575 19.1111 5.96291 19.3988 6.00603C19.6865 6.04915 19.9453 6.20471 20.1182 6.43848C20.2911 6.67225 20.364 6.96509 20.3209 7.25257C20.2777 7.54005 20.122 7.79863 19.8881 7.97142L10.985 14.5412C10.7961 14.6802 10.5676 14.7551 10.333 14.7547Z"
-                                            fill="#7AE229" />
+                                    <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10.333 9.00614C10.0984 9.00654 9.86988 8.9317 9.68103 8.79262L0.777921 2.22288C0.662083 2.13733 0.564243 2.02981 0.489988 1.90647C0.415732 1.78313 0.366516 1.64638 0.345148 1.50404C0.301994 1.21655 0.374893 0.923717 0.547809 0.689945C0.720726 0.456173 0.979494 0.300615 1.26719 0.257493C1.55488 0.21437 1.84794 0.287216 2.08188 0.460004L10.333 6.54248L18.5841 0.460004C18.7 0.374448 18.8315 0.312529 18.9713 0.277782C19.1111 0.243035 19.2564 0.236141 19.3988 0.257493C19.5413 0.278844 19.6781 0.328025 19.8016 0.402225C19.925 0.476425 20.0326 0.574193 20.1182 0.689945C20.2038 0.805697 20.2658 0.937168 20.3006 1.07685C20.3353 1.21653 20.3422 1.36169 20.3209 1.50404C20.2995 1.64638 20.2503 1.78313 20.176 1.90647C20.1018 2.02981 20.0039 2.13733 19.8881 2.22288L10.985 8.79262C10.7961 8.9317 10.5676 9.00654 10.333 9.00614Z" fill="#7AE229"/>
+                                        <path d="M10.333 14.7547C10.0984 14.7551 9.86988 14.6802 9.68103 14.5412L0.777921 7.97142C0.543975 7.79863 0.388302 7.54005 0.345148 7.25257C0.301994 6.96509 0.374893 6.67225 0.54781 6.43848C0.720726 6.20471 0.979494 6.04915 1.26719 6.00603C1.55488 5.96291 1.84794 6.03575 2.08188 6.20854L10.333 12.291L18.5841 6.20854C18.8181 6.03575 19.1111 5.96291 19.3988 6.00603C19.6865 6.04915 19.9453 6.20471 20.1182 6.43848C20.2911 6.67225 20.364 6.96509 20.3209 7.25257C20.2777 7.54005 20.122 7.79863 19.8881 7.97142L10.985 14.5412C10.7961 14.6802 10.5676 14.7551 10.333 14.7547Z" fill="#7AE229"/>
                                     </svg>
                                 </button>
                             </div>
-
-                            <label for="assignedTo">Assigned to</label>
-                            <select id="assignedTo" name="assignedTo">
-                                @if(firebase.orderedContactsList) {
-                                @for (item of firebase.orderedContactsList; track $index) {
-                                <option>
-                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
-                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+            
+                            <div class="dropdown">
+                                <label for="assignedTo">Assigned to</label>
+                                <div class="select_contacts" (click)="toggleDropdown()" (click)="$event.stopPropagation()">
+                                    <span class="like_placeholder" [ngClass] = "{ 'white' : dropdownVisible }">Select contacts to assign</span>
+                                    <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : dropdownVisible }">
+                                </div>
+                                <div class="dropdown_menu" *ngIf="dropdownVisible" (click)="$event.stopPropagation()">
+                                    @if(firebase.orderedContactsList) {
+                                        @for (item of firebase.orderedContactsList; track $index) {      
+                                            <div class="one_contact"  (click)="assignContact(item)">
+                                                <div class="contact_info">
+                                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                                                    </div>
+                                                    <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
+                                                </div>
+                                                <img  src="./assets/tasks/checkbox-unchecked.svg" alt="checkbox unchecked" 
+                                                     [ngClass]="{ 'checked': isSelected(item) }">
+                                            </div>                                                                             
+                                        } @empty {
+                                        <div>data loading</div>
+                                        }
+                                    }
+                                </div>
+                                
+                                <!-- <div class="selected_contacts" *ngIf="checkboxActive">
+                                    @if(firebase.orderedContactsList) {
+                                        @for (item of firebase.orderedContactsList; track $index) {      
+                                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
+                                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
+                                                    </div>                                                                             
+                                        } @empty {
+                                        <div>data loading</div>
+                                        }
+                                    }
+                                </div> -->
+                            </div>
+                            <div class="selected-contacts" *ngIf="selectedContacts.length > 0 && !dropdownVisible" >
+                                <div class="selected_contacts ">
+                                    <div class="avatar" *ngFor="let contact of selectedContacts" [ngStyle]="{'background-color': contact.color}">
+                                        <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
                                     </div>
-                                    <div class="contact_info">
-                                        <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) +
-                                            '...') : item.fullname}}</p>
-                                    </div>
-                                </option>
-                                } @empty {
-                                <div>data loading</div>
-                                }
-                                }
-                            </select>
-
-                            <label for="taskCategory">Category <span class="red">*</span></label>
-                            <select [(ngModel)]="newTask.category" id="taskCategory" name="taskCategory">
+                                </div>
+                            </div>
+                           <label for="taskCategory">Category <span class="red">*</span></label>
+                            <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel">
                                 <option value="" disabled selected>Select task category</option>
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
                             </select>
-
-                            <label for="subtasksTitle">Subtasks</label>
-                            <div class="input-container">
-                                <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
-                                    name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
-                                    (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
-
-                                <div class="input-icon"
-                                    [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
-                                    (click)="focusSubtaskInput()">
-                                    <img src="assets/tasks/add-black.svg" alt="Add">
-                                </div>
-                                <div class="input-icons"
-                                    [ngClass]="{'visible': subtaskInputFocused, 'hidden': !subtaskInputFocused}">
-                                    <div (click)="clearSubtaskInput()">
-                                        <img src="assets/tasks/close-black.svg" alt="Close">
-                                    </div>
-                                    <div (click)="addSubtask()">
-                                        <img src="assets/tasks/check-black.svg" alt="Check">
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="subtask-list">
-                                <li *ngFor="let subtask of subtasks; let i = index" class="subtask-item">
-                                    <span class="subtask-circle"></span>
-                                    <span *ngIf="!subtask.isEditing">{{ subtask.name }}</span>
-                                    <input class="subtask-input-edit" *ngIf="subtask.isEditing" [(ngModel)]="subtask.name"
-                                        id="subtask-input-{{i}}" (blur)="saveSubtask(i)"
-                                        (keyup.enter)="saveSubtask(i)" name="subtask"/>
-                                    <div class="subtask-actions">
-                                        <button type="button" class="edit-button" (click)="editSubtask(i)"><img
-                                                src="assets/tasks/edit.svg" alt="Edit"></button>
-                                        <img src="assets/tasks/line-small.svg" alt="">
-                                        <button type="button" class="remove-button" (click)="removeSubtask(i)"><img
-                                                src="assets/tasks/delete.svg" alt="Delete"></button>
-                                    </div>
-                                </li>
-                            </ul>
-
+                            @if (!category.valid && (category.touched)) {
+                                <span class="error_message">This field is required</span>
+                            } 
+            
+                           <label for="subtasksTitle">Subtasks</label>
+            
+                                        <div class="input-container">
+                                            <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
+                                                name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
+                                                (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
+            
+                                            <div class="input-icon"
+                                                [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
+                                                (click)="focusSubtaskInput()">
+                                                <img src="assets/tasks/add-black.svg" alt="Add">
+                                            </div>
+                                            <div class="input-icons"
+                                                [ngClass]="{'visible': subtaskInputFocused, 'hidden': !subtaskInputFocused}">
+                                                <div (click)="clearSubtaskInput()">
+                                                    <img src="assets/tasks/close-black.svg" alt="Close">
+                                                </div>
+                                                <div (click)="addSubtask()">
+                                                    <img src="assets/tasks/check-black.svg" alt="Check">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="subtask-list">
+                                            <li *ngFor="let subtask of subtasks; let i = index" class="subtask-item">
+                                                <span class="subtask-circle"></span>
+                                                <span *ngIf="!subtask.isEditing">{{ subtask.name }}</span>
+                                                <input class="subtask-input-edit" *ngIf="subtask.isEditing" [(ngModel)]="subtask.name"
+                                                    id="subtask-input-{{i}}" (blur)="saveSubtask(i)"
+                                                    (keyup.enter)="saveSubtask(i)" name="subtask"/>
+                                                <div class="subtask-actions">
+                                                    <button type="button" class="edit-button" (click)="editSubtask(i)"><img
+                                                            src="assets/tasks/edit.svg" alt="Edit"></button>
+                                                    <img src="assets/tasks/line-small.svg" alt="">
+                                                    <button type="button" class="remove-button" (click)="removeSubtask(i)"><img
+                                                            src="assets/tasks/delete.svg" alt="Delete"></button>
+                                                </div>
+                                            </li>
+                                        </ul> 
+            
                         </div>
-
                     </div>
+            
                     <div class="lower_form">
                         <span class="notice"><span class="red">*</span> this field is required</span>
-                        <div class="clear_submit">
-                            <img src="./assets/tasks/clear.svg" alt="">
-                            <button type="submit" (click)="submitPrio()" class="btn_bold">
+                        <div class="clear_submit" >
+                            <button type="button" class="btn_plain" (click)="clearFormular(addTask)">
+                                <span>Clear</span>
+                                <img src="./assets/tasks/close-black.svg" alt="x icon">
+                            </button>
+                            
+                            <button type="submit" class="btn_bold" (click)="showReport()" >
                                 <span>Create Task</span>
-                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <mask id="mask0_71766_5971" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0"
-                                        y="0" width="25" height="25">
-                                        <rect x="0.0166626" y="0.5" width="24" height="24" fill="#D9D9D9" />
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <mask id="mask0_71766_5971" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25">
+                                    <rect x="0.0166626" y="0.5" width="24" height="24" fill="#D9D9D9"/>
                                     </mask>
                                     <g mask="url(#mask0_71766_5971)">
-                                        <path
-                                            d="M9.56669 15.65L18.0417 7.175C18.2417 6.975 18.4792 6.875 18.7542 6.875C19.0292 6.875 19.2667 6.975 19.4667 7.175C19.6667 7.375 19.7667 7.6125 19.7667 7.8875C19.7667 8.1625 19.6667 8.4 19.4667 8.6L10.2667 17.8C10.0667 18 9.83335 18.1 9.56669 18.1C9.30002 18.1 9.06669 18 8.86669 17.8L4.56669 13.5C4.36669 13.3 4.27085 13.0625 4.27919 12.7875C4.28752 12.5125 4.39169 12.275 4.59169 12.075C4.79169 11.875 5.02919 11.775 5.30419 11.775C5.57919 11.775 5.81669 11.875 6.01669 12.075L9.56669 15.65Z"
-                                            fill="white" />
+                                    <path d="M9.56669 15.65L18.0417 7.175C18.2417 6.975 18.4792 6.875 18.7542 6.875C19.0292 6.875 19.2667 6.975 19.4667 7.175C19.6667 7.375 19.7667 7.6125 19.7667 7.8875C19.7667 8.1625 19.6667 8.4 19.4667 8.6L10.2667 17.8C10.0667 18 9.83335 18.1 9.56669 18.1C9.30002 18.1 9.06669 18 8.86669 17.8L4.56669 13.5C4.36669 13.3 4.27085 13.0625 4.27919 12.7875C4.28752 12.5125 4.39169 12.275 4.59169 12.075C4.79169 11.875 5.02919 11.775 5.30419 11.775C5.57919 11.775 5.81669 11.875 6.01669 12.075L9.56669 15.65Z" fill="white"/>
                                     </g>
                                 </svg>
                             </button>
                         </div>
                     </div>
-
                 </form>
+            <!-- hier ist die Meldung -->
+                <div class="btn_plain_color report" [ngClass] = "{ 'show_report' : newTaskAdded }">
+                    <span>Task added to board</span>
+                    <img src="./assets/tasks/board_icon.svg" alt="">
+                </div>
             </div>
         </section>
     </div>

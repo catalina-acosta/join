@@ -184,27 +184,27 @@ select option:disabled {
     color: white;
 }
 
-.select_contacts {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 48px;
-    border: 1px solid #d1d1d1;
-    border-radius: 10px;
-    padding: 12px 16px;
-    margin-top: 8px;
-        &:hover {
-            cursor: pointer;
-        }
-}
+// .select_contacts {
+//     background-color: white;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     height: 48px;
+//     border: 1px solid #d1d1d1;
+//     border-radius: 10px;
+//     padding: 12px 16px;
+//     margin-top: 8px;
+//         &:hover {
+//             cursor: pointer;
+//         }
+// }
 
-.select_contacts img {
-    &:hover {
-        background-color: #d1d1d1;
-        border-radius: 50%;
-    }
-}
+// .select_contacts img {
+//     &:hover {
+//         background-color: #d1d1d1;
+//         border-radius: 50%;
+//     }
+// }
 
 .like_placeholder {
     font-size: 20px;
@@ -408,6 +408,7 @@ select:focus,
     bottom: 447px; /* Die Position, an der die Box landen soll */
 }
 
+
 @media (max-width: 1200px) {
     .prio_btns {
         >button{
@@ -487,3 +488,4 @@ select:focus,
     .section_wrapper {padding-right: 16px; padding-left: 16px;}
     .clear_submit{right: 16px;}
 }
+
