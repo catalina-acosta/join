@@ -283,30 +283,30 @@ section {
         font-size: 18px;
     }
 
-    section {
-        .headline {
-            height: 270px;
-            padding: 25px;
-        }
 
-        .add_contacts_content {
-            height: 360px;
+    .headline {
+        height: 270px;
+        padding: 25px;
+    }
 
-            .form_content {
-                top: -128px;
-                gap: 20px;
-            }
-        }
+    .add_contacts_content {
+        height: 360px;
 
-        form {
-            width: 300px;
-            height: 246px;
-        }
-
-        .close_btn {
-            top: -279px;
+        .form_content {
+            top: -128px;
+            gap: 20px;
         }
     }
+
+    form {
+        width: 300px;
+        height: 246px;
+    }
+
+    .close_btn {
+        top: -279px;
+    }
+
 }
 
 @media (max-width:380px) {
@@ -318,35 +318,33 @@ section {
         font-size: 15px;
     }
 
-    section {
-        .headline {
-            height: 245px;
+    .headline {
+        height: 245px;
+    }
+
+    .add_contacts_content {
+        height: 330px;
+
+        .form_content {
+            top: -108px;
         }
-
-        .add_contacts_content {
-            height: 330px;
-
-            .form_content {
-                top: -108px;
-            }
-            .contact_icon{
-                width: 100px;
-            }
+        .contact_icon{
+            width: 100px;
         }
+    }
 
-        form {
-            width: 245px;
-            height: 189px;
-            gap: 12px;
-            .input_content{
-                input{
-                    padding: 9px;
-                }
+    form {
+        width: 245px;
+        height: 189px;
+        gap: 12px;
+        .input_content{
+            input{
+                padding: 9px;
             }
         }
+    }
 
-        .close_btn {
-            top: -250px;
-        }
+    .close_btn {
+        top: -250px;
     }
 }

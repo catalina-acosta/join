@@ -433,6 +433,10 @@ li {
     }
 }
 
+input, .prio_btns, .members_content {
+    margin-bottom: 6px;
+}
+
 @media (max-width: 450px) {
     section .dialog_content {
         padding: 15px;

@@ -43,12 +43,13 @@ export class BoardComponent {
     });
   }
 
-  openAddTask() {
+  openAddTask(newCardStatus:string) {
     if (window.innerWidth <= 900) {
       this.router.navigate(['/add-task']);
     } else {
       this.dialog.open(AddTaskDialogComponent, {
         width: '400px', 
+        data: {status: newCardStatus }
       });
     }
   }
@@ -114,8 +115,8 @@ export class BoardComponent {
     }
   
     const cardElement = event.item.element.nativeElement;
-    const randomRotation = Math.random() * 10 - 5;
-    cardElement.style.transform = `rotate(${randomRotation}deg)`;
+    const rotation = -2;
+    cardElement.style.transform = `rotate(${rotation}deg)`;
   }
   
 

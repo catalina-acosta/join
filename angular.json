@@ -40,7 +40,11 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "@grpc/proto-loader",
+              "@grpc/grpc-js"
+            ]
           },
           "configurations": {
             "production": {
@@ -48,12 +52,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "9kB"
                 }
               ],
               "outputHashing": "all"

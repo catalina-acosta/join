@@ -66,7 +66,6 @@ export class EditDialogComponent {
 
   saveEditedTask(taskForm: NgForm) {
     if (this.item?.id && this.item?.date) {
-      console.log('Vor Update:', this.item.date); // Debugging
       this.firebase.updateTaskStatus(this.item.id, {
         title: this.item.title,
         description: this.item.description,
@@ -77,8 +76,8 @@ export class EditDialogComponent {
         category: this.item.category,
         subtasks: this.item.subtasks
       }).then(() => {
-        console.log('Nach Update:', this.item?.date); // Debugging
-        console.log('Aufgabe erfolgreich aktualisiert!');
+        // console.log('Nach Update:', this.item?.date); // Debugging
+        // console.log('Aufgabe erfolgreich aktualisiert!');
         this.closeDialog();
       }).catch((error) => {
         console.error('Fehler beim Aktualisieren:', error);

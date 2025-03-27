@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { TaskInterface } from '../../board/task.interface';
-import { Component, inject} from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../../contacts/contact-interface';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -29,8 +30,6 @@ export class AddTaskDialogComponent {
   showAddButton: boolean = true;
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
 
- 
-
   newTask: TaskInterface = {
     title: "",
     description: "",
@@ -40,7 +39,10 @@ export class AddTaskDialogComponent {
     status: "todo",
     category: "",
     subtasks: []
+  }
 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { status: string }) {
+    this.newTask.status = data.status;
   }
 
   toggleDropdown() {
