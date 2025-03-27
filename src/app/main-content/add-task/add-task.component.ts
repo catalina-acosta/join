@@ -76,7 +76,7 @@ export class AddTaskComponent {
     this.newTask.priority = this.selectedPriority;
     this.newTask.assignedToUserId = this.selectedContacts.map(contact => contact.id).filter((id): id is string => id !== undefined); // Add selected contacts' IDs to the task
     this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
-
+    this.formSubmitted = true;
     if (ngform.valid && this.taskSelected) { // Only check if the form is valid
       console.log(this.newTask.category);
         this.firebase.addTaskToData(this.newTask); // Save the task to the database
@@ -87,6 +87,7 @@ export class AddTaskComponent {
         this.subtasks = []; // Clear subtasks
         this.taskSelected = false;
         this.selectedTask = '';
+        this.formSubmitted = false;
     }
 }
 
