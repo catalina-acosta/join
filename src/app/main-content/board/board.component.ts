@@ -42,11 +42,10 @@ export class BoardComponent {
     });
   }
 
-
-
-  openAddTaskDialog(): void {
+  openAddTaskDialog(newCardStatus:string): void {
     this.dialog.open(AddTaskDialogComponent, {
       width: '400px', 
+      data: {status: newCardStatus }
     });
   }
 
@@ -111,8 +110,8 @@ export class BoardComponent {
     }
   
     const cardElement = event.item.element.nativeElement;
-    const randomRotation = Math.random() * 10 - 5;
-    cardElement.style.transform = `rotate(${randomRotation}deg)`;
+    const rotation = -2;
+    cardElement.style.transform = `rotate(${rotation}deg)`;
   }
   
 
