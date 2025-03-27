@@ -16,13 +16,14 @@ import { EditContactDialogComponent } from '../contacts/edit-contact-dialog/edit
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component'; 
 import { Router } from '@angular/router';
+import { AddTaskComponent } from "../add-task/add-task.component";
 
 
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent, AddTaskDialogComponent, MatDialogModule],
+  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent, AddTaskDialogComponent, MatDialogModule, AddTaskComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -43,14 +44,11 @@ export class BoardComponent {
     });
   }
 
-  openAddTask(newCardStatus:string) {
+  openAddTask() {
     if (window.innerWidth <= 900) {
       this.router.navigate(['/add-task']);
     } else {
-      this.dialog.open(AddTaskDialogComponent, {
-        width: '400px', 
-        data: {status: newCardStatus }
-      });
+      this.isDialogOpen = true;
     }
   }
 
@@ -84,19 +82,14 @@ export class BoardComponent {
   }
 
   closeDialog() {
-    const dialogElement = document.querySelector('.custom-dialog');
-
-    if (dialogElement) {
-      dialogElement.classList.add('dialog-closed');
-      // this.isEditDialogOpen = false;
       setTimeout(() => {
         this.isDialogOpen = false;
         // this.isDeleteOpen = false;
       }, 500);
-    } else {
-      this.isDialogOpen = false;
-      // this.isDeleteOpen = false;
-    }
+  }
+
+  receiveEmitFromDialog(dialogClosed: boolean) {
+    this.isDialogOpen = false;
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
@@ -113,11 +106,14 @@ export class BoardComponent {
       const currentTask = event.container.data[event.currentIndex];
       this.firebase.updateTaskStatus(currentTask.id!, { status: event.container.id });
     }
-  
+    
     const cardElement = event.item.element.nativeElement;
-    const rotation = -2;
+    const rotation = -5;
     cardElement.style.transform = `rotate(${rotation}deg)`;
   }
   
+  // isDragging() {
+
+  // }
 
 }

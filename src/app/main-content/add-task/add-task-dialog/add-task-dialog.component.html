@@ -1,11 +1,11 @@
-<div class="dialog-overlay">
+<!-- <div class="dialog-overlay">
     <div class="dialog-content">
-        <section class="custom-dialog-content">
-            <div class="add_tasks_content">
+        <section class="custom-dialog-content"> -->
+            <div class="add_tasks_content" (click)="$event.stopPropagation()">
                 <div class="close-position">
                 <h1>Add Task</h1>
-                <div class="close_btn" >
-                    <img src="./assets/contact/Close.svg" alt="close">
+                <div class="close_btn"  >
+                    <img src="./assets/contact/Close.svg" alt="close" (click)="emitDialogStatus()">
                 </div>
             </div>
 
@@ -14,7 +14,7 @@
                         <div class="left_content">
                             <label for="taskTitle">Title <span class="red">*</span></label>
                             <input type="text" id="taskTitle" name="title" placeholder="Enter a title" [(ngModel)]="newTask.title" required #title="ngModel">
-                            @if (!title.valid && (title.touched)) {
+                            @if (!title.valid && title.touched || formSubmitted && !title.touched) {
                                 <span class="error_message">This field is required</span>
                             }
             
@@ -24,7 +24,7 @@
             
                             <label for="dueDate">Due date <span class="red">*</span></label>
                             <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel"> 
-                            @if (!date.valid && (date.touched)) {
+                            @if (!date.valid && date.touched || formSubmitted && !date.touched) {
                                 <span class="error_message">This field is required</span>
                             }
                         </div>
@@ -75,25 +75,13 @@
                                                     <p class="name">{{item.fullname.length > 32 ? (item.fullname.slice(0, 32) + '...') : item.fullname}}</p>    
                                                 </div>
                                                 <img  src="./assets/tasks/checkbox-unchecked.svg" alt="checkbox unchecked" 
-                                                     [ngClass]="{ 'checked': isSelected(item) }">
+                                                    [ngClass]="{ 'checked': isSelected(item) }">
                                             </div>                                                                             
                                         } @empty {
                                         <div>data loading</div>
                                         }
                                     }
                                 </div>
-                                
-                                <!-- <div class="selected_contacts" *ngIf="checkboxActive">
-                                    @if(firebase.orderedContactsList) {
-                                        @for (item of firebase.orderedContactsList; track $index) {      
-                                                    <div class="avatar" [ngStyle]="{'background-color': item.color}">
-                                                        <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
-                                                    </div>                                                                             
-                                        } @empty {
-                                        <div>data loading</div>
-                                        }
-                                    }
-                                </div> -->
                             </div>
                             <div class="selected-contacts" *ngIf="selectedContacts.length > 0 && !dropdownVisible" >
                                 <div class="selected_contacts ">
@@ -102,24 +90,20 @@
                                     </div>
                                 </div>
                             </div>
-                           <label for="taskCategory">Category <span class="red">*</span></label>
+                            <label for="taskCategory">Category <span class="red">*</span></label>
                             <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel">
                                 <option value="" disabled selected>Select task category</option>
                                 <option value="Technical Task">Technical Task</option>
                                 <option value="User Story">User Story</option>
                             </select>
-                            @if (!category.valid && (category.touched)) {
+                            @if (!category.valid && category.touched || formSubmitted && !category.touched) {
                                 <span class="error_message">This field is required</span>
                             } 
-            
                             <label class="subtast_title" for="subtasksTitle">Subtasks</label>
-
-
                             <div class="input_content">
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
                                     (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
-
                                 <div class="input-icon"
                                     [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
                                     (click)="focusSubtaskInput()">
@@ -161,18 +145,15 @@
                                     </div>
                                 </li>
                             </ul> 
-            
                         </div>
                     </div>
-            
                     <div class="lower_form">
                         <span class="notice"><span class="red">*</span> this field is required</span>
                         <div class="clear_submit" >
-                            <button type="button" class="btn_plain" (click)="clearFormular(addTask)">
+                            <button type="button" class="btn_plain" (click)="clearFormular(addTask); emitDialogStatus()">
                                 <span>Clear</span>
                                 <img src="./assets/tasks/close-black.svg" alt="x icon">
                             </button>
-                            
                             <button type="submit" class="btn_bold" (click)="showReport()" >
                                 <span>Create Task</span>
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,6 +174,6 @@
                     <img src="./assets/tasks/board_icon.svg" alt="">
                 </div>
             </div>
-        </section>
+        <!-- </section>
     </div>
-</div>
+</div> -->
