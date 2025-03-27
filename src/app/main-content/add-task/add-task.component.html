@@ -73,19 +73,8 @@
                             }
                         }
                     </div>
-                    
-                    <!-- <div class="selected_contacts" *ngIf="checkboxActive">
-                        @if(firebase.orderedContactsList) {
-                            @for (item of firebase.orderedContactsList; track $index) {      
-                                        <div class="avatar" [ngStyle]="{'background-color': item.color}">
-                                            <p>{{item.firstname.charAt(0)}}{{item.lastname.charAt(0)}}</p>
-                                        </div>                                                                             
-                            } @empty {
-                            <div>data loading</div>
-                            }
-                        }
-                    </div> -->
                 </div>
+                
                 <div class="selected-contacts" *ngIf="selectedContacts.length > 0 && !dropdownVisible" >
                     <div class="selected_contacts ">
                         <div class="avatar" *ngFor="let contact of selectedContacts" [ngStyle]="{'background-color': contact.color}">
