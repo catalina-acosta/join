@@ -29,6 +29,10 @@ export class AddTaskDialogComponent {
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   @Output() dialogStatusOutput = new EventEmitter<boolean>();
   isDialogOpen: boolean = false;
+  selectedTask: string = '';
+  categoryDropdownVisible: boolean = false;
+  categorySelected: boolean = false;
+
 
   newTask: TaskInterface = {
     title: "",
@@ -39,6 +43,19 @@ export class AddTaskDialogComponent {
     status: "todo",
     category: "",
     subtasks: []
+  }
+
+  chooseTask(chosenTask: string) {
+    this.selectedTask = chosenTask;
+    this.categorySelected = true;
+  }
+
+  toggleCategoryDropdown() {
+    this.categoryDropdownVisible = !this.categoryDropdownVisible;
+  }
+
+  hideCategoryDropdown() {
+    this.categoryDropdownVisible = false;
   }
 
   emitDialogStatus() {
@@ -57,20 +74,24 @@ export class AddTaskDialogComponent {
     this.selectedPriority = priority;
   }
 
-  submitForm(ngform: NgForm) {
-    this.newTask.priority = this.selectedPriority;
-    this.newTask.assignedToUserId = this.selectedContacts.map(contact => contact.id).filter((id): id is string => id !== undefined); // Add selected contacts' IDs to the task
-    this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
-    this.formSubmitted = true;
-    if (ngform.valid) { // Only check if the form is valid
-        this.firebase.addTaskToData(this.newTask); // Save the task to the database
-        this.newTaskAdded = true;
-        // console.log(this.newTask); // Log the task for debugging
-        this. clearFormular(ngform); // Reset the form after submission
-        this.selectedContacts = []; // Clear selected contacts
-        this.subtasks = []; // Clear subtasks
-        this.formSubmitted = false;
-    }
+submitForm(ngform: NgForm) {
+  this.newTask.category = this.selectedTask;
+  this.newTask.priority = this.selectedPriority;
+  this.newTask.assignedToUserId = this.selectedContacts.map(contact => contact.id).filter((id): id is string => id !== undefined); // Add selected contacts' IDs to the task
+  this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
+  this.formSubmitted = true;
+  if (ngform.valid && this.categorySelected) { // Only check if the form is valid
+    console.log(this.newTask.category);
+      this.firebase.addTaskToData(this.newTask); // Save the task to the database
+      this.newTaskAdded = true;
+      console.log(this.newTask); // Log the task for debugging
+      this. clearFormular(ngform); // Reset the form after submission
+      this.selectedContacts = []; // Clear selected contacts
+      this.subtasks = []; // Clear subtasks
+      this.categorySelected = false;
+      this.selectedTask = '';
+      this.formSubmitted = false;
+  }
 }
 
   showReport() {

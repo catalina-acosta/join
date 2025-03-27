@@ -245,14 +245,6 @@ select option:disabled {
     cursor: pointer;  
 }
 
-
-// .select_contacts img {
-//     &:hover {
-//         background-color: #d1d1d1;
-//         border-radius: 50%;
-//     }
-// }
-
 .like_placeholder {
     font-size: 20px;
     color: black;
@@ -291,6 +283,18 @@ select option:disabled {
         justify-content: center;
         gap: 16px;
     }
+}
+
+.category_dropdown {
+    background-color: white;
+    border-radius: 10px;
+    z-index: 30;
+    border: 1px solid #d1d1d1;
+}
+
+.select_task {
+    font-size: 20px;
+    padding-top: 16px;
 }
 
 .avatar {
@@ -581,6 +585,7 @@ li {
 
     label{
         font-size:15px;
+        padding-top: 6px;
     }
 
     .btn_bold{
