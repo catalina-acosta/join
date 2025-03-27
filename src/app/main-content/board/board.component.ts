@@ -42,10 +42,24 @@ export class BoardComponent {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
     });
+    window.addEventListener('resize', this.handleResize.bind(this));
+  }
+
+  handleResize() {
+    if (window.innerWidth <= 900 && this.isAddDialogOpen) {
+      this.isAddDialogOpen = false; // Schließe den Dialog
+      this.router.navigate(['/add-task']); // Navigiere zur Add-Task-Komponente
+    }
+  }
+
+  ngOnDestroy() {
+    // Entferne den Event-Listener, um Speicherlecks zu vermeiden
+    window.removeEventListener('resize', this.handleResize.bind(this));
   }
 
   openAddTask() {
     if (window.innerWidth <= 900) {
+      this.isAddDialogOpen = false; 
       this.router.navigate(['/add-task']);
     } else {
       this.isAddDialogOpen = true;
