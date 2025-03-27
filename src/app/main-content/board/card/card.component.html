@@ -62,9 +62,9 @@
 
         <div class="subtasks_content">
             <p class="title2">Subtasks</p>
-        
-            <div class="show_subtask" *ngFor="let subtask of item.subtasks; let i = index">
-                <label class="checkbox_content">
+    
+            <div class="show_subtask" >
+                <label class="checkbox_content" *ngFor="let subtask of item.subtasks; let i = index">
                     <input 
                         type="checkbox" 
                         [checked]="subtask.isCompleted" 

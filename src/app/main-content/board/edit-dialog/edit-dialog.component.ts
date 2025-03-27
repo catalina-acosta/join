@@ -102,12 +102,10 @@ export class EditDialogComponent {
         isCompleted: false,
         isEditing: false
       };
-
       if (this.item && this.item.subtasks) {
         this.item.subtasks.push(newSubtask);
-      } else {
-        console.error('Item or subtasks is undefined');
-      }
+      } 
+      this.subtaskInput = '';
     }
   }
 

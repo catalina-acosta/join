@@ -12,7 +12,6 @@ import {
   CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
-import { EditContactDialogComponent } from '../contacts/edit-contact-dialog/edit-contact-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component'; 
 import { Router } from '@angular/router';
@@ -23,7 +22,7 @@ import { AddTaskComponent } from "../add-task/add-task.component";
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent, AddTaskDialogComponent, MatDialogModule, AddTaskComponent],
+  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent, AddTaskDialogComponent, MatDialogModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
