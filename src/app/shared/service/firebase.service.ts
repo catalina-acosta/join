@@ -113,7 +113,7 @@ export class FirebaseService {
     }
   ];
 
-  dummyDataTasks: { title: string; description: string; date: string; priority: string; assignedToUserId: string[]; status: string; category: string; subtasks: { subtask: string; isCompleted: boolean }[] }[] = [
+  dummyDataTasks: { title: string; description: string; date: string; priority: string; assignedToUserId: string[]; status: string; category: string; subtasks: { subtask: string; isCompleted: boolean; isEditing: boolean }[] }[] = [
     {
       title: "HomePage",
       description: "Create new component for the homepage",
@@ -123,8 +123,8 @@ export class FirebaseService {
       status: "todo",
       category: "Technical Task",
       subtasks: [
-        { subtask: "create hero page", isCompleted: true },
-        { subtask: "navbar", isCompleted: false }
+        { subtask: "create hero page", isCompleted: true, isEditing: false },
+        { subtask: "navbar", isCompleted: false, isEditing: false }
       ]
     },
     {
@@ -136,9 +136,9 @@ export class FirebaseService {
       status: "inProgress",
       category: "User Story",
       subtasks: [
-        { subtask: "fetch recipes from API", isCompleted: false },
-        { subtask: "display recipes in a grid", isCompleted: true },
-        { subtask: "add pagination", isCompleted: false }
+        { subtask: "fetch recipes from API", isCompleted: false, isEditing: false },
+        { subtask: "display recipes in a grid", isCompleted: true, isEditing: false },
+        { subtask: "add pagination", isCompleted: false, isEditing: false }
       ]
     },
     {
@@ -149,8 +149,7 @@ export class FirebaseService {
       assignedToUserId: ["i2Zsc7SoKgQPbLa8OKOx"],
       status: "awaitFeedback",
       category: "Technical Task",
-      subtasks: [
-      ]
+      subtasks: []
     },
     {
       title: "User Authentication",
@@ -161,9 +160,9 @@ export class FirebaseService {
       status: "done",
       category: "User Story",
       subtasks: [
-        { subtask: "create login page", isCompleted: true },
-        { subtask: "create registration page", isCompleted: true },
-        { subtask: "implement JWT authentication", isCompleted: true }
+        { subtask: "create login page", isCompleted: true, isEditing: false },
+        { subtask: "create registration page", isCompleted: true, isEditing: false },
+        { subtask: "implement JWT authentication", isCompleted: true, isEditing: false }
       ]
     },
     {
@@ -175,9 +174,9 @@ export class FirebaseService {
       status: "todo",
       category: "Technical Task",
       subtasks: [
-        { subtask: "fetch recipe details from API", isCompleted: false },
-        { subtask: "display recipe details", isCompleted: false },
-        { subtask: "add comments section", isCompleted: false }
+        { subtask: "fetch recipe details from API", isCompleted: false, isEditing: false },
+        { subtask: "display recipe details", isCompleted: false, isEditing: false },
+        { subtask: "add comments section", isCompleted: false, isEditing: false }
       ]
     },
     {
@@ -189,9 +188,9 @@ export class FirebaseService {
       status: "inProgress",
       category: "User Story",
       subtasks: [
-        { subtask: "create search bar", isCompleted: true },
-        { subtask: "implement search logic", isCompleted: false },
-        { subtask: "display search results", isCompleted: false }
+        { subtask: "create search bar", isCompleted: true, isEditing: false },
+        { subtask: "implement search logic", isCompleted: false, isEditing: false },
+        { subtask: "display search results", isCompleted: false, isEditing: false }
       ]
     },
     {
@@ -203,9 +202,9 @@ export class FirebaseService {
       status: "awaitFeedback",
       category: "Technical Task",
       subtasks: [
-        { subtask: "test on mobile devices", isCompleted: false },
-        { subtask: "test on tablets", isCompleted: true },
-        { subtask: "test on desktops", isCompleted: false }
+        { subtask: "test on mobile devices", isCompleted: false, isEditing: false },
+        { subtask: "test on tablets", isCompleted: true, isEditing: false },
+        { subtask: "test on desktops", isCompleted: false, isEditing: false }
       ]
     },
     {
@@ -217,9 +216,9 @@ export class FirebaseService {
       status: "done",
       category: "User Story",
       subtasks: [
-        { subtask: "fetch user data from API", isCompleted: true },
-        { subtask: "display user data", isCompleted: true },
-        { subtask: "allow user to edit profile", isCompleted: true }
+        { subtask: "fetch user data from API", isCompleted: true, isEditing: false },
+        { subtask: "display user data", isCompleted: true, isEditing: false },
+        { subtask: "allow user to edit profile", isCompleted: true, isEditing: false }
       ]
     },
     {
@@ -231,9 +230,9 @@ export class FirebaseService {
       status: "todo",
       category: "Technical Task",
       subtasks: [
-        { subtask: "add favorite button", isCompleted: false },
-        { subtask: "store favorites in database", isCompleted: false },
-        { subtask: "display favorites on profile", isCompleted: false }
+        { subtask: "add favorite button", isCompleted: false, isEditing: false },
+        { subtask: "store favorites in database", isCompleted: false, isEditing: false },
+        { subtask: "display favorites on profile", isCompleted: false, isEditing: false }
       ]
     },
     {
@@ -245,9 +244,9 @@ export class FirebaseService {
       status: "inProgress",
       category: "User Story",
       subtasks: [
-        { subtask: "create notification system", isCompleted: true },
-        { subtask: "send notifications on new recipes", isCompleted: false },
-        { subtask: "display notifications in UI", isCompleted: false }
+        { subtask: "create notification system", isCompleted: true, isEditing: false },
+        { subtask: "send notifications on new recipes", isCompleted: false, isEditing: false },
+        { subtask: "display notifications in UI", isCompleted: false, isEditing: false }
       ]
     }
   ];
