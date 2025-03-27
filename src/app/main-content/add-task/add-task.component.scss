@@ -65,6 +65,11 @@ label {
     padding-top: 16px;
 }
 
+.select_task {
+    font-size: 20px;
+    padding-top: 16px;
+}
+
 .dropdown {
     padding-top: 16px;
 }
@@ -244,6 +249,15 @@ select option:disabled {
     scrollbar-width: thin;
     scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
 }
+
+.category_dropdown {
+    background-color: white;
+    border-radius: 10px;
+    z-index: 30;
+    padding: 12px 16px;
+    border: 1px solid #d1d1d1;
+}
+
 .selected-contacts{
     padding: 5px;
 }
@@ -476,6 +490,7 @@ li {
 }
 
 .grey_background {display: none;}
+.white {color: white;}
 
 @media (max-width: 1200px) {
     .prio_btns {

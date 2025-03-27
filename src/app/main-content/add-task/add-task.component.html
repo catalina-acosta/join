@@ -1,4 +1,4 @@
-<section class="section_wrapper" (click)="hideDropdown()" (click)="dismissReport()" >
+<section class="section_wrapper" (click)="hideDropdown()" (click)="hideCategoryDropdown()" (click)="dismissReport()" >
     <h1>Add Task</h1>
     <form #addTask="ngForm" (ngSubmit)="submitForm(addTask)">
         <div class="upper_form">
@@ -83,19 +83,24 @@
                     </div>
                 </div>
 
-               <label for="taskCategory">Category <span class="red">*</span></label>
-                <select id="taskCategory" name="category" [(ngModel)]="newTask.category" required #category="ngModel">
-                    <option value="" disabled selected>Select task category</option>
-                    <option value="Technical Task">Technical Task</option>
-                    <option value="User Story">User Story</option>
-                </select>
-                @if (!category.valid && (category.touched)) {
-                    <span class="error_message">This field is required</span>
-                } 
+                <div class="select_task">
+                    <label for="taskCategory">Category <span class="red">*</span></label>
+                    <div class="select_contacts" (click)="toggleCategoryDropdown()" (click)="$event.stopPropagation()">
+                        <span class="like_placeholder" [ngClass] = "{ 'd_none' : taskSelected || categoryDropdownVisible }" [ngClass] = "{ 'd_none' : taskSelected && categoryDropdownVisible || taskSelected && !categoryDropdownVisible }">Select task category</span>
+                        <span>{{ selectedTask }}</span>
+                        <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : categoryDropdownVisible }">
+                    </div>
+                    <div class="category_dropdown" *ngIf="categoryDropdownVisible">
+                        <div class="one_task">
+                            <span (click)="chooseTask('Technical Task')" >Technical Task</span>
+                        </div>
+                        <div class="one_task">
+                            <span (click)="chooseTask('User Story')">User Story</span>
+                        </div>
+                    </div>
+                </div>
 
                <label class="subtast_title" for="subtasksTitle">Subtasks</label>
-
-
                             <div class="input_content">
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"

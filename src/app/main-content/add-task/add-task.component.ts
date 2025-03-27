@@ -31,6 +31,9 @@ export class AddTaskComponent {
   formSubmitted: boolean = false;
   showAddButton: boolean = true;
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
+  selectedTask: string = '';
+  categoryDropdownVisible: boolean = false;
+  taskSelected: boolean = false;
 
   newTask: TaskInterface = {
     title: "",
@@ -41,7 +44,19 @@ export class AddTaskComponent {
     status: "todo",
     category: "",
     subtasks: []
+  }
 
+  chooseTask(chosenTask: string) {
+    this.selectedTask = chosenTask;
+    this.taskSelected = true;
+  }
+
+  toggleCategoryDropdown() {
+    this.categoryDropdownVisible = !this.categoryDropdownVisible;
+  }
+
+  hideCategoryDropdown() {
+    this.categoryDropdownVisible = false;
   }
 
   toggleDropdown() {
