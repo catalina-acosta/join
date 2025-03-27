@@ -86,7 +86,7 @@
                 <div class="select_task">
                     <label for="taskCategory">Category <span class="red">*</span></label>
                     <div class="select_contacts" (click)="toggleCategoryDropdown()" (click)="$event.stopPropagation()">
-                        <span class="like_placeholder" [ngClass] = "{ 'd_none' : taskSelected || categoryDropdownVisible }" [ngClass] = "{ 'd_none' : taskSelected && categoryDropdownVisible || taskSelected && !categoryDropdownVisible }">Select task category</span>
+                        <span class="like_placeholder" [ngClass] = "{ 'd_none' : categorySelected || categoryDropdownVisible }" [ngClass] = "{ 'd_none' : categorySelected && categoryDropdownVisible || categorySelected && !categoryDropdownVisible }">Select task category</span>
                         <span>{{ selectedTask }}</span>
                         <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : categoryDropdownVisible }">
                     </div>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-                @if (!taskSelected && formSubmitted) {
+                @if (!categorySelected && formSubmitted) {
                     <span class="error_message">This field is required</span>
                 }
 
