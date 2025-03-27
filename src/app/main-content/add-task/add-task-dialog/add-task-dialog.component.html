@@ -2,7 +2,12 @@
     <div class="dialog-content">
         <section class="custom-dialog-content">
             <div class="add_tasks_content">
+                <div class="close-position">
                 <h1>Add Task</h1>
+                <div class="close_btn" >
+                    <img src="./assets/contact/Close.svg" alt="close">
+                </div>
+            </div>
 
                 <form #addTask="ngForm" (ngSubmit)="submitForm(addTask)">
                     <div class="upper_form">
@@ -107,44 +112,55 @@
                                 <span class="error_message">This field is required</span>
                             } 
             
-                           <label for="subtasksTitle">Subtasks</label>
-            
-                                        <div class="input-container">
-                                            <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
-                                                name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
-                                                (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
-            
-                                            <div class="input-icon"
-                                                [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
-                                                (click)="focusSubtaskInput()">
-                                                <img src="assets/tasks/add-black.svg" alt="Add">
-                                            </div>
-                                            <div class="input-icons"
-                                                [ngClass]="{'visible': subtaskInputFocused, 'hidden': !subtaskInputFocused}">
-                                                <div (click)="clearSubtaskInput()">
-                                                    <img src="assets/tasks/close-black.svg" alt="Close">
-                                                </div>
-                                                <div (click)="addSubtask()">
-                                                    <img src="assets/tasks/check-black.svg" alt="Check">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="subtask-list">
-                                            <li *ngFor="let subtask of subtasks; let i = index" class="subtask-item">
-                                                <span class="subtask-circle"></span>
-                                                <span *ngIf="!subtask.isEditing">{{ subtask.name }}</span>
-                                                <input class="subtask-input-edit" *ngIf="subtask.isEditing" [(ngModel)]="subtask.name"
-                                                    id="subtask-input-{{i}}" (blur)="saveSubtask(i)"
-                                                    (keyup.enter)="saveSubtask(i)" name="subtask"/>
-                                                <div class="subtask-actions">
-                                                    <button type="button" class="edit-button" (click)="editSubtask(i)"><img
-                                                            src="assets/tasks/edit.svg" alt="Edit"></button>
-                                                    <img src="assets/tasks/line-small.svg" alt="">
-                                                    <button type="button" class="remove-button" (click)="removeSubtask(i)"><img
-                                                            src="assets/tasks/delete.svg" alt="Delete"></button>
-                                                </div>
-                                            </li>
-                                        </ul> 
+                            <label class="subtast_title" for="subtasksTitle">Subtasks</label>
+
+
+                            <div class="input_content">
+                                <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
+                                    name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
+                                    (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
+
+                                <div class="input-icon"
+                                    [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
+                                    (click)="focusSubtaskInput()">
+                                    <img src="assets/tasks/add-black.svg" alt="Add">
+                                </div>
+                                <div class="input-icons"
+                                    [ngClass]="{'visible': subtaskInputFocused, 'hidden': !subtaskInputFocused}">
+                                    <div (click)="clearSubtaskInput()">
+                                        <img src="assets/tasks/close-black.svg" alt="Close">
+                                    </div>
+                                    <div (click)="addSubtask()">
+                                        <img src="assets/tasks/check-black.svg" alt="Check">
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="subtask-list">
+                                <li *ngFor="let subtask of subtasks; let i = index" class="subtask-item" [ngClass]="{ 'editing': subtask.isEditing }">
+                                    <span class="subtask-circle" *ngIf="!subtask.isEditing"></span>
+
+                                    <span *ngIf="!subtask.isEditing">{{ subtask.name }}</span>
+                                    <input class="subtask-input-edit" *ngIf="subtask.isEditing" [(ngModel)]="subtask.name"
+                                        id="subtask-input-{{i}}" (blur)="saveSubtask(i)"
+                                        (keyup.enter)="saveSubtask(i)" name="subtask"/>
+
+                                    <div class="subtask-actions">
+                                        <button *ngIf="subtask.isEditing" type="button" class="edit-button" (click)="saveSubtask(i)">
+                                            <img src="assets/tasks/check-black.svg" alt="Check">
+                                        </button>
+
+                                        <button *ngIf="!subtask.isEditing" type="button" class="edit-button" (click)="editSubtask(i)">
+                                            <img src="assets/tasks/edit.svg" alt="Edit">
+                                        </button>
+
+                                        <img src="assets/tasks/line-small.svg" alt="">
+
+                                        <button type="button" class="remove-button" (click)="removeSubtask(i)"><img
+                                                src="assets/tasks/delete.svg" alt="Delete">
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul> 
             
                         </div>
                     </div>

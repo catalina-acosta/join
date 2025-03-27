@@ -15,6 +15,7 @@ import { CardComponent } from './card/card.component';
 import { EditContactDialogComponent } from '../contacts/edit-contact-dialog/edit-contact-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component'; 
+import { Router } from '@angular/router';
 
 
 
@@ -35,18 +36,22 @@ export class BoardComponent {
   selectedItem!: TaskInterface;
 
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private router: Router) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
     });
   }
 
-  openAddTaskDialog(newCardStatus:string): void {
-    this.dialog.open(AddTaskDialogComponent, {
-      width: '400px', 
-      data: {status: newCardStatus }
-    });
+  openAddTask(newCardStatus:string) {
+    if (window.innerWidth <= 900) {
+      this.router.navigate(['/add-task']);
+    } else {
+      this.dialog.open(AddTaskDialogComponent, {
+        width: '400px', 
+        data: {status: newCardStatus }
+      });
+    }
   }
 
   filterTasks(): void {
