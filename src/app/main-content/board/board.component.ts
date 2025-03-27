@@ -88,12 +88,18 @@ export class BoardComponent {
     }, 500);
 }
   
-  closeDialog() {
-      setTimeout(() => {
-        this.isDialogOpen = false;
-        // this.isDeleteOpen = false;
-      }, 500);
+closeDialog() {
+  const dialogElement = document.querySelector('.custom-dialog');
+
+  if (dialogElement) {
+    dialogElement.classList.add('dialog-closed');
+    setTimeout(() => {
+      this.isDialogOpen = false;
+    }, 500);
+  } else {
+    this.isDialogOpen = false;
   }
+}
 
   receiveEmitFromDialog(dialogClosed: boolean) {
     this.isAddDialogOpen = false;

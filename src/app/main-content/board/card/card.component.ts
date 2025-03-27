@@ -15,7 +15,7 @@ export class CardComponent {
  firebase = inject(FirebaseService);
    @Output() closeDialogEvent = new EventEmitter<void>();
    @Input() item?: TaskInterface;
-   private cdr = inject(ChangeDetectorRef); // ChangeDetector für UI-Updates
+   private cdr = inject(ChangeDetectorRef);
 
    selectedItem?: TaskInterface;
    isDialogOpen: boolean = false;
@@ -29,23 +29,20 @@ export class CardComponent {
   }
   
    formatDate(date: string | Date | undefined): string {
-    if (!date) return ''; // Falls kein Datum vorhanden ist
+    if (!date) return '';
     const dateObj = new Date(date);
-    return dateObj.toLocaleDateString('en-GB'); // Ausgabe im Format DD/MM/YYYY
+    return dateObj.toLocaleDateString('en-GB');
   }
   
 
    updateSubtaskStatus(taskId: string | undefined, subtaskIndex: number) {
     if (!this.item?.id || !this.item?.subtasks) return;
 
-    // Status der Subtask umkehren
     this.item.subtasks[subtaskIndex].isCompleted = !this.item.subtasks[subtaskIndex].isCompleted;
 
-    // UI sofort aktualisieren
     this.cdr.detectChanges();
     this.firebase.updateTaskStatus(this.item.id, { subtasks: this.item.subtasks, status: this.item.status })
       .then(() => {
-        console.log('Subtask updated successfully');
         this.cdr.detectChanges(); 
       })
       .catch((error) => console.error('Error updating subtask:', error));

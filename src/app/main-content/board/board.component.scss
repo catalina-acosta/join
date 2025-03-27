@@ -231,11 +231,30 @@ section {
     }
 }
 
-
-
 .dialog-closed {
     animation: slideOutToRight 0.5s ease-in forwards;
 }
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutToRight {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
 
 @media screen and (max-width: 1428px) {
     .task_container {
