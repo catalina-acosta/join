@@ -77,9 +77,17 @@
                 
                 <div class="selected-contacts" *ngIf="selectedContacts.length > 0 && !dropdownVisible" >
                     <div class="selected_contacts ">
-                        <div class="avatar" *ngFor="let contact of selectedContacts" [ngStyle]="{'background-color': contact.color}">
-                            <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
-                        </div>
+                        @if (selectedContacts.length > 3) {
+                                <div *ngFor="let contact of selectedContacts.slice(0, 3); let i = index" class="avatar" [ngStyle]="{'background-color': contact.color}">
+                                  <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                                </div>
+                            <p>+ {{ selectedContacts.length - 3}} weitere</p>
+                        }
+                        @else {
+                            <div class="avatar" *ngFor="let contact of selectedContacts" [ngStyle]="{'background-color': contact.color}">
+                                <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                            </div>
+                        }
                     </div>
                 </div>
 
