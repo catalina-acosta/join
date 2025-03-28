@@ -39,7 +39,6 @@ export class EditDialogComponent {
         }
       }
     }
-    console.log(this.item?.assignedToUserId);
   }
 
   toggleDropdown() {
@@ -48,19 +47,18 @@ export class EditDialogComponent {
 
   ngOnInit() {
     if (this.item?.priority) {
-      this.selectedPriority = this.item.priority;  // Setze gespeicherte Priorität
+      this.selectedPriority = this.item.priority; 
     }
 
-    // Stelle sicher, dass 'subtasks' immer ein Array ist
     if (!this.item?.subtasks) {
-      this.item!.subtasks = []; // Initialisiere 'subtasks' als leeres Array, falls nicht vorhanden
+      this.item!.subtasks = [];
     }
   }
 
   selectPriority(priority: string) {
     this.selectedPriority = priority;
     if (this.item) {
-      this.item.priority = priority; // Aktualisiere das Item
+      this.item.priority = priority;
     }
   }
 
