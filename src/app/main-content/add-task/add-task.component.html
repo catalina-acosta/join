@@ -14,8 +14,8 @@
                     style="height:200px" [(ngModel)]="newTask.description"></textarea>
 
                 <label for="dueDate">Due date <span class="red">*</span></label>
-                <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel"> 
-                @if ((!date.valid && date.touched || formSubmitted && !date.touched)) {
+                <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel" [ngClass]="{'date-focused': dateSet}" (click)="newClassForDate()" > 
+                @if (!date.valid && date.touched || formSubmitted && !date.touched) {
                     <span class="error_message">This field is required</span>
                 }
             </div>
@@ -74,15 +74,23 @@
                         }
                     </div>
                 </div>
-                
+<!-- contact selections -->
                 <div class="selected-contacts" *ngIf="selectedContacts.length > 0 && !dropdownVisible" >
                     <div class="selected_contacts ">
-                        <div class="avatar" *ngFor="let contact of selectedContacts" [ngStyle]="{'background-color': contact.color}">
-                            <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
-                        </div>
+                        @if (selectedContacts.length > 3) {
+                                <div *ngFor="let contact of selectedContacts.slice(0, 3); let i = index" class="avatar" [ngStyle]="{'background-color': contact.color}">
+                                  <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                                </div>
+                            <p>+ {{ selectedContacts.length - 3}} weitere</p>
+                        }
+                        @else {
+                            <div class="avatar" *ngFor="let contact of selectedContacts" [ngStyle]="{'background-color': contact.color}">
+                                <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                            </div>
+                        }
                     </div>
                 </div>
-
+<!-- task selection -->
                 <div class="select_task">
                     <label for="taskCategory">Category <span class="red">*</span></label>
                     <div class="select_contacts" (click)="toggleCategoryDropdown()" (click)="$event.stopPropagation()" (click)="setCategoryTouchedTrue()">
@@ -102,14 +110,14 @@
                 @if (!categorySelected && formSubmitted || (categoryTouched && !categoryDropdownVisible && !categorySelected)) {
                     <span class="error_message">This field is required</span>
                 }
-
+<!-- creating subtasks -->
                <label class="subtast_title" for="subtasksTitle">Subtasks</label>
                             <div class="input_content">
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
                                     (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
 
-                                <div class="input-icon"
+                                <div class="input-icons"
                                     [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
                                     (click)="focusSubtaskInput()">
                                     <img src="assets/tasks/add-black.svg" alt="Add">
@@ -162,7 +170,7 @@
                     <img src="./assets/tasks/close-black.svg" alt="x icon">
                 </button>
                 
-                <button type="submit" class="btn_bold" (click)="showReport()" >
+                <button type="submit" class="btn_bold">
                     <span>Create Task</span>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0_71766_5971" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25">
