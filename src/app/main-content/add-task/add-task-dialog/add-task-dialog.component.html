@@ -122,7 +122,7 @@
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
                                     (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
-                                <div class="input-icon"
+                                <div class="input-icons"
                                     [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
                                     (click)="focusSubtaskInput()">
                                     <img src="assets/tasks/add-black.svg" alt="Add">
