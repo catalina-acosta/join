@@ -27,7 +27,7 @@
 
     <!-- Open Card Dialog -->
     <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
-        <div class="custom-dialog">
+        <div class="card-dialog">
             <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"  (contactDeletedEvent)="onTaskDeleted()"></app-card>
         </div>
     </div>
