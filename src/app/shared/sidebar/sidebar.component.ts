@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,6 +20,22 @@ export class SidebarComponent {
     { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact' }
   ];
 
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Update the active index based on the current route
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.updateActiveIndex(event.urlAfterRedirects);
+      }
+    });
+  }
+
+  private updateActiveIndex(currentUrl: string) {
+    const foundIndex = this.menuItems.findIndex(item => item.link === currentUrl);
+    this.selectedIndex = foundIndex !== -1 ? foundIndex : null;
+  }
+
   setActive(index: number) {
     this.selectedIndex = index;
   }
@@ -26,5 +43,7 @@ export class SidebarComponent {
   setMobileActive(index: number) {
     this.selectedMobileIndex = index;
   }
+
+
   
 }
