@@ -76,8 +76,12 @@
           <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" 
             cdkDrag (click)="openCardDialog(item)"
             (cdkDragStarted)="item.id ? onDragStart(item) : null"
+            
             (cdkDragEnded)="item.id ? onDragEnd(item) : null"
             (cdkDragMoved)="onDragMoved($event)"
+            
+
+
             [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
             <app-task-card [item]="item"></app-task-card>
           </div>
@@ -103,7 +107,10 @@
             (cdkDragStarted)="item.id ? onDragStart(item) : null"
             (cdkDragEnded)="item.id ? onDragEnd(item) : null"
             (cdkDragMoved)="onDragMoved($event)"
-            [ngClass]="{ 'dragging': isDragging  }">
+
+
+
+            [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
@@ -128,7 +135,7 @@
             (cdkDragStarted)="item.id ? onDragStart(item) : null"
             (cdkDragEnded)="item.id ? onDragEnd(item) : null"
             (cdkDragMoved)="onDragMoved($event)"
-            [ngClass]="{ 'dragging': isDragging  }">
+            [ngClass]="{ 'dragging': item.id === draggingCardId }">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
