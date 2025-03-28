@@ -18,8 +18,6 @@ import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dia
 import { Router } from '@angular/router';
 import { AddTaskComponent } from "../add-task/add-task.component";
 
-
-
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -164,6 +162,7 @@ closeDialog() {
   onDragStart(item:TaskInterface): void {
     if (item && item.id) {
       this.isDragging = true;
+      
       this.draggingCardId = item.id; // Set the ID of the dragged card
       console.log('Drag started for card ID:', item.id); // Debugging
     }
