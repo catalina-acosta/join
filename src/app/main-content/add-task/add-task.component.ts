@@ -94,7 +94,7 @@ export class AddTaskComponent {
     this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
     this.formSubmitted = true;
     if (ngform.valid && this.categorySelected) { // Only check if the form is valid
-        this.showReport();
+        this.showReport();  //shows confirmation about added task
         this.firebase.addTaskToData(this.newTask); // Save the task to the database
         this.newTaskAdded = true;
         this. clearFormular(ngform); // Reset the form after submission
@@ -121,6 +121,7 @@ export class AddTaskComponent {
         this.dateSet = false; //new class for date input field set back to default
   }
 
+  //if newTaskAdded, comes a confirmation, after could it be false again
   dismissReport() {    
     this.newTaskAdded = false;
   }

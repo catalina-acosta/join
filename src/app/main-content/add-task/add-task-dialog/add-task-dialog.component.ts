@@ -4,6 +4,7 @@ import { TaskInterface } from '../../board/task.interface';
 import { Component, EventEmitter, Inject, inject, Output } from '@angular/core';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { ContactInterface } from '../../contacts/contact-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -32,7 +33,8 @@ export class AddTaskDialogComponent {
   selectedCategory: string = '';
   categoryDropdownVisible: boolean = false;
   categorySelected: boolean = false;
-
+  categoryTouched: boolean = false;
+  dateSet: boolean = false;
 
   newTask: TaskInterface = {
     title: "",
@@ -45,10 +47,22 @@ export class AddTaskDialogComponent {
     subtasks: []
   }
 
-  chooseCategory(choosenCategory: string) {
-    this.selectedCategory = choosenCategory;
-    this.categorySelected = true;
-  }
+   //implement Router in constructor, which I need for leading to Board after added Task
+   constructor(private router: Router) { }
+
+   newClassForDate() {
+     this.dateSet = true;
+   }
+ 
+   chooseCategory(choosenCategory: string) {
+     this.selectedCategory = choosenCategory;
+     this.categorySelected = true;
+     this.categoryTouched = false;
+   }
+ 
+   setCategoryTouchedTrue() {
+     this.categoryTouched = true;
+   }
 
   toggleCategoryDropdown() {
     this.categoryDropdownVisible = !this.categoryDropdownVisible;
@@ -81,25 +95,34 @@ submitForm(ngform: NgForm) {
   this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
   this.formSubmitted = true;
   if (ngform.valid && this.categorySelected) { // Only check if the form is valid
-    console.log(this.newTask.category);
+      this.showReport(); //shows confirmation about added task
       this.firebase.addTaskToData(this.newTask); // Save the task to the database
       this.newTaskAdded = true;
       console.log(this.newTask); // Log the task for debugging
       this. clearFormular(ngform); // Reset the form after submission
-      this.selectedContacts = []; // Clear selected contacts
-      this.subtasks = []; // Clear subtasks
-      this.categorySelected = false;
-      this.selectedCategory = '';
-      this.formSubmitted = false;
+      this.setBack(); //set back all flags and arrays to default
   }
 }
-
+//shows for 3 sec message "task added succesfully" and directs the user on the board
   showReport() {
     setTimeout(() => {
       this.newTaskAdded = false;
-    }, 5000);
+      this.router.navigate(['/board']);
+    }, 2000);
   }
 
+    //set back flags and get the formular ready for a new task
+    setBack() {
+      this.selectedContacts = []; // Clear selected contacts
+          this.subtasks = []; // Clear subtasks
+          this.categorySelected = false; //set category flag back
+          this.selectedCategory = ''; //clear category
+          this.formSubmitted = false; //form getting ready for the new submit
+          this.categoryTouched = false; //category touched set back to default
+          this.dateSet = false; //new class for date input field set back to default
+    }
+
+  //if newTaskAdded, comes a confirmation, after could it be false again
   dismissReport() {    
     this.newTaskAdded = false;
   }
@@ -108,6 +131,10 @@ submitForm(ngform: NgForm) {
     ngform.reset(); 
     this.selectedPriority = 'medium';
     this.emitDialogStatus();
+    this.categorySelected = false;
+    this.selectedCategory = '';
+    this.categoryTouched = false;
+    this.selectedContacts = [];
   }
 
   assignContact(contact: ContactInterface) {
@@ -122,11 +149,6 @@ submitForm(ngform: NgForm) {
   isSelected(contact: any): boolean {
     return this.selectedContacts.some(c => c.id === contact.id);
   }
-
-  // submitPrio() {
-  //   console.log("Ausgewählte Priorität:", this.selectedPriority);
-  // }
-
 
   addSubtask() {
     if (this.subtaskInput.trim()) {
