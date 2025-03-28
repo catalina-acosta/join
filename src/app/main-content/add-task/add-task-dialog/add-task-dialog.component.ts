@@ -29,7 +29,7 @@ export class AddTaskDialogComponent {
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   @Output() dialogStatusOutput = new EventEmitter<boolean>();
   isDialogOpen: boolean = false;
-  selectedTask: string = '';
+  selectedCategory: string = '';
   categoryDropdownVisible: boolean = false;
   categorySelected: boolean = false;
 
@@ -46,7 +46,7 @@ export class AddTaskDialogComponent {
   }
 
   chooseTask(chosenTask: string) {
-    this.selectedTask = chosenTask;
+    this.selectedCategory = chosenTask;
     this.categorySelected = true;
   }
 
@@ -75,7 +75,7 @@ export class AddTaskDialogComponent {
   }
 
 submitForm(ngform: NgForm) {
-  this.newTask.category = this.selectedTask;
+  this.newTask.category = this.selectedCategory;
   this.newTask.priority = this.selectedPriority;
   this.newTask.assignedToUserId = this.selectedContacts.map(contact => contact.id).filter((id): id is string => id !== undefined); // Add selected contacts' IDs to the task
   this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
@@ -89,7 +89,7 @@ submitForm(ngform: NgForm) {
       this.selectedContacts = []; // Clear selected contacts
       this.subtasks = []; // Clear subtasks
       this.categorySelected = false;
-      this.selectedTask = '';
+      this.selectedCategory = '';
       this.formSubmitted = false;
   }
 }
