@@ -34,6 +34,7 @@ export class AddTaskComponent {
   selectedCategory: string = '';
   categoryDropdownVisible: boolean = false;
   categorySelected: boolean = false;
+  categoryTouched: boolean = false;
 
   newTask: TaskInterface = {
     title: "",
@@ -46,9 +47,13 @@ export class AddTaskComponent {
     subtasks: []
   }
 
-  chooseTask(chosenTask: string) {
-    this.selectedCategory = chosenTask;
+  chooseCategory(choosenCategory: string) {
+    this.selectedCategory = choosenCategory;
     this.categorySelected = true;
+  }
+
+  setCategoryTouchedTrue() {
+    this.categoryTouched = true;
   }
 
   toggleCategoryDropdown() {

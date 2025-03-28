@@ -45,8 +45,8 @@ export class AddTaskDialogComponent {
     subtasks: []
   }
 
-  chooseTask(chosenTask: string) {
-    this.selectedCategory = chosenTask;
+  chooseCategory(choosenCategory: string) {
+    this.selectedCategory = choosenCategory;
     this.categorySelected = true;
   }
 
