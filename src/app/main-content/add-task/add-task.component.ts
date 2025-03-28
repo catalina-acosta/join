@@ -31,9 +31,10 @@ export class AddTaskComponent {
   formSubmitted: boolean = false;
   showAddButton: boolean = true;
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
-  selectedTask: string = '';
+  selectedCategory: string = '';
   categoryDropdownVisible: boolean = false;
   categorySelected: boolean = false;
+  categoryTouched: boolean = false;
 
   newTask: TaskInterface = {
     title: "",
@@ -46,9 +47,14 @@ export class AddTaskComponent {
     subtasks: []
   }
 
-  chooseTask(chosenTask: string) {
-    this.selectedTask = chosenTask;
+  chooseCategory(choosenCategory: string) {
+    this.selectedCategory = choosenCategory;
     this.categorySelected = true;
+    this.categoryTouched = false;
+  }
+
+  setCategoryTouchedTrue() {
+    this.categoryTouched = true;
   }
 
   toggleCategoryDropdown() {
@@ -72,7 +78,7 @@ export class AddTaskComponent {
   }
 
   submitForm(ngform: NgForm) {
-    this.newTask.category = this.selectedTask;
+    this.newTask.category = this.selectedCategory;
     this.newTask.priority = this.selectedPriority;
     this.newTask.assignedToUserId = this.selectedContacts.map(contact => contact.id).filter((id): id is string => id !== undefined); // Add selected contacts' IDs to the task
     this.newTask.subtasks = this.subtasks.map(subtask => ({ subtask: subtask.name, isCompleted: false })); // Add subtasks to the task
@@ -86,8 +92,9 @@ export class AddTaskComponent {
         this.selectedContacts = []; // Clear selected contacts
         this.subtasks = []; // Clear subtasks
         this.categorySelected = false;
-        this.selectedTask = '';
+        this.selectedCategory = '';
         this.formSubmitted = false;
+        this.categoryTouched = false;
     }
 }
 
@@ -104,6 +111,10 @@ export class AddTaskComponent {
   clearFormular(ngform: NgForm) {
     ngform.reset(); 
     this.selectedPriority = 'medium';
+    this.categorySelected = false;
+    this.selectedCategory = '';
+    this.categoryTouched = false;
+    this.selectedContacts = [];
   }
 
   assignContact(contact: ContactInterface) {
