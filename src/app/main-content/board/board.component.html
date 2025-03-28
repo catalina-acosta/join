@@ -1,3 +1,4 @@
+<!--#region add-task-overlay-->
 <div class="dialog-overlay" [ngStyle]="{ 'display': isAddDialogOpen ? 'flex' : 'none' }" (click)="closeAddDialog()">
   <div class="dialog-content">
       <section class="custom-dialog">
@@ -5,141 +6,114 @@
       </section>
   </div>
 </div>
-
+<!--#endregion-->
 <section>
-    <div class="headline_content">
-      <div class="headline_box">
-        <h1>Board</h1>
-      </div>
-      <div class="find_task_content">
-        <div class="search-container">
-          <input type="text" placeholder="Find Task" class="search-input" [(ngModel)]="searchQuery" (input)="filterTasks()"/>
-          <img src="./assets/tasks/Vector 3.svg" alt="">
-          <button class="search-button">
-            <img src="./assets/tasks/search.svg" alt="seach">
-          </button>
-        </div>
-        <button class="add_btn" (click)="openAddTask()">
-          Add task <img src="./assets/tasks/add.svg" alt="add">
+  <!--#region find-task-->
+  <div class="headline_content">
+    <div class="headline_box">
+      <h1>Board</h1>
+    </div>
+    <div class="find_task_content">
+      <div class="search-container">
+        <input type="text" placeholder="Find Task" class="search-input" [(ngModel)]="searchQuery" (input)="filterTasks()"/>
+        <img src="./assets/tasks/Vector 3.svg" alt="">
+        <button class="search-button">
+          <img src="./assets/tasks/search.svg" alt="seach">
         </button>
       </div>
+      <button class="add_btn" (click)="openAddTask()">
+        Add task <img src="./assets/tasks/add.svg" alt="add">
+      </button>
     </div>
-
-    <!-- Open Card Dialog -->
-    <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
-        <div class="custom-dialog">
-            <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
-        </div>
-    </div>
-
-  
-    <div class="task_container">
-      <div class="todo_box">
-        <div class="title_content">
-          <h5>To do</h5>
-          <button (click)="openAddTask()" class="plus_btn">+</button>
-        </div>
-        <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('todo')" 
-          [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" 
-          (cdkDropListDropped)="drop($event)">
-
-             <div *ngIf="filterTasksByStatusAndQuery('todo').length === 0" class="no_match_box">
-                <div class="no_tasks_card">
-                  <p>No tasks To do</p>
-                </div>
-              </div>
-
-          <div *ngFor="let item of filterTasksByStatusAndQuery('todo')" class="card" cdkDrag (click)="openCardDialog(item)"
-          (cdkDragStarted)="item.id ? onDragStart(item) : null"
-          (cdkDragEnded)="item.id ? onDragEnd(item) : null"
-          (cdkDragMoved)="onDragMoved($event)"
-          [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
-            <app-task-card [item]="item"></app-task-card>
-          </div>
-        </div>
+  </div>
+  <!--#endregion-->
+  <!--#region-board-columns-->
+  <div class="task_container">
+    <div class="todo_box">
+      <div class="title_content">
+        <h5>To do</h5>
+        <button (click)="openAddTask()" class="plus_btn">+</button>
       </div>
-  
-      <div class="progress_box">
-        <div class="title_content">
-          <h5>In progress</h5>
-          <button (click)="openAddTask()" class="plus_btn">+</button>
-        </div>  
-        <div id="inProgress" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('inProgress')" 
-          [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
-
-             <div *ngIf="filterTasksByStatusAndQuery('inProgress').length === 0" class="no_match_box">
-                <div class="no_tasks_card">
-                  <p>No tasks In progress</p>
-                </div>
-              </div>
-
-          <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" 
-            cdkDrag (click)="openCardDialog(item)"
-            (cdkDragStarted)="item.id ? onDragStart(item) : null"
-            
-            (cdkDragEnded)="item.id ? onDragEnd(item) : null"
-            (cdkDragMoved)="onDragMoved($event)"
-            
-
-
-            [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
-            <app-task-card [item]="item"></app-task-card>
+      <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('todo')" 
+        [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" 
+        (cdkDropListDropped)="drop($event)">
+        @if(filterTasksByStatusAndQuery('todo').length === 0) {
+          <div class="no_match_box">
+            <div class="no_tasks_card">
+              <p>No tasks To do</p>
+            </div>
           </div>
-        </div>
-      </div>
-  
-      <div class="await_box">
-        <div class="title_content">
-          <h5>Await feedback</h5>
-          <button (click)="openAddTask()" class="plus_btn">+</button>
-        </div>
-        <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('awaitFeedback')" 
-          [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
-
-             <div *ngIf="filterTasksByStatusAndQuery('awaitFeedback').length === 0" class="no_match_box">
-                <div class="no_tasks_card">
-                  <p>No tasks Await feedback</p>
-                </div>
-              </div>
-
-          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" 
-            cdkDrag (click)="openCardDialog(item)"
-            (cdkDragStarted)="item.id ? onDragStart(item) : null"
-            (cdkDragEnded)="item.id ? onDragEnd(item) : null"
-            (cdkDragMoved)="onDragMoved($event)"
-
-
-
-            [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
-            <app-task-card [item]="item"></app-task-card>
-          </div>
-        </div>
-      </div>
-  
-      <div class="done_box">
-        <div class="title_content">
-          <h5>Done</h5>
-          <button (click)="openAddTask()" class="plus_btn">+</button>
-        </div>
-        <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('done')" 
-          [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
-
-             <div *ngIf="filterTasksByStatusAndQuery('done').length === 0" class="no_match_box">
-                <div class="no_tasks_card">
-                  <p>No tasks Done</p>
-                </div>
-              </div>
-
-          <div *ngFor="let item of filterTasksByStatusAndQuery('done')" class="card" 
-            cdkDrag (click)="openCardDialog(item)"
-            (cdkDragStarted)="item.id ? onDragStart(item) : null"
-            (cdkDragEnded)="item.id ? onDragEnd(item) : null"
-            (cdkDragMoved)="onDragMoved($event)"
-            [ngClass]="{ 'dragging': item.id === draggingCardId }">
-            <app-task-card [item]="item"></app-task-card>
-          </div>
-        </div>
+        } @else {
+          @for( item of filterTasksByStatusAndQuery('todo'); track $index) {
+            <app-task-card [item]="item" cdkDrag ></app-task-card>
+          }
+        }
       </div>
     </div>
-  </section>
-  
+    <div class="progress_box">
+      <div class="title_content">
+        <h5>In progress</h5>
+        <button (click)="openAddTask()" class="plus_btn">+</button>
+      </div>  
+      <div id="inProgress" cdkDropList #inProgress="cdkDropList" 
+        [cdkDropListData]="filterTasksByStatusAndQuery('inProgress')" 
+        [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" 
+        (cdkDropListDropped)="drop($event)">
+        @if(filterTasksByStatusAndQuery('inProgress').length === 0) {
+          <div class="no_match_box">
+            <div class="no_tasks_card">
+              <p>No tasks In progress</p>
+            </div>
+          </div>
+        } @else {
+          @for( item of filterTasksByStatusAndQuery('inProgress'); track $index) {
+            <app-task-card [item]="item" cdkDrag></app-task-card>
+          }
+        }
+      </div>
+    </div>
+    
+    <div class="await_box">
+      <div class="title_content">
+        <h5>Await feedback</h5>
+        <button (click)="openAddTask()" class="plus_btn">+</button>
+      </div>
+      <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('awaitFeedback')" 
+        [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
+        @if(filterTasksByStatusAndQuery('awaitFeedback').length === 0) {
+          <div class="no_match_box">
+            <div class="no_tasks_card">
+              <p>No tasks Await Feedback</p>
+            </div>
+          </div>
+        } @else {
+          @for( item of filterTasksByStatusAndQuery('awaitFeedback'); track $index) {
+            <app-task-card [item]="item" cdkDrag ></app-task-card>
+          }
+        }
+        </div>
+      </div>
+      
+    <div class="done_box">
+      <div class="title_content">
+        <h5>Done</h5>
+        <button (click)="openAddTask()" class="plus_btn">+</button>
+      </div>
+      <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('done')" 
+      [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
+        @if(filterTasksByStatusAndQuery('done').length === 0) {
+          <div class="no_match_box">
+            <div class="no_tasks_card">
+              <p>No tasks Done</p>
+            </div>
+          </div>
+        } @else {
+          @for( item of filterTasksByStatusAndQuery('done'); track $index) {
+            <app-task-card [item]="item" cdkDrag ></app-task-card>
+          }
+        }
+      </div>
+    </div>
+  </div>
+  <!--#endregion-->
+</section>

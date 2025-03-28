@@ -29,16 +29,11 @@ import { AddTaskComponent } from "../add-task/add-task.component";
 export class BoardComponent {
   firebase = inject(FirebaseService);
   searchQuery: string = '';
-  isDialogOpen: boolean = false;
   isAddDialogOpen: boolean = false;
   tasks: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
-  selectedItem!: TaskInterface;
   isDragging: boolean = false;
   draggingCardId: string | null = null;
-  private scrollThreshold = 100; // Distance from the edge to trigger scrolling
-  private scrollSpeed = 10; // Speed of scrolling
-
 
   constructor(private dialog: MatDialog, private router: Router) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
@@ -48,21 +43,7 @@ export class BoardComponent {
     window.addEventListener('resize', this.handleResize.bind(this));
   }
 
-  onDragMoved(event: CdkDragMove): void {
-    const viewportWidth = window.innerWidth; // Get the width of the viewport
-    const cursorX = event.pointerPosition.x; // Get the horizontal position of the drag cursor
-  
-    // Scroll left if the cursor is near the left edge of the viewport
-    if (cursorX < this.scrollThreshold) {
-      window.scrollBy({ left: -this.scrollSpeed, behavior: 'smooth' });
-    }
-  
-    // Scroll right if the cursor is near the right edge of the viewport
-    if (cursorX > viewportWidth - this.scrollThreshold) {
-      window.scrollBy({ left: this.scrollSpeed, behavior: 'smooth' });
-    }
-  }
-
+// #region add-task-dialog
   handleResize() {
     if (window.innerWidth <= 900 && this.isAddDialogOpen) {
       this.isAddDialogOpen = false; // Schließe den Dialog
@@ -84,6 +65,24 @@ export class BoardComponent {
     }
   }
 
+  stopPropagation(event: Event) {
+    event.stopPropagation();
+  }
+
+  closeAddDialog() {
+    setTimeout(() => {
+      this.isAddDialogOpen = false;
+      // this.isDeleteOpen = false;
+    }, 500);
+  }
+
+  receiveEmitFromDialog(dialogClosed: boolean) {
+    this.isAddDialogOpen = false;
+  }
+//#endregion
+
+// #region filter-tasks
+
   filterTasks(): void {
     const query = this.searchQuery.toLowerCase().trim();
     if (!query) {
@@ -103,40 +102,9 @@ export class BoardComponent {
         task.description?.toLowerCase().includes(this.searchQuery.toLowerCase()))
     );
   }
+//#endregion
 
-  openCardDialog(item: TaskInterface) {
-    this.selectedItem = item;
-    this.isDialogOpen = true;
-  }
-
-  stopPropagation(event: Event) {
-    event.stopPropagation();
-  }
-
-  closeAddDialog() {
-    setTimeout(() => {
-      this.isDialogOpen = false;
-      // this.isDeleteOpen = false;
-    }, 500);
-}
-  
-closeDialog() {
-  const dialogElement = document.querySelector('.custom-dialog');
-
-  if (dialogElement) {
-    dialogElement.classList.add('dialog-closed');
-    setTimeout(() => {
-      this.isDialogOpen = false;
-    }, 500);
-  } else {
-    this.isDialogOpen = false;
-  }
-}
-
-  receiveEmitFromDialog(dialogClosed: boolean) {
-    this.isAddDialogOpen = false;
-  }
-
+// #region drag-and-drop
   drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -158,26 +126,5 @@ closeDialog() {
     //   cardElement.style.transform = `rotate(${rotation}deg)`;
     // }
   }
-  
-  onDragStart(item:TaskInterface): void {
-    if (item && item.id) {
-      this.isDragging = true;
-      
-      this.draggingCardId = item.id; // Set the ID of the dragged card
-      console.log('Drag started for card ID:', item.id); // Debugging
-    }
-  }
-
-  onDragEnd(item:TaskInterface): void {
-    if (item && item.id) {
-      this.isDragging = false;
-      this.draggingCardId = null; // Reset the dragged card ID
-      console.log('Drag ended for card ID:', item.id); // Debugging
-    }
-  }
-
-  isCardDragging(cardId: string): boolean {
-  return this.draggingCardId === cardId;
-  }
-
+//#endregion
 }
