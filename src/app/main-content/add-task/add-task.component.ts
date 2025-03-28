@@ -50,6 +50,7 @@ export class AddTaskComponent {
   chooseCategory(choosenCategory: string) {
     this.selectedCategory = choosenCategory;
     this.categorySelected = true;
+    this.categoryTouched = false;
   }
 
   setCategoryTouchedTrue() {
@@ -93,6 +94,7 @@ export class AddTaskComponent {
         this.categorySelected = false;
         this.selectedCategory = '';
         this.formSubmitted = false;
+        this.categoryTouched = false;
     }
 }
 
@@ -111,6 +113,8 @@ export class AddTaskComponent {
     this.selectedPriority = 'medium';
     this.categorySelected = false;
     this.selectedCategory = '';
+    this.categoryTouched = false;
+    this.selectedContacts = [];
   }
 
   assignContact(contact: ContactInterface) {
