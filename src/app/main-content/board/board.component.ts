@@ -135,6 +135,11 @@ closeDialog() {
   }
 }
 
+onTaskDeleted() {
+  this.isDialogOpen = false;
+}
+
+
   receiveEmitFromDialog(dialogClosed: boolean) {
     this.isAddDialogOpen = false;
   }

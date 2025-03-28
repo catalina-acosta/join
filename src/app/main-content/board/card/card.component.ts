@@ -3,11 +3,12 @@ import { ChangeDetectorRef, Component, EventEmitter, inject, Input, Output } fro
 import { TaskInterface } from '../task.interface';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { EditDialogComponent } from "../edit-dialog/edit-dialog.component";
+import { DeletCardDialogComponent } from '../delet-card-dialog/delet-card-dialog.component';
 
 @Component({
   selector: 'app-card',
   standalone:true,
-  imports: [CommonModule, EditDialogComponent],
+  imports: [CommonModule, EditDialogComponent, DeletCardDialogComponent],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
@@ -19,13 +20,16 @@ export class CardComponent {
 
    selectedItem?: TaskInterface;
    isDialogOpen: boolean = false;
+   isDeleteOpen: boolean = false;
 
-   deleteTask() {
-    if (this.item?.id) {
-      this.firebase.deleteTaskFromData(this.item.id);
-      this.closeDialogEvent.emit();
-      this.closeDialog();
-      }
+   onTaskDeleted() {
+    this.isDeleteOpen = false; 
+    this.closeDialogEvent.emit();
+  }
+  
+  opendeleteDialog(item: TaskInterface){
+    this.selectedItem = item;
+    this.isDeleteOpen = true;
   }
   
    formatDate(date: string | Date | undefined): string {
@@ -59,6 +63,7 @@ export class CardComponent {
   
    closeEditDialog(){
     this.isDialogOpen = false; 
+    this.isDeleteOpen = false;
   }
 
   stopPropagation(event: Event) {
