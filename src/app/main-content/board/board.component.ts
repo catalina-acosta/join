@@ -10,6 +10,7 @@ import {
   transferArrayItem,
   CdkDrag,
   CdkDropList,
+  CdkDragMove,
 } from '@angular/cdk/drag-drop';
 import { CardComponent } from './card/card.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -35,6 +36,10 @@ export class BoardComponent {
   tasks: TaskInterface[] = [];
   filteredTasks: TaskInterface[] = [];
   selectedItem!: TaskInterface;
+  isDragging: boolean = false;
+  draggingCardId: string | null = null;
+  private scrollThreshold = 100; // Distance from the edge to trigger scrolling
+  private scrollSpeed = 10; // Speed of scrolling
 
 
   constructor(private dialog: MatDialog, private router: Router) {
@@ -43,6 +48,21 @@ export class BoardComponent {
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
     });
     window.addEventListener('resize', this.handleResize.bind(this));
+  }
+
+  onDragMoved(event: CdkDragMove): void {
+    const viewportWidth = window.innerWidth; // Get the width of the viewport
+    const cursorX = event.pointerPosition.x; // Get the horizontal position of the drag cursor
+  
+    // Scroll left if the cursor is near the left edge of the viewport
+    if (cursorX < this.scrollThreshold) {
+      window.scrollBy({ left: -this.scrollSpeed, behavior: 'smooth' });
+    }
+  
+    // Scroll right if the cursor is near the right edge of the viewport
+    if (cursorX > viewportWidth - this.scrollThreshold) {
+      window.scrollBy({ left: this.scrollSpeed, behavior: 'smooth' });
+    }
   }
 
   handleResize() {
@@ -134,13 +154,31 @@ closeDialog() {
       this.firebase.updateTaskStatus(currentTask.id!, { status: event.container.id });
     }
     
-    const cardElement = event.item.element.nativeElement;
-    const rotation = -5;
-    cardElement.style.transform = `rotate(${rotation}deg)`;
+    // const cardElement = event.item.element.nativeElement;
+    // if (this.isDragging) {
+    //   const rotation = -5;
+    //   cardElement.style.transform = `rotate(${rotation}deg)`;
+    // }
   }
   
-  // isDragging() {
+  onDragStart(item:TaskInterface): void {
+    if (item && item.id) {
+      this.isDragging = true;
+      this.draggingCardId = item.id; // Set the ID of the dragged card
+      console.log('Drag started for card ID:', item.id); // Debugging
+    }
+  }
 
-  // }
+  onDragEnd(item:TaskInterface): void {
+    if (item && item.id) {
+      this.isDragging = false;
+      this.draggingCardId = null; // Reset the dragged card ID
+      console.log('Drag ended for card ID:', item.id); // Debugging
+    }
+  }
+
+  isCardDragging(cardId: string): boolean {
+  return this.draggingCardId === cardId;
+  }
 
 }
