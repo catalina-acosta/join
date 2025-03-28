@@ -37,6 +37,7 @@ export class AddTaskComponent {
   categoryDropdownVisible: boolean = false;
   categorySelected: boolean = false;
   categoryTouched: boolean = false;
+  dateSet: boolean = false;
 
   newTask: TaskInterface = {
     title: "",
@@ -51,6 +52,10 @@ export class AddTaskComponent {
 
   //implement Router in constructor, which I need for leading to Board after added Task
   constructor(private router: Router) { }
+
+  newClassForDate() {
+    this.dateSet = true;
+  }
 
   chooseCategory(choosenCategory: string) {
     this.selectedCategory = choosenCategory;
@@ -92,14 +97,8 @@ export class AddTaskComponent {
         this.showReport();
         this.firebase.addTaskToData(this.newTask); // Save the task to the database
         this.newTaskAdded = true;
-        console.log(this.newTask); // Log the task for debugging
         this. clearFormular(ngform); // Reset the form after submission
-        this.selectedContacts = []; // Clear selected contacts
-        this.subtasks = []; // Clear subtasks
-        this.categorySelected = false;
-        this.selectedCategory = '';
-        this.formSubmitted = false;
-        this.categoryTouched = false;
+        this.setBack(); //set back all flags and arrays to default
     }
 }
 
@@ -109,6 +108,17 @@ export class AddTaskComponent {
       this.newTaskAdded = false;
       this.router.navigate(['/board']);
     }, 2000);
+  }
+
+  //set back flags and get the formular ready for a new task
+  setBack() {
+    this.selectedContacts = []; // Clear selected contacts
+        this.subtasks = []; // Clear subtasks
+        this.categorySelected = false; //set category flag back
+        this.selectedCategory = ''; //clear category
+        this.formSubmitted = false; //form getting ready for the new submit
+        this.categoryTouched = false; //category touched set back to default
+        this.dateSet = false; //new class for date input field set back to default
   }
 
   dismissReport() {    

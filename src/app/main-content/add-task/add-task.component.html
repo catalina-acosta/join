@@ -14,8 +14,8 @@
                     style="height:200px" [(ngModel)]="newTask.description"></textarea>
 
                 <label for="dueDate">Due date <span class="red">*</span></label>
-                <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel"> 
-                @if ((!date.valid && date.touched || formSubmitted && !date.touched)) {
+                <input type="date" id="date" name="date" [min]="todaysDate" [(ngModel)]="newTask.date" required #date="ngModel" [ngClass]="{'date-focused': dateSet}" (click)="newClassForDate()" > 
+                @if (!date.valid && date.touched || formSubmitted && !date.touched) {
                     <span class="error_message">This field is required</span>
                 }
             </div>
