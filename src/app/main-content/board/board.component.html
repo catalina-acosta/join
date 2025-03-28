@@ -40,7 +40,8 @@
           <button (click)="openAddTask()" class="plus_btn">+</button>
         </div>
         <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('todo')" 
-          [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (cdkDropListDropped)="drop($event)">
+          [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" 
+          (cdkDropListDropped)="drop($event)">
 
              <div *ngIf="filterTasksByStatusAndQuery('todo').length === 0" class="no_match_box">
                 <div class="no_tasks_card">
@@ -48,7 +49,11 @@
                 </div>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('todo')" class="card" cdkDrag (click)="openCardDialog(item)">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('todo')" class="card" cdkDrag (click)="openCardDialog(item)"
+          (cdkDragStarted)="item.id ? onDragStart(item) : null"
+          (cdkDragEnded)="item.id ? onDragEnd(item) : null"
+          (cdkDragMoved)="onDragMoved($event)"
+          [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
@@ -68,7 +73,12 @@
                 </div>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" cdkDrag (click)="openCardDialog(item)">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('inProgress')" class="card" 
+            cdkDrag (click)="openCardDialog(item)"
+            (cdkDragStarted)="item.id ? onDragStart(item) : null"
+            (cdkDragEnded)="item.id ? onDragEnd(item) : null"
+            (cdkDragMoved)="onDragMoved($event)"
+            [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
@@ -88,7 +98,12 @@
                 </div>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" cdkDrag (click)="openCardDialog(item)" >
+          <div *ngFor="let item of filterTasksByStatusAndQuery('awaitFeedback')" class="card" 
+            cdkDrag (click)="openCardDialog(item)"
+            (cdkDragStarted)="item.id ? onDragStart(item) : null"
+            (cdkDragEnded)="item.id ? onDragEnd(item) : null"
+            (cdkDragMoved)="onDragMoved($event)"
+            [ngClass]="{ 'dragging': isDragging  }">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>
@@ -108,7 +123,12 @@
                 </div>
               </div>
 
-          <div *ngFor="let item of filterTasksByStatusAndQuery('done')" class="card" cdkDrag (click)="openCardDialog(item)">
+          <div *ngFor="let item of filterTasksByStatusAndQuery('done')" class="card" 
+            cdkDrag (click)="openCardDialog(item)"
+            (cdkDragStarted)="item.id ? onDragStart(item) : null"
+            (cdkDragEnded)="item.id ? onDragEnd(item) : null"
+            (cdkDragMoved)="onDragMoved($event)"
+            [ngClass]="{ 'dragging': isDragging  }">
             <app-task-card [item]="item"></app-task-card>
           </div>
         </div>

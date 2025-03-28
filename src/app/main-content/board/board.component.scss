@@ -144,25 +144,29 @@ section {
         scale: 1.02;
     }
 
-    &.cdk-drag-preview {
-        transform: rotate(-5deg);
-    }
+    // &.cdk-drag-preview {
+    //     transform: rotate(-5deg);
+    // }
     
     &.cdk-drag-placeholder {
         opacity: 0.5;
         border: 1px dashed #A8A8A8;
     }
 
-    &.cdk-drag-dragging:active {
-        animation: rotating 0.4s linear infinite; // Fügt eine Dreh-Animation hinzu
+    // &.cdk-drag-dragging:active {
+    //     animation: rotating 0.4s linear infinite; // Fügt eine Dreh-Animation hinzu
+    // }
+
+    &.dragging {
+        transform: rotate(-5deg);
     }
 }
 
-@keyframes rotating {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(3deg); }  // Leichte Schwenkbewegung
-    100% { transform: rotate(-3deg); }
-}
+// @keyframes rotating {
+//     0% { transform: rotate(0deg); }
+//     50% { transform: rotate(3deg); }  // Leichte Schwenkbewegung
+//     100% { transform: rotate(-3deg); }
+// }
 
 .no_tasks_card {
     width: 246px;
