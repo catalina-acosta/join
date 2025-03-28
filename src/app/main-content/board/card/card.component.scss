@@ -11,7 +11,7 @@ section {
     .dialog_content {
         background-color: #fff;
         padding: 25px;
-        // height: 90vh;
+        height: 659px;
         width: 100%;
         border-radius: 25px;
         display: flex;
@@ -146,7 +146,7 @@ section {
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        max-height: 4.5em;
+        max-height: 3.5em;
         overflow: auto;
         overflow-x: hidden; 
         -webkit-line-clamp: 2;
@@ -209,6 +209,9 @@ section {
     width: 100%;
     gap: 15px;
     padding: 20px 10px 0 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 
     .delete_box {
         display: flex;
@@ -289,6 +292,15 @@ section{
     }
 }
 }
+
+@media (max-width: 375px) and (max-height: 667px) {
+    section {
+        .dialog_content {
+            height: 95vh;
+        }
+    }
+}
+
 
 @media (max-width: 470px) {
     section{
