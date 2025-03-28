@@ -1,7 +1,7 @@
 @use './../../../../styles.scss' as *;
 
 section {
-    height: auto;
+    height: 80vh;
     width: 100vw;
     max-width: 480px;
     display: flex;
@@ -209,6 +209,9 @@ section {
     width: 100%;
     gap: 15px;
     padding: 20px 10px 0 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 
     .delete_box {
         display: flex;
