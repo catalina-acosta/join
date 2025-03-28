@@ -359,7 +359,7 @@ select option:disabled {
     }
 }
 
-.input-icon,
+//.input-icon,
 .input-icons {
     display: flex;
     flex-direction: row;
@@ -370,6 +370,11 @@ select option:disabled {
     right: 0;
     padding-right: 10px;
     top: 13px;
+}
+
+.input-icons div {
+    height: 100%;
+    width: 25px;
 }
 
 .hidden {
@@ -501,6 +506,7 @@ li {
 
 .grey_background {display: none;}
 .white {color: white;}
+.padding_checkicon {height: 100%;}
 
 @media (max-width: 1200px) {
     .prio_btns {

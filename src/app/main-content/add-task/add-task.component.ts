@@ -147,11 +147,6 @@ export class AddTaskComponent {
     return this.selectedContacts.some(c => c.id === contact.id);
   }
 
-  submitPrio() {
-    console.log("Ausgewählte Priorität:", this.selectedPriority);
-  }
-
-
   addSubtask() {
     if (this.subtaskInput.trim()) {
       this.subtasks.push({ name: this.subtaskInput.trim(), isEditing: false }); // Subtask zur Liste hinzufügen

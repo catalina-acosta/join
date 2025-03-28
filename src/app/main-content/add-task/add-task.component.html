@@ -74,7 +74,7 @@
                         }
                     </div>
                 </div>
-                
+<!-- contact selections -->
                 <div class="selected-contacts" *ngIf="selectedContacts.length > 0 && !dropdownVisible" >
                     <div class="selected_contacts ">
                         @if (selectedContacts.length > 3) {
@@ -90,7 +90,7 @@
                         }
                     </div>
                 </div>
-
+<!-- task selection -->
                 <div class="select_task">
                     <label for="taskCategory">Category <span class="red">*</span></label>
                     <div class="select_contacts" (click)="toggleCategoryDropdown()" (click)="$event.stopPropagation()" (click)="setCategoryTouchedTrue()">
@@ -110,14 +110,14 @@
                 @if (!categorySelected && formSubmitted || (categoryTouched && !categoryDropdownVisible && !categorySelected)) {
                     <span class="error_message">This field is required</span>
                 }
-
+<!-- creating subtasks -->
                <label class="subtast_title" for="subtasksTitle">Subtasks</label>
                             <div class="input_content">
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
                                     (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
 
-                                <div class="input-icon"
+                                <div class="input-icons"
                                     [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
                                     (click)="focusSubtaskInput()">
                                     <img src="assets/tasks/add-black.svg" alt="Add">
