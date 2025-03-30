@@ -103,8 +103,8 @@
                 </div>
                 <div class="members_content">
                     <div class="assigned_to">
-                        @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
-                            @for (userId of item.assignedToUserId; track $index) {
+                        @if(editedItem.assignedToUserId && editedItem.assignedToUserId.length > 0) {
+                            @for (userId of editedItem.assignedToUserId; track $index) {
                                 @for (contact of firebase.orderedContactsList; track $index) {
                                     @if(contact.id === userId) {
                                     <div class="person_box">

@@ -139,10 +139,9 @@ export class EditDialogComponent {
       }
 
       this.editedItem.subtasks[index].isEditing = false;
-
-      // Kein Firebase-Update hier! Erst in saveEditedTask()
     }
   }
+  
   handleKeyUp(event: KeyboardEvent, index: number) {
     if (event.key === 'Enter') {
       this.saveSubtask(index);
