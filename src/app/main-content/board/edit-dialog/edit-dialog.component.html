@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <ul class="subtask-list">
-                    <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item" [ngClass]="{ 'editing': subtask.isEditing }">
+                    <li *ngFor="let subtask of editedItem.subtasks; let i = index" class="subtask-item" [ngClass]="{ 'editing': subtask.isEditing }">
             
                       <span class="subtask-circle" *ngIf="!subtask.isEditing"></span>
                       

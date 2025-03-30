@@ -107,6 +107,7 @@ saveEditedTask(taskForm: NgForm) {
       };
       if (this.editedItem && this.editedItem.subtasks) {
         this.editedItem.subtasks.push(newSubtask);
+        //  this.item!.subtasks = [...this.editedItem.subtasks]; 
       } 
       this.subtaskInput = '';
     }
@@ -115,48 +116,35 @@ saveEditedTask(taskForm: NgForm) {
   removeSubtask(index: number) {
     if (this.editedItem?.subtasks) {
       this.editedItem.subtasks.splice(index, 1);
+    }
+  }
+
+  editSubtask(index: number) {
+    if (this.editedItem?.subtasks) {
+      this.editedItem.subtasks[index].isEditing = true;
   
-      if (this.editedItem?.id) {
-        this.firebase.updateTaskStatus(this.editedItem.id, {
-          subtasks: this.editedItem.subtasks
-        });
+      setTimeout(() => {
+        const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+        inputElement?.focus();
+      }, 0);
+    }
+  }
+
+  saveSubtask(index: number) {
+    const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+  
+    if (inputElement && this.editedItem?.subtasks) {
+      const newSubtaskValue = inputElement.value.trim();
+  
+      if (newSubtaskValue !== '') {
+        this.editedItem.subtasks[index].subtask = newSubtaskValue;
       }
+      
+      this.editedItem.subtasks[index].isEditing = false;
+  
+      // Kein Firebase-Update hier! Erst in saveEditedTask()
     }
   }
-
-editSubtask(index: number) {
-  if (this.editedItem?.subtasks) {
-    this.editedItem.subtasks[index].isEditing = true;
-
-    setTimeout(() => {
-      const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-      inputElement?.focus();
-    }, 0);
-  }
-}
-
-saveSubtask(index: number) {
-  const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-
-  if (inputElement && this.editedItem?.subtasks) {
-    const newSubtaskValue = inputElement.value.trim();
-
-    if (newSubtaskValue === '') {
-      inputElement.value = this.editedItem.subtasks[index].subtask;
-    } else {
-      this.editedItem.subtasks[index].subtask = newSubtaskValue;
-    }
-    this.editedItem.subtasks[index].isEditing = false;
-
-    // Firebase erst aktualisieren, wenn der Benutzer speichert
-    if (this.editedItem?.id) {
-      this.firebase.updateTaskStatus(this.editedItem.id, {
-        subtasks: this.editedItem.subtasks
-      });
-    }
-  }
-}
-
   handleKeyUp(event: KeyboardEvent, index: number) {
     if (event.key === 'Enter') {
       this.saveSubtask(index);
