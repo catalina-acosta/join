@@ -92,7 +92,7 @@
                                         <p class="name">{{contact.fullname.length > 32 ? (contact.fullname.slice(0, 32) + '...') : contact.fullname | titlecase}}</p>    
                                     </div>
                                     @if(contact.id) {
-                                        <img [src]="item.assignedToUserId?.includes(contact.id) ? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg'" alt="checkbox">
+                                        <img  [src]="isAssignedTo(contact.id) ? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg'" alt="checkbox">
                                     }
                                 </div>                                                                             
                             } @empty {

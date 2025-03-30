@@ -19,46 +19,42 @@ export class EditDialogComponent {
   @Input() item?: TaskInterface;
 
   editedItem!: TaskInterface; // Lokale Kopie für Bearbeitung
-
   isDialogOpen: boolean = false;
   selectedPriority: string = 'medium';
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
   subtaskInputFocused: boolean = false;
   subtaskInput: string = '';
-  subtasks: { name: string, isEditing: boolean }[] = []; // Array für Subtasks
+  subtasks: { name: string, isEditing: boolean }[] = [];
   dropdownVisible: boolean = false;
   newDate: string = "";
 
   assignContact(contactId: string) {
-    if (this.item) {
-      if (this.item.assignedToUserId) {
-        if (this.item.assignedToUserId) {
-          const index = this.item.assignedToUserId.indexOf(contactId);
-          if (index === -1) {
-            this.item.assignedToUserId.push(contactId);
-          } else {
-            this.item.assignedToUserId.splice(index, 1);
-          }
-        }
+    if (this.editedItem) {
+      if (!this.editedItem.assignedToUserId) {
+        this.editedItem.assignedToUserId = [];
+      }
+      const index = this.editedItem.assignedToUserId.indexOf(contactId);
+      if (index === -1) {
+        this.editedItem.assignedToUserId.push(contactId);
+      } else {
+        this.editedItem.assignedToUserId.splice(index, 1);
       }
     }
   }
 
+  isAssignedTo(contactId: string): boolean {
+    return this.editedItem?.assignedToUserId?.includes(contactId) ?? false;
+}
+  
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;
   }
 
   ngOnInit() {
-    // Sicherstellen, dass `editedItem` eine Kopie von `item` ist
-    this.editedItem = {
-      ...this.item,
-      title: this.item?.title ?? '',  // Standardwert für title setzen
-      subtasks: this.item?.subtasks ? [...this.item.subtasks] : []  // Subtasks müssen ebenfalls geprüft werden
-    };
-
-    if (this.item?.priority) {
-      this.selectedPriority = this.item.priority;
-    }
+      this.editedItem = JSON.parse(JSON.stringify(this.item)) || {}; 
+      if (this.item?.priority) {
+        this.selectedPriority = this.item.priority;
+      }
   }
   
   saveChanges() {
@@ -75,18 +71,17 @@ selectPriority(priority: string) {
 
 saveEditedTask(taskForm: NgForm) {
   if (this.editedItem?.id && this.editedItem?.date) {
-    // Übernehme die Änderungen in die Original-Daten (item)
-    this.item = { ...this.editedItem };
-    
-    // Jetzt kannst du die Änderungen an Firebase übergeben
+    this.item = { ...this.editedItem }; // Änderungen übernehmen
+
     this.firebase.updateTaskStatus(this.editedItem.id, {
       title: this.editedItem.title,
       description: this.editedItem.description,
       date: this.editedItem.date,
       priority: this.selectedPriority,
-      assignedToUserId: this.editedItem.assignedToUserId,
-      subtasks: this.editedItem.subtasks, // Falls Subtasks bearbeitet wurden
+      assignedToUserId: this.editedItem.assignedToUserId, // Jetzt erst speichern
+      subtasks: this.editedItem.subtasks,
     });
+
     this.saveChangesEvent.emit(this.editedItem);
     this.closeDialog();
   }
