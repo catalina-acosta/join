@@ -107,7 +107,6 @@ saveEditedTask(taskForm: NgForm) {
       };
       if (this.editedItem && this.editedItem.subtasks) {
         this.editedItem.subtasks.push(newSubtask);
-        //  this.item!.subtasks = [...this.editedItem.subtasks]; 
       } 
       this.subtaskInput = '';
     }
