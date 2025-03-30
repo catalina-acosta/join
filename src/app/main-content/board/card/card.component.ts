@@ -31,6 +31,17 @@ export class CardComponent {
     this.selectedItem = item;
     this.isDeleteOpen = true;
   }
+
+  updateTask(updatedTask: TaskInterface) {
+    this.firebase.updateTaskStatus(updatedTask.id!, updatedTask)
+      .then(() => {
+        this.item = { ...updatedTask }; // Direkt aktualisieren
+        this.cdr.detectChanges(); // Manuell Änderungserkennung auslösen
+        this.closeEditDialog();
+      })
+      .catch(error => console.error('Fehler beim Aktualisieren:', error));
+  }
+  
   
    formatDate(date: string | Date | undefined): string {
     if (!date) return '';

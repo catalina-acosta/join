@@ -15,7 +15,10 @@ import { ContactInterface } from '../../contacts/contact-interface';
 export class EditDialogComponent {
   firebase = inject(FirebaseService);
   @Output() closeDialogEvent = new EventEmitter<void>();
+  @Output() saveChangesEvent = new EventEmitter<TaskInterface>();
   @Input() item?: TaskInterface;
+
+  editedItem!: TaskInterface; // Lokale Kopie für Bearbeitung
 
   isDialogOpen: boolean = false;
   selectedPriority: string = 'medium';
@@ -46,42 +49,49 @@ export class EditDialogComponent {
   }
 
   ngOnInit() {
+    // Sicherstellen, dass `editedItem` eine Kopie von `item` ist
+    this.editedItem = {
+      ...this.item,
+      title: this.item?.title ?? '',  // Standardwert für title setzen
+      subtasks: this.item?.subtasks ? [...this.item.subtasks] : []  // Subtasks müssen ebenfalls geprüft werden
+    };
+
     if (this.item?.priority) {
-      this.selectedPriority = this.item.priority; 
-    }
-
-    if (!this.item?.subtasks) {
-      this.item!.subtasks = [];
+      this.selectedPriority = this.item.priority;
     }
   }
-
-  selectPriority(priority: string) {
-    this.selectedPriority = priority;
-    if (this.item) {
-      this.item.priority = priority;
-    }
+  
+  saveChanges() {
+    this.saveChangesEvent.emit(this.editedItem);
+    this.closeDialog();
   }
 
-  saveEditedTask(taskForm: NgForm) {
-    if (this.item?.id && this.item?.date) {
-      this.firebase.updateTaskStatus(this.item.id, {
-        title: this.item.title,
-        description: this.item.description,
-        date: this.item.date,
-        priority: this.selectedPriority,
-        assignedToUserId: this.item.assignedToUserId,
-        status: this.item.status,
-        category: this.item.category,
-        subtasks: this.item.subtasks
-      }).then(() => {
-        // console.log('Nach Update:', this.item?.date); // Debugging
-        // console.log('Aufgabe erfolgreich aktualisiert!');
-        this.closeDialog();
-      }).catch((error) => {
-        console.error('Fehler beim Aktualisieren:', error);
-      });
-    }
+selectPriority(priority: string) {
+  this.selectedPriority = priority;
+  if (this.editedItem) {
+    this.editedItem.priority = priority;
   }
+}
+
+saveEditedTask(taskForm: NgForm) {
+  if (this.editedItem?.id && this.editedItem?.date) {
+    // Übernehme die Änderungen in die Original-Daten (item)
+    this.item = { ...this.editedItem };
+    
+    // Jetzt kannst du die Änderungen an Firebase übergeben
+    this.firebase.updateTaskStatus(this.editedItem.id, {
+      title: this.editedItem.title,
+      description: this.editedItem.description,
+      date: this.editedItem.date,
+      priority: this.selectedPriority,
+      assignedToUserId: this.editedItem.assignedToUserId,
+      subtasks: this.editedItem.subtasks, // Falls Subtasks bearbeitet wurden
+    });
+    this.saveChangesEvent.emit(this.editedItem);
+    this.closeDialog();
+  }
+}
+
 
   closeDialog() {
     this.closeDialogEvent.emit();

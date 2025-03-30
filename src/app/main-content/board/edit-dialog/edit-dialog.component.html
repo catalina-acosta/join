@@ -16,17 +16,17 @@
 
             <p>Title</p>
             <label class="input_content">
-                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="item.title">
+                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="editedItem.title">
 
             </label>
             <p>Description</p>
             <label class="input_content">
-                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="item.description">
+                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="editedItem.description">
             </label>
 
             <div class="date_prio_content">
                 <label class="input_content" for="dueDate">Due date
-                    <input type="date" id="dueDate" [value]="item.date" [(ngModel)]="item.date" name="date">
+                    <input type="date" id="dueDate" [value]="editedItem.date" [(ngModel)]="editedItem.date" name="date">
                 </label>
             </div>
             <div class="date_prio_content">
