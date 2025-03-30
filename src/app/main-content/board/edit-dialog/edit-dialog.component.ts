@@ -44,49 +44,48 @@ export class EditDialogComponent {
 
   isAssignedTo(contactId: string): boolean {
     return this.editedItem?.assignedToUserId?.includes(contactId) ?? false;
-}
-  
+  }
+
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;
   }
 
   ngOnInit() {
-      this.editedItem = JSON.parse(JSON.stringify(this.item)) || {}; 
-      if (this.item?.priority) {
-        this.selectedPriority = this.item.priority;
-      }
+    this.editedItem = JSON.parse(JSON.stringify(this.item)) || {};
+    if (this.item?.priority) {
+      this.selectedPriority = this.item.priority;
+    }
   }
-  
+
   saveChanges() {
     this.saveChangesEvent.emit(this.editedItem);
     this.closeDialog();
   }
 
-selectPriority(priority: string) {
-  this.selectedPriority = priority;
-  if (this.editedItem) {
-    this.editedItem.priority = priority;
+  selectPriority(priority: string) {
+    this.selectedPriority = priority;
+    if (this.editedItem) {
+      this.editedItem.priority = priority;
+    }
   }
-}
 
-saveEditedTask(taskForm: NgForm) {
-  if (this.editedItem?.id && this.editedItem?.date) {
-    this.item = { ...this.editedItem }; // Änderungen übernehmen
+  saveEditedTask(taskForm: NgForm) {
+    if (this.editedItem?.id && this.editedItem?.date) {
+      this.item = { ...this.editedItem }; // Änderungen übernehmen
 
-    this.firebase.updateTaskStatus(this.editedItem.id, {
-      title: this.editedItem.title,
-      description: this.editedItem.description,
-      date: this.editedItem.date,
-      priority: this.selectedPriority,
-      assignedToUserId: this.editedItem.assignedToUserId, // Jetzt erst speichern
-      subtasks: this.editedItem.subtasks,
-    });
+      this.firebase.updateTaskStatus(this.editedItem.id, {
+        title: this.editedItem.title,
+        description: this.editedItem.description,
+        date: this.editedItem.date,
+        priority: this.selectedPriority,
+        assignedToUserId: this.editedItem.assignedToUserId, // Jetzt erst speichern
+        subtasks: this.editedItem.subtasks,
+      });
 
-    this.saveChangesEvent.emit(this.editedItem);
-    this.closeDialog();
+      this.saveChangesEvent.emit(this.editedItem);
+      this.closeDialog();
+    }
   }
-}
-
 
   closeDialog() {
     this.closeDialogEvent.emit();
@@ -107,7 +106,7 @@ saveEditedTask(taskForm: NgForm) {
       };
       if (this.editedItem && this.editedItem.subtasks) {
         this.editedItem.subtasks.push(newSubtask);
-      } 
+      }
       this.subtaskInput = '';
     }
   }
@@ -121,7 +120,7 @@ saveEditedTask(taskForm: NgForm) {
   editSubtask(index: number) {
     if (this.editedItem?.subtasks) {
       this.editedItem.subtasks[index].isEditing = true;
-  
+
       setTimeout(() => {
         const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
         inputElement?.focus();
@@ -131,16 +130,16 @@ saveEditedTask(taskForm: NgForm) {
 
   saveSubtask(index: number) {
     const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-  
+
     if (inputElement && this.editedItem?.subtasks) {
       const newSubtaskValue = inputElement.value.trim();
-  
+
       if (newSubtaskValue !== '') {
         this.editedItem.subtasks[index].subtask = newSubtaskValue;
       }
-      
+
       this.editedItem.subtasks[index].isEditing = false;
-  
+
       // Kein Firebase-Update hier! Erst in saveEditedTask()
     }
   }
