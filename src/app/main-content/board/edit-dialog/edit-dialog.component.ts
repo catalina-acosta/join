@@ -105,56 +105,57 @@ saveEditedTask(taskForm: NgForm) {
         isCompleted: false,
         isEditing: false
       };
-      if (this.item && this.item.subtasks) {
-        this.item.subtasks.push(newSubtask);
+      if (this.editedItem && this.editedItem.subtasks) {
+        this.editedItem.subtasks.push(newSubtask);
       } 
       this.subtaskInput = '';
     }
   }
 
   removeSubtask(index: number) {
-    if (this.item?.subtasks) {
-      this.item.subtasks.splice(index, 1);
+    if (this.editedItem?.subtasks) {
+      this.editedItem.subtasks.splice(index, 1);
   
-      if (this.item?.id) {
-        this.firebase.updateTaskStatus(this.item.id, {
-          subtasks: this.item.subtasks
+      if (this.editedItem?.id) {
+        this.firebase.updateTaskStatus(this.editedItem.id, {
+          subtasks: this.editedItem.subtasks
         });
       }
     }
   }
 
-  editSubtask(index: number) {
-    if (this.item?.subtasks) {
-      this.item.subtasks[index].isEditing = true;
+editSubtask(index: number) {
+  if (this.editedItem?.subtasks) {
+    this.editedItem.subtasks[index].isEditing = true;
 
-      setTimeout(() => {
-        const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-        inputElement?.focus();
-      }, 0);
+    setTimeout(() => {
+      const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+      inputElement?.focus();
+    }, 0);
+  }
+}
+
+saveSubtask(index: number) {
+  const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
+
+  if (inputElement && this.editedItem?.subtasks) {
+    const newSubtaskValue = inputElement.value.trim();
+
+    if (newSubtaskValue === '') {
+      inputElement.value = this.editedItem.subtasks[index].subtask;
+    } else {
+      this.editedItem.subtasks[index].subtask = newSubtaskValue;
+    }
+    this.editedItem.subtasks[index].isEditing = false;
+
+    // Firebase erst aktualisieren, wenn der Benutzer speichert
+    if (this.editedItem?.id) {
+      this.firebase.updateTaskStatus(this.editedItem.id, {
+        subtasks: this.editedItem.subtasks
+      });
     }
   }
-
-  saveSubtask(index: number) {
-    const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-
-    if (inputElement && this.item?.subtasks) {
-      const newSubtaskValue = inputElement.value.trim();
-
-      if (newSubtaskValue === '') {
-        inputElement.value = this.item.subtasks[index].subtask;
-      } else {
-        this.item.subtasks[index].subtask = newSubtaskValue;
-      }
-      this.item.subtasks[index].isEditing = false;
-
-      if (this.item?.id) {
-        this.firebase.updateTaskStatus(this.item.id, {
-          subtasks: this.item.subtasks
-        });
-      }
-    }
-  }
+}
 
   handleKeyUp(event: KeyboardEvent, index: number) {
     if (event.key === 'Enter') {
