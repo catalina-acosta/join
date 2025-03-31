@@ -40,7 +40,17 @@ export class EditDialogComponent {
       } else {
         this.editedItem.assignedToUserId.splice(index, 1);
       }
-      this.editedItem.assignedToUserId.sort();
+       // Sortiere nun nach dem Vornamen der Kontakte
+    this.editedItem.assignedToUserId.sort((a, b) => {
+      // Holen Sie sich die Kontaktinformationen basierend auf den IDs
+      const contactA = this.firebase.orderedContactsList.find(contact => contact.id === a);
+      const contactB = this.firebase.orderedContactsList.find(contact => contact.id === b);
+      
+      if (contactA && contactB) {
+        return contactA.firstname.localeCompare(contactB.firstname);
+      }
+      return 0; // Wenn einer der Kontakte nicht gefunden wurde, keine Änderung in der Reihenfolge
+    });
     }
   }
 
