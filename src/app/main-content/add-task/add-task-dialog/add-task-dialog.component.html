@@ -84,36 +84,45 @@
                             </div>
                             <div class="selected-contacts" *ngIf="selectedContacts.length > 0 && !dropdownVisible" >
                                 <div class="selected_contacts ">
+                                    @if (selectedContacts.length > 3) {
+                                        <div *ngFor="let contact of selectedContacts.slice(0, 3); let i = index" class="avatar" [ngStyle]="{'background-color': contact.color}">
+                                          <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                                        </div>
+                                    <p>+ {{ selectedContacts.length - 3}} weitere</p>
+                                }
+                                @else {
                                     <div class="avatar" *ngFor="let contact of selectedContacts" [ngStyle]="{'background-color': contact.color}">
                                         <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
                                     </div>
+                                }
                                 </div>
                             </div>
                             <div class="select_task">
                                 <label for="taskCategory">Category <span class="red">*</span></label>
-                                <div class="select_contacts" (click)="toggleCategoryDropdown()" (click)="$event.stopPropagation()">
-                                    <span class="like_placeholder" [ngClass] = "{ 'd_none' : categorySelected || categoryDropdownVisible }" [ngClass] = "{ 'd_none' : categorySelected && categoryDropdownVisible || categorySelected && !categoryDropdownVisible }">Select task category</span>
-                                    <span>{{ selectedCategory }}</span>
-                                    <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : categoryDropdownVisible }">
-                                </div>
+                    <div class="select_contacts" (click)="toggleCategoryDropdown()" (click)="$event.stopPropagation()" (click)="setCategoryTouchedTrue()">
+                        <span class="like_placeholder" [ngClass] = "{ 'd_none' : categorySelected && categoryDropdownVisible || categorySelected && !categoryDropdownVisible }">Select task category</span>
+                        <span>{{ selectedCategory }}</span>
+                        <img src="./assets/tasks/dropdown_arrow.svg" alt="little arrow" [ngClass]="{ 'rotate' : categoryDropdownVisible }">
+                    </div>
                                 <div class="category_dropdown" *ngIf="categoryDropdownVisible">
-                                    <div class="one_contact">
-                                        <span (click)="chooseCategory('Technical Task')" >Technical Task</span>
+                                    <div class="one_contact" (click)="chooseCategory('Technical Task')">
+                                        <span>Technical Task</span>
                                     </div>
-                                    <div class="one_contact">
-                                        <span (click)="chooseCategory('User Story')">User Story</span>
+                                    <div class="one_contact" (click)="chooseCategory('User Story')">
+                                        <span>User Story</span>
                                     </div>
                                 </div>
                             </div>
-                            @if (!categorySelected && formSubmitted) {
+                            @if (!categorySelected && formSubmitted || (categoryTouched && !categoryDropdownVisible && !categorySelected)) {
                                 <span class="error_message">This field is required</span>
                             }
+
                             <label class="subtast_title" for="subtasksTitle">Subtasks</label>
                             <div class="input_content">
                                 <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput"
                                     name="subtaskInput" placeholder="Add new subtask" (keyup.enter)="addSubtask()"
                                     (focus)="onSubtaskInputFocus()" (blur)="onSubtaskInputBlur()" />
-                                <div class="input-icon"
+                                <div class="input-icons"
                                     [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
                                     (click)="focusSubtaskInput()">
                                     <img src="assets/tasks/add-black.svg" alt="Add">
@@ -163,7 +172,7 @@
                                 <span>Clear</span>
                                 <img src="./assets/tasks/close-black.svg" alt="x icon">
                             </button>
-                            <button type="submit" class="btn_bold" (click)="showReport()" >
+                            <button type="submit" class="btn_bold">
                                 <span>Create Task</span>
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <mask id="mask0_71766_5971" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25">
@@ -177,6 +186,7 @@
                         </div>
                     </div>
                 </form>
+                <div class="grey_background"></div>
             <!-- hier ist die Meldung -->
                 <div class="btn_plain_color report" [ngClass] = "{ 'show_report' : newTaskAdded }">
                     <span>Task added to board</span>

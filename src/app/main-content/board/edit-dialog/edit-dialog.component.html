@@ -16,17 +16,17 @@
 
             <p>Title</p>
             <label class="input_content">
-                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="item.title">
+                <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="editedItem.title">
 
             </label>
             <p>Description</p>
             <label class="input_content">
-                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="item.description">
+                <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="editedItem.description">
             </label>
 
             <div class="date_prio_content">
                 <label class="input_content" for="dueDate">Due date
-                    <input type="date" id="dueDate" [value]="item.date" [(ngModel)]="item.date" name="date">
+                    <input type="date" id="dueDate" [value]="editedItem.date" [(ngModel)]="editedItem.date" name="date">
                 </label>
             </div>
             <div class="date_prio_content">
@@ -92,7 +92,7 @@
                                         <p class="name">{{contact.fullname.length > 32 ? (contact.fullname.slice(0, 32) + '...') : contact.fullname | titlecase}}</p>    
                                     </div>
                                     @if(contact.id) {
-                                        <img [src]="item.assignedToUserId?.includes(contact.id) ? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg'" alt="checkbox">
+                                        <img  [src]="isAssignedTo(contact.id) ? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg'" alt="checkbox">
                                     }
                                 </div>                                                                             
                             } @empty {
@@ -103,8 +103,8 @@
                 </div>
                 <div class="members_content">
                     <div class="assigned_to">
-                        @if(item.assignedToUserId && item.assignedToUserId.length > 0) {
-                            @for (userId of item.assignedToUserId; track $index) {
+                        @if(editedItem.assignedToUserId && editedItem.assignedToUserId.length > 0) {
+                            @for (userId of editedItem.assignedToUserId; track $index) {
                                 @for (contact of firebase.orderedContactsList; track $index) {
                                     @if(contact.id === userId) {
                                     <div class="person_box">
@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <ul class="subtask-list">
-                    <li *ngFor="let subtask of item.subtasks; let i = index" class="subtask-item" [ngClass]="{ 'editing': subtask.isEditing }">
+                    <li *ngFor="let subtask of editedItem.subtasks; let i = index" class="subtask-item" [ngClass]="{ 'editing': subtask.isEditing }">
             
                       <span class="subtask-circle" *ngIf="!subtask.isEditing"></span>
                       

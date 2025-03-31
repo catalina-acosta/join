@@ -79,7 +79,7 @@
         
 
         <div class="delete_edit_content">
-            <div class="delete_box" (click)="deleteTask()">
+            <div class="delete_box" (click)="opendeleteDialog(item)">
                 <img src="./assets/contact/delete.svg" alt="delete">
                 <p>Delete</p>
             </div>
@@ -91,10 +91,17 @@
         </div>
     </div>
 
+         <!-- Open deleteDialog -->
+         <div *ngIf="isDeleteOpen" class="overlay_content" (click)="closeEditDialog()">
+            <div class="custom-dialog">
+                <app-delet-card-dialog [item]="selectedItem" class="delet-dialog" (closeDialogEvent)="closeEditDialog()"  (contactDeletedEvent)="onTaskDeleted()" (click)="stopPropagation($event)"></app-delet-card-dialog>
+            </div>
+        </div>
+
        <!-- Open Edit Dialog -->
        <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeEditDialog()">
         <div class="custom-dialog">
-            <app-edit-dialog [item]="selectedItem" (closeDialogEvent)="closeEditDialog()" (click)="stopPropagation($event)"></app-edit-dialog>
+            <app-edit-dialog [item]="selectedItem" (saveChangesEvent)="updateTask($event)" (closeDialogEvent)="closeEditDialog()" (click)="stopPropagation($event)"></app-edit-dialog>
         </div>
     </div>
 

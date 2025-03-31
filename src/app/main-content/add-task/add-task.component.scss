@@ -203,8 +203,6 @@ select option:disabled {
     background-color: #7be129;
 }
 
-
-
 //selection of contacts
 .rotate {
     transform: rotate(180deg);
@@ -213,7 +211,6 @@ select option:disabled {
 .white {
     color: white;
 }
-
 
 .select_contacts {
     background-color: white;
@@ -228,14 +225,6 @@ select option:disabled {
     cursor: pointer;  
 }
 
-
-// .select_contacts img {
-//     &:hover {
-//         background-color: #d1d1d1;
-//         border-radius: 50%;
-//     }
-// }
-
 .like_placeholder {
     font-size: 20px;
     color: black;
@@ -246,7 +235,6 @@ select option:disabled {
     border: 1px solid #d1d1d1;
     border-radius: 10px;
     z-index: 30;
-    // padding: 12px 16px;
     max-height: 200px;
     overflow-y: scroll;
     scrollbar-width: thin;
@@ -323,7 +311,6 @@ select option:disabled {
     font-family: 'Poppins';
 }
 
-
 // SUBTASK
 .subtasks_content {
     width: 100%;
@@ -353,13 +340,11 @@ select option:disabled {
         border: 1px solid $light_blue;
         box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
     }
-
     &::placeholder {
         color: #d1d1d1;
     }
 }
 
-//.input-icon,
 .input-icons {
     display: flex;
     flex-direction: row;
@@ -423,7 +408,6 @@ li {
     .subtask-actions {
         display: none;
         margin-left: auto;
-
         .edit-button,
         .remove-button {
             background: none;
@@ -432,7 +416,6 @@ li {
             margin-left: 5px;
             margin-right: 5px;
             padding: 3px 6px 3px 6px;
-
             &:hover{
                 padding: 3px 6px 3px 6px;
                 border-radius: 20px;
@@ -467,7 +450,6 @@ li {
     padding: 6px;
     width: 100%;
     border-bottom: 1px solid $light_blue;
-    ;
     font-size: 16px;
     border: none;
     outline: none;
@@ -560,7 +542,7 @@ li {
     .left_content {width: 100%;}
     .right_content {width: 100%;}
     .prio_btns {gap: 8px;}
-    .upper_form {height: 804px;}
+    .upper_form {height: 923px;}
     .lower_form {margin-bottom: 122px; flex-direction: column; position: relative; height: 95px;}
     .clear_submit{
         position: fixed;

@@ -104,6 +104,7 @@ export class BoardComponent {
   }
 //#endregion
 
+
 // #region drag-and-drop
   drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {
