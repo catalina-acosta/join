@@ -110,16 +110,17 @@ export class AddTaskComponent {
     }, 2000);
   }
 
-  //set back flags and get the formular ready for a new task
-  setBack() {
-    this.selectedContacts = []; // Clear selected contacts
-        this.subtasks = []; // Clear subtasks
-        this.categorySelected = false; //set category flag back
-        this.selectedCategory = ''; //clear category
-        this.formSubmitted = false; //form getting ready for the new submit
-        this.categoryTouched = false; //category touched set back to default
-        this.dateSet = false; //new class for date input field set back to default
-  }
+    //set back flags and get the formular ready for a new task
+    setBack() {
+      this.selectedContacts = []; // Clear selected contacts
+          this.subtasks = []; // Clear subtasks
+          this.subtaskInput = '';
+          this.categorySelected = false; //set category flag back
+          this.selectedCategory = ''; //clear category
+          this.formSubmitted = false; //form getting ready for the new submit
+          this.categoryTouched = false; //category touched set back to default
+          this.dateSet = false; //new class for date input field set back to default
+    }
 
   //if newTaskAdded, comes a confirmation, after could it be false again
   dismissReport() {    
@@ -133,6 +134,8 @@ export class AddTaskComponent {
     this.selectedCategory = '';
     this.categoryTouched = false;
     this.selectedContacts = [];
+    this.subtasks = []; // Clear subtasks
+    this.subtaskInput = '';
   }
 
   assignContact(contact: ContactInterface) {

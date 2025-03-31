@@ -98,7 +98,6 @@ submitForm(ngform: NgForm) {
       this.showReport(); //shows confirmation about added task
       this.firebase.addTaskToData(this.newTask); // Save the task to the database
       this.newTaskAdded = true;
-      console.log(this.newTask); // Log the task for debugging
       this. clearFormular(ngform); // Reset the form after submission
       this.setBack(); //set back all flags and arrays to default
   }
@@ -115,6 +114,7 @@ submitForm(ngform: NgForm) {
     setBack() {
       this.selectedContacts = []; // Clear selected contacts
           this.subtasks = []; // Clear subtasks
+          this.subtaskInput = '';
           this.categorySelected = false; //set category flag back
           this.selectedCategory = ''; //clear category
           this.formSubmitted = false; //form getting ready for the new submit
@@ -135,6 +135,8 @@ submitForm(ngform: NgForm) {
     this.selectedCategory = '';
     this.categoryTouched = false;
     this.selectedContacts = [];
+    this.subtasks = []; // Clear subtasks
+    this.clearSubtaskInput();
   }
 
   assignContact(contact: ContactInterface) {
