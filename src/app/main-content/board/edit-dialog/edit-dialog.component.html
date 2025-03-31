@@ -101,7 +101,7 @@
                         }
                     </div>
                 </div>
-                <div class="members_content">
+                <!-- <div class="members_content">
                     <div class="assigned_to">
                         <div *ngFor="let userId of editedItem.assignedToUserId">
                           <div *ngFor="let contact of firebase.orderedContactsList">
@@ -114,7 +114,28 @@
                         </div>
                       </div>
                       
+                </div> -->
+
+                <div class="members_content">
+                    <div class="assigned_to" *ngIf="item.assignedToUserId && item.assignedToUserId.length > 0">
+                        @for (contact of firebase.orderedContactsList; let i = $index; track i) { 
+                            @for (userId of item.assignedToUserId; track $index){      
+                                <div class="person_box" *ngIf="contact.id === userId && $index < 3">                                                                               
+                                    <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
+                                        <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
+                                    </div>    
+                                </div> 
+                                <div *ngIf="contact.id === userId && $index === 3">                           
+                                    <div class="more_contacts">
+                                        <p>+ {{item.assignedToUserId.length - 2}} weitere</p>
+                                    </div>
+                                </div>                 
+                            }
+                        }
+                    </div>
                 </div>
+
+
             </div>
 
 <!-- subtask -->
