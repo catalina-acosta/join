@@ -103,22 +103,17 @@
                 </div>
                 <div class="members_content">
                     <div class="assigned_to">
-                        @if(editedItem.assignedToUserId && editedItem.assignedToUserId.length > 0) {
-                            @for (userId of editedItem.assignedToUserId; track $index) {
-                                @for (contact of firebase.orderedContactsList; track $index) {
-                                    @if(contact.id === userId) {
-                                    <div class="person_box">
-                                        <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
-                                            <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
-                                        </div>
-                                    </div>
-                                    }
-                                }
-                            }
-                        } @else {
-                        <p>no users assigned</p>
-                        }
-                    </div>
+                        <div *ngFor="let userId of editedItem.assignedToUserId">
+                          <div *ngFor="let contact of firebase.orderedContactsList">
+                            <div *ngIf="contact.id === userId" class="person_box">
+                              <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
+                                <p>{{ contact.firstname.charAt(0) }}{{ contact.lastname.charAt(0) }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
                 </div>
             </div>
 

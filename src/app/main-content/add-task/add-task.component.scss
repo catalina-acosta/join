@@ -239,6 +239,8 @@ select option:disabled {
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
+    position: absolute;
+    width: 100%;
 }
 
 .category_dropdown {

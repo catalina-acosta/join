@@ -4,6 +4,7 @@ import { FirebaseService } from '../../../shared/service/firebase.service';
 import { TaskInterface } from '../task.interface';
 import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { CardComponent } from '../card/card.component';
+import { ContactInterface } from '../../contacts/contact-interface';
 
 @Component({
   selector: 'app-task-card',
@@ -20,6 +21,16 @@ export class TaskCardComponent {
   selectedItem!: TaskInterface;
   isDialogOpen: boolean = false;
 
+  fullOrderedContactList: ContactInterface[] = [];
+
+  constructor() {
+    this.getContactList();
+    console.log(this.fullOrderedContactList);
+  }
+
+  getContactList() {
+    this.fullOrderedContactList = this.firebase.orderedContactsList;
+  }
 
   getCompletedPercentage(): number {
     if (!this.item.subtasks || this.item.subtasks.length === 0) {
