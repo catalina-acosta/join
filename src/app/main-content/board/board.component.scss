@@ -131,6 +131,33 @@ section {
     }
 }
 
+#todo, #inProgress, #awaitFeedback, #done {
+    display: flex;
+    flex-direction: column;
+}
+
+app-task-card {
+    height: fit-content;
+    width: 252px;
+    min-width: 252px;
+    background-color: #FFFFFF;
+    border-radius: 24px;
+    margin-bottom: 16px;
+    
+    .cdk-drag {
+        margin: 0;
+    }
+    
+    &.cdk-drag-preview {
+        rotate: -5deg;
+    }
+    
+    &.cdk-drag-placeholder {
+        opacity: 0.5;
+        border: 1px dashed #A8A8A8;
+    }
+}
+
 // .cdk-drag {
 //     transform: rotate(-5deg);
 // }
@@ -306,6 +333,12 @@ section .custom-dialog {
         display: flex;
         overflow-x: scroll;
         gap: 16px;
+    }
+
+    #todo, #inProgress, #awaitFeedback, #done {
+        display: flex;
+        flex-direction: row;
+        height: 250px;
     }
 }
 

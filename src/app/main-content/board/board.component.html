@@ -45,7 +45,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('todo'); track $index) {
-            <app-task-card [item]="item" cdkDrag ></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag ></app-task-card>
           }
         }
       </div>
@@ -67,7 +67,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('inProgress'); track $index) {
-            <app-task-card [item]="item" cdkDrag></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag></app-task-card>
           }
         }
       </div>
@@ -88,7 +88,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('awaitFeedback'); track $index) {
-            <app-task-card [item]="item" cdkDrag ></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag ></app-task-card>
           }
         }
         </div>
@@ -109,7 +109,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('done'); track $index) {
-            <app-task-card [item]="item" cdkDrag ></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag ></app-task-card>
           }
         }
       </div>

@@ -3,10 +3,10 @@
         <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
     </div>
 </div>
-<div class="card" cdkDrag (click)="openCardDialog(item)"
+<div class="card" (click)="openCardDialog(item)"
     (cdkDragStarted)="item.id ? onDragStart(item) : null"
     (cdkDragEnded)="item.id ? onDragEnd(item) : null"
-    [ngClass]="{ 'dragging': item.id ? isCardDragging(item.id) : false }">
+    [ngClass]="{ 'dragging': isDragging }">
     <span class="category" [ngStyle]="{'background-color': item.category === 'Technical Task' ? '#1FD7C1' : '#0038FF'}">{{item.category}}</span>
     <p class="title">{{item.title}}</p>
     <p class="description">{{item.description}}</p>
@@ -26,15 +26,15 @@
                 @for (userId of item.assignedToUserId; track $index) {
                     <div class="avatar_wrapper">
                         @for (contact of firebase.orderedContactsList; track $index) {
-                            @if(contact.id === userId) {
+                            @if(contact.id === userId ) {
                                 <div class="avatar" [ngStyle]="{'background-color': contact.color}">
                                     <p>{{contact.firstname.charAt(0)}}{{contact.lastname.charAt(0)}}</p>
                                 </div>
-                            }
+                            } 
                         }
                     </div>
                 } 
-            }
+            } 
         </div>
         <div class="priority">
             @if (item.priority === "urgent") {
