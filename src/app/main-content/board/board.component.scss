@@ -138,7 +138,7 @@ section {
 // .cdk-drag-preview {
 //     transform: rotate(-5deg);
 // }
-    
+
 // .cdk-drag-placeholder {
 //     opacity: 0.5;
 //     border: 1px dashed #A8A8A8;
@@ -165,7 +165,7 @@ section {
 //     // &.cdk-drag-preview {
 //     //     transform: rotate(-5deg);
 //     // }
-    
+
 //     &.cdk-drag-placeholder {
 //         opacity: 0.5;
 //         border: 1px dashed #A8A8A8;
@@ -201,6 +201,7 @@ section {
 section .custom-dialog {
     padding: 0;
 }
+
 // open card dialog
 .custom-dialog {
     padding: 0;
@@ -214,7 +215,7 @@ section .custom-dialog {
     align-items: center;
     z-index: 100;
     animation: slideInFromRight 125ms ease-out forwards;
-    padding:0;
+    padding: 0;
 }
 
 .card-dialog {
@@ -228,7 +229,7 @@ section .custom-dialog {
     align-items: center;
     z-index: 100;
     animation: slideInFromRight 125ms ease-out forwards;
-    padding:0;
+    padding: 0;
 }
 
 .overlay_content {
@@ -300,12 +301,24 @@ section .custom-dialog {
 @media screen and (max-width: 1428px) {
     .task_container {
         flex-direction: column;
-    }
-
+    }.drop-area {
+        overflow-x: auto;
+        overflow-y: hidden;
+        max-width: 100%;
+      }
+      
     .cdk-drop-list {
         display: flex;
-        overflow-x: scroll;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
         gap: 16px;
+        touch-action: pan-x !important; 
+        -webkit-overflow-scrolling: touch;
+    }
+    app-task-card {
+        touch-action: none; // Verhindert das Standard-Touch-Verhalten beim Dragging
     }
 }
 
@@ -396,4 +409,3 @@ section .custom-dialog {
         }
     }
 }
-

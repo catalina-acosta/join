@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject, PLATFORM_ID } from '@angular/core';
 import { FirebaseService } from '../../shared/service/firebase.service';
 import { TaskInterface } from './task.interface';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TaskCardComponent } from './task-card/task-card.component';
 import {
   CdkDragDrop,
@@ -12,16 +12,14 @@ import {
   CdkDropList,
   CdkDragMove,
 } from '@angular/cdk/drag-drop';
-import { CardComponent } from './card/card.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component'; 
 import { Router } from '@angular/router';
-import { AddTaskComponent } from "../add-task/add-task.component";
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, CardComponent, TaskCardComponent, AddTaskDialogComponent, MatDialogModule],
+  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, TaskCardComponent, AddTaskDialogComponent, MatDialogModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -34,27 +32,39 @@ export class BoardComponent {
   filteredTasks: TaskInterface[] = [];
   isDragging: boolean = false;
   draggingCardId: string | null = null;
+  isScrolling: boolean = false;
 
-  constructor(private dialog: MatDialog, private router: Router) {
+  constructor(private dialog: MatDialog, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
     });
-    window.addEventListener('resize', this.handleResize.bind(this));
-  }
-
-// #region add-task-dialog
-  handleResize() {
-    if (window.innerWidth <= 900 && this.isAddDialogOpen) {
-      this.isAddDialogOpen = false; // Schließe den Dialog
-      this.router.navigate(['/add-task']); // Navigiere zur Add-Task-Komponente
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('resize', this.handleResize.bind(this));
     }
   }
 
-  ngOnDestroy() {
-    // Entferne den Event-Listener, um Speicherlecks zu vermeiden
+  onDragStart() {
+    this.isScrolling = false; // Zurücksetzen, wenn der Nutzer tatsächlich draggt
+  }
+  
+  onScroll() {
+    this.isScrolling = true; // Scrollvorgang erkannt
+  }
+
+// #region add-task-dialog
+
+handleResize() {
+  if (isPlatformBrowser(this.platformId) && window.innerWidth <= 900 && this.isAddDialogOpen) {
+    this.isAddDialogOpen = false;this.router.navigate(['/add-task']);
+  }
+}
+
+ngOnDestroy() {
+  if (isPlatformBrowser(this.platformId)) {
     window.removeEventListener('resize', this.handleResize.bind(this));
   }
+}
 
   openAddTask() {
     if (window.innerWidth <= 900) {
@@ -107,6 +117,10 @@ export class BoardComponent {
 
 // #region drag-and-drop
   drop(event: CdkDragDrop<TaskInterface[]>) {
+    if (this.isScrolling) {
+      return; // Dragging blockieren, wenn gescrollt wurde
+    }
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
