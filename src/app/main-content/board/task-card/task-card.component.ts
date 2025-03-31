@@ -25,7 +25,6 @@ export class TaskCardComponent {
 
   constructor() {
     this.getContactList();
-    console.log(this.fullOrderedContactList);
   }
 
   getContactList() {

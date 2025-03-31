@@ -7,6 +7,11 @@
   </div>
 </div>
 <!--#endregion-->
+<div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
+  <div class="card-dialog">
+      <app-card [item]="selectedItem" (closeDialogEvent)="closeDialog()" (click)="stopPropagation($event)"></app-card>
+  </div>
+</div>
 <section>
   <!--#region find-task-->
   <div class="headline_content">
@@ -38,8 +43,7 @@
         <button (click)="openAddTask()" class="plus_btn">+</button>
       </div>
       <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('todo')" 
-        [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (scroll)="onScroll()"
-        (cdkDragStarted)="onDragStart()"
+        [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area"
         (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('todo').length === 0) {
           <div class="no_match_box">
@@ -49,7 +53,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('todo'); track $index) {
-            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag ></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag (click)="openCardDialog(item)"></app-task-card>
           }
         }
       </div>
@@ -61,8 +65,7 @@
       </div>  
       <div id="inProgress" cdkDropList #inProgress="cdkDropList" 
         [cdkDropListData]="filterTasksByStatusAndQuery('inProgress')" 
-        [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (scroll)="onScroll()"
-        (cdkDragStarted)="onDragStart()"
+        [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area"
         (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('inProgress').length === 0) {
           <div class="no_match_box">
@@ -72,7 +75,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('inProgress'); track $index) {
-            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag (click)="openCardDialog(item)"></app-task-card>
           }
         }
       </div>
@@ -84,8 +87,8 @@
         <button (click)="openAddTask()" class="plus_btn">+</button>
       </div>
       <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('awaitFeedback')" 
-        [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (scroll)="onScroll()"
-        (cdkDragStarted)="onDragStart()" (cdkDropListDropped)="drop($event)">
+        [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" 
+        (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('awaitFeedback').length === 0) {
           <div class="no_match_box">
             <div class="no_tasks_card">
@@ -94,7 +97,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('awaitFeedback'); track $index) {
-            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag ></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag (click)="openCardDialog(item)"></app-task-card>
           }
         }
         </div>
@@ -106,8 +109,7 @@
         <button (click)="openAddTask()" class="plus_btn">+</button>
       </div>
       <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('done')" 
-      [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (scroll)="onScroll()"
-      (cdkDragStarted)="onDragStart()" (cdkDropListDropped)="drop($event)">
+      [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('done').length === 0) {
           <div class="no_match_box">
             <div class="no_tasks_card">
@@ -116,7 +118,7 @@
           </div>
         } @else {
           @for( item of filterTasksByStatusAndQuery('done'); track $index) {
-            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag ></app-task-card>
+            <app-task-card [item]="item" [cdkDragData]="item" cdkDrag (click)="openCardDialog(item)"></app-task-card>
           }
         }
       </div>
