@@ -15,11 +15,12 @@ import {
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component'; 
 import { Router } from '@angular/router';
+import { CardComponent } from './card/card.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, TaskCardComponent, AddTaskDialogComponent, MatDialogModule],
+  imports: [CommonModule, FormsModule, CdkDropList, CdkDrag, TaskCardComponent, AddTaskDialogComponent, MatDialogModule, CardComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -33,6 +34,8 @@ export class BoardComponent {
   isDragging: boolean = false;
   draggingCardId: string | null = null;
   isScrolling: boolean = false;
+  selectedItem!: TaskInterface;
+  isDialogOpen: boolean = false;
 
   constructor(private dialog: MatDialog, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
@@ -42,14 +45,6 @@ export class BoardComponent {
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('resize', this.handleResize.bind(this));
     }
-  }
-
-  onDragStart() {
-    this.isScrolling = false; // Zurücksetzen, wenn der Nutzer tatsächlich draggt
-  }
-  
-  onScroll() {
-    this.isScrolling = true; // Scrollvorgang erkannt
   }
 
 // #region add-task-dialog
@@ -142,4 +137,27 @@ ngOnDestroy() {
     // }
   }
 //#endregion
+
+openCardDialog(item: TaskInterface) {
+  this.selectedItem = item;
+  this.isDialogOpen = true;
+}
+
+// stopPropagation(event: Event) {
+//   event.stopPropagation();
+// }
+
+
+closeDialog() {
+  const dialogElement = document.querySelector('.custom-dialog');
+
+  if (dialogElement) {
+    dialogElement.classList.add('dialog-closed');
+    setTimeout(() => {
+      this.isDialogOpen = false;
+    }, 500);
+  } else {
+    this.isDialogOpen = false;
+  }
+}
 }
