@@ -26,6 +26,7 @@ export class EditDialogComponent {
   subtaskInput: string = '';
   subtasks: { name: string, isEditing: boolean }[] = [];
   dropdownVisible: boolean = false;
+  isEditFormSubmitted: boolean = false;
   newDate: string = "";
 
   assignContact(contactId: string) {

@@ -72,7 +72,7 @@ export class CardComponent {
     this.isDialogOpen = true;
   }
   
-   closeEditDialog(){
+  closeEditDialog(){
     this.isDialogOpen = false; 
     this.isDeleteOpen = false;
   }
