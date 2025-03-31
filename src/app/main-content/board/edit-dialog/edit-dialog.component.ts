@@ -40,6 +40,7 @@ export class EditDialogComponent {
       } else {
         this.editedItem.assignedToUserId.splice(index, 1);
       }
+      this.editedItem.assignedToUserId.sort();
     }
   }
 

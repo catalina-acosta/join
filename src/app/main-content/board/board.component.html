@@ -12,6 +12,9 @@
   <div class="headline_content">
     <div class="headline_box">
       <h1>Board</h1>
+      <button class="add_btn_respo" (click)="openAddTask()">
+       <img src="./assets/tasks/add.svg" alt="add">
+      </button>
     </div>
     <div class="find_task_content">
       <div class="search-container">
@@ -35,7 +38,8 @@
         <button (click)="openAddTask()" class="plus_btn">+</button>
       </div>
       <div id="todo" cdkDropList #todo="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('todo')" 
-        [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" 
+        [cdkDropListConnectedTo]="[inProgress, awaitFeddback, done]" class="drop-area" (scroll)="onScroll()"
+        (cdkDragStarted)="onDragStart()"
         (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('todo').length === 0) {
           <div class="no_match_box">
@@ -57,7 +61,8 @@
       </div>  
       <div id="inProgress" cdkDropList #inProgress="cdkDropList" 
         [cdkDropListData]="filterTasksByStatusAndQuery('inProgress')" 
-        [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" 
+        [cdkDropListConnectedTo]="[awaitFeddback, todo, done]" class="drop-area" (scroll)="onScroll()"
+        (cdkDragStarted)="onDragStart()"
         (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('inProgress').length === 0) {
           <div class="no_match_box">
@@ -79,7 +84,8 @@
         <button (click)="openAddTask()" class="plus_btn">+</button>
       </div>
       <div id="awaitFeedback" cdkDropList #awaitFeddback="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('awaitFeedback')" 
-        [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (cdkDropListDropped)="drop($event)">
+        [cdkDropListConnectedTo]="[done, todo, inProgress]" class="drop-area" (scroll)="onScroll()"
+        (cdkDragStarted)="onDragStart()" (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('awaitFeedback').length === 0) {
           <div class="no_match_box">
             <div class="no_tasks_card">
@@ -100,7 +106,8 @@
         <button (click)="openAddTask()" class="plus_btn">+</button>
       </div>
       <div id="done" cdkDropList #done="cdkDropList" [cdkDropListData]="filterTasksByStatusAndQuery('done')" 
-      [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (cdkDropListDropped)="drop($event)">
+      [cdkDropListConnectedTo]="[awaitFeddback, inProgress, todo]" class="drop-area" (scroll)="onScroll()"
+      (cdkDragStarted)="onDragStart()" (cdkDropListDropped)="drop($event)">
         @if(filterTasksByStatusAndQuery('done').length === 0) {
           <div class="no_match_box">
             <div class="no_tasks_card">
