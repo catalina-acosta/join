@@ -9,6 +9,7 @@ import { BoardComponent } from './main-content/board/board.component';
 import { AddTaskComponent } from './main-content/add-task/add-task.component';
 import { AddTaskDialogComponent } from './main-content/add-task/add-task-dialog/add-task-dialog.component';
 import { SummaryComponent } from './main-content/summary/summary.component';
+import { LogInComponent } from './log-in/log-in.component';
 
 export const routes: Routes = [
     { path: '', component: MainContentComponent},
@@ -21,4 +22,5 @@ export const routes: Routes = [
     { path: 'add-task', component: AddTaskComponent},
     { path: 'add-task-dialog', component: AddTaskDialogComponent},
     { path: 'summary', component: SummaryComponent},
+    // { path: 'login', component: LogInComponent},
 ];
