@@ -22,5 +22,5 @@ export const routes: Routes = [
     { path: 'add-task', component: AddTaskComponent},
     { path: 'add-task-dialog', component: AddTaskDialogComponent},
     { path: 'summary', component: SummaryComponent},
-    // { path: 'login', component: LogInComponent},
+    //{ path: 'login', component: LogInComponent},
 ];

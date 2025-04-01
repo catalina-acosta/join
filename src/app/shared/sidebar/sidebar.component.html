@@ -1,7 +1,7 @@
 <div class="container">
     <nav class="sidebar">
         <div class="logo"><img src="assets/sidebar/logo.svg" alt=""></div>
-        <div class="menu">
+        <div class="menu" *ngIf="!shouldHideMenu()">
             <div class="menu-item-wrapper" *ngFor="let item of menuItems; let i = index"
                 [class.active]="selectedIndex === i" (click)="setActive(i)">
                 <a [routerLink]="item.link" class="menu-link">
@@ -10,6 +10,12 @@
                         <span>{{ item.label }}</span>
                     </div>
                 </a>
+            </div>
+        </div>
+        <div class="menu-item-wrapper">
+            <div *ngIf="shouldHideMenu()" class="menu-item">
+                <img src="assets/login/login.svg" alt="">
+                <a [routerLink]="['/']" class="login-link" (click)="logout()">Login</a>
             </div>
         </div>
 
@@ -23,9 +29,8 @@
 
 <div class="mobile">
     <nav>
-        <div *ngFor="let item of menuItems; let i = index"
-             [class.active]="selectedMobileIndex === i"
-             (click)="setMobileActive(i)">
+        <div *ngFor="let item of menuItems; let i = index" [class.active]="selectedMobileIndex === i"
+            (click)="setMobileActive(i)">
             <div class="menu-item-mobile" [routerLink]="item.link">
                 <img [src]="item.icon" alt="">
                 <span>{{ item.label }}</span>
