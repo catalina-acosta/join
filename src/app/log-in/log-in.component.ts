@@ -22,6 +22,7 @@ export class LogInComponent {
   }
 
   constructor(private router: Router) { }
+
   loginUser() {
     this.loginSuccess.emit();
     this.router.navigate(['/']);
