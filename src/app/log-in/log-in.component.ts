@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
@@ -13,21 +13,26 @@ import { Router } from '@angular/router';
 export class LogInComponent {
   @Output() loginSuccess = new EventEmitter<void>();
 
-  formSubmitted: boolean = false; 
-  login= {
+  formSubmitted: boolean = false;
+  passwordVisible: boolean = false;
+  passwordTyped: boolean = false;
+  login = {
     email: "",
     password: "",
   }
 
- constructor(private router: Router) {}
- loginUser() {
-  this.loginSuccess.emit();
+  constructor(private router: Router) { }
+  loginUser() {
+    this.loginSuccess.emit();
     this.router.navigate(['/']);
-}
+  }
 
-loginAsGuest(){
-  this.loginSuccess.emit();
-  this.router.navigate([''])
-}
- 
+  loginAsGuest() {
+    this.loginSuccess.emit();
+    this.router.navigate([''])
+  }
+
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
 }
