@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ContactsComponent } from './contacts/contacts.component';
+import { SummaryComponent } from "./summary/summary.component";
 
 
 @Component({
   selector: 'app-main-content',
-  imports: [ContactsComponent],
+  imports: [SummaryComponent],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss'
 })

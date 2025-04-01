@@ -85,9 +85,9 @@ input[type="text"] {
     padding: 12px 16px;
     outline: none;
     &::placeholder {
-        font-size: 12px;
+        font-size: 14px;
         color: #d1d1d1;
-        font-family: 'Poppins';
+        font-family: 'inter';
     }
     &:focus {
         border: 1px solid $light_blue;
@@ -103,9 +103,9 @@ input[type="date"] {
     padding: 12px 16px;
     font-size: 20px;
     background-color: white;
-    font-size: 12px;
+    font-size: 14px;
     color: #d1d1d1;
-    font-family: 'Poppins';
+    font-family: 'inter';
     cursor: pointer;
     outline: none;
     &:focus {
@@ -128,9 +128,9 @@ textarea {
         box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
     }
     &::placeholder {
-        font-size: 12px;
+        font-size: 14px;
         color: #d1d1d1;
-        font-family: 'Poppins';
+        font-family: 'inter';
     }
 }
 
@@ -338,6 +338,7 @@ select option:disabled {
     padding: 12px 16px;
     padding-right: 40px;
     outline: none;
+    font-family: 'inter';
     &:focus {
         border: 1px solid $light_blue;
         box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
