@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -10,11 +11,23 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent {
-  formSubmitted: boolean = false;
+  @Output() loginSuccess = new EventEmitter<void>();
 
+  formSubmitted: boolean = false; 
   login= {
     email: "",
     password: "",
-
   }
+
+ constructor(private router: Router) {}
+ loginUser() {
+  this.loginSuccess.emit();
+    this.router.navigate(['/']);
+}
+
+loginAsGuest(){
+  this.loginSuccess.emit();
+  this.router.navigate([''])
+}
+ 
 }

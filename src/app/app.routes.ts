@@ -20,5 +20,5 @@ export const routes: Routes = [
     { path: 'board', component: BoardComponent},
     { path: 'add-task', component: AddTaskComponent},
     { path: 'add-task-dialog', component: AddTaskDialogComponent},
-    { path: 'login', component: LogInComponent},
+    // { path: 'login', component: LogInComponent},
 ];
