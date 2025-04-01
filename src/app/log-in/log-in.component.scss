@@ -342,6 +342,14 @@ form {
     }
 }
 
+@media (max-width:375px)and (max-height:667px) {
+ .logo_aniamtion{
+    img{
+        width: 148px;
+    }
+ }
+}
+
 // animaton
 @keyframes logoMove {
     0% {
@@ -360,13 +368,11 @@ form {
 @keyframes backgroundMove {
     0% {
         background-color: #F0F0F0;
-        /* Anfangsfarbe */
         z-index: 100;
     }
 
     100% {
         background-color: rgba(240, 240, 240, 0);
-        /* Transparent */
         z-index: -1;
     }
 }
