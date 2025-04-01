@@ -1,0 +1,125 @@
+@use './../../styles.scss' as *;
+
+.blue_line{
+    background-color:$light_blue;
+    width: 150px;
+    height: 4px;
+    border-radius: 5px;
+}
+
+.signin_content{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+// login_content
+
+.login_content{
+background-color: #fff;
+width: 580px;
+height: 400px;
+border-radius: 20px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+box-shadow:2px 5px 20px #0000000c;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 60%;
+}
+
+
+.input_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    input {
+        padding: 13px;
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #00000036;
+        font-size: 20px;
+        outline: none;
+        transition: border 125ms ease;
+
+        &:focus {
+            border: 1px solid $light_blue;
+            box-shadow: 0px 0px 5px rgba(42, 171, 226, 0.151);
+        }
+
+        &.input-error {
+            border: 1px solid rgba(211, 0, 0, 0.534);
+
+            &::placeholder {
+                color: rgba(211, 0, 0, 0.534);
+            }
+        }
+    }
+
+    img {
+        position: absolute;
+        right: 0;
+        padding-right: 20px;
+    }
+}
+
+
+// buttom
+.btn_content{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.light_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: 700;
+    border: 1px solid $lightblack;
+    padding: 7px 12px 7px 12px;
+    cursor: pointer;
+    transition: all 125ms ease;
+    color:$lightblack;
+
+    &:hover {
+        border: 1px solid $light_blue;
+        color: $light_blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
+    }
+}
+
+.dark_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: $lightblack;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 7px 15px 7px 15px;
+    transition: all 125ms ease;
+
+    &:hover {
+        background-color: $light_blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.178);
+
+    }
+}

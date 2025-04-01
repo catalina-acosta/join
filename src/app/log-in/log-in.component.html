@@ -1,0 +1,48 @@
+<section>
+    <div>
+        <img src="./assets/icons/logo_dark.svg" alt="Logo">
+        <div class="signin_content">
+            <p>Not a Join user ?</p>
+            <button class="dark_btn">Sign up</button>
+        </div>
+    </div>
+    <div class="login_content">
+        <div class="title">
+            <h1>Log in</h1>
+            <div class="blue_line"></div>
+        </div>
+
+        <form>
+            <label class="input_content">
+                <input type="email" [(ngModel)]="login.email" name="email"
+                    [placeholder]="'Email'"
+                    #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$" minlength="4">
+                <img src="./assets/contact/mail.svg" alt="mail">
+            </label>
+            @if (email.invalid && email.touched || !email.touched && formSubmitted) {
+                <p class="error-color">please enter a valid email address</p>
+            } 
+
+            <label class="input_content">
+                <input type="password" [(ngModel)]="login.password" name="password"
+                    [placeholder]="'Password'"
+                    #email="ngModel" [ngClass]="{'input-error': email.invalid && email.touched}" required pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$" minlength="4">
+                <img src="./assets/login/lock.svg" alt="locker">
+            </label>
+            @if (email.invalid && email.touched || !email.touched && formSubmitted) {
+                <p class="error-color">Check our email and password. Please try again.</p>
+            } 
+
+
+            <div class="btn_content">
+                <button class="dark_btn">Log in</button> 
+                <button class="light_btn">Guest Log in</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+</section>
