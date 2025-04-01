@@ -23,7 +23,7 @@
                 <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="login.password" name="password"
                     [placeholder]="'Password'" #password="ngModel" (input)="passwordTyped = true"
                     [ngClass]="{'input-error': password.invalid && password.touched}" required minlength="4">
-                <img [src]="passwordVisible ? './assets/login/visibility.svg' : (passwordTyped ? './assets/login/visibility_off.svg' : './assets/login/lock.svg')"
+                <img class="visibility_icon" [src]="passwordVisible ? './assets/login/visibility.svg' : (passwordTyped ? './assets/login/visibility_off.svg' : './assets/login/lock.svg')"
                     alt="toggle visibility" (click)="togglePasswordVisibility()">
             </label>
 

@@ -16,11 +16,18 @@
         width: 70px;
     }
 }
+.visibility_icon{
+    cursor: pointer;
+}
 
 .signin_content {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.signin_content_respo {
+    display: none;
 }
 
 section {
