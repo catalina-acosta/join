@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { getAuth } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { signInWithEmailAndPassword } from '@firebase/auth';
 
 @Component({
   selector: 'app-log-in',
@@ -24,9 +26,21 @@ export class LogInComponent {
   constructor(private router: Router) { }
 
   loginUser() {
-    this.loginSuccess.emit();
-    this.router.navigate(['/']);
-  }
+  //   const auth = getAuth();
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       // Signed in 
+  //       const user = userCredential.user;
+
+  //       this.loginSuccess.emit();
+  //       this.router.navigate(['/']);
+
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //     });
+   }
 
   loginAsGuest() {
     this.loginSuccess.emit();
