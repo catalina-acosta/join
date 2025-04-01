@@ -4,9 +4,10 @@
         <img src="./assets/contact/line.svg" alt="blue line">
         <h3>Key Metrics at a Glance</h3>
     </div>
+<div class="main_content">
 <div class="task_table">
     <div class="first_line">
-        <div class="table_cell">
+        <div class="table_cell more_padding">
             <img class="todo_icon" src="./assets/summary/to_do_icon.svg" alt="to do task icon">
             <div>
                 <span class="count">1</span>
@@ -14,7 +15,7 @@
             </div>
             
         </div>
-        <div class="table_cell">
+        <div class="table_cell more_padding">
             <img class="done_icon" src="./assets/summary/done_icon.svg" alt="done task icon">
             <div>
                 <span class="count">1</span>
@@ -23,7 +24,7 @@
         </div>
     </div>
 
-    <div class="urgent-task table_cell">
+    <div class="urgent_task">
         <div class="task_count">
             <img class="urgent_icon" src="./assets/summary/urgent_icon.svg" alt="urgent task icon">
             <div>
@@ -31,12 +32,44 @@
                 <p>Urgent</p>
             </div>
         </div>
-        <img src="./assets/summary/grey_dividing_line.svg" alt="grey line">
+        <img class="divider" src="./assets/summary/grey_dividing_line.svg" alt="grey line">
         <div class="due_date">
             <p class="task_date">Dezember 31., 2025</p>
             <p>Upcoming Deadline</p>
         </div>
     </div>
+
+    <div class="third_line">
+        <div class="table_cell">
+            <div>
+                <span class="count">5</span>
+                <p>Tasks in<br>Board</p>
+            </div>
+        </div>
+        <div class="table_cell">
+            <div>
+                <span class="count">2</span>
+                <p>Tasks in<br>Progress</p>
+            </div>
+        </div>
+        <div class="table_cell">
+            <div>
+                <span class="count">2</span>
+                <p>Awaiting<br>Feedback</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="welcome">
+    <span class="greeting">{{ getGreeting() }}</span>
+    <span class="user_name">Sofia Müller</span>
+</div>
+
+<div class="welcome" *ngIf="guestLogIn">
+    <span class="greeting">{{ getGreeting() }} ,</span>
+</div>
 
 </div>
 </section>
