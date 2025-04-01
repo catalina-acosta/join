@@ -14,7 +14,7 @@ export class SidebarComponent {
   selectedMobileIndex: number | null = null;
 
   menuItems = [
-    { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/imprint' },
+    { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary' },
     { label: 'Add Task', icon: 'assets/sidebar/add-task.svg', link: '/add-task' },
     { label: 'Board', icon: 'assets/sidebar/board.svg', link: '/board' },
     { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact' }
