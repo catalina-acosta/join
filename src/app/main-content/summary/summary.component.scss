@@ -5,3 +5,64 @@
         rotate: (90deg);
     }
 }
+
+.first_line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task_table {
+    width: 560px;
+    align-self: flex-start;
+    margin-top: 8px;
+}
+
+.table_cell {
+    cursor: pointer;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 28px 48px;
+    gap: 18px;
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    >img {height: 69px; width: 69px;}
+    >p {font-size: 20px; font-weight: 400;}
+}
+
+.count {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.table_cell:hover {
+    background-color: #293647; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    scale: (1.08);
+    >.todo_icon {
+        content: url(./../../../../public/assets/summary/to_do_icon_hover.svg);
+    }
+    >.done_icon {
+        content: url(./../../../../public/assets/summary/done_icon_hover.svg);
+    }
+    >div .count {color: white;}
+    >div p {color: white;}
+}
+
+.task_count {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 28px 48px;
+    gap: 18px;
+    >img {height: 69px; width: 69px;}
+    >p {font-size: 20px; font-weight: 400;}
+}
+
+.urgent_task:hover {
+    background-color: #293647;
+}
+
+// hover shadow = box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
