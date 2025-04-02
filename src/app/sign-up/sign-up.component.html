@@ -1,6 +1,6 @@
 <section>
     <div class="login_content">
-        <div class="arrow"><a [routerLink]="['/']"><img src="assets/help/arrow.svg" alt=""></a></div>
+        <div class="arrow"><button (click)="resetNewUserStatus()"><img src="assets/help/arrow.svg" alt=""></button></div>
         <div class="title">
             <h1>Sign up</h1>
             <div class="blue_line"></div>
@@ -36,6 +36,7 @@
             @if (email.invalid && email.touched || !email.touched && formSubmitted) {
             <p class="error-color">Check our email and password. Please try again.</p>
             }
+            <div>Privacy policy</div>
             <div class="btn_content">
                 <button class="dark_btn" (click)="createNewUser()">Sign Up</button>
             </div>
@@ -48,5 +49,4 @@
         <a href="">Privacy Policy</a>
         <a href=""> Legal notice</a>
     </div>
-
 </section>

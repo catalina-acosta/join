@@ -35,4 +35,8 @@ export class AppComponent {
   logout() {
     this.isLoggedIn = false;
   }
+
+  resetNewUser() {
+    this.newUser = false;
+  }
 }
