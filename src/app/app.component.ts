@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
 import { SharedComponent } from "./shared/shared.component";
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from "./sign-up/sign-up.component";
-import { EventEmitter } from 'stream';
+import { getAuth, signOut } from '@angular/fire/auth';
 
 
 @Component({
   selector: 'app-root',
   standalone:true,
-  imports: [RouterOutlet, SharedComponent, RouterModule, LogInComponent, SignUpComponent],
+  imports: [RouterOutlet, SharedComponent, RouterModule, LogInComponent, SignUpComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -20,7 +20,7 @@ export class AppComponent {
   isLoggedIn = false;
   newUser?: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
     this.firebase;
   }
 
@@ -33,7 +33,13 @@ export class AppComponent {
   }
   
   logout() {
-    this.isLoggedIn = false;
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      this.isLoggedIn = false;
+      this.router.navigate(['/login']);
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   resetNewUser() {
