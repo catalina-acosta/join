@@ -1,10 +1,10 @@
 
 @if (!isLoggedIn && newUser) {
-  <app-sign-up (newUserOutput)="goToSignUp()"></app-sign-up>
+  <app-sign-up (resetNewUser)="resetNewUser()"></app-sign-up>
 }
 
 @else if (!isLoggedIn) {
-    <app-log-in (loginSuccess)="onLoginSuccess()"></app-log-in>
+    <app-log-in (loginSuccess)="onLoginSuccess()" (newUserOutput)="goToSignUp()" ></app-log-in>
 }
 
 @else {

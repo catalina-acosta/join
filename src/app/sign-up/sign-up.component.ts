@@ -15,7 +15,7 @@ import { Auth } from '@angular/fire/auth';
 export class SignUpComponent {
   firebaseUsers = inject(UsersService);
   formSubmitted: boolean = false; 
-  auth = inject(Auth)
+  auth = inject(Auth);
   @Output() resetNewUser = new EventEmitter<void>();
   signUp = {
     fullname: "",
@@ -41,6 +41,7 @@ export class SignUpComponent {
     createUserWithEmailAndPassword(this.auth, this.signUp.email, this.signUp.password)
       .then((userCredential) => {
         // Signed up 
+        // updateProfile() add name
         const user = userCredential.user;
         console.log("new user created")
       })
@@ -49,5 +50,9 @@ export class SignUpComponent {
         const errorMessage = error.message;
         // ..
       });
+  }
+
+  resetNewUserStatus() {
+    this.resetNewUser.emit();
   }
 }

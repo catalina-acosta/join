@@ -7,6 +7,22 @@
     border-radius: 5px;
 }
 
+.arrow {
+    width: 100%;
+    padding-left: 24px;
+    transform: translatey(44px);
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    img {
+        width: 32px;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
 .header_content {
     display: flex;
     justify-content: space-between;
@@ -110,7 +126,7 @@ form {
 }
 
 
-// buttom
+// button
 .btn_content {
     display: flex;
     gap: 30px;
@@ -182,6 +198,114 @@ form {
         &:not(:hover) {
             color: #a3a3a3;
             font-weight: normal;
+        }
+    }
+}
+
+@media (max-width:666px) {
+    section {
+        padding: 30px 30px;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    .login_content {
+        width: 100%;
+        height: 580px;
+        margin-top: 40px;
+    }
+
+    .btn_content {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        padding-top: 30px;
+
+        .btn_box {
+            width: 50%;
+        }
+    }
+
+    .signin_content {
+        display: none;
+    }
+
+    .signin_content_respo {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width:450px) {
+    .header_content {
+        img {
+            width: 56px;
+        }
+    }
+
+    .login_content {
+        height: 420px;
+    }
+
+    form {
+        .error-color {
+            font-size: 13px;
+            top: 97px;
+            right: -1px;
+            width: 100%;
+        }
+    }
+
+    .btn_content {
+        .btn_box {
+            width: 60%;
+        }
+    }
+
+    .input_content {
+        input {
+            padding: 9px;
+            font-size: 16px;
+        }
+    }
+}
+
+@media (max-width:383px) {
+    h1 {
+        font-size: 50px;
+    }
+
+    .blue_line {
+        width: 69%;
+    }
+
+    .login_content {
+        height: 410px;
+    }
+
+    form {
+        .error-color {
+            font-size: 13px;
+            top: 97px;
+            right: -1px;
+            width: 100%;
+        }
+    }
+
+    .btn_content {
+        .btn_box {
+            width: 75%;
+            font-size: 16px;
+        }
+    }
+
+    .input_content {
+        input {
+            padding: 9px;
+            font-size: 16px;
         }
     }
 }
