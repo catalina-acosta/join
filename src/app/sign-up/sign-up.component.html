@@ -1,0 +1,52 @@
+<section>
+    <div class="login_content">
+        <div class="arrow"><a [routerLink]="['/']"><img src="assets/help/arrow.svg" alt=""></a></div>
+        <div class="title">
+            <h1>Sign up</h1>
+            <div class="blue_line"></div>
+        </div>
+
+        <form>
+            <label class="input_content">
+                <input type="fullname" [(ngModel)]="signUp.fullname" name="fullname" [placeholder]="'Name'" #fullname="ngModel"
+                    [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required minlength="4">
+                <img src="./assets/contact/person.svg" alt="person">
+            </label>
+            <label class="input_content">
+                <input type="email" [(ngModel)]="signUp.email" name="email" [placeholder]="'Email'" #email="ngModel"
+                    [ngClass]="{'input-error': email.invalid && email.touched}" required
+                    pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$" minlength="4">
+                <img src="./assets/contact/mail.svg" alt="mail">
+            </label>
+            <label class="input_content">
+                <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="signUp.password" name="password"
+                    [placeholder]="'Password'" #password="ngModel" (input)="passwordTyped = true"
+                    [ngClass]="{'input-error': password.invalid && password.touched}" required minlength="4">
+                <img [src]="passwordVisible ? './assets/login/visibility.svg' : (passwordTyped ? './assets/login/visibility_off.svg' : './assets/login/lock.svg')"
+                    alt="toggle visibility" (click)="togglePasswordVisibility()">
+            </label>
+            <label class="input_content">
+                <input [type]="confirmedPasswordVisible ? 'text' : 'confirmedPassword'" [(ngModel)]="signUp.confirmedPassword" name="confirmedPassword"
+                    [placeholder]="'Confirm Password'" #confirmedPassword="ngModel" (input)="confirmedPasswordTyped = true"
+                    [ngClass]="{'input-error': confirmedPassword.invalid && confirmedPassword.touched}" required minlength="4">
+                <img [src]="confirmedPasswordVisible ? './assets/login/visibility.svg' : (confirmedPasswordTyped ? './assets/login/visibility_off.svg' : './assets/login/lock.svg')"
+                    alt="toggle visibility" (click)="togglePasswordVisibility()">
+            </label>
+
+            @if (email.invalid && email.touched || !email.touched && formSubmitted) {
+            <p class="error-color">Check our email and password. Please try again.</p>
+            }
+            <div class="btn_content">
+                <button class="dark_btn" (click)="createNewUser()">Sign Up</button>
+            </div>
+        </form>
+
+    </div>
+
+
+    <div class="imprint_content">
+        <a href="">Privacy Policy</a>
+        <a href=""> Legal notice</a>
+    </div>
+
+</section>
