@@ -1,12 +1,12 @@
 <section class="section_wrapper">
     
-    <div class="summary_title">
+    <div class="summary_title" *ngIf="showMainContent">
         <h1>Join 360</h1>
         <img src="./assets/contact/line.svg" alt="blue line">
         <h3>Key Metrics at a Glance</h3>
     </div>
 <div class="main_content">
-<div class="task_table">
+<div class="task_table" *ngIf="showMainContent">
     <div class="first_line">
         <div class="table_cell more_padding" (click)="navigateToDetailWithFragment('toDoSection')">
             <img class="todo_icon" src="./assets/summary/to_do_icon.svg" alt="to do task icon">
@@ -63,7 +63,7 @@
 
 </div>
 
-<div class="welcome">
+<div class="welcome" *ngIf="showGreeting">
     <span class="greeting">{{ getGreeting() }} ,</span>
     <span class="user_name">Sofia Müller</span>
 </div>

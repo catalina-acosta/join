@@ -5,6 +5,7 @@ import { FirebaseService } from '../../shared/service/firebase.service';
 import { TaskInterface } from '../board/task.interface';
 import { collectionData, Firestore, collection } from '@angular/fire/firestore';
 import { Router, RouterModule } from '@angular/router';
+//import { setTimeout } from 'timers/promises';
 
 @Component({
   selector: 'app-summary',
@@ -24,12 +25,33 @@ export class SummaryComponent {
   filteredTasks: TaskInterface[] = [];
   urgent: TaskInterface[] = [];
 
+  showGreeting: boolean = false;
+  showMainContent: boolean = false;
+
 
   constructor(private firebase: FirebaseService, private router: Router) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
     });
+  }
+
+  ngOnInit() {
+    this.checkScreenWidth();
+  }
+
+  checkScreenWidth() {
+    if(window.innerWidth <= 900) {
+      this.showGreeting = true;
+      setTimeout(() => {
+        this.showGreeting = false;
+        this.showMainContent = true;
+      }, 2000);
+    }
+    else {
+      this.showGreeting = true;
+      this.showMainContent = true;
+    }
   }
 
   sortTasks() {
