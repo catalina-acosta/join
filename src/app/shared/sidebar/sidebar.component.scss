@@ -66,16 +66,28 @@ span{
     text-decoration: none;
     color: #CDCDCD;
     transition: color 0.2s ease-in-out;
-    padding-top: 10px;
+}
+
+.legal-position .imprint{
+    padding: 10px 84px;
+}
+
+.legal-position .privacy-policy{
+    padding: 10px 78px;
 }
 
 .legal-position a:hover {
     color: #29ABE2;
-    transform: scale(1.1);
+    transform: scale(0.99);
 }
 
 .login-link{
     color:white;
+}
+
+.legal-position a.active-link {
+    background-color: #091931; 
+   
 }
 
 /* Mobile Anpassungen */
