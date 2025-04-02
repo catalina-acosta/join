@@ -14,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class LogInComponent {
   @Output() loginSuccess = new EventEmitter<void>();
+  @Output() newUserOutput = new EventEmitter<void>();
 
   formSubmitted: boolean = false;
   passwordVisible: boolean = false;
@@ -23,9 +24,12 @@ export class LogInComponent {
     password: "",
   }
 
-  constructor(private router: Router) { }
-
-
+  constructor(private router: Router) {}
+  
+  signUp() {
+    this.newUserOutput.emit();
+  }
+  
   loginUser() {
   //   const auth = getAuth();
   //   signInWithEmailAndPassword(auth, email, password)
@@ -52,13 +56,14 @@ export class LogInComponent {
     this.passwordVisible = !this.passwordVisible;
   }
 
-navigateToPrivacyPolicy() {
-  this.loginSuccess.emit();
-  this.router.navigate(['/privacy-policy']);
-}
+  navigateToPrivacyPolicy() {
+    this.loginSuccess.emit();
+    this.router.navigate(['/privacy-policy']);
+  }
 
-navigateToImprint() {
-  this.loginSuccess.emit();
-  this.router.navigate(['/imprint']);
-}
+  navigateToImprint() {
+    this.loginSuccess.emit();
+    this.router.navigate(['/imprint']);
+  }
+
 }

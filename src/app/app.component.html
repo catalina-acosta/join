@@ -1,11 +1,18 @@
-@if (!isLoggedIn) {
+
+@if (!isLoggedIn && newUser) {
+  <app-sign-up (newUserOutput)="goToSignUp()"></app-sign-up>
+}
+
+@else if (!isLoggedIn) {
     <app-log-in (loginSuccess)="onLoginSuccess()"></app-log-in>
-  } @else {
-    <div>
-      <app-shared></app-shared>
-      <div class="content_wrapper">
-        <router-outlet></router-outlet>
-      </div>
+}
+
+@else {
+  <div>
+    <app-shared></app-shared>
+    <div class="content_wrapper">
+      <router-outlet></router-outlet>
     </div>
-  }
+  </div>
+}
   
