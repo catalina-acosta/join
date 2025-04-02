@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent {
+  userLoggedIn: boolean = false;
+  guestLoggedIn: boolean = false;
+
   @Output() loginSuccess = new EventEmitter<void>();
 
   formSubmitted: boolean = false; 
@@ -21,11 +24,13 @@ export class LogInComponent {
 
  constructor(private router: Router) {}
  loginUser() {
+  this.userLoggedIn = true;
   this.loginSuccess.emit();
     this.router.navigate(['/']);
 }
 
 loginAsGuest(){
+  this.guestLoggedIn = true;
   this.loginSuccess.emit();
   this.router.navigate([''])
 }
