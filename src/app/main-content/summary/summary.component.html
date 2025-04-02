@@ -11,18 +11,15 @@
         <div class="table_cell more_padding">
             <img class="todo_icon" src="./assets/summary/to_do_icon.svg" alt="to do task icon">
             <div>
-                <span class="count">1</span>
+                <span class="count">{{ getTodoTaskCount() }}</span>
                 <p>To-do</p>
             </div>
             
         </div>
         <div class="table_cell more_padding">
-            @for (item of firebase.tasksList; track $index) {
-                <p>{{ item }}</p>
-            }
             <img class="done_icon" src="./assets/summary/done_icon.svg" alt="done task icon">
             <div>
-                <span class="count">1</span>
+                <span class="count">{{ getDoneTasksCount() }}</span>
                 <p>Done</p>
             </div>
         </div>
@@ -46,19 +43,19 @@
     <div class="third_line">
         <div class="table_cell">
             <div>
-                <span class="count">5</span>
+                <span class="count">{{ getAllTaskCount() }}</span>
                 <p>Tasks in<br>Board</p>
             </div>
         </div>
         <div class="table_cell">
             <div>
-                <span class="count">{{ inProgress.length }}</span>
+                <span class="count">{{ getInProgressTaskCount() }}</span>
                 <p>Tasks in<br>Progress</p>
             </div>
         </div>
         <div class="table_cell">
             <div>
-                <span class="count">{{ awaitFeedback.length }}</span>
+                <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
                 <p>Awaiting<br>Feedback</p>
             </div>
         </div>
