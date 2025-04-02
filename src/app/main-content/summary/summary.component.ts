@@ -152,6 +152,9 @@ navigateToBoardView() {
   this.router.navigate(['/board']);
 }
 
+navigateToDetailWithFragment(sectionId: string) {
+  this.router.navigate(['/board'], { fragment: sectionId });
+}
 
 
 }
