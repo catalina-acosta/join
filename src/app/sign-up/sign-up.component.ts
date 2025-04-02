@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule  } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { UsersService } from '../shared/service/users.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,7 @@ import { UsersService } from '../shared/service/users.service';
 export class SignUpComponent {
   firebaseUsers = inject(UsersService);
   formSubmitted: boolean = false; 
-  // auth = inject(getAuth);
+  auth = inject(Auth)
   @Output() resetNewUser = new EventEmitter<void>();
   signUp = {
     fullname: "",
@@ -37,16 +38,16 @@ export class SignUpComponent {
   }
 
   createNewUser() {
-    // createUserWithEmailAndPassword(this.auth, this.signUp.email, this.signUp.password)
-    //   .then((userCredential) => {
-    //     // Signed up 
-    //     const user = userCredential.user;
-    //     console.log("new user created")
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     // ..
-    //   });
+    createUserWithEmailAndPassword(this.auth, this.signUp.email, this.signUp.password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log("new user created")
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   }
 }

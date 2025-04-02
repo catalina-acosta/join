@@ -18,7 +18,7 @@ export class AppComponent {
   title = 'join';
   firebase = inject(FirebaseService);
   isLoggedIn = false;
-  newUser?: boolean = true;
+  newUser?: boolean;
 
   constructor() {
     this.firebase;
