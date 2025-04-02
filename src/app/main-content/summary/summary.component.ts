@@ -23,6 +23,7 @@ inProgress: TaskInterface[] = [];
 awaitFeedback: TaskInterface[] = [];
 done: TaskInterface[] = [];
 filteredTasks: TaskInterface[] = [];
+urgent: TaskInterface[] = [];
 
 constructor() {
   this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
@@ -40,6 +41,20 @@ sortTasks() {
   this.filteredTasks.forEach((task) => {
     this.categorizeTask(task);
   });
+}
+
+sortTasksByPriority() {
+  this.urgent = [];
+
+  this.filteredTasks.forEach((task) => {
+    this.categorizeTaskByPriority(task);
+  })
+}
+
+categorizeTaskByPriority(task: TaskInterface) {
+  if(task.priority === "urgent") {
+    this.urgent.push(task);
+  }
 }
 
 categorizeTask(task: TaskInterface){
@@ -78,10 +93,16 @@ getAllTaskCount() {
   return this.filteredTasks.length;
 }
 
+getUrgentTaskCount() {
+  this.sortTasksByPriority();
+  return this.urgent.length;
+}
+
 
 //get different greetings for different day times
 getGreeting() {
   if(this.currentHour > 3 && this.currentHour < 11) {
+    console.log(this.filteredTasks);
     return 'Good morning';
   }
   else if(this.currentHour > 12 && this.currentHour < 16){
