@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { getAuth } from '@angular/fire/auth';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { Router, RouterModule } from '@angular/router';
+import { UsersService } from '../shared/service/users.service';
 
 @Component({
   selector: 'app-log-in',
@@ -13,12 +14,13 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent {
-  userLoggedIn: boolean = false;
-  guestLoggedIn: boolean = false;
+  firebaseUsers = inject(UsersService); 
+  auth = inject(Auth);
 
   @Output() loginSuccess = new EventEmitter<void>();
   @Output() newUserOutput = new EventEmitter<void>();
-
+  userLoggedIn: boolean = false;
+  guestLoggedIn: boolean = false;
   formSubmitted: boolean = false;
   passwordVisible: boolean = false;
   passwordTyped: boolean = false;
@@ -26,6 +28,7 @@ export class LogInComponent {
     email: "",
     password: "",
   }
+ 
 
   constructor(private router: Router) {}
   
@@ -34,20 +37,24 @@ export class LogInComponent {
   }
   
   loginUser() {
-  //   const auth = getAuth();
-  //   signInWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       // Signed in 
-  //       const user = userCredential.user;
+    this.formSubmitted = true;
 
-  //       this.loginSuccess.emit();
-  //       this.router.navigate(['/']);
+    if (!this.login.email || !this.login.password) {
+      return;
+    }
 
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //     });
+    signInWithEmailAndPassword(this.auth, this.login.email, this.login.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+
+        this.loginSuccess.emit();
+        this.router.navigate(['/']);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
    }
 
   loginAsGuest() {
