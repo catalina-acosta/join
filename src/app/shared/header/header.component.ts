@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +13,15 @@ import { RouterLink } from '@angular/router';
 export class HeaderComponent {
   menuOpen = false;
 
+  constructor(private appComponent: AppComponent) {}
+
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
-  openHelp() {}
-  openLegalNotice() { }
-  openPrivacyPolicy() { }
-  logout() { }
+
+  logout() {
+    this.appComponent.logout();
+  }
 
     // HostListener für Klicks überall auf der Seite
     @HostListener('document:click', ['$event'])
