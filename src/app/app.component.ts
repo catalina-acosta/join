@@ -31,4 +31,8 @@ export class AppComponent {
   goToSignUp() {
     this.newUser = true;
   }
+  
+  logout() {
+    this.isLoggedIn = false;
+  }
 }
