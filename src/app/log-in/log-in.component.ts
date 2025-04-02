@@ -28,6 +28,7 @@ export class LogInComponent {
     email: "",
     password: "",
   }
+  loginError: string = '';
  
 
   constructor(private router: Router) {}
@@ -40,22 +41,41 @@ export class LogInComponent {
     this.formSubmitted = true;
 
     if (!this.login.email || !this.login.password) {
+      this.loginError = "Check our email and password. Please try again.";
       return;
     }
 
     signInWithEmailAndPassword(this.auth, this.login.email, this.login.password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-
+      .then(() => {
+        // const user = userCredential.user;
+        this.loginError = '';
         this.loginSuccess.emit();
         this.router.navigate(['/']);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log("Login failed:", error.code); 
+        this.handleLoginError(error.code);
       });
    }
+
+   handleLoginError(errorCode: string) {
+    switch (errorCode) {
+      case 'auth/invalid-email':
+        this.loginError = "Invalid email address.";
+        break;
+      case 'auth/user-not-found':
+        this.loginError = "No user found with this email.";
+        break;
+      case 'auth/wrong-password':
+        this.loginError = "Incorrect password. Please try again.";
+        break;
+      case 'auth/too-many-requests':
+        this.loginError = "Check our email and password. Please try again.";
+        break;
+      default:
+        this.loginError = "Login failed. Please try again later.";
+    }
+  }
 
   loginAsGuest() {
     this.loginSuccess.emit();
