@@ -31,6 +31,17 @@ constructor() {
   });
 }
 
+sortTasks() {
+  this.todo = []; // Leere die Arrays vor dem erneuten Kategorisieren
+  this.awaitFeedback = [];
+  this.inProgress = [];
+  this.done = [];
+
+  this.filteredTasks.forEach((task) => {
+    this.categorizeTask(task);
+  });
+}
+
 categorizeTask(task: TaskInterface){
   if(task.status === "todo") {
     this.todo.push(task);
@@ -43,12 +54,34 @@ categorizeTask(task: TaskInterface){
   }
 }
 
+getTodoTaskCount() {
+  this.sortTasks();
+  return this.todo.length;
+}
+
+getAwaitFeedbackTaskCount() {
+  this.sortTasks();
+  return this.awaitFeedback.length;
+}
+
+getInProgressTaskCount() {
+  this.sortTasks();
+  return this.inProgress.length;
+}
+
+getDoneTasksCount() {
+  this.sortTasks();
+  return this.done.length;
+}
+
+getAllTaskCount() {
+  return this.filteredTasks.length;
+}
 
 
 //get different greetings for different day times
 getGreeting() {
   if(this.currentHour > 3 && this.currentHour < 11) {
-    console.log(this.filteredTasks);
     return 'Good morning';
   }
   else if(this.currentHour > 12 && this.currentHour < 16){
