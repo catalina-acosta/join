@@ -13,6 +13,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent {
+  userLoggedIn: boolean = false;
+  guestLoggedIn: boolean = false;
+
   @Output() loginSuccess = new EventEmitter<void>();
   @Output() newUserOutput = new EventEmitter<void>();
 
