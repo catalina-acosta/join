@@ -12,10 +12,10 @@
 
             <div class="dropdown_menu" *ngIf="menuOpen">
 
-                <a [routerLink]="['help-page']" class="dropdown_help" (click)="openHelp()">Help</a>
+                <a [routerLink]="['help-page']" class="dropdown_help" >Help</a>
 
-                <a [routerLink]="['imprint']" (click)="openLegalNotice()">Legal Notice</a>
-                <a [routerLink]="['privacy-policy']" (click)="openPrivacyPolicy()">Privacy Policy</a>
+                <a [routerLink]="['imprint']" >Legal Notice</a>
+                <a [routerLink]="['privacy-policy']" >Privacy Policy</a>
                 <a [routerLink]="['login']"(click)="logout()">Log out</a>
               </div>
         </div>

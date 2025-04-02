@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
   standalone:true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
 })
@@ -28,6 +28,16 @@ export class LogInComponent {
 loginAsGuest(){
   this.loginSuccess.emit();
   this.router.navigate([''])
+}
+
+navigateToPrivacyPolicy() {
+  this.loginSuccess.emit();
+  this.router.navigate(['/privacy-policy']);
+}
+
+navigateToImprint() {
+  this.loginSuccess.emit();
+  this.router.navigate(['/imprint']);
 }
  
 }

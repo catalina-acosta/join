@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,9 +10,10 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
   selectedIndex: number | null = null;
   selectedMobileIndex: number | null = null;
+  previousUrl: string | null = null;
 
   menuItems = [
     { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary' },
@@ -20,13 +22,20 @@ export class SidebarComponent {
     { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private appComponent: AppComponent) {}
 
   ngOnInit() {
-    // Update the active index based on the current route
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.updateActiveIndex(event.urlAfterRedirects);
+        const currentUrl = event.urlAfterRedirects; 
+        
+       
+        if (this.previousUrl === null) {
+          this.previousUrl = '/'; 
+        }
+  
+        this.updateActiveIndex(currentUrl);
+        this.previousUrl = currentUrl;
       }
     });
   }
@@ -44,6 +53,20 @@ export class SidebarComponent {
     this.selectedMobileIndex = index;
   }
 
-
+  shouldHideMenu(): boolean {
+    const hiddenRoutes = ['/privacy-policy', '/imprint'];
   
+    if (!this.previousUrl) {
+      this.previousUrl = '/'; 
+    }
+  
+    console.log('Current URL:', this.router.url);
+    console.log('Previous URL:', this.previousUrl);
+  
+    return hiddenRoutes.includes(this.router.url) && this.previousUrl === '/';
+  }
+  
+  logout() {
+    this.appComponent.logout();
+  }
 }
