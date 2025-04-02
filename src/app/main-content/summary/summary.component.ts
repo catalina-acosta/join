@@ -38,6 +38,7 @@ export class SummaryComponent {
 
   ngOnInit() {
     this.checkScreenWidth();
+    console.log(this.currentHour);
   }
 
   checkScreenWidth() {
@@ -157,13 +158,12 @@ export class SummaryComponent {
   //get different greetings for different day times
   getGreeting() {
     if (this.currentHour > 3 && this.currentHour < 11) {
-      console.log(this.filteredTasks);
       return 'Good morning';
     }
-    else if (this.currentHour > 12 && this.currentHour < 16) {
+    if (this.currentHour >= 11 && this.currentHour < 18) {
       return 'Good afternoon';
     }
-    else if (this.currentHour > 17 && this.currentHour < 20) {
+    if (this.currentHour >= 18 && this.currentHour <= 19) {
       return 'Good evening';
     }
     else return 'Good night';
