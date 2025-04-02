@@ -25,6 +25,7 @@ done: TaskInterface[] = [];
 filteredTasks: TaskInterface[] = [];
 urgent: TaskInterface[] = [];
 
+
 constructor() {
   this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
     this.tasks = tasks;
@@ -41,6 +42,39 @@ sortTasks() {
   this.filteredTasks.forEach((task) => {
     this.categorizeTask(task);
   });
+}
+
+getUrgentTaskWithLowestDate(): string {
+  this.sortTasksByPriority();
+  if (this.urgent.length === 0) {
+    return 'No urgent Tasks';
+  } else {
+    let taskWithLowestDate: TaskInterface = this.urgent[0];
+    this.urgent.forEach((urgentTask) => {
+      if (urgentTask.date) {
+        const currentDate = new Date(urgentTask.date);
+        const lowestDate = new Date(taskWithLowestDate.date || '');
+        if (currentDate < lowestDate) {
+          taskWithLowestDate = urgentTask;
+        }
+      }
+    });
+    return this.transformUrgentTaskDate(taskWithLowestDate);
+  }
+}
+
+transformUrgentTaskDate(task: TaskInterface ) {
+  if (task.date) {
+    const date = new Date(task.date);
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(date);
+    return formattedDate;
+  } else {
+    return 'No date found';
+  }
 }
 
 sortTasksByPriority() {
