@@ -8,7 +8,7 @@
 <div class="main_content">
 <div class="task_table">
     <div class="first_line">
-        <div class="table_cell more_padding">
+        <div class="table_cell more_padding" (click)="navigateToBoardView()">
             <img class="todo_icon" src="./assets/summary/to_do_icon.svg" alt="to do task icon">
             <div>
                 <span class="count">{{ getTodoTaskCount() }}</span>
@@ -16,7 +16,7 @@
             </div>
             
         </div>
-        <div class="table_cell more_padding">
+        <div class="table_cell more_padding" (click)="navigateToBoardView()">
             <img class="done_icon" src="./assets/summary/done_icon.svg" alt="done task icon">
             <div>
                 <span class="count">{{ getDoneTasksCount() }}</span>
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="urgent_task">
+    <div class="urgent_task" (click)="navigateToBoardView()">
         <div class="task_count">
             <img class="urgent_icon" src="./assets/summary/urgent_icon.svg" alt="urgent task icon">
             <div>
@@ -41,19 +41,19 @@
     </div>
 
     <div class="third_line">
-        <div class="table_cell">
+        <div class="table_cell" (click)="navigateToBoardView()">
             <div>
                 <span class="count">{{ getAllTaskCount() }}</span>
                 <p>Tasks in<br>Board</p>
             </div>
         </div>
-        <div class="table_cell">
+        <div class="table_cell" (click)="navigateToBoardView()">
             <div>
                 <span class="count">{{ getInProgressTaskCount() }}</span>
                 <p>Tasks in<br>Progress</p>
             </div>
         </div>
-        <div class="table_cell">
+        <div class="table_cell" (click)="navigateToBoardView()">
             <div>
                 <span class="count">{{ getAwaitFeedbackTaskCount() }}</span>
                 <p>Awaiting<br>Feedback</p>
