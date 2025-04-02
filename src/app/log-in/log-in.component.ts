@@ -53,7 +53,6 @@ export class LogInComponent {
         this.router.navigate(['/']);
       })
       .catch((error) => {
-        console.log("Login failed:", error.code); 
         this.handleLoginError(error.code);
       });
    }
@@ -67,6 +66,7 @@ export class LogInComponent {
         this.loginError = "No user found with this email.";
         break;
       case 'auth/wrong-password':
+      case 'auth/invalid-credential': 
         this.loginError = "Incorrect password. Please try again.";
         break;
       case 'auth/too-many-requests':
