@@ -1,11 +1,11 @@
 <section class="contacts_list">
-    <div class="btn_wrapper">
+   
+    <div class="list_wrapper">
+         <div class="btn_wrapper">
         <button (click)="openAddNewContacts()" class="btn_plain_color" id="add_contact_btn">
             <h4>Add new contact</h4><img src="../assets/icons/person_add.svg" alt="">
         </button>
     </div>
-    <div class="list_wrapper">
-        
 
         <div *ngIf="isDialogOpen" class="overlay_content" (click)="closeDialog()">
             <div class="custom-dialog">
