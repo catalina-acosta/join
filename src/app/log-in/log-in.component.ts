@@ -29,7 +29,6 @@ export class LogInComponent {
     password: "",
   }
   loginError: string = '';
- 
 
   constructor(private router: Router) {}
   

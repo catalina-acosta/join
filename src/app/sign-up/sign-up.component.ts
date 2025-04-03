@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule  } from '@angular/router';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { UsersService } from '../shared/service/users.service';
 import { Auth } from '@angular/fire/auth';
 
@@ -24,6 +24,8 @@ export class SignUpComponent {
     confirmedPassword: "",
   }
 
+  isPrivacyPolicyAccepted: boolean = false;
+
   passwordVisible: boolean = false;
   passwordTyped: boolean = false;
   confirmedPasswordVisible: boolean = false;
@@ -37,6 +39,10 @@ export class SignUpComponent {
     this.confirmedPasswordVisible = !this.confirmedPasswordVisible;
   }
 
+  setPrivacyPolicy() {
+    this.isPrivacyPolicyAccepted =!this.isPrivacyPolicyAccepted;
+  }
+
   createNewUser() {
     createUserWithEmailAndPassword(this.auth, this.signUp.email, this.signUp.password)
       .then((userCredential) => {
@@ -44,12 +50,32 @@ export class SignUpComponent {
         // updateProfile() add name
         const user = userCredential.user;
         console.log("new user created")
+        this.updateUserName();
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
       });
+  }
+
+  updateUserName() {
+    if (this.auth) {
+      if (this.auth.currentUser) {
+        updateProfile(this.auth.currentUser, {
+          displayName: this.signUp.fullname
+        }).then(() => {
+          console.log("fullname saved: ", this.auth.currentUser?.displayName);
+          
+          // ...
+        }).catch((error) => {
+          console.log("the name could not be saved")
+          // ...
+        });
+      } else {
+        console.error("No user is currently signed in.");
+      }
+    }
   }
 
   resetNewUserStatus() {

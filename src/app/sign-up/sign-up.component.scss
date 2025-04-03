@@ -125,6 +125,22 @@ form {
     }
 }
 
+.privacy_policy_wrapper {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    p, a {
+        font-size: 16px;
+    }
+
+    p {
+        color: #A8A8A8;
+    }
+
+    a {
+        color: $light_blue;
+    }
+}
 
 // button
 .btn_content {
@@ -214,14 +230,15 @@ form {
     .login_content {
         width: 100%;
         height: 580px;
-        margin-top: 40px;
+        margin-top: 0;
+        justify-content: flex-start;
     }
 
     .btn_content {
         flex-direction: column;
         gap: 10px;
         align-items: center;
-        padding-top: 30px;
+        padding-top: 0;
 
         .btn_box {
             width: 50%;
@@ -240,14 +257,14 @@ form {
 }
 
 @media (max-width:450px) {
+    h1 {
+        font-size: 44px;
+    }
+
     .header_content {
         img {
             width: 56px;
         }
-    }
-
-    .login_content {
-        height: 420px;
     }
 
     form {
@@ -262,6 +279,13 @@ form {
     .btn_content {
         .btn_box {
             width: 60%;
+            padding-top: 0;
+        }
+    }
+
+    .privacy_policy_wrapper {
+        p, a {
+            font-size: 14px;
         }
     }
 
@@ -275,15 +299,20 @@ form {
 
 @media (max-width:383px) {
     h1 {
-        font-size: 50px;
+        font-size: 36px;
     }
-
+    
+    .arrow {
+        padding-left: 16px;
+        transform: translatey(30px);
+    }
+    
     .blue_line {
         width: 69%;
     }
 
     .login_content {
-        height: 410px;
+        height: 498px;
     }
 
     form {
@@ -307,5 +336,12 @@ form {
             padding: 9px;
             font-size: 16px;
         }
+    }
+
+    button{
+        img {
+            width: 24px;
+        }
+
     }
 }

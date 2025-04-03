@@ -36,12 +36,14 @@
             @if (email.invalid && email.touched || !email.touched && formSubmitted) {
             <p class="error-color">Check our email and password. Please try again.</p>
             }
-            <div>Privacy policy</div>
+            <div class="privacy_policy_wrapper">
+                <img (click)="setPrivacyPolicy()" [src]="isPrivacyPolicyAccepted? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg' " alt="">
+                <p>I accept the <a>Privacy policy</a></p>
+            </div>
             <div class="btn_content">
                 <button class="dark_btn" (click)="createNewUser()">Sign Up</button>
             </div>
         </form>
-
     </div>
 
 
