@@ -47,11 +47,4 @@ export class AppComponent {
     this.newUser = false;
   }
 
-  showUsersName() {
-    return this.usersName;
-  }
-
-  ngOnInit() {
-    console.log(this.usersName);
-  }
 }

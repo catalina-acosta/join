@@ -32,6 +32,7 @@ currentUser = this.auth.currentUser
 
   showGreeting: boolean = false;
   showMainContent: boolean = false;
+  greetingShown: boolean = false;
 
   user: UserInterface = {
     id: '',
@@ -48,16 +49,50 @@ currentUser = this.auth.currentUser
   }
 
   ngOnInit() {
-    this.checkScreenWidth();
+    //this.checkScreenWidth();
+    this.showGreetingOnce();
   }
 
-  checkScreenWidth() {
-    if(window.innerWidth <= 900) {
+  // checkScreenWidth() {
+  //   if(window.innerWidth <= 900) {
+  //     if(!this.greetingShown) {
+  //     setTimeout(() => {
+  //       this.showGreeting = false;
+  //       this.showMainContent = true;
+  //       this.greetingShown = true;
+  //     }, 2000);
+  //     this.showGreeting = true;
+  //     }
+  //     else {
+  //       this.showGreeting = false;
+  //       this.showMainContent = true;
+  //     }
+  //   }
+  //   else {
+  //     if(!this.greetingShown){
+  //       this.showGreeting = true;
+  //     this.showMainContent = true;
+  //     }
+  //     else if(this.greetingShown) {
+  //       this.showGreeting = false;
+  //       this.showMainContent = true;
+  //     }
+      
+  //   }
+  // }
+
+  showGreetingOnce() {
+    if (window.innerWidth <= 900 && !this.greetingShown) {
       this.showGreeting = true;
       setTimeout(() => {
         this.showGreeting = false;
         this.showMainContent = true;
-      }, 2000);
+        this.greetingShown = true;
+      }, 5000);
+    }
+    else if (window.innerWidth <= 900 && this.greetingShown){
+      this.showGreeting = false;
+      this.showMainContent = true;
     }
     else {
       this.showGreeting = true;
