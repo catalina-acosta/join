@@ -5,6 +5,8 @@
    width: 100%;
    display: flex;
    flex-direction: column;
+   position: relative;
+    z-index: 500;
    animation: slideInFromRight 125ms ease-out forwards;
 
    >.section_wrapper {
@@ -161,6 +163,7 @@ h4 {
    margin-left: auto;
    width: fit-content;
    padding-right: 16px;
+   bottom: 29px;
 }
 
 .three_dot_menu>img:hover {
