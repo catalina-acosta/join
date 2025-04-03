@@ -6,18 +6,24 @@
             <div class="blue_line"></div>
         </div>
 
-        <form>
+        <form (ngSubmit)="onCreateNewUser(signUpForm)" #signUpForm="ngForm">
             <label class="input_content">
                 <input type="fullname" [(ngModel)]="signUp.fullname" name="fullname" [placeholder]="'Name'" #fullname="ngModel"
-                    [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required minlength="4">
+                [ngClass]="{'input-error': fullname.invalid && fullname.touched}" required minlength="4">
                 <img src="./assets/contact/person.svg" alt="person">
             </label>
+            @if (fullname.invalid && fullname.touched || !fullname.touched && isFormSubmitted) {
+                <p class="error-color">Please enter your name and last name.</p>
+                }
             <label class="input_content">
                 <input type="email" [(ngModel)]="signUp.email" name="email" [placeholder]="'Email'" #email="ngModel"
                     [ngClass]="{'input-error': email.invalid && email.touched}" required
                     pattern="[a-z0-9._%+\-]+@[a-z0-9\-]+\.[a-z]{2,}$" minlength="4">
                 <img src="./assets/contact/mail.svg" alt="mail">
             </label>
+            @if (email.invalid && email.touched || !email.touched && isFormSubmitted) {
+                <p class="error-color">Check our email and password. Please try again.</p>
+                }
             <label class="input_content">
                 <input [type]="passwordVisible ? 'text' : 'password'" [(ngModel)]="signUp.password" name="password"
                     [placeholder]="'Password'" #password="ngModel" (input)="passwordTyped = true"
@@ -25,6 +31,9 @@
                 <img [src]="passwordVisible ? './assets/login/visibility.svg' : (passwordTyped ? './assets/login/visibility_off.svg' : './assets/login/lock.svg')"
                     alt="toggle visibility" (click)="togglePasswordVisibility()">
             </label>
+            @if (signUp.password.length < 6 && password.touched) {
+                <p class="error-color">The password needs to have at least 6 characters</p>
+                }
             <label class="input_content">
                 <input [type]="confirmedPasswordVisible ? 'text' : 'confirmedPassword'" [(ngModel)]="signUp.confirmedPassword" name="confirmedPassword"
                     [placeholder]="'Confirm Password'" #confirmedPassword="ngModel" (input)="confirmedPasswordTyped = true"
@@ -32,16 +41,20 @@
                 <img [src]="confirmedPasswordVisible ? './assets/login/visibility.svg' : (confirmedPasswordTyped ? './assets/login/visibility_off.svg' : './assets/login/lock.svg')"
                     alt="toggle visibility" (click)="togglePasswordVisibility()">
             </label>
-
-            @if (email.invalid && email.touched || !email.touched && formSubmitted) {
-            <p class="error-color">Check our email and password. Please try again.</p>
+            @if ( password.touched && password !== confirmedPassword) {
+                <p class="error-color">Your passwords don't match. Please try again.</p>
+            } @else if (password.touched && isFormSubmitted) {
+                <p class="error-color">Please enter your password again.</p>
             }
             <div class="privacy_policy_wrapper">
                 <img (click)="setPrivacyPolicy()" [src]="isPrivacyPolicyAccepted? './assets/tasks/checkbox-checked.svg' : './assets/tasks/checkbox-unchecked.svg' " alt="">
                 <p>I accept the <a>Privacy policy</a></p>
             </div>
+            @if(!isPrivacyPolicyAccepted && isFormSubmitted) {
+                <p>Please accept the privacy policy </p>
+            }
             <div class="btn_content">
-                <button class="dark_btn" (click)="createNewUser()">Sign Up</button>
+                <button class="dark_btn" type="submit">Sign Up</button>
             </div>
         </form>
     </div>
