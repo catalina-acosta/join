@@ -19,6 +19,7 @@ export class AppComponent {
   firebase = inject(FirebaseService);
   isLoggedIn = false;
   newUser?: boolean;
+  usersName?: string;
 
   constructor(private router: Router) {
     this.firebase;
@@ -44,5 +45,13 @@ export class AppComponent {
 
   resetNewUser() {
     this.newUser = false;
+  }
+
+  showUsersName() {
+    return this.usersName;
+  }
+
+  ngOnInit() {
+    console.log(this.usersName);
   }
 }

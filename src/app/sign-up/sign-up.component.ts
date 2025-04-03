@@ -17,6 +17,8 @@ export class SignUpComponent {
   formSubmitted: boolean = false; 
   auth = inject(Auth);
   @Output() resetNewUser = new EventEmitter<void>();
+  @Output() usersName = new EventEmitter<string>();
+  
   signUp = {
     fullname: "",
     email: "",
@@ -80,5 +82,12 @@ export class SignUpComponent {
 
   resetNewUserStatus() {
     this.resetNewUser.emit();
+  }
+
+ showUsersName() {
+  if(this.signUp.fullname) {
+    this.usersName.emit(this.signUp.fullname);
+  }
+  else {this.usersName.emit('GuestLoggedIn');}
   }
 }

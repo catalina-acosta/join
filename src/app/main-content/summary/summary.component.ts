@@ -5,7 +5,9 @@ import { FirebaseService } from '../../shared/service/firebase.service';
 import { TaskInterface } from '../board/task.interface';
 import { collectionData, Firestore, collection } from '@angular/fire/firestore';
 import { Router, RouterModule } from '@angular/router';
-//import { setTimeout } from 'timers/promises';
+import { UserInterface } from '../../log-in/user.interface';
+import { UsersService } from '../../shared/service/users.service';
+import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-summary',
@@ -25,11 +27,20 @@ export class SummaryComponent {
   filteredTasks: TaskInterface[] = [];
   urgent: TaskInterface[] = [];
 
+auth = getAuth();
+currentUser = this.auth.currentUser
+
   showGreeting: boolean = false;
   showMainContent: boolean = false;
 
+  user: UserInterface = {
+    id: '',
+    fullname: '',
+    email: ''
+  };
 
-  constructor(private firebase: FirebaseService, private router: Router) {
+
+  constructor(private firebase: FirebaseService, private router: Router,) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
@@ -156,10 +167,10 @@ export class SummaryComponent {
 
   //get different greetings for different day times
   getGreeting() {
-    if (this.currentHour > 3 && this.currentHour < 11) {
+    if (this.currentHour > 3 && this.currentHour < 12) {
       return 'Good morning';
     }
-    if (this.currentHour >= 11 && this.currentHour < 18) {
+    if (this.currentHour >= 12 && this.currentHour < 18) {
       return 'Good afternoon';
     }
     if (this.currentHour >= 18 && this.currentHour <= 19) {
