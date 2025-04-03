@@ -38,7 +38,6 @@ export class SummaryComponent {
 
   ngOnInit() {
     this.checkScreenWidth();
-    console.log(this.currentHour);
   }
 
   checkScreenWidth() {
