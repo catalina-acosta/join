@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { AppComponent } from '../../app.component';
+import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,6 +15,7 @@ export class SidebarComponent implements OnInit{
   selectedIndex: number | null = null;
   selectedMobileIndex: number | null = null;
   previousUrl: string | null = null;
+  isLoggedIn: boolean = false;
 
   menuItems = [
     { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary' },
@@ -25,21 +27,17 @@ export class SidebarComponent implements OnInit{
   constructor(private router: Router, private appComponent: AppComponent) {}
 
   ngOnInit() {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      this.isLoggedIn = !!user; 
+    });
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const currentUrl = event.urlAfterRedirects; 
-        
-       
-        if (this.previousUrl === null) {
-          this.previousUrl = '/'; 
-        }
-  
-        this.updateActiveIndex(currentUrl);
-        this.previousUrl = currentUrl;
+        this.updateActiveIndex(event.urlAfterRedirects);
       }
     });
   }
-
   private updateActiveIndex(currentUrl: string) {
     const foundIndex = this.menuItems.findIndex(item => item.link === currentUrl);
     this.selectedIndex = foundIndex !== -1 ? foundIndex : null;
@@ -55,18 +53,16 @@ export class SidebarComponent implements OnInit{
 
   shouldHideMenu(): boolean {
     const hiddenRoutes = ['/privacy-policy', '/imprint'];
-  
-    if (!this.previousUrl) {
-      this.previousUrl = '/'; 
-    }
-  
-    console.log('Current URL:', this.router.url);
-    console.log('Previous URL:', this.previousUrl);
-  
-    return hiddenRoutes.includes(this.router.url) && this.previousUrl === '/';
+    return hiddenRoutes.includes(this.router.url) && !this.isLoggedIn;
   }
   
   logout() {
-    this.appComponent.logout();
+    const auth = getAuth();
+    auth.signOut().then(() => {
+      this.isLoggedIn = false;
+     
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 }
