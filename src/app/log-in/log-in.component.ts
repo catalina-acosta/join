@@ -28,7 +28,6 @@ export class LogInComponent {
     email: "",
     password: "",
   }
- 
 
   constructor(private router: Router) {}
   
