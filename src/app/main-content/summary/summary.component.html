@@ -65,12 +65,12 @@
 
 <div class="welcome" *ngIf="showGreeting">
     <span class="greeting">{{ getGreeting() }},</span>
-    <span class="user_name">Sofia Müller</span>
+    <span class="user_name">{{ currentUser?.displayName }}</span>
 </div>
 
-<!-- <div class="welcome">
+<div class="welcome" *ngIf="currentUser?.displayName == 'guest'">
     <span class="greeting">{{ getGreeting() }}</span>
-</div> -->
+</div>
 
 </div>
 </section>
