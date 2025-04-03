@@ -6,7 +6,7 @@
         </div>
         
         
-        <div class="header_profil_container" *ngIf="isLoggedIn">
+        <div class="header_profil_container" *ngIf="!shouldHideProfileContainer()">
             <a class="help_btn" [routerLink]="['help-page']"><img src="./assets/icons/help.svg" alt="Help"></a>
             <button class="menu-button" (click)="toggleMenu()">{{ userInitials }}</button>
 

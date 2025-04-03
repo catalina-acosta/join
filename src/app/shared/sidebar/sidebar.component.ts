@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit{
       }
     });
   }
+  
   private updateActiveIndex(currentUrl: string) {
     const foundIndex = this.menuItems.findIndex(item => item.link === currentUrl);
     this.selectedIndex = foundIndex !== -1 ? foundIndex : null;

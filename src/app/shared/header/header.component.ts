@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AppComponent } from '../../app.component';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
@@ -14,11 +14,26 @@ import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 export class HeaderComponent {
   menuOpen = false;
   userInitials: string = '';
+  previousUrl: string | null = null;
   isLoggedIn: boolean = false;
 
-  constructor(private appComponent: AppComponent) {
+  constructor(private router: Router, private appComponent: AppComponent) {
     this.fetchUserInitials();
    }
+
+   ngOnInit() {
+       const auth = getAuth();
+       onAuthStateChanged(auth, (user) => {
+         this.isLoggedIn = !!user; 
+       });
+  
+     }
+
+
+    shouldHideProfileContainer(): boolean {
+      const hiddenRoutes = ['/privacy-policy', '/imprint'];
+      return hiddenRoutes.includes(this.router.url) && !this.isLoggedIn;
+    }
 
    // Fetch the initials of the logged-in user
   private fetchUserInitials() {
