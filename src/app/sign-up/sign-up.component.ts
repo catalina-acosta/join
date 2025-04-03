@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule  } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { UsersService } from '../shared/service/users.service';
@@ -14,7 +14,7 @@ import { Auth } from '@angular/fire/auth';
 })
 export class SignUpComponent {
   firebaseUsers = inject(UsersService);
-  formSubmitted: boolean = false; 
+  isFormSubmitted: boolean = false; 
   auth = inject(Auth);
   @Output() resetNewUser = new EventEmitter<void>();
   @Output() usersName = new EventEmitter<string>();
@@ -25,9 +25,7 @@ export class SignUpComponent {
     password: "",
     confirmedPassword: "",
   }
-
   isPrivacyPolicyAccepted: boolean = false;
-
   passwordVisible: boolean = false;
   passwordTyped: boolean = false;
   confirmedPasswordVisible: boolean = false;
@@ -43,6 +41,15 @@ export class SignUpComponent {
 
   setPrivacyPolicy() {
     this.isPrivacyPolicyAccepted =!this.isPrivacyPolicyAccepted;
+  }
+
+  // submit form and create new user
+
+  onCreateNewUser(signUpForm: NgForm) {
+    this.isFormSubmitted = true;
+    if (signUpForm.valid) {
+      this.createNewUser();
+    }
   }
 
   createNewUser() {
@@ -78,6 +85,10 @@ export class SignUpComponent {
         console.error("No user is currently signed in.");
       }
     }
+  }
+
+  redirectToLogIn() {
+
   }
 
   resetNewUserStatus() {
