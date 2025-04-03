@@ -30,10 +30,9 @@
                     alt="toggle visibility" (click)="togglePasswordVisibility()">
             </label>
 
-            @if (email.invalid && email.touched || !email.touched && formSubmitted) {
-            <p class="error-color">Check our email and password. Please try again.</p>
+            @if (email.invalid && email.touched || !email.touched && formSubmitted ||loginError) {
+            <p class="error-color">{{ loginError }}</p>
             }
-
 
             <div class="btn_content">
                 <button (click)="loginUser()" class="dark_btn btn_box">Log in</button>

@@ -16,6 +16,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddTaskDialogComponent } from '../add-task/add-task-dialog/add-task-dialog.component'; 
 import { Router } from '@angular/router';
 import { CardComponent } from './card/card.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -37,7 +38,7 @@ export class BoardComponent {
   selectedItem!: TaskInterface;
   isDialogOpen: boolean = false;
 
-  constructor(private dialog: MatDialog, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private dialog: MatDialog, private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private route: ActivatedRoute) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
@@ -45,6 +46,18 @@ export class BoardComponent {
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('resize', this.handleResize.bind(this));
     }
+  }
+
+  //methode, welche mir zur gewünschten Abschnitt der Seite führen soll
+  ngAfterViewInit() {
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment) {
+        const element = document.getElementById(fragment);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
   }
 
 // #region add-task-dialog
