@@ -6,20 +6,28 @@
 .list_wrapper {
     width: 100%;
     padding: 20px 30px;
-    height: 100vh;
+    // height: 80vh;
     overflow-y: scroll;
     height: calc(100vh - 100px);
+    padding-top: 82px;
 }
 
 .btn_wrapper {
-    width: 100%;
+    // width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    z-index: 100;
+    top: 104px;
+    max-width: 100%;
+    background-color: #f0f0f041;
+    padding-left: 10px;
 
     .btn_plain_color {
-        width: 80%;
+        // width: 80%;
         margin-top: 16px;
+        margin-bottom: 16px;
     }
 }
 
@@ -202,6 +210,7 @@
     .list_wrapper {
         width: 100vw;
         padding-top: 100px;
+        // height: auto;
     }
     #addNewBtn {
         position: fixed;
