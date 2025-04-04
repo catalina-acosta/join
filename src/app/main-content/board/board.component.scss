@@ -137,9 +137,13 @@ section {
     min-height: 400px;
 }
 
-#toDoSection, #inProgressSection, #awaitFeedbackSection {
+#toDoSection, #inProgressSection, #awaitFeedbackSection{
     scroll-margin-top: 100px; /* Passe den Wert an die Höhe deines Headers an */
   }
+
+#boardUpstairs {
+    scroll-margin-top: 300px;
+}
 
 app-task-card {
     height: fit-content;
