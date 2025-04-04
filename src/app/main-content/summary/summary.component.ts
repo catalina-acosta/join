@@ -29,6 +29,8 @@ export class SummaryComponent {
 
 auth = getAuth();                           //authentification of user
 currentUser = this.auth.currentUser         //actual user, where his name and dates can be shown
+usersFirstName: string = '';
+usersLastName: string = '';
 
 showGreeting: boolean = false;              //show greeting screen at mobile view
 showMainContent: boolean = false;           //show rest of the content in mobile view
@@ -51,6 +53,7 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
  * shows greetings by first site view in one session
  */
   ngOnInit() {
+    this.capitalizeFirstLettersOfUsersName();
     if(this.getGreetingShownFromSessionStorage() == 'true'){
       this.greetingShown = true;
     }
@@ -60,9 +63,7 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
   /**
    * checks, if the screen is ready for mobile view
    */
-  showGreetingOnce() {
-    console.log(this.currentUser?.displayName);
-    
+  showGreetingOnce() {    
     if (window.innerWidth <= 900 && !this.greetingShown) {
       this.showGreeting = true;
       setTimeout(() => {
@@ -227,6 +228,17 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
     else return 'Good night';
   }
 
+capitalizeFirstLettersOfUsersName() {
+  if(typeof this.currentUser?.displayName === 'string' && this.currentUser?.displayName.includes(' ')){
+    let dividedName = this.currentUser.displayName.split(' ');
+    let firstNameFirstLetter = dividedName[0].charAt(0).toUpperCase();
+    let lastNameFirstLetter = dividedName[1].charAt(0).toUpperCase();
+    let firstNameRest = dividedName[0].slice(1);
+    let lastNameRest = dividedName[1].slice(1);
+    this.usersFirstName = firstNameFirstLetter + firstNameRest;
+    this.usersLastName = lastNameFirstLetter + lastNameRest;
+  }
+}
 
 navigateToBoardView() {
   this.router.navigate(['/board']);

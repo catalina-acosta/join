@@ -68,7 +68,7 @@
         @else if (showGreeting && currentUser?.displayName !== 'guest') {
             <div class="welcome">
                 <span class="greeting">{{ getGreeting() }},</span>
-                <span class="user_name">{{ currentUser?.displayName }}</span>
+                <span class="user_name">{{ usersFirstName }} {{ usersLastName }}</span>
             </div>
         }
     </div>
