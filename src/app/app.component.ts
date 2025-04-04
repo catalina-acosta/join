@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
 import { SharedComponent } from "./shared/shared.component";
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from "./sign-up/sign-up.component";
-import { getAuth, signOut } from '@angular/fire/auth';
+import { Auth, signOut } from '@angular/fire/auth';
 
 
 @Component({
@@ -15,6 +15,7 @@ import { getAuth, signOut } from '@angular/fire/auth';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  auth = inject(Auth);
   title = 'join';
   firebase = inject(FirebaseService);
   isLoggedIn = false;
@@ -34,8 +35,7 @@ export class AppComponent {
   }
   
   logout() {
-    const auth = getAuth();
-    signOut(auth).then(() => {
+    signOut(this.auth).then(() => {
       this.isLoggedIn = false;
       this.router.navigate(['/login']);
     }).catch((error) => {

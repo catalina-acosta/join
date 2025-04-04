@@ -1,22 +1,19 @@
-@if (isEdited) {
-<div class="overlay_content" (click)="closeDialog()">
+<div  *ngIf="isEdited && contact" class="overlay_content" (click)="closeDialog()">
     <div class="custom-dialog">
-        <app-edit-contact-dialog *ngIf="isEdited && contact" [contact]="contact" (closeDialogEvent)="closeDialog()"
+        <app-edit-contact-dialog [contact]="contact" (closeDialogEvent)="closeDialog()"
             (click)="stopPropagation($event)"></app-edit-contact-dialog>
     </div>
 </div>
-} @else if(isDeleteOpen) {
 
-    <div class="overlay_content" (click)="closeDialog()">
+    <div *ngIf="isDeleteOpen && contact"class="overlay_content" (click)="closeDialog()">
         <div class="custom-dialog">
-            <app-delete-dialog *ngIf="isDeleteOpen && contact" 
+            <app-delete-dialog  
             [contact]="contact"  (closeDialogEvent)="closeDialog()" (contactDeletedEvent)="handleContactDeleted()" (click)="stopPropagation($event)"></app-delete-dialog>
         </div>
-
     </div>
 
-} @else {
-<div *ngIf="contact && isVisible; else detailStart" [ngClass]="{'hidden': !isVisible && contact}" class="content section_wrapper">
+
+<div *ngIf="contact" class="content section_wrapper">
     <div class="headline-position">
         <div class="headline">
             <h1>Contacts</h1>
@@ -66,14 +63,12 @@
         </div>
     </div>
 </div>
-}
 
 
 <ng-template #detailStart>
     <div class="content section_wrapper">
         <div class="headline">
             <h1>Contacts</h1>
-            <!-- <div class="divider"></div> -->
             <div class="line">
                 <img src="./assets/contact/line.svg" alt="">
             </div>
