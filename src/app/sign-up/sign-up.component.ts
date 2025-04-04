@@ -18,6 +18,7 @@ export class SignUpComponent {
   auth = inject(Auth);
   @Output() resetNewUser = new EventEmitter<void>();
   @Output() usersName = new EventEmitter<string>();
+  @Output() loginSuccess = new EventEmitter<void>();
 
   
   signUp = {
@@ -33,6 +34,8 @@ export class SignUpComponent {
   confirmedPasswordTyped: boolean = false;
   newUserAdded: boolean = false;
   existingUser: boolean = false;
+
+  constructor(private router: Router) {}
 
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
@@ -123,5 +126,17 @@ export class SignUpComponent {
       this.usersName.emit(this.signUp.fullname);
     }
     else {this.usersName.emit('GuestLoggedIn');}
+  }
+
+  navigateToPrivacyPolicy() {
+    // this.resetNewUserStatus();
+    // this.loginSuccess.emit();
+    this.router.navigate(['/privacy-policy']);
+  }
+
+  navigateToImprint() {
+    // this.resetNewUserStatus();
+    // this.loginSuccess.emit();
+    this.router.navigate(['/imprint']);
   }
 }

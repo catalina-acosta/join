@@ -86,12 +86,12 @@ export class LogInComponent {
   }
 
   navigateToPrivacyPolicy() {
-    this.loginSuccess.emit();
+    // this.loginSuccess.emit();
     this.router.navigate(['/privacy-policy']);
   }
 
   navigateToImprint() {
-    this.loginSuccess.emit();
+    // this.loginSuccess.emit();
     this.router.navigate(['/imprint']);
   }
 

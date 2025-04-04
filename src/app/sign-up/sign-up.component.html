@@ -70,8 +70,8 @@
     </div>
 
     <div class="imprint_content">
-        <a href="">Privacy Policy</a>
-        <a href=""> Legal notice</a>
+        <a (click)="navigateToImprint()">Legal notice</a>
+        <a (click)="navigateToPrivacyPolicy()">Privacy Policy</a>
     </div>
 </section>
 <div class="btn_plain_color report" [ngClass] = "{ 'show_report' : newUserAdded }">
