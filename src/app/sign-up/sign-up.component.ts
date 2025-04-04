@@ -19,7 +19,6 @@ export class SignUpComponent {
   @Output() resetNewUser = new EventEmitter<void>();
   @Output() usersName = new EventEmitter<string>();
 
-  
   signUp = {
     fullname: "",
     email: "",
