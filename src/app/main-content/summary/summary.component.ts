@@ -270,8 +270,8 @@ export class SummaryComponent {
         }
       });
       this.usersFullName = capitalizedNames.join(' ');
-    } else {
-      this.usersFullName = 'noname';
+    } else if (typeof this.currentUser?.displayName === 'string') {
+      this.usersFullName = this.currentUser?.displayName.charAt(0).toUpperCase() + this.currentUser?.displayName.slice(1);
     }
   }
 
