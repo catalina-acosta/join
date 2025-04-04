@@ -65,6 +65,7 @@ export class HeaderComponent {
   }
 
   logout() {
+    sessionStorage.clear();
     this.appComponent.logout();
   }
 
