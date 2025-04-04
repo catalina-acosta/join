@@ -420,6 +420,10 @@ export class AddTaskComponent {
     }, 1000/2); // 2 seconds delay
   }
 
+    /**
+   * @method onSubtaskInputFocus
+   * @description Handles the 'Focus' event of the subtask input field. Clears any pending timeout for hiding the icon.
+   */
   onSubtaskInputFocus() {
     if (this.hideInputIconTimeout) {
       clearTimeout(this.hideInputIconTimeout);
