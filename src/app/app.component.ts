@@ -21,9 +21,17 @@ export class AppComponent {
   isLoggedIn = false;
   newUser?: boolean;
   usersName?: string;
+  currentRoute: string = '';
 
   constructor(private router: Router) {
     this.firebase;
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url;
+    });
+  }
+
+  isPrivacyOrImprintPage(): boolean {
+    return this.currentRoute === '/imprint' || this.currentRoute === '/privacy-policy';
   }
 
   onLoginSuccess() {

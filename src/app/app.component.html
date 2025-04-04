@@ -1,5 +1,12 @@
-
-@if (!isLoggedIn && newUser) {
+@if (isPrivacyOrImprintPage()) {
+  <div>
+    <app-shared></app-shared>
+    <div class="content_wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+}
+@else if (!isLoggedIn && newUser) {
   <app-sign-up (resetNewUser)="resetNewUser()"></app-sign-up>
 }
 
@@ -15,3 +22,19 @@
     </div>
   </div>
 }
+
+
+<!-- @if (isPrivacyOrImprintPage() || isLoggedIn) { DAS GLEICHE WIE OBEN
+  <div>
+    <app-shared></app-shared>
+    <div class="content_wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+}
+@else if (!isLoggedIn && newUser) {
+  <app-sign-up (resetNewUser)="resetNewUser()"></app-sign-up>
+}
+@else {
+  <app-log-in (loginSuccess)="onLoginSuccess()" (newUserOutput)="goToSignUp()"></app-log-in>
+} -->
