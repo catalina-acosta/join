@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ImpressumComponent } from './impressum/impressum/impressum.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy/privacy-policy.component';
 import { HelpComponent } from './help/help.component';
@@ -11,6 +11,7 @@ import { AddTaskDialogComponent } from './main-content/add-task/add-task-dialog/
 import { SummaryComponent } from './main-content/summary/summary.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
     { path: '', component: MainContentComponent},
@@ -24,5 +25,13 @@ export const routes: Routes = [
     { path: 'add-task-dialog', component: AddTaskDialogComponent},
     { path: 'summary', component: SummaryComponent},
     { path: 'sign-up', component: SignUpComponent},
-    // { path: 'login', component: LogInComponent},
+    { path: 'login', component: LogInComponent},
+    { path: '', redirectTo: '/login', pathMatch: 'full' }, // Standardroute
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+
+export class AppRoutingModule { }
