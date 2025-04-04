@@ -61,6 +61,8 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
    * checks, if the screen is ready for mobile view
    */
   showGreetingOnce() {
+    console.log(this.currentUser?.displayName);
+    
     if (window.innerWidth <= 900 && !this.greetingShown) {
       this.showGreeting = true;
       setTimeout(() => {

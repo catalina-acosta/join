@@ -24,6 +24,11 @@ export class LogInComponent {
   formSubmitted: boolean = false;
   passwordVisible: boolean = false;
   passwordTyped: boolean = false;
+  guestLogin = {
+    email: "guest@gmail.com",
+    password: "123456"
+  }
+
   login = {
     email: "",
     password: "",
@@ -77,8 +82,17 @@ export class LogInComponent {
   }
 
   loginAsGuest() {
-    this.loginSuccess.emit();
-    this.router.navigate([''])
+    this.formSubmitted = true;
+
+    signInWithEmailAndPassword(this.auth, this.guestLogin.email, this.guestLogin.password)
+      .then(() => {
+        this.loginError = '';
+        this.loginSuccess.emit();
+        this.router.navigate(['']);
+      })
+      .catch((error) => {
+        this.handleLoginError(error.code);
+      });
   }
 
   togglePasswordVisibility() {

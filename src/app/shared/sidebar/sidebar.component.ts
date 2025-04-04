@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { AppComponent } from '../../app.component';
-import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit{
   selectedMobileIndex: number | null = null;
   previousUrl: string | null = null;
   isLoggedIn: boolean = false;
+  auth = inject(Auth);
 
   menuItems = [
     { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary' },
@@ -27,8 +28,7 @@ export class SidebarComponent implements OnInit{
   constructor(private router: Router, private appComponent: AppComponent) {}
 
   ngOnInit() {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(this.auth, (user) => {
       this.isLoggedIn = !!user; 
     });
 
@@ -58,10 +58,8 @@ export class SidebarComponent implements OnInit{
   }
   
   logout() {
-    const auth = getAuth();
-    auth.signOut().then(() => {
+    this.auth.signOut().then(() => {
       this.isLoggedIn = false;
-     
     }).catch((error) => {
       console.error(error);
     });

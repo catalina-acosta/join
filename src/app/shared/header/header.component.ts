@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AppComponent } from '../../app.component';
-import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-header',
@@ -16,19 +16,17 @@ export class HeaderComponent {
   userInitials: string = '';
   previousUrl: string | null = null;
   isLoggedIn: boolean = false;
+  auth = inject(Auth);
 
   constructor(private router: Router, private appComponent: AppComponent) {
     this.fetchUserInitials();
-   }
+  }
 
-   ngOnInit() {
-       const auth = getAuth();
-       onAuthStateChanged(auth, (user) => {
-         this.isLoggedIn = !!user; 
-       });
-  
-     }
-
+  ngOnInit() {
+    onAuthStateChanged(this.auth, (user) => {
+      this.isLoggedIn = !!user; 
+    });
+  }
 
     shouldHideProfileContainer(): boolean {
       const hiddenRoutes = ['/privacy-policy', '/imprint'];
