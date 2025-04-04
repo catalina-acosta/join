@@ -1,3 +1,7 @@
+/**
+ * Array of colors for avatars.
+ * @example ["#FF7A00", "#FF5EB3", "#6E52FF", "#9327FF", ...]
+ */
 export const avatarColor: string[] = [
     "#FF7A00",
     "#FF5EB3",
@@ -16,6 +20,19 @@ export const avatarColor: string[] = [
     "#FFBB2B"
 ];
 
+/**
+ * Dummy data for users, each with a random avatar color selected from the `avatarColor` array.
+ * Each user object contains first name, last name, email, phone number, and avatar color.
+ * 
+ * @example
+ * {
+ *   firstname: "Lena",
+ *   lastname: "Schmidt",
+ *   email: "lena.schmidt82@gmail.com",
+ *   phone: "+49 1521 1234567",
+ *   color: "#FF7A00"
+ * }
+ */
 export const dummyData: { firstname: string; lastname: string; email: string; phone: string; color: string }[] = [
     {
         firstname: "Lena",
@@ -89,6 +106,26 @@ export const dummyData: { firstname: string; lastname: string; email: string; ph
         }
 ];
 
+
+/**
+ * Dummy data for tasks with various attributes such as title, description, priority,
+ * date, assigned users, and task status. Each task can contain multiple subtasks.
+ * 
+ * @example
+ * {
+ *   title: "HomePage",
+ *   description: "Create new component for the homepage",
+ *   date: "2025-04-20",
+ *   priority: "high",
+ *   assignedToUserId: ["CCptP0yIlYy5X2uwA4de", "IzjGbNzLyv7OkpGeg3B4"],
+ *   status: "todo",
+ *   category: "Technical Task",
+ *   subtasks: [
+ *     { subtask: "create hero page", isCompleted: true, isEditing: false },
+ *     { subtask: "navbar", isCompleted: false, isEditing: false }
+ *   ]
+ * }
+ */
 export const dummyDataTasks: { title: string; description: string; date: string; priority: string; assignedToUserId: string[]; status: string; category: string; subtasks: { subtask: string; isCompleted: boolean; isEditing: boolean }[] }[] = [
     {
         title: "HomePage",
