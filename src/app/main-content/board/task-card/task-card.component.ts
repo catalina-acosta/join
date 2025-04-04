@@ -4,6 +4,9 @@ import { FirebaseService } from '../../../shared/service/firebase.service';
 import { TaskInterface } from '../task.interface';
 import { ContactInterface } from '../../contacts/contact-interface';
 
+/**
+ * Component for displaying a task card on the board.
+ */
 @Component({
   selector: 'app-task-card',
   imports: [CommonModule],
@@ -11,24 +14,59 @@ import { ContactInterface } from '../../contacts/contact-interface';
   styleUrl: './task-card.component.scss'
 })
 export class TaskCardComponent {
-  @Input() item!: TaskInterface; 
+  /**
+   * The task item to display in the card.
+   */
+  @Input() item!: TaskInterface;
+
+  /**
+   * Firebase service instance for interacting with Firestore.
+   */
   firebase = inject(FirebaseService);
+
+  /**
+   * The number of completed subtasks for the task.
+   */
   completedSubtasks: number = 0;
+
+  /**
+   * Indicates whether the task card is being dragged.
+   */
   isDragging: boolean = false;
-  // draggingCardId: string | null = null;
+
+  /**
+   * The currently selected task item for the dialog.
+   */
   selectedItem!: TaskInterface;
+
+  /**
+   * Indicates whether the task details dialog is open.
+   */
   isDialogOpen: boolean = false;
 
+  /**
+   * The full ordered list of contacts fetched from Firestore.
+   */
   fullOrderedContactList: ContactInterface[] = [];
 
+  /**
+   * Initializes the component and fetches the contact list.
+   */
   constructor() {
     this.getContactList();
   }
 
+  /**
+   * Fetches the ordered list of contacts from the Firebase service.
+   */
   getContactList() {
     this.fullOrderedContactList = this.firebase.orderedContactsList;
   }
 
+  /**
+   * Calculates the percentage of completed subtasks for the task.
+   * @returns The percentage of completed subtasks.
+   */
   getCompletedPercentage(): number {
     if (!this.item.subtasks || this.item.subtasks.length === 0) {
       return 0;
@@ -37,37 +75,26 @@ export class TaskCardComponent {
     return (this.completedSubtasks / this.item.subtasks.length) * 100;
   }
 
-  onDragStart(item:TaskInterface): void {
-    console.log("dragging card");
-    if (item && item.id) {
-      this.isDragging = true;
-      // this.draggingCardId = item.id; // Set the ID of the dragged card
-      // console.log('Drag started for card ID:', item.id); // Debugging
-    }
-  }
-
-  onDragEnd(item:TaskInterface): void {
-    if (item && item.id) {
-      this.isDragging = false;
-      // this.draggingCardId = null; // Reset the dragged card ID
-      // console.log('Drag ended for card ID:', item.id); // Debugging
-    }
-  }
-
-  // isCardDragging(cardId: string): boolean {
-  // return this.draggingCardId === cardId;
-  // }
-
+  /**
+   * Opens the task details dialog for the selected task.
+   * @param item - The task item to display in the dialog.
+   */
   openCardDialog(item: TaskInterface) {
     this.selectedItem = item;
     this.isDialogOpen = true;
   }
 
+  /**
+   * Stops event propagation to prevent unintended behavior.
+   * @param event - The event to stop propagation for.
+   */
   stopPropagation(event: Event) {
     event.stopPropagation();
   }
 
-  
+  /**
+   * Closes the task details dialog with an animation.
+   */
   closeDialog() {
     const dialogElement = document.querySelector('.custom-dialog');
 
