@@ -30,6 +30,8 @@ export class SignUpComponent {
   passwordTyped: boolean = false;
   confirmedPasswordVisible: boolean = false;
   confirmedPasswordTyped: boolean = false;
+  newUserAdded: boolean = false;
+  existingUser: boolean = false;
 
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
@@ -47,24 +49,32 @@ export class SignUpComponent {
 
   onCreateNewUser(signUpForm: NgForm) {
     this.isFormSubmitted = true;
-    if (signUpForm.valid) {
-      this.createNewUser();
+    if (signUpForm.valid && this.isPrivacyPolicyAccepted) {
+      this.createNewUser(signUpForm);
     }
   }
 
-  createNewUser() {
+  createNewUser(signUpForm: NgForm) {
     createUserWithEmailAndPassword(this.auth, this.signUp.email, this.signUp.password)
       .then((userCredential) => {
-        // Signed up 
-        // updateProfile() add name
         const user = userCredential.user;
-        console.log("new user created")
+        console.log("new user created");
+        this.newUserAdded = true;
         this.updateUserName();
+        setTimeout(() =>{
+          this.resetNewUserStatus();
+        }, 2000);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        this.displayErrorDialog();
+        this.clearForm(signUpForm);
+        setTimeout(() => {
+          this.isFormSubmitted = false;
+          this.existingUser = false;
+          this.isPrivacyPolicyAccepted = false;
+        }, 3000);
       });
   }
 
@@ -87,12 +97,30 @@ export class SignUpComponent {
     }
   }
 
-  redirectToLogIn() {
-
-  }
-
   resetNewUserStatus() {
     this.resetNewUser.emit();
   }
 
+  displayErrorDialog() {
+    this.existingUser = true;
+  }
+
+  clearForm(signUpForm: NgForm) {
+    console.log("clearing form");
+    signUpForm.reset();
+    this.signUp = {
+      fullname: "",
+      email: "",
+      password: "",
+      confirmedPassword: "",
+    }
+    this.isPrivacyPolicyAccepted = false;
+  }
+
+  showUsersName() {
+    if(this.signUp.fullname) {
+      this.usersName.emit(this.signUp.fullname);
+    }
+    else {this.usersName.emit('GuestLoggedIn');}
+  }
 }
