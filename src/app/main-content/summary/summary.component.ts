@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../shared/service/firebase.service';
 import { TaskInterface } from '../board/task.interface';
@@ -27,15 +27,14 @@ export class SummaryComponent {
   urgent: TaskInterface[] = [];             //tasks in Board with urgent category
   filteredTasks: TaskInterface[] = [];      //tasks before categorizing according to status
 
-auth = getAuth();                           //authentification of user
-currentUser = this.auth.currentUser         //actual user, where his name and dates can be shown
-// usersFirstName: string = '';
-// usersLastName: string = '';
-usersFullName: string = '';
+  auth = getAuth();                           //authentification of user
+  currentUser = this.auth.currentUser         //actual user, where his name and dates can be shown
 
-showGreeting: boolean = false;              //show greeting screen at mobile view
-showMainContent: boolean = false;           //show rest of the content in mobile view
-greetingShown: boolean = false;             //checks, if the greeting screen was already shown
+  usersFullName: string = '';                 //users full name after capitalized all first letters
+
+  showGreeting: boolean = false;              //show greeting screen at mobile view
+  showMainContent: boolean = false;           //show rest of the content in mobile view
+  greetingShown: boolean = false;             //checks, if the greeting screen was already shown
 
   user: UserInterface = {                   //user interface for access his files
     id: '',
@@ -50,12 +49,13 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
       this.filteredTasks = [...this.tasks]; // shows at the beginning all of the tasks
     });
   }
-/**
- * shows greetings by first site view in one session
- */
+
+  /**
+   * shows greetings by first site view in one session
+   */
   ngOnInit() {
     this.capitalizeFirstLettersOfUsersName();
-    if(this.getGreetingShownFromSessionStorage() == 'true'){
+    if (this.getGreetingShownFromSessionStorage() == 'true') {
       this.greetingShown = true;
     }
     this.showGreetingOnce();
@@ -64,7 +64,7 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
   /**
    * checks, if the screen is ready for mobile view
    */
-  showGreetingOnce() {    
+  showGreetingOnce() {
     if (window.innerWidth <= 900 && !this.greetingShown) {
       this.showGreeting = true;
       setTimeout(() => {
@@ -74,7 +74,7 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
         this.setGreetingShownInSessionStorage();
       }, 5000);
     }
-    else if (window.innerWidth <= 900 && this.getGreetingShownFromSessionStorage() == 'true'){
+    else if (window.innerWidth <= 900 && this.getGreetingShownFromSessionStorage() == 'true') {
       this.showGreeting = false;
       this.showMainContent = true;
     }
@@ -88,10 +88,10 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
    * save the greetingsShown boolean in session storage for greeting only be shown once in a session
    */
   setGreetingShownInSessionStorage() {
-    if(this.greetingShown) {
+    if (this.greetingShown) {
       sessionStorage.setItem('greetingShown', 'true');
     }
-    
+
   }
 
   /**
@@ -106,7 +106,7 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
    * empty all arrays for clear categorization of tasks according to status
    */
   sortTasks() {
-    this.todo = [];    
+    this.todo = [];
     this.awaitFeedback = [];
     this.inProgress = [];
     this.done = [];
@@ -117,8 +117,8 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
   }
 
   /**
-   * 
-   * @returns 
+   * search of a closest date in task of urgent priority
+   * @returns transformated date of the task with urgent priority and closest date
    */
   getUrgentTaskWithLowestDate(): string {
     this.sortTasksByPriority();
@@ -139,9 +139,9 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
     }
   }
 
-/**
- * sort all task with an urgent priority and push them in an separate array
- */
+  /**
+   * sort all task with an urgent priority and push them in an separate array
+   */
   sortTasksByPriority() {
     this.urgent = [];
 
@@ -152,11 +152,12 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
     })
   }
 
-/**
- * 
- * @param task 
- * @returns 
- */
+  /**
+   * Formating date of an urgent task in other format - monthname, day, year
+   *
+   * @param {TaskInterface} task - task, which contains the date
+   * @returns {string} - date returns as string or as a string with error message
+   */
   transformUrgentTaskDate(task: TaskInterface) {
     if (task.date) {
       const date = new Date(task.date);
@@ -172,7 +173,10 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
   }
 
 
-
+  /**
+   * categorize alls task in arrays with status names
+   * @param task one task
+   */
   categorizeTask(task: TaskInterface) {
     if (task.status === "todo") {
       this.todo.push(task);
@@ -185,30 +189,54 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
     }
   }
 
+  /**
+   * count all todo tasks
+   * @returns number of tasks of todo category
+   */
   getTodoTaskCount() {
     this.sortTasks();
     return this.todo.length;
   }
 
+  /**
+   * count all await feedback tasks
+   * @returns number of tasks of await feedback category
+   */
   getAwaitFeedbackTaskCount() {
     this.sortTasks();
     return this.awaitFeedback.length;
   }
 
+  /**
+   * count all in progress tasks
+   * @returns number of tasks of in progress category
+   */
   getInProgressTaskCount() {
     this.sortTasks();
     return this.inProgress.length;
   }
 
+  /**
+   * count all done tasks
+   * @returns number of tasks of done category
+   */
   getDoneTasksCount() {
     this.sortTasks();
     return this.done.length;
   }
 
+  /**
+   * count all task on board
+   * @returns number of all tasks in board right now
+   */
   getAllTaskCount() {
     return this.filteredTasks.length;
   }
 
+  /**
+   * count all task with urgent priority
+   * @returns the number of tasks with urgent priority on board
+   */
   getUrgentTaskCount() {
     this.sortTasksByPriority();
     return this.urgent.length;
@@ -229,31 +257,38 @@ greetingShown: boolean = false;             //checks, if the greeting screen was
     else return 'Good night';
   }
 
+  /**
+   * users name comes as one string, it need to be split and first letter of each name capitalized
+   */
   capitalizeFirstLettersOfUsersName() {
     if (typeof this.currentUser?.displayName === 'string' && this.currentUser?.displayName.includes(' ')) {
       let dividedName = this.currentUser.displayName.split(' ');
-      let capitalizedNames: string[] = []; // Array außerhalb der Schleife initialisieren
-  
+      let capitalizedNames: string[] = [];
       dividedName.forEach(name => {
         if (name.length > 0) {
           let capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
           capitalizedNames.push(capitalizedName);
         }
       });
-  
-      this.usersFullName = capitalizedNames.join(' '); // Zusammenfügen nach der Schleife
+      this.usersFullName = capitalizedNames.join(' ');
     } else {
       this.usersFullName = 'noname';
     }
-  }    
+  }
 
-navigateToBoardView() {
-  this.router.navigate(['/board']);
-}
+  /**
+   * route for navigation to the board component
+   */
+  navigateToBoardView() {
+    this.router.navigate(['/board']);
+  }
 
-navigateToDetailWithFragment(sectionId: string) {
-  this.router.navigate(['/board'], { fragment: sectionId });
-}
-
+  /**
+   * route to navigate to a very concrete part of board component
+   * @param sectionId id of a concrete section, which should be seen up on the site view
+   */
+  navigateToDetailWithFragment(sectionId: string) {
+    this.router.navigate(['/board'], { fragment: sectionId });
+  }
 
 }
