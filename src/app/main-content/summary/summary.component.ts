@@ -49,7 +49,9 @@ currentUser = this.auth.currentUser
   }
 
   ngOnInit() {
-    //this.checkScreenWidth();
+    if(this.getGreetingShownFromSessionStorage() == 'true'){
+      this.greetingShown = true;
+    }
     this.showGreetingOnce();
   }
 
@@ -88,9 +90,11 @@ currentUser = this.auth.currentUser
         this.showGreeting = false;
         this.showMainContent = true;
         this.greetingShown = true;
+        this.setGreetingShownInSessionStorage();
       }, 5000);
     }
-    else if (window.innerWidth <= 900 && this.greetingShown){
+    else if (window.innerWidth <= 900 && this.getGreetingShownFromSessionStorage() == 'true'){
+      console.log('else if part mit bedingung in local storage', this.getGreetingShownFromSessionStorage());
       this.showGreeting = false;
       this.showMainContent = true;
     }
@@ -98,6 +102,17 @@ currentUser = this.auth.currentUser
       this.showGreeting = true;
       this.showMainContent = true;
     }
+  }
+
+  setGreetingShownInSessionStorage() {
+    if(this.greetingShown) {
+      sessionStorage.setItem('greetingShown', 'true');
+    }
+    
+  }
+
+  getGreetingShownFromSessionStorage() {
+    return sessionStorage.getItem('greetingShown');
   }
 
   sortTasks() {
