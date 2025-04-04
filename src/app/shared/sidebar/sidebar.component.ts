@@ -20,10 +20,18 @@ export class SidebarComponent implements OnInit{
 
   menuItems = [
     { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary' },
-    { label: 'Add Task', icon: 'assets/sidebar/add-task.svg', link: '/add-task' },
-    { label: 'Board', icon: 'assets/sidebar/board.svg', link: '/board' },
+    { label: 'Add Task', icon: 'assets/sidebar/add-task.svg', link: '/add-task', fragment: '' },
+    { label: 'Board', icon: 'assets/sidebar/board.svg', link: '/board', fragment: 'boardUpstairs' },
     { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact' }
   ];
+
+  //Albinas version:
+  // menuItems = [
+  //   { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary' },
+  //   { label: 'Add Task', icon: 'assets/sidebar/add-task.svg', link: '/add-task' },
+  //   { label: 'Board', icon: 'assets/sidebar/board.svg', link: '/board' },
+  //   { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact' }
+  // ];
 
   constructor(private router: Router, private appComponent: AppComponent) {}
 
