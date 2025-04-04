@@ -4,7 +4,6 @@ import { Auth } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { Router, RouterModule } from '@angular/router';
-import { UsersService } from '../shared/service/users.service';
 
 @Component({
   selector: 'app-log-in',
@@ -14,7 +13,6 @@ import { UsersService } from '../shared/service/users.service';
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent {
-  firebaseUsers = inject(UsersService); 
   auth = inject(Auth);
 
   @Output() loginSuccess = new EventEmitter<void>();
