@@ -16,24 +16,25 @@ import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
   styleUrl: './summary.component.scss'
 })
 export class SummaryComponent {
-  nowDate = new Date;
-  currentHour = this.nowDate.getHours();
-  tasks: TaskInterface[] = [];
+  nowDate = new Date;                       //get actual date
+  currentHour = this.nowDate.getHours();    //get what time is it now
+  tasks: TaskInterface[] = [];              //all tasks in Board
 
-  todo: TaskInterface[] = [];
-  inProgress: TaskInterface[] = [];
-  awaitFeedback: TaskInterface[] = [];
-  done: TaskInterface[] = [];
-  filteredTasks: TaskInterface[] = [];
-  urgent: TaskInterface[] = [];
+  todo: TaskInterface[] = [];               //tasks in Board with todo status
+  inProgress: TaskInterface[] = [];         //in Progress tasks in Board with in Progress status
+  awaitFeedback: TaskInterface[] = [];      //tasks in Board with await Feedback status
+  done: TaskInterface[] = [];               //tasks in Board with done status
+  urgent: TaskInterface[] = [];             //tasks in Board with urgent category
+  filteredTasks: TaskInterface[] = [];      //tasks before categorizing according to status
 
-auth = getAuth();
-currentUser = this.auth.currentUser
+auth = getAuth();                           //authentification of user
+currentUser = this.auth.currentUser         //actual user, where his name and dates can be shown
 
-  showGreeting: boolean = false;
-  showMainContent: boolean = false;
+showGreeting: boolean = false;              //show greeting screen at mobile view
+showMainContent: boolean = false;           //show rest of the content in mobile view
+greetingShown: boolean = false;             //checks, if the greeting screen was already shown
 
-  user: UserInterface = {
+  user: UserInterface = {                   //user interface for access his files
     id: '',
     fullname: '',
     email: ''
@@ -43,21 +44,35 @@ currentUser = this.auth.currentUser
   constructor(private firebase: FirebaseService, private router: Router,) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
-      this.filteredTasks = [...this.tasks]; // Anfangs alle Aufgaben anzeigen
+      this.filteredTasks = [...this.tasks]; // shows at the beginning all of the tasks
     });
   }
-
+/**
+ * shows greetings by first site view in one session
+ */
   ngOnInit() {
-    this.checkScreenWidth();
+    if(this.getGreetingShownFromSessionStorage() == 'true'){
+      this.greetingShown = true;
+    }
+    this.showGreetingOnce();
   }
 
-  checkScreenWidth() {
-    if(window.innerWidth <= 900) {
+  /**
+   * checks, if the screen is ready for mobile view
+   */
+  showGreetingOnce() {
+    if (window.innerWidth <= 900 && !this.greetingShown) {
       this.showGreeting = true;
       setTimeout(() => {
         this.showGreeting = false;
         this.showMainContent = true;
-      }, 2000);
+        this.greetingShown = true;
+        this.setGreetingShownInSessionStorage();
+      }, 5000);
+    }
+    else if (window.innerWidth <= 900 && this.getGreetingShownFromSessionStorage() == 'true'){
+      this.showGreeting = false;
+      this.showMainContent = true;
     }
     else {
       this.showGreeting = true;
@@ -65,8 +80,29 @@ currentUser = this.auth.currentUser
     }
   }
 
+  /**
+   * save the greetingsShown boolean in session storage for greeting only be shown once in a session
+   */
+  setGreetingShownInSessionStorage() {
+    if(this.greetingShown) {
+      sessionStorage.setItem('greetingShown', 'true');
+    }
+    
+  }
+
+  /**
+   * 
+   * @returns value of greetingShown, which was stored in session storage
+   */
+  getGreetingShownFromSessionStorage() {
+    return sessionStorage.getItem('greetingShown');
+  }
+
+  /**
+   * empty all arrays for clear categorization of tasks according to status
+   */
   sortTasks() {
-    this.todo = []; // Leere die Arrays vor dem erneuten Kategorisieren
+    this.todo = [];    
     this.awaitFeedback = [];
     this.inProgress = [];
     this.done = [];
@@ -76,6 +112,10 @@ currentUser = this.auth.currentUser
     });
   }
 
+  /**
+   * 
+   * @returns 
+   */
   getUrgentTaskWithLowestDate(): string {
     this.sortTasksByPriority();
     if (this.urgent.length === 0) {
@@ -95,6 +135,24 @@ currentUser = this.auth.currentUser
     }
   }
 
+/**
+ * sort all task with an urgent priority and push them in an separate array
+ */
+  sortTasksByPriority() {
+    this.urgent = [];
+
+    this.filteredTasks.forEach((task) => {
+      if (task.priority === "urgent") {
+        this.urgent.push(task);
+      }
+    })
+  }
+
+/**
+ * 
+ * @param task 
+ * @returns 
+ */
   transformUrgentTaskDate(task: TaskInterface) {
     if (task.date) {
       const date = new Date(task.date);
@@ -109,19 +167,7 @@ currentUser = this.auth.currentUser
     }
   }
 
-  sortTasksByPriority() {
-    this.urgent = [];
 
-    this.filteredTasks.forEach((task) => {
-      this.categorizeTaskByPriority(task);
-    })
-  }
-
-  categorizeTaskByPriority(task: TaskInterface) {
-    if (task.priority === "urgent") {
-      this.urgent.push(task);
-    }
-  }
 
   categorizeTask(task: TaskInterface) {
     if (task.status === "todo") {
