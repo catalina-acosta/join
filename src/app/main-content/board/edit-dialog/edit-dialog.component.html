@@ -1,29 +1,23 @@
 <section *ngIf=item>
     <div class="dialog_content">
-
         <div class="headline">
             <div class="category"
                 [ngStyle]="{'background-color': item.category === 'User Story' ? 'blue' : item.category === 'Technical Task' ? '#1fd7c1' : 'gray'}">
                 {{ item.category }}
             </div>
-
             <div class="close_btn" (click)="closeDialog()">
                 <img src="./assets/contact/Close.svg" alt="close">
             </div>
         </div>
-
         <form #taskForm="ngForm">
-
             <p>Title</p>
             <label class="input_content">
                 <input type="text" name="title" placeholder="Enter a title" [(ngModel)]="editedItem.title">
-
             </label>
             <p>Description</p>
             <label class="input_content">
                 <input type="text" name="description" placeholder="Enter a description" [(ngModel)]="editedItem.description">
             </label>
-
             <div class="date_prio_content">
                 <label class="input_content" for="dueDate">Due date
                     <input type="date" id="dueDate" [value]="editedItem.date" [(ngModel)]="editedItem.date" name="date">
@@ -73,7 +67,6 @@
                     </button>
                 </div>
             </div>
-
             <div class="assigned_content">
                 <div class="dropdown">
                     <label for="assignedTo">Assigned to</label>
@@ -101,21 +94,6 @@
                         }
                     </div>
                 </div>
-                <!-- <div class="members_content">
-                    <div class="assigned_to">
-                        <div *ngFor="let userId of editedItem.assignedToUserId">
-                          <div *ngFor="let contact of firebase.orderedContactsList">
-                            <div *ngIf="contact.id === userId" class="person_box">
-                              <div class="color_icon" [ngStyle]="{'background-color': contact.color}">
-                                <p>{{ contact.firstname.charAt(0) }}{{ contact.lastname.charAt(0) }}</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                </div> -->
-
                 <div class="members_content">
                     <div class="assigned_to" *ngIf="item.assignedToUserId && item.assignedToUserId.length > 0">
                         @for (contact of firebase.orderedContactsList; let i = $index; track i) { 
@@ -134,20 +112,14 @@
                         }
                     </div>
                 </div>
-
-
             </div>
-
 <!-- subtask -->
-
             <div class="subtasks_content">
                 <p class="title2">Subtasks</p>
-
                 <div class="input_content">
                     <input id="subtask-input" class="subtask-input" [(ngModel)]="subtaskInput" name="subtaskInput"
                         placeholder="Add new subtask" (keyup.enter)="addSubtask()" (focus)="onSubtaskInputFocus()"
                         (blur)="onSubtaskInputBlur()" />
-
                     <div class="input-icon" 
                     [ngClass]="{'hidden': subtaskInputFocused, 'visible': !subtaskInputFocused}"
                         (click)="focusSubtaskInput()">
@@ -165,51 +137,40 @@
                 </div>
                 <ul class="subtask-list">
                     <li *ngFor="let subtask of editedItem.subtasks; let i = index" class="subtask-item" [ngClass]="{ 'editing': subtask.isEditing }">
-            
-                      <span class="subtask-circle" *ngIf="!subtask.isEditing"></span>
-                      
-                      <span *ngIf="!subtask.isEditing">{{ subtask.subtask }}</span>
-                      <input class="subtask-input-edit" 
-                             *ngIf="subtask.isEditing" 
-                             [(ngModel)]="subtask.subtask"
-                             id="subtask-input-{{i}}" 
-                             (keyup.enter)="saveSubtask(i)" 
-                             placeholder="{{ subtask.subtask }}"/>
-                  
-                      <!-- Aktionen (Speichern/ Löschen) -->
-                      <div class="subtask-actions">
-                        <!-- Check-Button wird nur angezeigt, wenn der Subtask bearbeitet wird -->
-                        <button *ngIf="subtask.isEditing" type="button" class="edit-button" (click)="saveSubtask(i)">
-                          <img src="assets/tasks/check-black.svg" alt="Check">
-                        </button>
-                  
-                        <!-- Edit-Button wird nur angezeigt, wenn der Subtask nicht bearbeitet wird -->
-                        <button *ngIf="!subtask.isEditing" type="button" class="edit-button" (click)="editSubtask(i)">
-                          <img src="assets/tasks/edit.svg" alt="Edit">
-                        </button>
-                  
-                        <img src="assets/tasks/line-small.svg" alt="">
-                  
-                        <!-- Löschen-Button -->
-                        <button type="button" class="remove-button" (click)="removeSubtask(i)">
-                          <img src="assets/tasks/delete.svg" alt="Delete">
-                        </button>
-                      </div>
+                        <span class="subtask-circle" *ngIf="!subtask.isEditing"></span>
+                        <span *ngIf="!subtask.isEditing">{{ subtask.subtask }}</span>
+                        <input class="subtask-input-edit" 
+                                *ngIf="subtask.isEditing" 
+                                [(ngModel)]="subtask.subtask"
+                                id="subtask-input-{{i}}" 
+                                (keyup.enter)="saveSubtask(i)" 
+                                placeholder="{{ subtask.subtask }}"/>
+                        <!-- Aktionen (Speichern/ Löschen) -->
+                        <div class="subtask-actions">
+                            <!-- Check-Button wird nur angezeigt, wenn der Subtask bearbeitet wird -->
+                            <button *ngIf="subtask.isEditing" type="button" class="edit-button" (click)="saveSubtask(i)">
+                                <img src="assets/tasks/check-black.svg" alt="Check">
+                            </button>
+                            <!-- Edit-Button wird nur angezeigt, wenn der Subtask nicht bearbeitet wird -->
+                            <button *ngIf="!subtask.isEditing" type="button" class="edit-button" (click)="editSubtask(i)">
+                                <img src="assets/tasks/edit.svg" alt="Edit">
+                            </button>
+                                <img src="assets/tasks/line-small.svg" alt="">
+                            <!-- Löschen-Button -->
+                            <button type="button" class="remove-button" (click)="removeSubtask(i)">
+                                <img src="assets/tasks/delete.svg" alt="Delete">
+                            </button>
+                        </div>
                     </li>
-                  </ul>
-                    
-                  </div>
-
+                </ul>
+            </div>
 <!-- save btn -->
-
             <div class="save_edit_content" (click)="saveEditedTask(taskForm)">
                 <div class="edit_box">
                     <p>Ok</p>
                     <img src="./assets/tasks/check.svg" alt="save">
                 </div>
             </div>
-
         </form>
-
     </div>
 </section>

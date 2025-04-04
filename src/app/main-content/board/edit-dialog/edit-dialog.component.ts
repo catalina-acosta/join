@@ -3,7 +3,6 @@ import { Component, EventEmitter, inject, Input, Output, ChangeDetectorRef } fro
 import { TaskInterface } from '../task.interface';
 import { FirebaseService } from '../../../shared/service/firebase.service';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ContactInterface } from '../../contacts/contact-interface';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -18,7 +17,7 @@ export class EditDialogComponent {
   @Output() saveChangesEvent = new EventEmitter<TaskInterface>();
   @Input() item?: TaskInterface;
 
-  editedItem!: TaskInterface; // Lokale Kopie für Bearbeitung
+  editedItem!: TaskInterface;
   isDialogOpen: boolean = false;
   selectedPriority: string = 'medium';
   hideInputIconTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -40,17 +39,15 @@ export class EditDialogComponent {
       } else {
         this.editedItem.assignedToUserId.splice(index, 1);
       }
-       // Sortiere nun nach dem Vornamen der Kontakte
-    this.editedItem.assignedToUserId.sort((a, b) => {
-      // Holen Sie sich die Kontaktinformationen basierend auf den IDs
-      const contactA = this.firebase.orderedContactsList.find(contact => contact.id === a);
-      const contactB = this.firebase.orderedContactsList.find(contact => contact.id === b);
-      
-      if (contactA && contactB) {
-        return contactA.firstname.localeCompare(contactB.firstname);
-      }
-      return 0; // Wenn einer der Kontakte nicht gefunden wurde, keine Änderung in der Reihenfolge
-    });
+      this.editedItem.assignedToUserId.sort((a, b) => {
+        const contactA = this.firebase.orderedContactsList.find(contact => contact.id === a);
+        const contactB = this.firebase.orderedContactsList.find(contact => contact.id === b);
+        
+        if (contactA && contactB) {
+          return contactA.firstname.localeCompare(contactB.firstname);
+        }
+        return 0;
+      });
     }
   }
 
@@ -107,8 +104,6 @@ export class EditDialogComponent {
     event.stopPropagation();
   }
 
-  // subtaks
-
   addSubtask() {
     if (this.subtaskInput.trim()) {
       const newSubtask = {
@@ -132,7 +127,6 @@ export class EditDialogComponent {
   editSubtask(index: number) {
     if (this.editedItem?.subtasks) {
       this.editedItem.subtasks[index].isEditing = true;
-
       setTimeout(() => {
         const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
         inputElement?.focus();
@@ -142,14 +136,11 @@ export class EditDialogComponent {
 
   saveSubtask(index: number) {
     const inputElement = document.getElementById(`subtask-input-${index}`) as HTMLInputElement;
-
     if (inputElement && this.editedItem?.subtasks) {
       const newSubtaskValue = inputElement.value.trim();
-
       if (newSubtaskValue !== '') {
         this.editedItem.subtasks[index].subtask = newSubtaskValue;
       }
-
       this.editedItem.subtasks[index].isEditing = false;
     }
   }
@@ -184,5 +175,4 @@ export class EditDialogComponent {
     }
     this.subtaskInputFocused = true;
   }
-
 }
