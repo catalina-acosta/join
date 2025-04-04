@@ -53,7 +53,6 @@ section {
 .login_content {
     background-color: #fff;
     width: 580px;
-    height: 580px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -139,12 +138,18 @@ form {
     }
 }
 
+.error_p {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(211, 0, 0, 0.534);
+}
+
 // button
 .btn_content {
     display: flex;
     gap: 30px;
     justify-content: center;
-    padding-top: 20px;
+    padding: 20px 0 28px 0;
 }
 
 .light_btn {
@@ -213,6 +218,31 @@ form {
             font-weight: normal;
         }
     }
+}
+
+.report {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    border-radius: 8px;
+    border: unset;
+    padding: 15px 24px;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    background-color: #2A3647;
+    width: 246px;
+    position: fixed; /* Position ändern, um von unten zu fliegen */
+    bottom: -100%; /* Start außerhalb des Bildschirms */
+    left: 50%; /* In der Mitte des Bildschirms */
+    transform: translateX(-50%); /* Um es genau mittig zu platzieren */
+    transition: bottom 0.5s ease-in-out; /* Sanfter Übergang für die Bewegung */
+    z-index: 50;
+}
+
+.show_report {
+    bottom: 100px; /* Die Position, an der die Box landen soll */
 }
 
 @media (max-width:666px) {
