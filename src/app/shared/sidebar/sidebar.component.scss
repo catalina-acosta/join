@@ -101,6 +101,36 @@ span{
     .container {
         display: none;
     }
+    
+    #menu-item-mobile-login {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 0px 24px;
+    }
+
+    .menu-item-mobile {
+        display: flex;
+        justify-content: space-between; /* Linke und rechte Seite aufteilen */
+        align-items: center;
+        width: 100%;
+        padding: 0 20px; /* Abstand zum Rand */
+    }
+
+    
+    .login-position-mobile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .legal-position-mobile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
     .mobile nav {
         background-color: #2A3647;
@@ -110,8 +140,7 @@ span{
         bottom: 0;
         display: flex;
         justify-content: space-around;
-        align-items: flex-end;
-        padding-bottom: 26px;
+        align-items: center;
     }
 
     .mobile li {
@@ -129,27 +158,78 @@ span{
         color:white;
     }
 
-   
-
     .mobile nav div {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        // padding:10px;
+        flex-direction: row;
         border-radius:20px;
-        cursor: pointer;
+      
     }
 
     .mobile nav div.active {
         background-color: #091931;  
        
     }
+
+    .legal-position {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: auto;
+        
+    }
+    
+    .legal-position-mobile a {
+        text-decoration: none;
+        color: #CDCDCD;
+        transition: color 0.2s ease-in-out;
+    }
+    
+    .legal-position-mobile .imprint{
+        padding: 33px 30px;
+    }
+    
+    .legal-position-mobile .privacy-policy{
+        padding: 33px 30px;
+    }
+    
+    .legal-position-mobile a:hover {
+        color: #29ABE2;
+        transform: scale(0.99);
+    }
+   
+    
+    .legal-position-mobile a.active-link {
+        background-color: #091931; 
+        border-radius:20px;
+       
+    }
+}
+
+@media (max-width:600px) {
+    .legal-position-mobile .imprint{
+        padding: 33px 5px;
+    }
+    
+    .legal-position-mobile .privacy-policy{
+        padding: 33px 5px;
+    }
+
+    #menu-item-mobile-login {
+
+        padding: 0px 10px;
+    }
+    
 }
 
 @media (max-width:412px) {
     .mobile nav div {
         padding:4px;
     
+    }
+
+    #menu-item-mobile-login {
+
+        padding: 0px 2px;
     }
 }
 

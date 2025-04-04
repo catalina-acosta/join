@@ -29,11 +29,26 @@
 
 <div class="mobile">
     <nav>
-        <div *ngFor="let item of menuItems; let i = index" [class.active]="selectedMobileIndex === i"
-            (click)="setMobileActive(i)">
-            <div class="menu-item-mobile" [routerLink]="item.link">
-                <img [src]="item.icon" alt="">
-                <span>{{ item.label }}</span>
+        <div *ngIf="!shouldHideMenu()">
+            <div *ngFor="let item of menuItems; let i = index"
+                [class.active]="selectedMobileIndex === i"
+                (click)="setMobileActive(i)">
+                <div id="menu-item-mobile-login" class="menu-item-mobile-login" [routerLink]="item.link">
+                    <img [src]="item.icon" alt="">
+                    <span>{{ item.label }}</span>
+                </div>
+            </div>
+        </div>
+   
+       
+        <div *ngIf="shouldHideMenu()" class="menu-item-mobile">
+            <div class="login-position-mobile">
+                <img src="assets/login/login.svg" alt="">
+                <a href="/" class="login-link">Login</a>
+            </div>
+            <div class="legal-position-mobile">
+                <a [routerLink]="['/privacy-policy']" routerLinkActive="active-link" class="privacy-policy">Privacy Policy</a>
+                <a [routerLink]="['/imprint']" routerLinkActive="active-link" class="imprint">Legal notice</a>
             </div>
         </div>
     </nav>
