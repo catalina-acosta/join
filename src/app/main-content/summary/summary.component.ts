@@ -6,7 +6,6 @@ import { TaskInterface } from '../board/task.interface';
 import { collectionData, Firestore, collection } from '@angular/fire/firestore';
 import { Router, RouterModule } from '@angular/router';
 import { UserInterface } from '../../log-in/user.interface';
-import { UsersService } from '../../shared/service/users.service';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({

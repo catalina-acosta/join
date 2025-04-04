@@ -6,7 +6,6 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { Auth, signOut } from '@angular/fire/auth';
 
-
 @Component({
   selector: 'app-root',
   standalone:true,

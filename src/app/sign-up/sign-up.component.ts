@@ -3,7 +3,6 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule  } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { UsersService } from '../shared/service/users.service';
 import { Auth } from '@angular/fire/auth';
 
 @Component({
@@ -13,7 +12,6 @@ import { Auth } from '@angular/fire/auth';
   styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {
-  firebaseUsers = inject(UsersService);
   isFormSubmitted: boolean = false; 
   auth = inject(Auth);
   @Output() resetNewUser = new EventEmitter<void>();
