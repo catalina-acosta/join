@@ -68,7 +68,7 @@
     <span class="user_name">{{ currentUser?.displayName }}</span>
 </div>
 
-<div class="welcome" *ngIf="currentUser?.displayName == 'guest'">
+<div class="welcome" *ngIf="currentUser?.displayName == 'guest' && showGreeting">
     <span class="greeting">{{ getGreeting() }}</span>
 </div>
 
