@@ -62,13 +62,13 @@
         </div>
         @if (currentUser?.displayName == 'guest' && showGreeting) {
             <div class="welcome">
-                <span class="greeting">{{ getGreeting() }}</span>
+                <span class="greeting" id="guestGreeting">{{ getGreeting() }}</span>
             </div>
         }
-        @else if (showGreeting && currentUser?.displayName !== 'guest') {
+        @else if (showGreeting && currentUser?.displayName !== 'guest' && showGreeting) {
             <div class="welcome">
                 <span class="greeting">{{ getGreeting() }},</span>
-                <span class="user_name">{{ currentUser?.displayName }}</span>
+                <span class="user_name">{{ usersFullName }}</span>
             </div>
         }
     </div>
