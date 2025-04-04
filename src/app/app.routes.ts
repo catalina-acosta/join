@@ -1,3 +1,7 @@
+/**
+ * @file Defines the application's routing configuration.
+ */
+
 import { RouterModule, Routes } from '@angular/router';
 import { ImpressumComponent } from './impressum/impressum/impressum.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy/privacy-policy.component';
@@ -13,25 +17,31 @@ import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { NgModule } from '@angular/core';
 
+/**
+ * Application routes configuration.
+ * @constant {Routes}
+ */
 export const routes: Routes = [
-    { path: '', component: MainContentComponent},
-    { path: 'imprint', component: ImpressumComponent},
-    { path: 'privacy-policy', component: PrivacyPolicyComponent},
-    { path: 'help-page', component: HelpComponent},
-    { path: 'contact-list', component: ContactsListComponent},
-    { path: 'contact', component: ContactsComponent},
-    { path: 'board', component: BoardComponent},
-    { path: 'add-task', component: AddTaskComponent},
-    { path: 'add-task-dialog', component: AddTaskDialogComponent},
-    { path: 'summary', component: SummaryComponent},
-    { path: 'sign-up', component: SignUpComponent},
-    { path: 'login', component: LogInComponent},
-    { path: '', redirectTo: '/login', pathMatch: 'full' }, // Standardroute
+    { path: '', component: MainContentComponent },
+    { path: 'imprint', component: ImpressumComponent },
+    { path: 'privacy-policy', component: PrivacyPolicyComponent },
+    { path: 'help-page', component: HelpComponent },
+    { path: 'contact-list', component: ContactsListComponent },
+    { path: 'contact', component: ContactsComponent },
+    { path: 'board', component: BoardComponent },
+    { path: 'add-task', component: AddTaskComponent },
+    { path: 'add-task-dialog', component: AddTaskDialogComponent },
+    { path: 'summary', component: SummaryComponent },
+    { path: 'sign-up', component: SignUpComponent },
+    { path: 'login', component: LogInComponent },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
+/**
+ * Module for routing configuration.
+ */
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-
 export class AppRoutingModule { }

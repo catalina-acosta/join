@@ -1,4 +1,8 @@
-import { Component, Inject, inject } from '@angular/core';
+/**
+ * @file Root component of the Angular application.
+ */
+
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
 import { SharedComponent } from "./shared/shared.component";
@@ -8,20 +12,51 @@ import { Auth, signOut } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
-  standalone:true,
-  imports: [RouterOutlet, SharedComponent, RouterModule, LogInComponent, SignUpComponent,],
+  standalone: true,
+  imports: [RouterOutlet, SharedComponent, RouterModule, LogInComponent, SignUpComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  /**
+   * Firebase authentication instance
+   */
   auth = inject(Auth);
+
+  /**
+   * Application title
+   */
   title = 'join';
+
+  /**
+   * Firebase service instance
+   */
   firebase = inject(FirebaseService);
+
+  /**
+   * Indicates if the user is logged in
+   */
   isLoggedIn = false;
+
+  /**
+   * Indicates if a new user is signing up
+   */
   newUser?: boolean;
+
+  /**
+   * Stores the user's name
+   */
   usersName?: string;
+
+  /**
+   * Stores the current route
+   */
   currentRoute: string = '';
 
+  /**
+   * Constructor for AppComponent
+   * @param router - Angular Router instance
+   */
   constructor(private router: Router) {
     this.firebase;
     this.router.events.subscribe(() => {
@@ -29,18 +64,31 @@ export class AppComponent {
     });
   }
 
+  /**
+   * Checks if the current page is either 'Imprint' or 'Privacy Policy'
+   * @returns True if the page is Imprint or Privacy Policy, otherwise false
+   */
   isPrivacyOrImprintPage(): boolean {
     return this.currentRoute === '/imprint' || this.currentRoute === '/privacy-policy';
   }
 
+  /**
+   * Handles login success by setting the user as logged in
+   */
   onLoginSuccess() {
     this.isLoggedIn = true; 
   }
 
+  /**
+   * Navigates to the Sign-Up page
+   */
   goToSignUp() {
     this.newUser = true;
   }
   
+  /**
+   * Logs out the user and redirects to the login page
+   */
   logout() {
     signOut(this.auth).then(() => {
       this.isLoggedIn = false;
@@ -50,8 +98,10 @@ export class AppComponent {
     });
   }
 
+  /**
+   * Resets the new user flag
+   */
   resetNewUser() {
     this.newUser = false;
   }
-
 }
