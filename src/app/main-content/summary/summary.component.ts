@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FirebaseService } from '../../shared/service/firebase.service';
 import { TaskInterface } from '../board/task.interface';
 import { collectionData, Firestore, collection } from '@angular/fire/firestore';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UserInterface } from '../../log-in/user.interface';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 
@@ -42,7 +42,7 @@ export class SummaryComponent {
   };
 
 
-  constructor(private firebase: FirebaseService, private router: Router,) {
+  constructor(private firebase: FirebaseService, private router: Router,private activatedRoute: ActivatedRoute) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // shows at the beginning all of the tasks
@@ -53,6 +53,7 @@ export class SummaryComponent {
    * shows greetings by first site view in one session
    */
   ngOnInit() {
+    //this.myActivatedRoute();
     this.capitalizeFirstLettersOfUsersName();
     if (this.getGreetingShownFromSessionStorage() == 'true') {
       this.greetingShown = true;
@@ -157,7 +158,7 @@ export class SummaryComponent {
    * @param {TaskInterface} task - task, which contains the date
    * @returns {string} - date returns as string or as a string with error message
    */
-  transformUrgentTaskDate(task: TaskInterface) {
+  transformUrgentTaskDate(task: TaskInterface): string {
     if (task.date) {
       const date = new Date(task.date);
       const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -290,4 +291,15 @@ export class SummaryComponent {
     this.router.navigate(['/board'], { fragment: sectionId });
   }
 
+
+  // myActivatedRoute() {
+  //   this.activatedRoute.fragment.subscribe((fragment: string | null) => {
+  //     if (fragment) this.jumpToSection(fragment);
+  //   });
+  // }
+
+  // jumpToSection(section: string | null) {
+  //   if (section) document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+  // }
 }
+
