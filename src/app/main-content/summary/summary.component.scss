@@ -192,7 +192,7 @@
 }
 
 @media(max-width: 900px) {
-    .main_content { justify-content: center; align-items: center; height: 100dvh;}
+    .main_content { justify-content: center; align-items: center;}
     .welcome {margin-bottom: 100px; margin-left: 0; justify-content: center; align-items: center;}
     .greeting{font-size: 36px; font-weight: 400;} //TODO: wenn er alleine ist, hat er 36px höhe
     .user_name{font-size: 47px; font-weight: 700; text-align: center; margin-top: 8px;}
@@ -208,6 +208,7 @@
         padding-right: 52px;
     }
     .urgent_task {padding: 19px 48px;}
+    .task_table {margin-top:16px;}
 }
 
 @media(max-width: 550px) {
@@ -223,9 +224,18 @@
 @media(max-width: 400px) {
     .count {font-size: 46px;}
     .table_cell{
+        gap: 2px;
+        padding-top: 8px;
         >img{height: 40px; width: 40px;}
     }
-    .urgent_task {gap: 8px;}
+    .third_line .table_cell {padding-top: 12px;}
+    .urgent_task {
+        gap: 8px;
+        margin-bottom: 8px;
+        margin-top: 8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
     .task_count{
         >img {height: 40px; width: 40px;}
     }
@@ -233,12 +243,16 @@
     .section_wrapper {
         padding-right: 16px;
         padding-left: 16px;
+        padding-top: 90px;
     }
 }
 
 @media(max-width: 430px) {
+    h1 {font-size: 42px;}
+    h3 {font-size: 18px;}
     .greeting{font-size: 30px;} 
     .user_name{font-size: 40px;}
+    .task_count .divider {height: 88px;}
 }
 
 @media(max-width: 360px) {
