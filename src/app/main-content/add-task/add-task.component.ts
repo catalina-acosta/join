@@ -5,7 +5,7 @@ import { FirebaseService } from '../../shared/service/firebase.service';
 import { ContactInterface } from '../contacts/contact-interface';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../board/task.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -164,7 +164,7 @@ export class AddTaskComponent {
    * @constructor
    * @param {Router} router - Injected Router service for navigating to Board after succesfully added task.
    */
-  constructor(private router: Router) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
     /**
    * @method newClassForDate
