@@ -1,40 +1,29 @@
-@if (isPrivacyOrImprintPage()) {
-  <div>
-    <app-shared></app-shared>
-    <div class="content_wrapper">
-      <router-outlet></router-outlet>
-    </div>
+<!-- Ladeindikator -->
+<div *ngIf="isLoading" class="loader-wrapper">
+  <p>Loading...</p> <!-- Hier kannst du deinen Loader einbauen -->
+</div>
+
+<!-- Wenn Impressum oder Datenschutzseite -->
+<div *ngIf="!isLoading && isPrivacyOrImprintPage()">
+  <app-shared></app-shared>
+  <div class="content_wrapper">
+    <router-outlet></router-outlet>
   </div>
-}
-@else if (!isLoggedIn && newUser) {
-  <app-sign-up (resetNewUser)="resetNewUser()"></app-sign-up>
-}
+</div>
 
-@else if (!isLoggedIn) {
-    <app-log-in (loginSuccess)="onLoginSuccess()" (newUserOutput)="goToSignUp()" ></app-log-in>
-}
+<!-- Wenn Login angezeigt werden soll -->
+<app-sign-up *ngIf="!isLoading && !isLoggedIn && newUser" (resetNewUser)="resetNewUser()"></app-sign-up>
 
-@else {
-  <div class="main-component_wrapper">
-    <app-shared></app-shared>
-    <div class="content_wrapper">
-      <router-outlet></router-outlet>
-    </div>
+<app-log-in
+  *ngIf="!isLoading && !isLoggedIn && !newUser"
+  (loginSuccess)="onLoginSuccess()"
+  (newUserOutput)="goToSignUp()"
+></app-log-in>
+
+<!-- Wenn eingeloggt -->
+<div *ngIf="!isLoading && isLoggedIn" class="main-component_wrapper">
+  <app-shared></app-shared>
+  <div class="content_wrapper">
+    <router-outlet></router-outlet>
   </div>
-}
-
-
-<!-- @if (isPrivacyOrImprintPage() || isLoggedIn) { DAS GLEICHE WIE OBEN
-  <div>
-    <app-shared></app-shared>
-    <div class="content_wrapper">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-}
-@else if (!isLoggedIn && newUser) {
-  <app-sign-up (resetNewUser)="resetNewUser()"></app-sign-up>
-}
-@else {
-  <app-log-in (loginSuccess)="onLoginSuccess()" (newUserOutput)="goToSignUp()"></app-log-in>
-} -->
+</div>

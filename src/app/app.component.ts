@@ -2,23 +2,23 @@
  * @file Root component of the Angular application.
  */
 
-import { Component, Inject, inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
 import { SharedComponent } from "./shared/shared.component";
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from "./sign-up/sign-up.component";
-import { Auth, signOut } from '@angular/fire/auth';
-import { isPlatformBrowser } from '@angular/common';
+import { Auth, onAuthStateChanged, signOut } from '@angular/fire/auth';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SharedComponent, RouterModule, LogInComponent, SignUpComponent],
+  imports: [CommonModule, RouterOutlet, SharedComponent, RouterModule, LogInComponent, SignUpComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   /**
    * Firebase authentication instance
    */
@@ -55,22 +55,28 @@ export class AppComponent {
   currentRoute: string = '';
 
   currentUser = this.auth.currentUser; 
+  isLoading = true;
 
   /**
    * Constructor for AppComponent
    * @param router - Angular Router instance
    */
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
-    this.firebase;
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
     });
+  }
+
+  ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      const loggedIn = localStorage.getItem('isLoggedIn');
-      if (loggedIn === 'true') {
-        this.isLoggedIn = true;
-        this.router.navigate(['/']); // Redirect to the board page if logged in
-      }
+      onAuthStateChanged(this.auth, (user) => {
+        this.isLoggedIn = !!user;
+        this.isLoading = false;
+
+        if (this.isLoggedIn && this.router.url === '/') {
+          this.router.navigate(['/summary']);
+        }
+      });
     }
   }
 

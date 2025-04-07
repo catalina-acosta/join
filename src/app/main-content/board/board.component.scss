@@ -1,7 +1,7 @@
 @use './../../../styles.scss' as *;
 
 section {
-    padding: 80px;
+    padding: 80px 15px 80px 80px;
 }
 
 .headline_content {
@@ -95,8 +95,15 @@ section {
 .task_container {
     display: flex;
     justify-content: space-between;
-    padding-top: 50px;
+    padding: 50px 10px 150px 0;
     gap: 24px;
+    max-height: 73vh;
+    height: auto;
+    overflow-y: auto;
+    width: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
 }
 
 .title_content {
