@@ -4,7 +4,7 @@
         <div class="menu" *ngIf="!shouldHideMenu()">
             <div class="menu-item-wrapper" *ngFor="let item of menuItems; let i = index"
                 [class.active]="selectedIndex === i" (click)="setActive(i)">
-                <a [routerLink]="item.link" class="menu-link">
+                <a [routerLink]="item.link" [fragment]="item.fragment" class="menu-link">
                     <div class="menu-item">
                         <img [src]="item.icon" alt="">
                         <span>{{ item.label }}</span>
