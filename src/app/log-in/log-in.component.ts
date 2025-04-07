@@ -23,6 +23,8 @@ export class LogInComponent {
    */
   auth = inject(Auth);
 
+  isCurrentUser: boolean = false; 
+
   /**
    * Event emitted when the user successfully logs in.
    */
@@ -79,7 +81,8 @@ export class LogInComponent {
    */
   loginError: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   /**
    * Triggered when the user wants to sign up.
