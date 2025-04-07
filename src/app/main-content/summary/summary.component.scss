@@ -245,3 +245,8 @@
     .greeting{font-size: 24px;}
     .user_name{font-size: 30px;}
 }
+
+@media (max-width: 345px) {
+    .count {font-size: 36px;}
+    .third_line .table_cell {padding: 16px 10px;}
+}
