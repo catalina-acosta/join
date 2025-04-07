@@ -3,7 +3,7 @@
  */
 
 import { Component, inject } from '@angular/core';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { NavigationStart, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
 import { SharedComponent } from "./shared/shared.component";
 import { LogInComponent } from './log-in/log-in.component';
@@ -53,6 +53,8 @@ export class AppComponent {
    */
   currentRoute: string = '';
 
+  currentUser = this.auth.currentUser; 
+
   /**
    * Constructor for AppComponent
    * @param router - Angular Router instance
@@ -62,6 +64,29 @@ export class AppComponent {
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
     });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        console.log('Navigating to:', event.url);
+        // Add custom logic here to control what is shown
+        if (event.navigationTrigger === 'popstate') {
+          console.log('User clicked the back button');
+          // Handle back navigation
+        }
+      }
+    });
+
+    if (this.auth) {
+      this.auth.onAuthStateChanged((user) => {
+        if (user) {
+          this.isLoggedIn = true;
+          this.router.navigate(['/']);
+        } else {
+          this.isLoggedIn = false;
+          this.router.navigate(['/']);
+        }
+      });
+    }
   }
 
   /**
@@ -78,6 +103,7 @@ export class AppComponent {
   onLoginSuccess() {
     this.isLoggedIn = true; 
   }
+  
 
   /**
    * Navigates to the Sign-Up page
