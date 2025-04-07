@@ -360,3 +360,10 @@ form {
 
     }
 }
+
+@media (max-width: 360px) {
+    section{
+        padding: 16px 16px;
+    }
+    form {width: 90%;}
+}
