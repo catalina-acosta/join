@@ -15,7 +15,7 @@
             <div class="blue_line"></div>
         </div>
 
-        <form>
+        <form #loginForm="ngForm">
             <label class="input_content">
                 <input type="email" [(ngModel)]="login.email" name="email" [placeholder]="'Email'" #email="ngModel"
                     [ngClass]="{'input-error': email.invalid && email.touched}" required
@@ -30,9 +30,14 @@
                     alt="toggle visibility" (click)="togglePasswordVisibility()">
             </label>
 
-            @if (email.invalid && email.touched || !email.touched && formSubmitted ||loginError) {
-            <p class="error-color">{{ loginError }}</p>
-            }
+
+            <p class="error-color" *ngIf="(email.invalid && email.touched) || (password.invalid && password.touched)">
+                Check your email and password. Please try again.
+              </p>
+              <p class="error-color" *ngIf="loginError && !(email.invalid || password.invalid)">
+                {{ loginError }}
+              </p>
+              
 
             <div class="btn_content">
                 <button (click)="loginUser()" class="dark_btn btn_box">Log in</button>
