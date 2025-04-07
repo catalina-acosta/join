@@ -42,7 +42,7 @@ export class SummaryComponent {
   };
 
 
-  constructor(private firebase: FirebaseService, private router: Router,private activatedRoute: ActivatedRoute) {
+  constructor(private firebase: FirebaseService, private router: Router,) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // shows at the beginning all of the tasks
@@ -53,7 +53,6 @@ export class SummaryComponent {
    * shows greetings by first site view in one session
    */
   ngOnInit() {
-    //this.myActivatedRoute();
     this.capitalizeFirstLettersOfUsersName();
     if (this.getGreetingShownFromSessionStorage() == 'true') {
       this.greetingShown = true;
@@ -280,7 +279,7 @@ export class SummaryComponent {
    * route for navigation to the board component
    */
   navigateToBoardView() {
-    this.router.navigate(['/board']);
+    this.router.navigate(['/board'], { fragment: 'boardUpstairs' });
   }
 
   /**
@@ -291,15 +290,5 @@ export class SummaryComponent {
     this.router.navigate(['/board'], { fragment: sectionId });
   }
 
-
-  // myActivatedRoute() {
-  //   this.activatedRoute.fragment.subscribe((fragment: string | null) => {
-  //     if (fragment) this.jumpToSection(fragment);
-  //   });
-  // }
-
-  // jumpToSection(section: string | null) {
-  //   if (section) document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
-  // }
 }
 

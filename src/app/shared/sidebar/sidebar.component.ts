@@ -65,10 +65,10 @@ export class SidebarComponent implements OnInit {
    * @type {Array<{ label: string, icon: string, link: string }>}
    */
   menuItems = [
-    { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary' },
-    { label: 'Add Task', icon: 'assets/sidebar/add-task.svg', link: '/add-task' },
+    { label: 'Summary', icon: 'assets/sidebar/summary.svg', link: '/summary', fragment: 'summaryUpstairs' },
+    { label: 'Add Task', icon: 'assets/sidebar/add-task.svg', link: '/add-task', fragment: 'addTaskUpstairs' },
     { label: 'Board', icon: 'assets/sidebar/board.svg', link: '/board', fragment: 'boardUpstairs' },
-    { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact' }
+    { label: 'Contacts', icon: 'assets/sidebar/contacts.svg', link: '/contact', fragment: 'contactUpstairs' }
   ];
 
   /**

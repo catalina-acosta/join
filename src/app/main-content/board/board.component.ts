@@ -91,7 +91,7 @@ export class BoardComponent {
    * @param platformId - Platform ID for detecting browser or server.
    * @param route - Activated route for handling route fragments.
    */
-  constructor(private dialog: MatDialog, private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private route: ActivatedRoute) {
+  constructor(private dialog: MatDialog, private router: Router, @Inject(PLATFORM_ID) private platformId: Object, private route: ActivatedRoute, private activatedRoute: ActivatedRoute) {
     this.firebase.tasksList$.subscribe((tasks: TaskInterface[]) => {
       this.tasks = tasks;
       this.filteredTasks = [...this.tasks]; // Initially display all tasks
@@ -273,4 +273,50 @@ export class BoardComponent {
   }
 
   //#endregion
+
+
+  /**
+   * Lifecycle hook that is called after data-bound properties of a directive are initialized.
+   * In this method, `myActivatedRoute()` is called to start monitoring fragment changes in the URL.
+   *
+   * @remarks
+   * This method ensures that the monitoring of the URL fragment begins as soon as the component is ready.
+   *
+   * @inheritdoc
+   */
+ngOnInit() {
+  this.myActivatedRoute();
+}
+
+  /**
+   * Subscribes to changes in the URL fragment (`#...`).
+   * If the fragment changes and is not `null`, the `jumpToSection()` method is called
+   * to scroll to the corresponding section on the page.
+   *
+   * @remarks
+   * This method utilizes the `activatedRoute.fragment` Observable to react to changes in the
+   * fragment part of the URL. This enables deep-linking to specific sections within the current page.
+   *
+   * @example
+   * To link to Section 2, the URL could be `your-page#section2`.
+   */
+myActivatedRoute() {
+  this.activatedRoute.fragment.subscribe((fragment: string | null) => {
+    if (fragment) this.jumpToSection(fragment);
+  });
+}
+
+ /**
+   * Smoothly scrolls to the HTML element with the specified `section` ID.
+   *
+   * @param section The ID of the HTML element to scroll to. Can be `null`.
+   *
+   * @remarks
+   * This method uses the `scrollIntoView()` method of the DOM element with the option `behavior: 'smooth'`
+   * to achieve a smooth scrolling effect. It checks if the `section` is not `null` before attempting
+   * to find the element and scroll to it.
+   */
+jumpToSection(section: string | null) {
+  if (section) document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+}
 }
