@@ -65,16 +65,16 @@ export class AppComponent {
       this.currentRoute = this.router.url;
     });
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        console.log('Navigating to:', event.url);
-        // Add custom logic here to control what is shown
-        if (event.navigationTrigger === 'popstate') {
-          console.log('User clicked the back button');
-          // Handle back navigation
-        }
-      }
-    });
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationStart) {
+    //     console.log('Navigating to:', event.url);
+    //     // Add custom logic here to control what is shown
+    //     if (event.navigationTrigger === 'popstate') {
+    //       console.log('User clicked the back button');
+    //       // Handle back navigation
+    //     }
+    //   }
+    // });
 
     if (this.auth) {
       this.auth.onAuthStateChanged((user) => {
@@ -118,7 +118,7 @@ export class AppComponent {
   logout() {
     signOut(this.auth).then(() => {
       this.isLoggedIn = false;
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     }).catch((error) => {
       console.error(error);
     });
