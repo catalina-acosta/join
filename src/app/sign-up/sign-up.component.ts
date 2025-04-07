@@ -38,11 +38,6 @@ export class SignUpComponent {
   @Output() usersName = new EventEmitter<string>();
 
   /**
-   * Event emitter to indicate successful login.
-   */
-  @Output() loginSuccess = new EventEmitter<void>();
-
-  /**
    * Object to store sign-up form data.
    */
   signUp = {
@@ -165,7 +160,6 @@ export class SignUpComponent {
         updateProfile(this.auth.currentUser, {
           displayName: this.signUp.fullname
         }).then(() => {
-          console.log("User name updated successfully.");
         }).catch((error) => {
           console.log("The name could not be saved.");
         });

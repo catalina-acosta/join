@@ -2,13 +2,14 @@
  * @file Root component of the Angular application.
  */
 
-import { Component, inject } from '@angular/core';
-import { NavigationStart, Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Component, Inject, inject, PLATFORM_ID } from '@angular/core';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { FirebaseService } from './shared/service/firebase.service';
 import { SharedComponent } from "./shared/shared.component";
 import { LogInComponent } from './log-in/log-in.component';
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { Auth, signOut } from '@angular/fire/auth';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -59,33 +60,17 @@ export class AppComponent {
    * Constructor for AppComponent
    * @param router - Angular Router instance
    */
-  constructor(private router: Router) {
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
     this.firebase;
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
     });
-
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        console.log('Navigating to:', event.url);
-        // Add custom logic here to control what is shown
-        if (event.navigationTrigger === 'popstate') {
-          console.log('User clicked the back button');
-          // Handle back navigation
-        }
+    if (isPlatformBrowser(this.platformId)) {
+      const loggedIn = localStorage.getItem('isLoggedIn');
+      if (loggedIn === 'true') {
+        this.isLoggedIn = true;
+        this.router.navigate(['/']); // Redirect to the board page if logged in
       }
-    });
-
-    if (this.auth) {
-      this.auth.onAuthStateChanged((user) => {
-        if (user) {
-          this.isLoggedIn = true;
-          this.router.navigate(['/']);
-        } else {
-          this.isLoggedIn = false;
-          this.router.navigate(['/']);
-        }
-      });
     }
   }
 
@@ -102,8 +87,10 @@ export class AppComponent {
    */
   onLoginSuccess() {
     this.isLoggedIn = true; 
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('isLoggedIn', 'true'); // Persist the logged-in state
+    }
   }
-  
 
   /**
    * Navigates to the Sign-Up page
@@ -118,7 +105,10 @@ export class AppComponent {
   logout() {
     signOut(this.auth).then(() => {
       this.isLoggedIn = false;
-      this.router.navigate(['/login']);
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.removeItem('isLoggedIn'); // Clear the logged-in state
+      }
+      this.router.navigate(['/']);
     }).catch((error) => {
       console.error(error);
     });
@@ -129,5 +119,6 @@ export class AppComponent {
    */
   resetNewUser() {
     this.newUser = false;
+    this.isLoggedIn = false;
   }
 }

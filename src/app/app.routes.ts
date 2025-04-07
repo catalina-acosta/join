@@ -33,8 +33,7 @@ export const routes: Routes = [
     { path: 'add-task-dialog', component: AddTaskDialogComponent },
     { path: 'summary', component: SummaryComponent },
     { path: 'sign-up', component: SignUpComponent },
-    { path: 'login', component: LogInComponent },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/', pathMatch: 'full' },
 ];
 
 /**

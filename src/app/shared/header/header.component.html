@@ -4,20 +4,15 @@
         <div class="logo_container">
             <img class="header_logo" src="./assets/icons/logo_dark.svg" alt="Logo">
         </div>
-        
-        
         <div class="header_profil_container" *ngIf="!shouldHideProfileContainer()">
             <a class="help_btn" [routerLink]="['help-page']"><img src="./assets/icons/help.svg" alt="Help"></a>
             <button class="menu-button" (click)="toggleMenu()">{{ userInitials }}</button>
-
             <div class="dropdown_menu" *ngIf="menuOpen">
-
                 <a [routerLink]="['help-page']" class="dropdown_help" >Help</a>
-
                 <a [routerLink]="['imprint']" >Legal Notice</a>
                 <a [routerLink]="['privacy-policy']" >Privacy Policy</a>
-                <a [routerLink]="['login']"(click)="logout()">Log out</a>
-              </div>
+                <a [routerLink]="['/']"(click)="logout()">Log out</a>
+            </div>
         </div>
     </header>
 
