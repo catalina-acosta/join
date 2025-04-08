@@ -546,6 +546,13 @@ li {
 
 @media (max-width: 900px) {
     h1 {font-size: 56px; margin-top: 70px;}
+    form {
+        height: 70vh;
+        overflow-y: scroll;
+        padding-bottom: 40px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(165, 164, 164, 0.404) transparent;
+    }
     .upper_form {flex-direction: column;}
     .left_content {width: 100%;}
     .right_content {width: 100%;}
