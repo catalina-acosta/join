@@ -1,29 +1,34 @@
-<!-- Ladeindikator -->
-<div *ngIf="isLoading" class="loader-wrapper">
-  <p>Loading...</p> <!-- Hier kannst du deinen Loader einbauen -->
-</div>
-
-<!-- Wenn Impressum oder Datenschutzseite -->
-<div *ngIf="!isLoading && isPrivacyOrImprintPage()">
-  <app-shared></app-shared>
-  <div class="content_wrapper">
-    <router-outlet></router-outlet>
+@if(isLoading) {
+  <div class="loader-wrapper">
+    <p>Loading...</p> 
   </div>
-</div>
+}
 
-<!-- Wenn Login angezeigt werden soll -->
-<app-sign-up *ngIf="!isLoading && !isLoggedIn && newUser" (resetNewUser)="resetNewUser()"></app-sign-up>
-
-<app-log-in
-  *ngIf="!isLoading && !isLoggedIn && !newUser"
-  (loginSuccess)="onLoginSuccess()"
-  (newUserOutput)="goToSignUp()"
-></app-log-in>
-
-<!-- Wenn eingeloggt -->
-<div *ngIf="!isLoading && isLoggedIn" class="main-component_wrapper">
-  <app-shared></app-shared>
-  <div class="content_wrapper">
-    <router-outlet></router-outlet>
+@else if(!isLoading && isPrivacyOrImprintPage()) {
+  <div>
+    <app-shared></app-shared>
+    <div class="content_wrapper">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-</div>
+}
+
+@else if(!isLoading && !isLoggedIn && newUser) {
+  <app-sign-up (resetNewUser)="resetNewUser()"></app-sign-up>
+}
+
+@else if (!isLoading && !isLoggedIn && !newUser) {
+  <app-log-in
+    (loginSuccess)="onLoginSuccess()"
+    (newUserOutput)="goToSignUp()"
+  ></app-log-in>
+} 
+
+@else {
+  <div class="main-component_wrapper">
+    <app-shared></app-shared>
+    <div class="content_wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+}
