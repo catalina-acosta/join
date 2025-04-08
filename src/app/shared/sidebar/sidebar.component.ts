@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { AppComponent } from '../../app.component';
 import { Auth, getAuth, onAuthStateChanged } from '@angular/fire/auth';
@@ -144,4 +144,5 @@ export class SidebarComponent implements OnInit {
       console.error(error);
     });
   }
+
 }

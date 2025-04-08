@@ -33,7 +33,7 @@
             <div *ngFor="let item of menuItems; let i = index"
                 [class.active]="selectedMobileIndex === i"
                 (click)="setMobileActive(i)">
-                <div id="menu-item-mobile-login" class="menu-item-mobile-login" [routerLink]="item.link">
+                <div id="menu-item-mobile-login" class="menu-item-mobile-login" [routerLink]="item.link" [fragment]="item.fragment">
                     <img [src]="item.icon" alt="">
                     <span>{{ item.label }}</span>
                 </div>

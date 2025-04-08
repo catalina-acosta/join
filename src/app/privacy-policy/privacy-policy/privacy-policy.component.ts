@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 /**
  * A component responsible for displaying the privacy policy of the application.
@@ -25,4 +25,6 @@ export class PrivacyPolicyComponent {
    * @param router The Angular Router service used for navigation within the app.
    */
   constructor(private router: Router) {}
+
+
 }
