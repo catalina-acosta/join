@@ -3,7 +3,7 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { Auth } from '@angular/fire/auth';
+import { Auth, signOut } from '@angular/fire/auth';
 
 /**
  * Component for managing the sign-up process.
@@ -130,9 +130,13 @@ export class SignUpComponent {
         const user = userCredential.user;
         this.newUserAdded = true;
         this.updateUserName();
-        setTimeout(() => {
+  
+        signOut(this.auth).then(() => {
           this.resetNewUserStatus();
-        }, 2000);
+          this.router.navigate(['/']).then(() => {
+            window.location.reload();
+          });
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -146,6 +150,7 @@ export class SignUpComponent {
         }, 3000);
       });
   }
+  
 
   //#endregion
 
