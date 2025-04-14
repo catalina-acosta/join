@@ -51,12 +51,12 @@ export const appConfig: ApplicationConfig = {
      * @param {string} config.messagingSenderId - Firebase messaging sender ID.
      */
     provideFirebaseApp(() => initializeApp({
-      projectId: "join-52e31",
-      appId: "1:290584592371:web:a52999eaaabf744119dc86",
-      storageBucket: "join-52e31.firebasestorage.app",
-      apiKey: "AIzaSyCQy7vwff4IXLJGmuVv8k_hgDdYTTx2tpE",
-      authDomain: "join-52e31.firebaseapp.com",
-      messagingSenderId: "290584592371"
+      apiKey: "AIzaSyBYrYS2nCZS0NpCHMiDtMVlLYCf0kisg80",
+      authDomain: "join2-fdd25.firebaseapp.com",
+      projectId: "join2-fdd25",
+      storageBucket: "join2-fdd25.firebasestorage.app",
+      messagingSenderId: "313451164017",
+      appId: "1:313451164017:web:fcf06a65e2baf28e6c46d0"
     })),
 
     /**
